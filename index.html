@@ -52,7 +52,7 @@ a { color: inherit; text-decoration: none; }
   background: rgba(7,8,11,0.85); backdrop-filter: blur(16px) saturate(1.4);
   -webkit-backdrop-filter: blur(16px) saturate(1.4); border-bottom: 1px solid var(--line);
 }
-.brand { display: flex; align-items: center; gap: 10px; }
+.brand { display: flex; align-items: center; gap: 10px; position: relative; }
 .brand-mark {
   width: 34px; height: 34px; border-radius: 11px; padding: 0; flex-shrink: 0;
   background: #f4f6fb; position: relative;
@@ -67,6 +67,23 @@ a { color: inherit; text-decoration: none; }
 .brand-mark svg { width: 34px; height: 34px; display: block; }
 .brand-name { font-size: 1rem; font-weight: 700; letter-spacing: -0.02em; }
 .brand-sub { font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.theme-hint {
+  position: absolute; left: 48px; top: 100%; margin-top: 8px; z-index: 45;
+  max-width: min(220px, calc(100vw - 40px));
+  padding: 10px 14px; border-radius: 12px;
+  background: var(--s1); border: 1px solid var(--gold-line);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.45), 0 0 0 1px rgba(var(--gold-rgb),0.08);
+  color: var(--ink); font-size: 0.78rem; font-weight: 700; letter-spacing: -0.01em; line-height: 1.35;
+  pointer-events: none;
+  opacity: 0; transform: translateY(-6px); transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.theme-hint.show { opacity: 1; transform: translateY(0); }
+.theme-hint::before {
+  content: ""; position: absolute; left: 14px; top: -6px; width: 12px; height: 12px;
+  background: var(--s1); border-left: 1px solid var(--gold-line); border-top: 1px solid var(--gold-line);
+  transform: rotate(45deg);
+}
+.theme-hint strong { color: var(--gold-text); font-weight: 700; }
 .clocks { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
 .clock { font-family: var(--mono); font-size: 0.7rem; font-weight: 500; color: var(--soft); }
 .clock span { color: var(--dim); margin-right: 4px; font-size: 0.58rem; }
@@ -568,7 +585,7 @@ html[data-theme="umbreon"] .progress-fill { background: linear-gradient(90deg, #
 <div class="app" id="app">
   <header class="header">
     <div class="brand">
-      <button class="brand-mark" id="btnMenu" type="button" aria-label="Themes">
+      <button class="brand-mark" id="btnMenu" type="button" aria-label="Tap Pokéball to change theme colour" title="Tap to change theme colour">
         <svg viewBox="0 0 24 24">
           <rect x="0" y="0" width="24" height="12" fill="var(--gold)"/>
           <rect x="0" y="12" width="24" height="12" fill="#f4f6fb"/>
@@ -580,6 +597,7 @@ html[data-theme="umbreon"] .progress-fill { background: linear-gradient(90deg, #
         <div class="brand-name">Pokeland Helper</div>
         <div class="brand-sub">Live · Player tools</div>
       </div>
+      <div class="theme-hint" id="themeHint" role="status" aria-live="polite"><strong>Tap the Pokéball</strong> to change theme colour</div>
     </div>
     <div class="header-right">
       <div class="clocks">
@@ -812,7 +830,7 @@ html[data-theme="umbreon"] .progress-fill { background: linear-gradient(90deg, #
 
       <div class="card mt-18" style="padding:18px">
         <div class="kicker">Day one tips</div>
-        <p style="font-size:0.85rem;color:var(--soft);line-height:1.55;margin-top:8px;text-wrap:pretty">Save diamonds for the first legendary rotation. Claim all three daily Vit Gift windows — friendship vit is the slowest resource in the game. Weather boosts follow Hong Kong time (HKT), so check the Weather tab before you plan a catch run.</p>
+        <p style="font-size:0.85rem;color:var(--soft);line-height:1.55;margin-top:8px;text-wrap:pretty">Save diamonds for the first legendary rotation. Claim all three daily Vit Gift windows — friendship vit is the slowest resource in the game. Weather boosts follow Vietnam time (ICT), so check the Weather tab before you plan a catch run.</p>
       </div>
     </section>
     <section id="view-builds" class="hidden">
@@ -1135,12 +1153,11 @@ const pad = n => (n < 10 ? '0' + n : '' + n);
 function vnMs(dmy, hm) {
   const [d, m, y] = dmy.split('-').map(Number);
   const [H, M] = hm.split(':').map(Number);
-  // Weather windows are treated as HKT (UTC+8)
-  return Date.UTC(y, m - 1, d, H - 8, M, 0, 0);
+  return Date.UTC(y, m - 1, d, H - 7, M, 0, 0);
 }
 function dayStartMs(dmy) {
   const [d, m, y] = dmy.split('-').map(Number);
-  return Date.UTC(y, m - 1, d, -8, 0, 0, 0);
+  return Date.UTC(y, m - 1, d, -7, 0, 0, 0);
 }
 function typeOfBlock(el) {
   const i = el.querySelector('i[class*="fa-"]');
@@ -1171,7 +1188,7 @@ class WeatherFeed {
   // Month grid of every weather type, straight from the site's own JSON API.
   // Cached per weather type so a partial month can be completed on the next attempt.
   async loadMonth(month, year) {
-    year = year || Number(new Intl.DateTimeFormat('en', { timeZone: 'Asia/Hong_Kong', year: 'numeric' }).format(new Date()));
+    year = year || Number(new Intl.DateTimeFormat('en', { timeZone: 'Asia/Ho_Chi_Minh', year: 'numeric' }).format(new Date()));
     const key = year + '-' + month;
     this.month = month;
     this.typeCache = this.typeCache || {};
@@ -1237,7 +1254,7 @@ class WeatherFeed {
   async loadTypeYear(vi) {
     const idx = WORDER.indexOf(vi);
     if (idx < 0) return;
-    const year = Number(new Intl.DateTimeFormat('en', { timeZone: 'Asia/Hong_Kong', year: 'numeric' }).format(new Date()));
+    const year = Number(new Intl.DateTimeFormat('en', { timeZone: 'Asia/Ho_Chi_Minh', year: 'numeric' }).format(new Date()));
     this.typeCache = this.typeCache || {};
     this.yearBusy = vi;
     this.yearLoading = true;
@@ -1275,7 +1292,7 @@ class WeatherFeed {
 
   // Every window of one weather type across the whole year, grouped by month.
   typeYear(vi) {
-    const year = Number(new Intl.DateTimeFormat('en', { timeZone: 'Asia/Hong_Kong', year: 'numeric' }).format(new Date()));
+    const year = Number(new Intl.DateTimeFormat('en', { timeZone: 'Asia/Ho_Chi_Minh', year: 'numeric' }).format(new Date()));
     const out = [];
     for (let m = 1; m <= 12; m += 1) {
       const store = (this.typeCache && this.typeCache[year + '-' + m]) || {};
@@ -1285,7 +1302,7 @@ class WeatherFeed {
   }
 
   monthTypeCount(month, year) {
-    year = year || Number(new Intl.DateTimeFormat('en', { timeZone: 'Asia/Hong_Kong', year: 'numeric' }).format(new Date()));
+    year = year || Number(new Intl.DateTimeFormat('en', { timeZone: 'Asia/Ho_Chi_Minh', year: 'numeric' }).format(new Date()));
     return Object.keys((this.typeCache && this.typeCache[year + '-' + month]) || {}).length;
   }
 
@@ -1295,7 +1312,7 @@ class WeatherFeed {
   }
 
   monthDays(month, year) {
-    year = year || Number(new Intl.DateTimeFormat('en', { timeZone: 'Asia/Hong_Kong', year: 'numeric' }).format(new Date()));
+    year = year || Number(new Intl.DateTimeFormat('en', { timeZone: 'Asia/Ho_Chi_Minh', year: 'numeric' }).format(new Date()));
     return this.monthCache[year + '-' + month] || null;
   }
 
@@ -1311,7 +1328,7 @@ class WeatherFeed {
       if (dt > 0 && dt <= lead) {
         this.notified[key] = 1;
         try {
-          new Notification(((WMETA[e.vi] || {}).en || e.vi) + ' incoming', { body: 'Starts ' + e.start + ' HKT · ends ' + e.end, tag: key });
+          new Notification(((WMETA[e.vi] || {}).en || e.vi) + ' incoming', { body: 'Starts ' + e.start + ' ICT · ends ' + e.end, tag: key });
         } catch (err) {}
       }
     });
@@ -1604,8 +1621,8 @@ let wx = null;
 function initWeather() {
   wx = new WeatherFeed(() => { if (state.view === "weather") renderWeather(); });
   wx.start(90);
-  const month = Number(new Intl.DateTimeFormat("en", { timeZone: "Asia/Hong_Kong", month: "numeric" }).format(new Date()));
-  const year = Number(new Intl.DateTimeFormat("en", { timeZone: "Asia/Hong_Kong", year: "numeric" }).format(new Date()));
+  const month = Number(new Intl.DateTimeFormat("en", { timeZone: "Asia/Ho_Chi_Minh", month: "numeric" }).format(new Date()));
+  const year = Number(new Intl.DateTimeFormat("en", { timeZone: "Asia/Ho_Chi_Minh", year: "numeric" }).format(new Date()));
   state.wxMonth = month;
   state.wxYear = year;
   wx.loadMonth(month, year);
@@ -1797,7 +1814,7 @@ function renderWeather() {
   const meta = hero ? (WMETA[hero.vi] || { en: hero.vi, c: "#8C94A3" }) : { en: "", c: "#5aa7d8" };
   const heroLive = !!hero && hero.startMs <= now && now < hero.endMs;
   const age = wx.lastSync ? Math.round((now - wx.lastSync) / 1000) : null;
-  const todayDmy = new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Hong_Kong", day: "2-digit", month: "2-digit", year: "numeric" }).format(new Date()).replace(/\//g, "-");
+  const todayDmy = new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Ho_Chi_Minh", day: "2-digit", month: "2-digit", year: "numeric" }).format(new Date()).replace(/\//g, "-");
   const dayTitle = dmy => {
     if (dmy === todayDmy) return "Today";
     const [d, m, y] = dmy.split("-").map(Number);
@@ -1808,7 +1825,7 @@ function renderWeather() {
   document.getElementById("wxTitle").textContent = wx.loading ? "Syncing…" : hero ? meta.en : "All quiet";
   document.getElementById("wxKicker").textContent = heroLive ? "Happening now" : picked ? "Selected window" : hero ? "Next event" : "No events ahead";
   document.getElementById("wxKicker").className = "kicker " + (heroLive ? "green" : "");
-  document.getElementById("wxWindow").textContent = hero ? hero.start + " – " + hero.end + " HKT" : "Nothing in the next three days";
+  document.getElementById("wxWindow").textContent = hero ? hero.start + " – " + hero.end + " ICT" : "Nothing in the next three days";
   document.getElementById("wxIcon").src = hero && WICON[hero.vi] ? WICON[hero.vi] : BLANK;
   document.getElementById("wxCd").textContent = hero ? fmtCd(heroLive ? hero.endMs - now : hero.startMs - now) : "--:--:--";
   document.getElementById("wxCdLabel").textContent = hero ? (heroLive ? "until it ends" : "until it starts") : "";
@@ -1845,7 +1862,7 @@ function renderWeather() {
   }).join("");
 
   // Calendar
-  const year = state.wxYear || Number(new Intl.DateTimeFormat("en", { timeZone: "Asia/Hong_Kong", year: "numeric" }).format(new Date()));
+  const year = state.wxYear || Number(new Intl.DateTimeFormat("en", { timeZone: "Asia/Ho_Chi_Minh", year: "numeric" }).format(new Date()));
   const month = state.wxMonth || 1;
   const byDay = wx.monthDays ? wx.monthDays(month, year) : {};
   const wxTypeCount = wx.monthTypeCount ? wx.monthTypeCount(month, year) : 0;
@@ -1875,7 +1892,7 @@ function renderWeather() {
     : "Pick a day to list its weather";
   document.getElementById("wxPickedEvents").innerHTML = pickedList.map(e => {
     const m2 = WMETA[e.vi] || { en: e.vi, c: "#8C94A3" };
-    return `<div class="wx-event"><span class="rail" style="background:${m2.c}"></span><img src="${WICON[e.vi]||BLANK}" alt=""><span class="wx-event-name">${m2.en}</span><span class="wx-event-window">${e.start} – ${e.end} HKT</span></div>`;
+    return `<div class="wx-event"><span class="rail" style="background:${m2.c}"></span><img src="${WICON[e.vi]||BLANK}" alt=""><span class="wx-event-name">${m2.en}</span><span class="wx-event-window">${e.start} – ${e.end} ICT</span></div>`;
   }).join("");
 
   // Find
@@ -1962,6 +1979,16 @@ document.getElementById("themeList").innerHTML = THEMES.map(t => `
   </button>`).join("");
 document.querySelectorAll(".theme-row").forEach(r => r.addEventListener("click", () => applyTheme(r.dataset.theme)));
 applyTheme(curTheme);
+/* Floating theme hint — bold text, visible 2.5s, then fades out */
+(function () {
+  const tip = document.getElementById("themeHint");
+  if (!tip) return;
+  requestAnimationFrame(() => tip.classList.add("show"));
+  setTimeout(() => {
+    tip.classList.remove("show");
+    setTimeout(() => { tip.remove(); }, 400);
+  }, 2500);
+})();
 const drawer = document.getElementById("drawer"), scrim = document.getElementById("scrim");
 function setDrawer(on) { drawer.classList.toggle("on", on); scrim.classList.toggle("on", on); }
 document.getElementById("btnMenu").addEventListener("click", () => setDrawer(true));
