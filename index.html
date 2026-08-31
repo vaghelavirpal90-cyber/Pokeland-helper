@@ -81,22 +81,67 @@ a { color: inherit; text-decoration: none; }
 .brand-name { font-size: 1rem; font-weight: 700; letter-spacing: -0.02em; }
 .brand-sub { font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
 .theme-hint {
-  position: absolute; left: 0; top: 100%; margin-top: 8px; z-index: 45;
-  max-width: min(220px, calc(100vw - 40px));
-  padding: 10px 14px; border-radius: 12px;
-  background: var(--s1); border: 1px solid var(--gold-line);
-  box-shadow: 0 10px 28px rgba(0,0,0,0.45), 0 0 0 1px rgba(var(--gold-rgb),0.08);
-  color: var(--ink); font-size: 0.78rem; font-weight: 700; letter-spacing: -0.01em; line-height: 1.35;
-  pointer-events: none;
-  opacity: 0; transform: translateY(-6px); transition: opacity 0.35s ease, transform 0.35s ease;
+  position: absolute; left: 0; top: 100%; margin-top: 10px; z-index: 45;
+  width: min(268px, calc(100vw - 36px));
+  padding: 0; border-radius: 16px;
+  background: linear-gradient(160deg, rgba(var(--gold-rgb),0.16), var(--s1) 55%);
+  border: 1px solid var(--gold-line);
+  box-shadow: 0 14px 36px rgba(0,0,0,0.5), 0 0 0 1px rgba(var(--gold-rgb),0.1), inset 0 1px 0 rgba(255,255,255,0.04);
+  color: var(--ink); pointer-events: none;
+  opacity: 0; transform: translateY(-8px) scale(0.97); transition: opacity 0.4s ease, transform 0.4s cubic-bezier(.32,.72,0,1);
+  overflow: hidden;
 }
-.theme-hint.show { opacity: 1; transform: translateY(0); }
+.theme-hint.show { opacity: 1; transform: translateY(0) scale(1); }
 .theme-hint::before {
   content: ""; position: absolute; left: 14px; top: -6px; width: 12px; height: 12px;
-  background: var(--s1); border-left: 1px solid var(--gold-line); border-top: 1px solid var(--gold-line);
+  background: linear-gradient(135deg, rgba(var(--gold-rgb),0.22), var(--s1));
+  border-left: 1px solid var(--gold-line); border-top: 1px solid var(--gold-line);
+  transform: rotate(45deg); z-index: 1;
+}
+.theme-hint-head {
+  display: flex; align-items: center; gap: 8px;
+  padding: 11px 14px 9px; border-bottom: 1px solid var(--line);
+}
+.theme-hint-head strong {
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--gold-text);
+}
+.theme-hint-body { padding: 8px 10px 10px; display: flex; flex-direction: column; gap: 6px; }
+.theme-hint-row {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 8px 8px; border-radius: 11px; background: rgba(0,0,0,0.22);
+  border: 1px solid var(--line);
+}
+.theme-hint-ico {
+  width: 28px; height: 28px; flex-shrink: 0; border-radius: 9px;
+  display: grid; place-items: center; background: var(--gold-soft); color: var(--gold-text);
+}
+.theme-hint-ico svg { width: 15px; height: 15px; }
+.theme-hint-txt { min-width: 0; flex: 1; }
+.theme-hint-title { font-size: 0.8rem; font-weight: 700; letter-spacing: -0.01em; line-height: 1.25; }
+.theme-hint-title em { font-style: normal; color: var(--gold-text); }
+.theme-hint-sub { font-family: var(--mono); font-size: 0.58rem; color: var(--muted); margin-top: 2px; letter-spacing: 0.02em; line-height: 1.35; }
+.menu-hint {
+  position: absolute; right: 0; top: 100%; margin-top: 10px; z-index: 45;
+  width: min(200px, calc(100vw - 36px));
+  padding: 10px 12px; border-radius: 14px;
+  background: linear-gradient(160deg, rgba(var(--gold-rgb),0.14), var(--s1) 60%);
+  border: 1px solid var(--gold-line);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.48), 0 0 0 1px rgba(var(--gold-rgb),0.08);
+  color: var(--ink); pointer-events: none;
+  opacity: 0; transform: translateY(-8px) scale(0.97); transition: opacity 0.4s ease, transform 0.4s cubic-bezier(.32,.72,0,1);
+}
+.menu-hint.show { opacity: 1; transform: translateY(0) scale(1); }
+.menu-hint::before {
+  content: ""; position: absolute; right: 12px; top: -6px; width: 12px; height: 12px;
+  background: linear-gradient(135deg, rgba(var(--gold-rgb),0.2), var(--s1));
+  border-left: 1px solid var(--gold-line); border-top: 1px solid var(--gold-line);
   transform: rotate(45deg);
 }
-.theme-hint strong { color: var(--gold-text); font-weight: 700; }
+.menu-hint-title { font-size: 0.78rem; font-weight: 700; letter-spacing: -0.01em; }
+.menu-hint-title em { font-style: normal; color: var(--gold-text); }
+.menu-hint-sub { font-family: var(--mono); font-size: 0.56rem; color: var(--muted); margin-top: 3px; letter-spacing: 0.02em; line-height: 1.35; }
+.header-right { position: relative; display: flex; align-items: center; gap: 10px; }
 .clocks { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
 .clock { font-family: var(--mono); font-size: 0.7rem; font-weight: 500; color: var(--soft); }
 .clock span { color: var(--dim); margin-right: 4px; font-size: 0.58rem; }
@@ -411,7 +456,6 @@ html[data-theme="umbreon"] .progress-fill { background: linear-gradient(90deg, #
 }
 .icon-btn:active { transform: scale(0.94); }
 .icon-btn svg { width: 17px; height: 17px; }
-.header-right { display: flex; align-items: center; gap: 10px; }
 .scrim {
   position: fixed; inset: 0; z-index: 60; background: rgba(4,5,7,0.6);
   backdrop-filter: blur(3px); opacity: 0; pointer-events: none; transition: opacity .2s;
@@ -427,6 +471,14 @@ html[data-theme="umbreon"] .progress-fill { background: linear-gradient(90deg, #
   overflow-y: auto; box-shadow: 0 -18px 40px rgba(0,0,0,0.5);
 }
 .drawer.on { transform: translateY(0); }
+.drawer #themeSection { order: 1; }
+.drawer #countrySection { order: 2; }
+.drawer.country-focus #themeSection { order: 2; margin-top: 18px; }
+.drawer.country-focus #countrySection { order: 1; }
+.drawer.country-focus #countrySection .kicker { margin-top: 0 !important; }
+.drawer:not(.country-focus) #themeSection { margin-top: 0; }
+.drawer > .sheet-grab,
+.drawer > .drawer-head { order: 0; flex-shrink: 0; }
 @keyframes pb-shake {
   0%,26% { transform: rotate(0) }
   4% { transform: rotate(-13deg) } 8% { transform: rotate(12deg) }
@@ -624,7 +676,7 @@ html[data-theme="umbreon"] .progress-fill { background: linear-gradient(90deg, #
 <div class="app" id="app">
   <header class="header">
     <div class="brand">
-      <button class="brand-mark" id="btnMenu" type="button" aria-label="Tap Pokéball to change theme colour" title="Tap to change theme colour">
+      <button class="brand-mark" id="btnMenu" type="button" aria-label="Tap Pokéball for theme colour & country time" title="Theme colour & country time">
         <svg viewBox="0 0 24 24">
           <rect x="0" y="0" width="24" height="12" fill="var(--gold)"/>
           <rect x="0" y="12" width="24" height="12" fill="#f4f6fb"/>
@@ -636,19 +688,47 @@ html[data-theme="umbreon"] .progress-fill { background: linear-gradient(90deg, #
         <div class="brand-name">Pokeland Helper</div>
         <div class="brand-sub">Live · Player tools</div>
       </div>
-      <div class="theme-hint" id="themeHint" role="status" aria-live="polite"><strong>Tap the Pokéball</strong> to change theme colour</div>
+      <div class="theme-hint" id="themeHint" role="status" aria-live="polite">
+        <div class="theme-hint-head">
+          <strong>Quick tips</strong>
+        </div>
+        <div class="theme-hint-body">
+          <div class="theme-hint-row">
+            <span class="theme-hint-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M4 12h16"/><circle cx="12" cy="12" r="2.5"/></svg>
+            </span>
+            <div class="theme-hint-txt">
+              <div class="theme-hint-title">Tap <em>Pokéball</em></div>
+              <div class="theme-hint-sub">Change theme colour · Flareon, Jolteon & more</div>
+            </div>
+          </div>
+          <div class="theme-hint-row">
+            <span class="theme-hint-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg>
+            </span>
+            <div class="theme-hint-txt">
+              <div class="theme-hint-title">Tap <em>clock</em> or Pokéball</div>
+              <div class="theme-hint-sub">Pick your country time · HKT, IST, ICT…</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="header-right">
-      <div class="clocks">
+      <button class="clocks" id="clocksBox" type="button" title="Tap to change your country time" aria-label="Change country time" style="background:none;border:none;padding:0;cursor:pointer;text-align:right">
+        <div class="clock"><span id="clockLocalLabel">LOCAL</span><span id="clockLocal">--:--:--</span></div>
         <div class="clock"><span>HKT</span><span id="clockHK">--:--:--</span></div>
-        <div class="clock"><span>ICT</span><span id="clockICT">--:--:--</span></div>
-      </div>
+      </button>
       <a class="icon-btn" href="https://discord.gg/ZBxUxc25Q" target="_blank" rel="noopener" aria-label="Join our Discord" title="Join our Discord">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.492c-1.53-.69-3.17-1.2-4.885-1.49a.075.075 0 0 0-.079.036c-.21.36-.444.83-.608 1.2a18.566 18.566 0 0 0-5.487 0 12.36 12.36 0 0 0-.617-1.2.077.077 0 0 0-.079-.037c-1.714.29-3.354.8-4.885 1.491a.07.07 0 0 0-.032.027C.533 9.09-.32 13.555.099 17.961a.08.08 0 0 0 .031.055 20.03 20.03 0 0 0 5.993 2.98.078.078 0 0 0 .084-.026 13.83 13.83 0 0 0 1.226-1.963.074.074 0 0 0-.041-.104 13.201 13.201 0 0 1-1.872-.878.075.075 0 0 1-.008-.125c.126-.093.252-.19.372-.287a.075.075 0 0 1 .078-.01c3.927 1.764 8.18 1.764 12.061 0a.075.075 0 0 1 .079.009c.12.098.246.195.373.288a.075.075 0 0 1-.006.125c-.598.344-1.22.635-1.873.877a.075.075 0 0 0-.041.105c.36.687.772 1.341 1.225 1.962a.077.077 0 0 0 .084.028 19.963 19.963 0 0 0 6.002-2.981.076.076 0 0 0 .032-.054c.5-5.094-.838-9.52-3.549-13.442a.06.06 0 0 0-.031-.028Zm-12.31 10.78c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.176 1.094 2.157 2.418 0 1.334-.956 2.42-2.157 2.42Zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.176 1.094 2.157 2.418 0 1.334-.947 2.42-2.157 2.42Z"/></svg>
       </a>
       <button class="icon-btn" id="btnSide" type="button" aria-label="Menu">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></svg>
       </button>
+      <div class="menu-hint" id="menuHint" role="status" aria-live="polite">
+        <div class="menu-hint-title">Tap <em>☰ menu</em></div>
+        <div class="menu-hint-sub">Download · Pokemon Build · Team Build · Guide · About</div>
+      </div>
     </div>
   </header>
   <main class="main">
@@ -874,7 +954,7 @@ html[data-theme="umbreon"] .progress-fill { background: linear-gradient(90deg, #
 
       <div class="card mt-18" style="padding:18px">
         <div class="kicker">Day one tips</div>
-        <p style="font-size:0.85rem;color:var(--soft);line-height:1.55;margin-top:8px;text-wrap:pretty">Save diamonds for the first legendary rotation. Claim all three daily Vit Gift windows — friendship vit is the slowest resource in the game. Weather boosts follow Hong Kong server time (HKT), so check the Weather tab before you plan a catch run.</p>
+        <p style="font-size:0.85rem;color:var(--soft);line-height:1.55;margin-top:8px;text-wrap:pretty">Save diamonds for the first legendary rotation. Claim all three daily Vit Gift windows — friendship vit is the slowest resource in the game. Weather &amp; events follow Hong Kong server time (HKT) — pick your country in Themes &amp; time so times show in your local clock.</p>
       </div>
     </section>
     <section id="view-builds" class="hidden">
@@ -1047,15 +1127,23 @@ html[data-theme="umbreon"] .progress-fill { background: linear-gradient(90deg, #
     </button>
   </aside>
   <div class="scrim" id="scrim"></div>
-  <aside class="drawer" id="drawer" aria-label="Themes">
+  <aside class="drawer" id="drawer" aria-label="Themes & country">
     <div class="sheet-grab"></div>
     <div class="drawer-head">
-      <div class="drawer-title">Themes</div>
+      <div class="drawer-title" id="drawerTitle">Themes & time</div>
       <button class="icon-btn" id="btnClose" type="button" aria-label="Close">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg>
       </button>
     </div>
-    <div id="themeList"></div>
+    <div id="themeSection">
+      <div class="kicker" style="margin-bottom:10px;padding-left:2px">Theme colour</div>
+      <div id="themeList"></div>
+    </div>
+    <div id="countrySection">
+      <div class="kicker" style="margin:18px 0 10px;padding-left:2px">Your country time</div>
+      <p style="font-size:0.75rem;color:var(--muted);margin:0 0 12px;padding:0 2px;line-height:1.4">All event, weather, World Boss and server times will show in your selected country time. Server still runs on HKT.</p>
+      <div id="countryList"></div>
+    </div>
   </aside>
   <div class="sheet-overlay" id="sheetOverlay">
     <div class="sheet" id="sheet" role="dialog" aria-modal="true">
@@ -1570,7 +1658,7 @@ class WeatherFeed {
       if (dt > 0 && dt <= lead) {
         this.notified[key] = 1;
         try {
-          new Notification(((WMETA[e.vi] || {}).en || e.vi) + ' incoming', { body: 'Starts ' + e.start + ' HKT · ends ' + e.end, tag: key });
+          new Notification(((WMETA[e.vi] || {}).en || e.vi) + ' incoming', { body: 'Starts ' + fmtTimeInTz(e.startMs) + ' ' + getCountry().short + ' · ends ' + fmtTimeInTz(e.endMs), tag: key });
         } catch (err) {}
       }
     });
@@ -1877,7 +1965,10 @@ function eventStatus(ev) {
     start.setDate(start.getDate() + 7); end = new Date(start.getTime() + ev.dur * 60000);
   }
   const live = now >= start && now < end;
-  return { live, ms: live ? end - now : start - now, pct: live ? (now - start) / (end - start) * 100 : 0, at: pad2(ev.h) + ":" + pad2(ev.m) };
+  // start's Y/M/D + wall h/m are HKT; build UTC then format in user's country tz
+  const absStartAdj = Date.UTC(start.getFullYear(), start.getMonth(), start.getDate(), ev.h - 8, ev.m, 0, 0);
+  const localAt = fmtTimeInTz(absStartAdj);
+  return { live, ms: live ? end - now : start - now, pct: live ? (now - start) / (end - start) * 100 : 0, at: localAt, atHkt: pad2(ev.h) + ":" + pad2(ev.m) };
 }
 
 /* Weather feed instance — same automation as original */
@@ -1937,8 +2028,10 @@ function openSheet(name) {
 function closeSheet() { document.getElementById("sheetOverlay").classList.remove("open"); state.sel = null; }
 
 function renderClocks() {
+  const c = getCountry();
+  document.getElementById("clockLocalLabel").textContent = c.short;
+  document.getElementById("clockLocal").textContent = hhmmss(localNow());
   document.getElementById("clockHK").textContent = hhmmss(serverNow());
-  document.getElementById("clockICT").textContent = hhmmss(ictNow());
 }
 
 function renderBoard() {
@@ -2164,22 +2257,24 @@ function renderRotation() {
 }
 
 function renderEvents() {
-  const sn = serverNow();
-  document.getElementById("evDate").textContent = sn.toLocaleDateString("en-GB", { weekday:"long", day:"numeric", month:"long" });
+  const c = getCountry();
+  const sn = localNow();
+  document.getElementById("evDate").textContent = sn.toLocaleDateString("en-GB", { weekday:"long", day:"numeric", month:"long" }) + " · " + c.short;
   const evs = DAILY_EVENTS.map(e => Object.assign({}, e, eventStatus(e))).sort((a, b) => (b.live - a.live) || (a.ms - b.ms));
   document.getElementById("eventsFull").innerHTML = evs.map(e => `
     <div class="event-item${e.live ? " live" : ""}">
       <div class="event-ico">${e.icon}</div>
-      <div class="event-body"><div class="event-name">${e.name}</div><div class="event-desc">${e.desc} · ${e.at}</div></div>
+      <div class="event-body"><div class="event-name">${e.name}</div><div class="event-desc">${e.desc} · ${e.at} ${c.short}</div></div>
       <div class="event-right"><div class="event-cd">${fmtCd(e.ms)}</div><div class="event-status">${e.live ? "ENDS IN" : (e.ms < 3600000 ? "SOON" : "STARTS IN")}</div></div>
     </div>`).join("");
 }
 
 function renderServer() {
+  const c = getCountry();
   const srv = serverInfo();
   const srvMs = srv.target - Date.now();
   document.getElementById("serverNum").textContent = "#" + srv.server;
-  document.getElementById("serverWhen").textContent = srv.target.toLocaleString("en-GB", { weekday:"short", day:"numeric", month:"short", hour:"2-digit", minute:"2-digit", hour12:false, timeZone:"Asia/Hong_Kong" }) + " HKT";
+  document.getElementById("serverWhen").textContent = fmtDateTimeInTz(srv.target) + " " + c.short;
   const blocks = [
     { v: pad2(Math.floor(srvMs / 86400000)), u: "DAYS" },
     { v: pad2(Math.floor(srvMs / 3600000) % 24), u: "HRS" },
@@ -2189,7 +2284,7 @@ function renderServer() {
   document.getElementById("serverBlocks").innerHTML = blocks.map(b => `<div class="cd-block"><div class="cd-val">${b.v}</div><div class="cd-unit">${b.u}</div></div>`).join("");
   document.getElementById("serverList").innerHTML = Array.from({ length: 6 }, (_, i) => {
     const t = new Date(srv.target.getTime() + i * 604800000);
-    return `<div class="server-row${i === 0 ? " next" : ""}"><span class="num">#${srv.server + i}</span><span class="when">${t.toLocaleString("en-GB", { weekday:"short", day:"numeric", month:"short", hour:"2-digit", minute:"2-digit", hour12:false, timeZone:"Asia/Hong_Kong" })}</span><span class="away">${i === 0 ? "next up" : i + " wk"}</span></div>`;
+    return `<div class="server-row${i === 0 ? " next" : ""}"><span class="num">#${srv.server + i}</span><span class="when">${fmtDateTimeInTz(t)}</span><span class="away">${i === 0 ? "next up" : i + " wk"}</span></div>`;
   }).join("");
 }
 
@@ -2218,10 +2313,13 @@ function renderWeather() {
   };
   const stateOf = e => (e.startMs <= now && now < e.endMs) ? "LIVE" : (e.endMs <= now ? "DONE" : "SOON");
 
+  const ctry = getCountry();
   document.getElementById("wxTitle").textContent = wx.loading ? "Syncing…" : hero ? meta.en : "All quiet";
   document.getElementById("wxKicker").textContent = heroLive ? "Happening now" : picked ? "Selected window" : hero ? "Next event" : "No events ahead";
   document.getElementById("wxKicker").className = "kicker " + (heroLive ? "green" : "");
-  document.getElementById("wxWindow").textContent = hero ? hero.start + " – " + hero.end + " HKT" : "Nothing in the next three days";
+  document.getElementById("wxWindow").textContent = hero
+    ? fmtTimeInTz(hero.startMs) + " – " + fmtTimeInTz(hero.endMs) + " " + ctry.short
+    : "Nothing in the next three days";
   document.getElementById("wxIcon").src = hero && WICON[hero.vi] ? WICON[hero.vi] : BLANK;
   document.getElementById("wxCd").textContent = hero ? fmtCd(heroLive ? hero.endMs - now : hero.startMs - now) : "--:--:--";
   document.getElementById("wxCdLabel").textContent = hero ? (heroLive ? "until it ends" : "until it starts") : "";
@@ -2251,7 +2349,7 @@ function renderWeather() {
         <span class="rail" style="background:${m2.c}"></span>
         <img src="${WICON[e.vi] || BLANK}" alt="">
         <span class="wx-event-name">${m2.en}</span>
-        <span class="wx-event-window">${e.start} – ${e.end}</span>
+        <span class="wx-event-window">${fmtTimeInTz(e.startMs)} – ${fmtTimeInTz(e.endMs)}</span>
         <span class="wx-event-tag" style="color:${st === "LIVE" ? "var(--green)" : st === "DONE" ? "var(--dim)" : m2.c}">${st}</span>
       </button>`;
     }).join("")}</div>`;
@@ -2288,7 +2386,7 @@ function renderWeather() {
     : "Pick a day to list its weather";
   document.getElementById("wxPickedEvents").innerHTML = pickedList.map(e => {
     const m2 = WMETA[e.vi] || { en: e.vi, c: "#8C94A3" };
-    return `<div class="wx-event"><span class="rail" style="background:${m2.c}"></span><img src="${WICON[e.vi]||BLANK}" alt=""><span class="wx-event-name">${m2.en}</span><span class="wx-event-window">${e.start} – ${e.end} HKT</span></div>`;
+    return `<div class="wx-event"><span class="rail" style="background:${m2.c}"></span><img src="${WICON[e.vi]||BLANK}" alt=""><span class="wx-event-name">${m2.en}</span><span class="wx-event-window">${fmtTimeInTz(e.startMs)} – ${fmtTimeInTz(e.endMs)} ${ctry.short}</span></div>`;
   }).join("");
 
   // Find
@@ -2314,7 +2412,7 @@ function renderWeather() {
     return `<button class="result-row" data-wx="${e.date}|${e.start}|${e.vi}">
       <img src="${WICON[e.vi]||BLANK}" alt="" style="width:28px;height:28px">
       <span class="result-name">${m2.en}</span>
-      <span class="result-date">${dayTitle(e.date)} · ${e.start}${mons.length ? " · " + mons.length + " spawns" : ""}</span>
+      <span class="result-date">${dayTitle(e.date)} · ${fmtTimeInTz(e.startMs)}${mons.length ? " · " + mons.length + " spawns" : ""}</span>
     </button>`;
   }).join("");
   document.getElementById("wxFindHint").classList.toggle("hidden", hits.length > 0 || (q.length < 2 && !state.wxType));
@@ -2357,8 +2455,62 @@ const THEMES = [
   { id: "umbreon",  name: "Umbreon", c: "#4a4a4f", mon: 197 },
   { id: "rgb",      name: "RGB",      c: null, mon: 137, animated: true }
 ];
+const COUNTRIES = [
+  { id: "hkt", name: "Hong Kong (Server)", short: "HKT", tz: "Asia/Hong_Kong", flag: "🇭🇰" },
+  { id: "ict", name: "Vietnam", short: "ICT", tz: "Asia/Ho_Chi_Minh", flag: "🇻🇳" },
+  { id: "ist", name: "India", short: "IST", tz: "Asia/Kolkata", flag: "🇮🇳" },
+  { id: "wib", name: "Indonesia (WIB)", short: "WIB", tz: "Asia/Jakarta", flag: "🇮🇩" },
+  { id: "wita", name: "Indonesia (WITA)", short: "WITA", tz: "Asia/Makassar", flag: "🇮🇩" },
+  { id: "wit", name: "Indonesia (WIT)", short: "WIT", tz: "Asia/Jayapura", flag: "🇮🇩" },
+  { id: "pht", name: "Philippines", short: "PHT", tz: "Asia/Manila", flag: "🇵🇭" },
+  { id: "tha", name: "Thailand", short: "ICT", tz: "Asia/Bangkok", flag: "🇹🇭" },
+  { id: "myt", name: "Malaysia", short: "MYT", tz: "Asia/Kuala_Lumpur", flag: "🇲🇾" },
+  { id: "sgt", name: "Singapore", short: "SGT", tz: "Asia/Singapore", flag: "🇸🇬" },
+  { id: "pkt", name: "Pakistan", short: "PKT", tz: "Asia/Karachi", flag: "🇵🇰" },
+  { id: "bst", name: "Bangladesh", short: "BST", tz: "Asia/Dhaka", flag: "🇧🇩" },
+  { id: "npt", name: "Nepal", short: "NPT", tz: "Asia/Kathmandu", flag: "🇳🇵" },
+  { id: "mmt", name: "Myanmar", short: "MMT", tz: "Asia/Yangon", flag: "🇲🇲" },
+  { id: "jst", name: "Japan", short: "JST", tz: "Asia/Tokyo", flag: "🇯🇵" },
+  { id: "kst", name: "Korea", short: "KST", tz: "Asia/Seoul", flag: "🇰🇷" },
+  { id: "cst", name: "China", short: "CST", tz: "Asia/Shanghai", flag: "🇨🇳" },
+  { id: "utc", name: "UTC", short: "UTC", tz: "UTC", flag: "🌐" }
+];
 let curTheme = "orange";
 try { const st = localStorage.getItem("lh_theme"); if (st && THEMES.some(t => t.id === st)) curTheme = st; } catch (e) {}
+let curCountry = "hkt";
+try {
+  const ct = localStorage.getItem("lh_country");
+  if (ct && COUNTRIES.some(c => c.id === ct)) curCountry = ct;
+  else {
+    // auto-detect browser timezone if possible
+    const browserTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const hit = COUNTRIES.find(c => c.tz === browserTz);
+    if (hit) curCountry = hit.id;
+  }
+} catch (e) {}
+function getCountry() { return COUNTRIES.find(c => c.id === curCountry) || COUNTRIES[0]; }
+function getTz() { return getCountry().tz; }
+function localNow() { return new Date(new Date().toLocaleString("en-US", { timeZone: getTz() })); }
+function fmtTimeInTz(msOrDate, opts) {
+  const d = msOrDate instanceof Date ? msOrDate : new Date(msOrDate);
+  return d.toLocaleTimeString("en-GB", Object.assign({ hour: "2-digit", minute: "2-digit", hour12: false, timeZone: getTz() }, opts || {}));
+}
+function fmtDateTimeInTz(msOrDate) {
+  const d = msOrDate instanceof Date ? msOrDate : new Date(msOrDate);
+  return d.toLocaleString("en-GB", { weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", hour12: false, timeZone: getTz() });
+}
+function applyCountry(id) {
+  if (!COUNTRIES.some(c => c.id === id)) return;
+  curCountry = id;
+  try { localStorage.setItem("lh_country", id); } catch (e) {}
+  document.querySelectorAll(".country-row").forEach(r => r.classList.toggle("on", r.dataset.country === id));
+  renderClocks();
+  // refresh current view so times update
+  if (state.view === "board") renderBoard();
+  else if (state.view === "weather") renderWeather();
+  else if (state.view === "events") renderEvents();
+  else if (state.view === "server") renderServer();
+}
 let rgbRaf = null;
 function hslToHex(h, s, l) {
   s /= 100; l /= 100;
@@ -2403,19 +2555,46 @@ document.getElementById("themeList").innerHTML = THEMES.map(t => `
   </button>`).join("");
 document.querySelectorAll(".theme-row").forEach(r => r.addEventListener("click", () => applyTheme(r.dataset.theme)));
 applyTheme(curTheme);
-/* Floating theme hint — bold text, visible 2.5s, then fades out */
+document.getElementById("countryList").innerHTML = COUNTRIES.map(c => `
+  <button class="theme-row country-row" data-country="${c.id}" type="button">
+    <span class="theme-dot" style="background:transparent;font-size:1rem;display:grid;place-items:center;box-shadow:none">${c.flag}</span>
+    <span class="theme-name">${c.name} <span style="color:var(--muted);font-weight:500;font-size:0.78rem">(${c.short})</span></span>
+    <svg class="theme-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+  </button>`).join("");
+document.querySelectorAll(".country-row").forEach(r => r.addEventListener("click", () => applyCountry(r.dataset.country)));
+applyCountry(curCountry);
+/* Floating tips — theme/country + menu; staggered show, then fade */
 (function () {
   const tip = document.getElementById("themeHint");
-  if (!tip) return;
-  requestAnimationFrame(() => tip.classList.add("show"));
-  setTimeout(() => {
-    tip.classList.remove("show");
-    setTimeout(() => { tip.remove(); }, 400);
-  }, 2500);
+  const menuTip = document.getElementById("menuHint");
+  const show = el => { if (el) requestAnimationFrame(() => el.classList.add("show")); };
+  const hide = el => {
+    if (!el) return;
+    el.classList.remove("show");
+    setTimeout(() => { if (el.parentNode) el.remove(); }, 420);
+  };
+  show(tip);
+  setTimeout(() => show(menuTip), 450);
+  setTimeout(() => hide(tip), 4200);
+  setTimeout(() => hide(menuTip), 4800);
 })();
 const drawer = document.getElementById("drawer"), scrim = document.getElementById("scrim");
-function setDrawer(on) { drawer.classList.toggle("on", on); scrim.classList.toggle("on", on); }
-document.getElementById("btnMenu").addEventListener("click", () => setDrawer(true));
+function setDrawer(on, focus) {
+  if (!on) {
+    drawer.classList.remove("on", "country-focus");
+    scrim.classList.remove("on");
+    return;
+  }
+  const isCountry = focus === "country";
+  drawer.classList.toggle("country-focus", isCountry);
+  const title = document.getElementById("drawerTitle");
+  if (title) title.textContent = isCountry ? "Country time" : "Themes & time";
+  drawer.scrollTop = 0;
+  drawer.classList.add("on");
+  scrim.classList.add("on");
+}
+document.getElementById("btnMenu").addEventListener("click", () => setDrawer(true, "theme"));
+document.getElementById("clocksBox").addEventListener("click", () => setDrawer(true, "country"));
 const shots = Array.from(document.querySelectorAll(".shot-img"));
 const lb = document.getElementById("shotLb"), lbImg = document.getElementById("shotLbImg"), lbNav = document.getElementById("shotLbNav");
 let lbIdx = 0;
