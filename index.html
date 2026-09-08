@@ -1049,7 +1049,7 @@ html[data-theme="umbreon"] .progress-fill { background: linear-gradient(90deg, #
       <div class="card mt-18" style="padding:18px">
         <p style="font-size:0.88rem;color:var(--soft);line-height:1.55;text-wrap:pretty">Catch, train and awaken legendaries across live servers. Grab the client and start on the newest server.</p>
         <div style="display:flex;flex-direction:column;gap:8px;margin-top:16px">
-          <a class="btn btn-primary" href="http://3dsres.daji3ds.com/android/3dsen/20210528/3ds_en.html" target="_blank" rel="noopener">Download new APK · Android &amp; iOS</a>
+          <a class="btn btn-primary" id="dlMenuBtn" href="http://3dsres.daji3ds.com/android/3dsen/20210528/3ds_en.html" target="_blank" rel="noopener">Download new APK · Android &amp; iOS</a>
           <a class="btn" href="https://www.facebook.com/pokemondsland/" target="_blank" rel="noopener">Official Facebook page</a>
         </div>
         <div style="font-family:var(--mono);font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);margin-top:14px">Latest package · Facebook login fixed</div>
@@ -3032,6 +3032,15 @@ document.getElementById("notifNudgeBtn").addEventListener("click", async () => {
   updateNotifNudge();
   if (state.view === "weather") renderWeather();
 });
+function openExternal(e) {
+  e.preventDefault();
+  const url = e.currentTarget.href;
+  const win = window.open(url, "_blank", "noopener,noreferrer");
+  if (!win) window.location.href = url;
+}
+document.getElementById("dlMenuBtn")?.addEventListener("click", openExternal);
+document.getElementById("annDownload")?.addEventListener("click", openExternal);
+
 document.getElementById("notifNudgeClose").addEventListener("click", () => {
   try { localStorage.setItem(NUDGE_SNOOZE_KEY, String(Date.now() + 3 * 86400000)); } catch (e) {}
   document.getElementById("notifNudge").style.display = "none";
