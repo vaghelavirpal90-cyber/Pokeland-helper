@@ -354,6 +354,97 @@ a { color: inherit; text-decoration: none; }
 .wx-event-name { font-size: 0.85rem; font-weight: 500; flex: 1; }
 .wx-event-window { font-family: var(--mono); font-size: 0.62rem; color: var(--muted); }
 .wx-event-tag { font-family: var(--mono); font-size: 0.52rem; letter-spacing: 0.1em; }
+
+/* ── Premium announcement modal (FB login fixed) ── */
+.ann-overlay {
+  position: fixed; inset: 0; z-index: 210;
+  background: rgba(3,4,7,0.75);
+  backdrop-filter: blur(12px) saturate(1.2);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px 16px calc(20px + var(--safe-b));
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.28s ease;
+}
+.ann-overlay.open { opacity: 1; pointer-events: auto; }
+.ann-card {
+  width: 100%; max-width: 380px;
+  background: linear-gradient(165deg, rgba(24,119,242,0.16), var(--s0) 45%);
+  border: 1px solid rgba(24,119,242,0.35);
+  border-radius: 26px;
+  padding: 22px 20px 18px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.04) inset;
+  transform: translateY(18px) scale(0.97);
+  transition: transform 0.32s cubic-bezier(0.32, 0.72, 0, 1);
+  position: relative; overflow: hidden;
+}
+.ann-overlay.open .ann-card { transform: translateY(0) scale(1); }
+.ann-card::before {
+  content: ""; position: absolute; top: -40%; right: -30%;
+  width: 220px; height: 220px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(24,119,242,0.25), transparent 68%);
+  pointer-events: none;
+}
+.ann-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 11px; border-radius: 999px;
+  background: rgba(79,214,156,0.14); border: 1px solid rgba(79,214,156,0.35);
+  color: var(--green); font-family: var(--mono); font-size: 0.58rem;
+  letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600;
+}
+.ann-title {
+  font-size: 1.28rem; font-weight: 700; letter-spacing: -0.03em;
+  line-height: 1.2; margin: 14px 0 10px; position: relative;
+}
+.ann-title span { color: var(--green); }
+.ann-body {
+  font-size: 0.84rem; color: var(--soft); line-height: 1.5;
+  margin-bottom: 12px; position: relative;
+}
+.ann-body strong { color: var(--ink); font-weight: 600; }
+.ann-actions { display: flex; flex-direction: column; gap: 8px; position: relative; }
+.ann-actions .btn { width: 100%; min-height: 48px; font-size: 0.88rem; }
+.ann-dl {
+  background: linear-gradient(135deg, #1877f2, #0d5dbf) !important;
+  border-color: rgba(255,255,255,0.18) !important;
+  color: #fff !important;
+  box-shadow: 0 8px 22px rgba(24,119,242,0.35);
+  text-decoration: none;
+}
+.ann-dl:active { transform: scale(0.97); }
+.ann-close-btn {
+  background: var(--s2) !important; border: 1px solid var(--line) !important; color: var(--soft) !important;
+}
+.ann-never {
+  display: flex; align-items: center; gap: 10px;
+  margin-top: 14px; padding: 10px 12px;
+  border-radius: 12px; background: var(--s1); border: 1px solid var(--line);
+  cursor: pointer; user-select: none; position: relative;
+  transition: border-color .15s;
+}
+.ann-never:hover { border-color: var(--gold-line); }
+.ann-check {
+  width: 20px; height: 20px; border-radius: 6px; flex-shrink: 0;
+  border: 1.5px solid var(--line-strong); background: var(--s2);
+  display: grid; place-items: center; transition: background .15s, border-color .15s;
+}
+.ann-never.on .ann-check {
+  background: var(--green); border-color: var(--green);
+}
+.ann-check svg { width: 12px; height: 12px; opacity: 0; transition: opacity .12s; }
+.ann-never.on .ann-check svg { opacity: 1; }
+.ann-never-label { font-size: 0.78rem; color: var(--muted); line-height: 1.3; }
+.ann-icon-row {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 4px; position: relative;
+}
+.ann-fb {
+  width: 40px; height: 40px; border-radius: 12px;
+  background: #1877f2; display: grid; place-items: center;
+  box-shadow: 0 6px 16px rgba(24,119,242,0.4);
+}
+.ann-fb svg { width: 20px; height: 20px; }
+
 .server-hero {
   text-align: center; padding: 28px 20px;
   background: linear-gradient(160deg, rgba(var(--gold-rgb),0.1), var(--s0));
@@ -1187,6 +1278,38 @@ html[data-theme="umbreon"] .progress-fill { background: linear-gradient(90deg, #
       <div id="countryList"></div>
     </div>
   </aside>
+  
+  <div class="ann-overlay" id="annOverlay" aria-hidden="true">
+    <div class="ann-card" role="dialog" aria-modal="true" aria-labelledby="annTitle">
+      <div class="ann-icon-row">
+        <div class="ann-fb" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="#fff"><path d="M14 8.5h2.5V5.2c-.4-.1-1.6-.2-2.9-.2-2.9 0-4.8 1.7-4.8 4.9V13H6v3.5h2.8V22h3.4v-5.5H15l.5-3.5h-3.3V10.5c0-1 .3-1.9 1.8-1.9z"/></svg>
+        </div>
+        <span class="ann-badge"><span style="width:6px;height:6px;border-radius:50%;background:var(--green)"></span> Fixed</span>
+      </div>
+      <h2 class="ann-title" id="annTitle">Facebook login <span>issue fixed</span></h2>
+      <p class="ann-body">
+        You can log in with Facebook again. Link your email for security so login problems don’t come back.
+        Returning players: download the latest package below (Android &amp; iOS).
+      </p>
+      <p class="ann-body" style="margin-top:-4px;margin-bottom:16px;font-size:0.76rem;color:var(--muted)">
+        Older packages are no longer maintained and can’t upgrade. After linking, migrate to the new platform.
+      </p>
+      <div class="ann-actions">
+        <a class="btn ann-dl" id="annDownload" href="http://3dsres.daji3ds.com/android/3dsen/20210528/3ds_en.html" target="_blank" rel="noopener noreferrer">
+          Download new APK
+        </a>
+        <button class="btn ann-close-btn" id="annClose" type="button">Close</button>
+      </div>
+      <label class="ann-never" id="annNever">
+        <span class="ann-check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0b0c10" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        </span>
+        <span class="ann-never-label">Don't show this again</span>
+      </label>
+    </div>
+  </div>
+
   <div class="notif-modal-overlay" id="notifModalOverlay">
     <div class="notif-modal">
       <div class="notif-modal-icon">
@@ -2991,6 +3114,47 @@ document.getElementById("sheetFav").addEventListener("click", () => { if (state.
 const hash = (location.hash || "").slice(1);
 if (["board","rotation","weather","events","server","download","builds","teams","guide","guide-tickets","about"].includes(hash)) go(hash);
 else render();
+
+
+/* ── Announcement: Facebook login fixed ── */
+const ANN_KEY = "ph_ann_fb_login_v1";
+let annNever = false;
+function showAnnouncement() {
+  try { if (localStorage.getItem(ANN_KEY) === "1") return; } catch (e) {}
+  const el = document.getElementById("annOverlay");
+  if (!el) return;
+  el.classList.add("open");
+  el.setAttribute("aria-hidden", "false");
+}
+function hideAnnouncement(permanent) {
+  const el = document.getElementById("annOverlay");
+  if (!el) return;
+  el.classList.remove("open");
+  el.setAttribute("aria-hidden", "true");
+  if (permanent || annNever) {
+    try { localStorage.setItem(ANN_KEY, "1"); } catch (e) {}
+  }
+}
+(function initAnnouncement() {
+  const never = document.getElementById("annNever");
+  const close = document.getElementById("annClose");
+  const overlay = document.getElementById("annOverlay");
+  const dl = document.getElementById("annDownload");
+  if (!never || !close || !overlay || !dl) return;
+  never.addEventListener("click", (e) => {
+    e.preventDefault();
+    annNever = !annNever;
+    never.classList.toggle("on", annNever);
+  });
+  close.addEventListener("click", () => hideAnnouncement(annNever));
+  overlay.addEventListener("click", e => { if (e.target === overlay) hideAnnouncement(annNever); });
+  dl.addEventListener("click", () => {
+    if (annNever) hideAnnouncement(true);
+  });
+  // Show after board paints; before notif modal (notif is 2200ms)
+  setTimeout(showAnnouncement, 700);
+})();
+
 
 initWeather();
 
