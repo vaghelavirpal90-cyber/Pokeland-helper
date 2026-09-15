@@ -355,12 +355,12 @@ a { color: inherit; text-decoration: none; }
 .wx-event-window { font-family: var(--mono); font-size: 0.62rem; color: var(--muted); }
 .wx-event-tag { font-family: var(--mono); font-size: 0.52rem; letter-spacing: 0.1em; }
 
-/* ── Premium announcement modal (FB login fixed) ── */
+/* ── Premium announcement modal (community) ── */
 .ann-overlay {
   position: fixed; inset: 0; z-index: 210;
-  background: rgba(3,4,7,0.75);
-  backdrop-filter: blur(12px) saturate(1.2);
-  -webkit-backdrop-filter: blur(12px) saturate(1.2);
+  background: rgba(3,4,7,0.78);
+  backdrop-filter: blur(14px) saturate(1.25);
+  -webkit-backdrop-filter: blur(14px) saturate(1.25);
   display: flex; align-items: center; justify-content: center;
   padding: 20px 16px calc(20px + var(--safe-b));
   opacity: 0; pointer-events: none;
@@ -369,8 +369,8 @@ a { color: inherit; text-decoration: none; }
 .ann-overlay.open { opacity: 1; pointer-events: auto; }
 .ann-card {
   width: 100%; max-width: 380px;
-  background: linear-gradient(165deg, rgba(24,119,242,0.16), var(--s0) 45%);
-  border: 1px solid rgba(24,119,242,0.35);
+  background: linear-gradient(165deg, rgba(var(--gold-rgb),0.18), var(--s0) 48%);
+  border: 1px solid var(--gold-line);
   border-radius: 26px;
   padding: 22px 20px 18px;
   box-shadow: 0 24px 60px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.04) inset;
@@ -382,36 +382,46 @@ a { color: inherit; text-decoration: none; }
 .ann-card::before {
   content: ""; position: absolute; top: -40%; right: -30%;
   width: 220px; height: 220px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(24,119,242,0.25), transparent 68%);
+  background: radial-gradient(circle, rgba(var(--gold-rgb),0.28), transparent 68%);
   pointer-events: none;
 }
 .ann-badge {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 5px 11px; border-radius: 999px;
-  background: rgba(79,214,156,0.14); border: 1px solid rgba(79,214,156,0.35);
-  color: var(--green); font-family: var(--mono); font-size: 0.58rem;
+  background: var(--gold-soft); border: 1px solid var(--gold-line);
+  color: var(--gold-text); font-family: var(--mono); font-size: 0.58rem;
   letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600;
 }
 .ann-title {
   font-size: 1.28rem; font-weight: 700; letter-spacing: -0.03em;
   line-height: 1.2; margin: 14px 0 10px; position: relative;
 }
-.ann-title span { color: var(--green); }
+.ann-title span { color: var(--gold-text); }
 .ann-body {
   font-size: 0.84rem; color: var(--soft); line-height: 1.5;
-  margin-bottom: 12px; position: relative;
+  margin-bottom: 16px; position: relative;
 }
 .ann-body strong { color: var(--ink); font-weight: 600; }
 .ann-actions { display: flex; flex-direction: column; gap: 8px; position: relative; }
 .ann-actions .btn { width: 100%; min-height: 48px; font-size: 0.88rem; }
-.ann-dl {
-  background: linear-gradient(135deg, #1877f2, #0d5dbf) !important;
-  border-color: rgba(255,255,255,0.18) !important;
+.ann-discord {
+  background: linear-gradient(135deg, #5865F2, #4752C4) !important;
+  border-color: rgba(255,255,255,0.16) !important;
   color: #fff !important;
-  box-shadow: 0 8px 22px rgba(24,119,242,0.35);
+  box-shadow: 0 8px 22px rgba(88,101,242,0.38);
   text-decoration: none;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
 }
-.ann-dl:active { transform: scale(0.97); }
+.ann-discord:active { transform: scale(0.97); }
+.ann-yt {
+  background: linear-gradient(135deg, #FF0000, #CC0000) !important;
+  border-color: rgba(255,255,255,0.16) !important;
+  color: #fff !important;
+  box-shadow: 0 8px 22px rgba(255,0,0,0.28);
+  text-decoration: none;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+}
+.ann-yt:active { transform: scale(0.97); }
 .ann-close-btn {
   background: var(--s2) !important; border: 1px solid var(--line) !important; color: var(--soft) !important;
 }
@@ -438,12 +448,17 @@ a { color: inherit; text-decoration: none; }
   display: flex; align-items: center; justify-content: space-between;
   margin-bottom: 4px; position: relative;
 }
-.ann-fb {
-  width: 40px; height: 40px; border-radius: 12px;
-  background: #1877f2; display: grid; place-items: center;
-  box-shadow: 0 6px 16px rgba(24,119,242,0.4);
+.ann-icons {
+  display: flex; align-items: center; gap: 8px;
 }
-.ann-fb svg { width: 20px; height: 20px; }
+.ann-ico {
+  width: 40px; height: 40px; border-radius: 12px;
+  display: grid; place-items: center;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+}
+.ann-ico.discord { background: #5865F2; }
+.ann-ico.yt { background: #FF0000; }
+.ann-ico svg { width: 20px; height: 20px; }
 
 .server-hero {
   text-align: center; padding: 28px 20px;
@@ -1282,24 +1297,30 @@ html[data-theme="umbreon"] .progress-fill { background: linear-gradient(90deg, #
   <div class="ann-overlay" id="annOverlay" aria-hidden="true">
     <div class="ann-card" role="dialog" aria-modal="true" aria-labelledby="annTitle">
       <div class="ann-icon-row">
-        <div class="ann-fb" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="#fff"><path d="M14 8.5h2.5V5.2c-.4-.1-1.6-.2-2.9-.2-2.9 0-4.8 1.7-4.8 4.9V13H6v3.5h2.8V22h3.4v-5.5H15l.5-3.5h-3.3V10.5c0-1 .3-1.9 1.8-1.9z"/></svg>
+        <div class="ann-icons" aria-hidden="true">
+          <div class="ann-ico discord">
+            <svg viewBox="0 0 24 24" fill="#fff"><path d="M20.317 4.492c-1.53-.69-3.17-1.2-4.885-1.49a.075.075 0 0 0-.079.036c-.21.36-.444.83-.608 1.2a18.566 18.566 0 0 0-5.487 0 12.36 12.36 0 0 0-.617-1.2.077.077 0 0 0-.079-.037c-1.714.29-3.354.8-4.885 1.491a.07.07 0 0 0-.032.027C.533 9.09-.32 13.555.099 17.961a.08.08 0 0 0 .031.055 20.03 20.03 0 0 0 5.993 2.98.078.078 0 0 0 .084-.026 13.83 13.83 0 0 0 1.226-1.963.074.074 0 0 0-.041-.104 13.201 13.201 0 0 1-1.872-.878.075.075 0 0 1-.008-.125c.126-.093.252-.19.372-.287a.075.075 0 0 1 .078-.01c3.927 1.764 8.18 1.764 12.061 0a.075.075 0 0 1 .079.009c.12.098.246.195.373.288a.075.075 0 0 1-.006.125c-.598.344-1.22.635-1.873.877a.075.075 0 0 0-.041.105c.36.687.772 1.341 1.225 1.962a.077.077 0 0 0 .084.028 19.963 19.963 0 0 0 6.002-2.981.076.076 0 0 0 .032-.054c.5-5.094-.838-9.52-3.549-13.442a.06.06 0 0 0-.031-.028Zm-12.31 10.78c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.176 1.094 2.157 2.418 0 1.334-.956 2.42-2.157 2.42Zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.176 1.094 2.157 2.418 0 1.334-.947 2.42-2.157 2.42Z"/></svg>
+          </div>
+          <div class="ann-ico yt">
+            <svg viewBox="0 0 24 24" fill="#fff"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.8zM9.75 15.5v-7l6.5 3.5-6.5 3.5z"/></svg>
+          </div>
         </div>
-        <span class="ann-badge"><span style="width:6px;height:6px;border-radius:50%;background:var(--green)"></span> Fixed</span>
+        <span class="ann-badge"><span style="width:6px;height:6px;border-radius:50%;background:var(--gold-text)"></span> Community</span>
       </div>
-      <h2 class="ann-title" id="annTitle">Facebook login <span>issue fixed</span></h2>
+      <h2 class="ann-title" id="annTitle">Join the <span>Pokeland</span> crew</h2>
       <p class="ann-body">
-        You can log in with Facebook again. Link your email for security so login problems don’t come back.
-        Returning players: download the latest package below (Android &amp; iOS).
-      </p>
-      <p class="ann-body" style="margin-top:-4px;margin-bottom:16px;font-size:0.76rem;color:var(--muted)">
-        Older packages are no longer maintained and can’t upgrade. After linking, migrate to the new platform.
+        Get live tips, rotation alerts, and hang with other players on Discord — plus guides &amp; updates on YouTube.
       </p>
       <div class="ann-actions">
-        <a class="btn ann-dl" id="annDownload" href="http://3dsres.daji3ds.com/android/3dsen/20210528/3ds_en.html" target="_blank" rel="noopener noreferrer">
-          Download new APK
+        <a class="btn ann-discord" id="annDiscord" href="https://discord.gg/ZBxUxc25Q" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M20.317 4.492c-1.53-.69-3.17-1.2-4.885-1.49a.075.075 0 0 0-.079.036c-.21.36-.444.83-.608 1.2a18.566 18.566 0 0 0-5.487 0 12.36 12.36 0 0 0-.617-1.2.077.077 0 0 0-.079-.037c-1.714.29-3.354.8-4.885 1.491a.07.07 0 0 0-.032.027C.533 9.09-.32 13.555.099 17.961a.08.08 0 0 0 .031.055 20.03 20.03 0 0 0 5.993 2.98.078.078 0 0 0 .084-.026 13.83 13.83 0 0 0 1.226-1.963.074.074 0 0 0-.041-.104 13.201 13.201 0 0 1-1.872-.878.075.075 0 0 1-.008-.125c.126-.093.252-.19.372-.287a.075.075 0 0 1 .078-.01c3.927 1.764 8.18 1.764 12.061 0a.075.075 0 0 1 .079.009c.12.098.246.195.373.288a.075.075 0 0 1-.006.125c-.598.344-1.22.635-1.873.877a.075.075 0 0 0-.041.105c.36.687.772 1.341 1.225 1.962a.077.077 0 0 0 .084.028 19.963 19.963 0 0 0 6.002-2.981.076.076 0 0 0 .032-.054c.5-5.094-.838-9.52-3.549-13.442a.06.06 0 0 0-.031-.028Zm-12.31 10.78c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.176 1.094 2.157 2.418 0 1.334-.956 2.42-2.157 2.42Zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.176 1.094 2.157 2.418 0 1.334-.947 2.42-2.157 2.42Z"/></svg>
+          Join Discord group
         </a>
-        <button class="btn ann-close-btn" id="annClose" type="button">Close</button>
+        <a class="btn ann-yt" id="annYoutube" href="https://youtube.com/@pokelandhelper?si=--tKrc_chOyg1uGu" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.8zM9.75 15.5v-7l6.5 3.5-6.5 3.5z"/></svg>
+          Subscribe on YouTube
+        </a>
+        <button class="btn ann-close-btn" id="annClose" type="button">Maybe later</button>
       </div>
       <label class="ann-never" id="annNever">
         <span class="ann-check">
@@ -3116,8 +3137,8 @@ if (["board","rotation","weather","events","server","download","builds","teams",
 else render();
 
 
-/* ── Announcement: Facebook login fixed ── */
-const ANN_KEY = "ph_ann_fb_login_v1";
+/* ── Announcement: community (Discord + YouTube) ── */
+const ANN_KEY = "ph_ann_community_v1";
 let annNever = false;
 function showAnnouncement() {
   try { if (localStorage.getItem(ANN_KEY) === "1") return; } catch (e) {}
@@ -3139,8 +3160,9 @@ function hideAnnouncement(permanent) {
   const never = document.getElementById("annNever");
   const close = document.getElementById("annClose");
   const overlay = document.getElementById("annOverlay");
-  const dl = document.getElementById("annDownload");
-  if (!never || !close || !overlay || !dl) return;
+  const discord = document.getElementById("annDiscord");
+  const yt = document.getElementById("annYoutube");
+  if (!never || !close || !overlay) return;
   never.addEventListener("click", (e) => {
     e.preventDefault();
     annNever = !annNever;
@@ -3148,9 +3170,9 @@ function hideAnnouncement(permanent) {
   });
   close.addEventListener("click", () => hideAnnouncement(annNever));
   overlay.addEventListener("click", e => { if (e.target === overlay) hideAnnouncement(annNever); });
-  dl.addEventListener("click", () => {
-    if (annNever) hideAnnouncement(true);
-  });
+  const markIfNever = () => { if (annNever) hideAnnouncement(true); };
+  if (discord) discord.addEventListener("click", markIfNever);
+  if (yt) yt.addEventListener("click", markIfNever);
   // Show after board paints; before notif modal (notif is 2200ms)
   setTimeout(showAnnouncement, 700);
 })();
