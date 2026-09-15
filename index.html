@@ -1049,10 +1049,10 @@ html[data-theme="umbreon"] .progress-fill { background: linear-gradient(90deg, #
       <div class="card mt-18" style="padding:18px">
         <p style="font-size:0.88rem;color:var(--soft);line-height:1.55;text-wrap:pretty">Catch, train and awaken legendaries across live servers. Grab the client and start on the newest server.</p>
         <div style="display:flex;flex-direction:column;gap:8px;margin-top:16px">
-          <a class="btn btn-primary" id="dlMenuBtn" href="http://3dsres.daji3ds.com/android/3dsen/20210528/3ds_en.html" target="_blank" rel="noopener">Download new APK · Android &amp; iOS</a>
+          <a class="btn btn-primary" href="https://www.pokelandlegends.com/download" target="_blank" rel="noopener">Official site · Download</a>
           <a class="btn" href="https://www.facebook.com/pokemondsland/" target="_blank" rel="noopener">Official Facebook page</a>
         </div>
-        <div style="font-family:var(--mono);font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);margin-top:14px">Latest package · Facebook login fixed</div>
+        <div style="font-family:var(--mono);font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);margin-top:14px">Official links only</div>
       </div>
 
       <div class="mt-18">
@@ -1068,10 +1068,10 @@ html[data-theme="umbreon"] .progress-fill { background: linear-gradient(90deg, #
 
       <div class="card mt-18" style="padding:18px">
         <div class="kicker">How to install</div>
-        <div class="dl-step"><span class="dl-num">1</span><div><div style="font-size:0.88rem;font-weight:600">Download the client</div><div style="font-size:0.8rem;color:var(--muted);margin-top:2px">Use Download new APK above for the latest package (Android & iOS). On Android allow install from unknown sources when prompted.</div></div></div>
+        <div class="dl-step"><span class="dl-num">1</span><div><div style="font-size:0.88rem;font-weight:600">Download the client</div><div style="font-size:0.8rem;color:var(--muted);margin-top:2px">Get the APK from pokelandlegends.com. On Android allow install from unknown sources when prompted.</div></div></div>
         <div class="dl-step"><span class="dl-num">2</span><div><div style="font-size:0.88rem;font-weight:600">Let resources unpack</div><div style="font-size:0.8rem;color:var(--muted);margin-top:2px">First launch downloads the asset packs — use Wi-Fi and keep the app open.</div></div></div>
         <div class="dl-step"><span class="dl-num">3</span><div><div style="font-size:0.88rem;font-weight:600">Pick a server</div><div style="font-size:0.8rem;color:var(--muted);margin-top:2px">New servers reset rankings — check the Server tab for the next opening time.</div></div></div>
-        <div class="dl-step"><span class="dl-num">4</span><div><div style="font-size:0.88rem;font-weight:600">Bind your account</div><div style="font-size:0.8rem;color:var(--muted);margin-top:2px">Sign in with Facebook (now fixed) or your Jodo account, then link email so progress survives a reinstall.</div></div></div>
+        <div class="dl-step"><span class="dl-num">4</span><div><div style="font-size:0.88rem;font-weight:600">Bind your account</div><div style="font-size:0.8rem;color:var(--muted);margin-top:2px">Sign in with Facebook or your Jodo account so progress survives a reinstall.</div></div></div>
       </div>
 
       <div class="card mt-18" style="padding:18px">
@@ -3032,15 +3032,6 @@ document.getElementById("notifNudgeBtn").addEventListener("click", async () => {
   updateNotifNudge();
   if (state.view === "weather") renderWeather();
 });
-function openExternal(e) {
-  e.preventDefault();
-  const url = e.currentTarget.href;
-  const win = window.open(url, "_blank", "noopener,noreferrer");
-  if (!win) window.location.href = url;
-}
-document.getElementById("dlMenuBtn")?.addEventListener("click", openExternal);
-document.getElementById("annDownload")?.addEventListener("click", openExternal);
-
 document.getElementById("notifNudgeClose").addEventListener("click", () => {
   try { localStorage.setItem(NUDGE_SNOOZE_KEY, String(Date.now() + 3 * 86400000)); } catch (e) {}
   document.getElementById("notifNudge").style.display = "none";
