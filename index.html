@@ -3227,10 +3227,15 @@ function bindExternalLinks() {
 /* ── Announcement: community (Discord + YouTube) ── */
 const ANN_KEY = "ph_ann_community_v1";
 let annNever = false;
-function showAnnouncement() {
+let annOpenOnce = false; // only auto-popup once per cold JS context; reopen via visibility still ok if not dismissed
+function showAnnouncement(force) {
   try { if (localStorage.getItem(ANN_KEY) === "1") return; } catch (e) {}
   const el = document.getElementById("annOverlay");
   if (!el) return;
+  // Avoid stacking if already open
+  if (el.classList.contains("open")) return;
+  if (!force && annOpenOnce) return;
+  annOpenOnce = true;
   el.classList.add("open");
   el.setAttribute("aria-hidden", "false");
 }
@@ -3261,8 +3266,26 @@ function hideAnnouncement(permanent) {
   if (discord) discord.addEventListener("click", markIfNever);
   if (yt) yt.addEventListener("click", markIfNever);
   bindExternalLinks();
-  // Show after board paints; before notif modal (notif is 2200ms)
-  setTimeout(showAnnouncement, 700);
+
+  // AppMint / WebView often resumes without a full reload.
+  // Fire on load, pageshow (incl. bfcache), and when app becomes visible.
+  function scheduleShow(ms, force) {
+    setTimeout(function () { showAnnouncement(!!force); }, ms);
+  }
+  scheduleShow(600);
+  scheduleShow(1400); // second try after splash / late paint
+  window.addEventListener("load", function () { scheduleShow(500); });
+  window.addEventListener("pageshow", function (e) {
+    // e.persisted = restored from cache (common when "opening" app again)
+    annOpenOnce = false; // allow show again after process death / new session
+    scheduleShow(e.persisted ? 350 : 700, true);
+  });
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "visible") {
+      // Opening app from background / launcher without full reload
+      scheduleShow(400, true);
+    }
+  });
 })();
 
 
