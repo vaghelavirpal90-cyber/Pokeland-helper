@@ -812,6 +812,16 @@ html[data-theme="umbreon"] .progress-fill { background: linear-gradient(90deg, #
 .theme-check { width: 16px; height: 16px; color: var(--gold-text); opacity: 0; }
 .theme-row.on .theme-check { opacity: 1; }
 @media (min-width: 520px) { .app { border-left: 1px solid var(--line); border-right: 1px solid var(--line); } }
+.tz-pill { flex-direction: row; align-items: center; gap: 7px; padding: 4px 9px 4px 7px; border-radius: 11px; background: var(--s2); border: 1px solid var(--line); cursor: pointer; text-align: right; }
+.tz-pill:active { transform: scale(0.96); }
+.tz-ico { width: 20px; height: 20px; flex-shrink: 0; color: var(--gold-text, var(--gold)); }
+.tz-txt { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+.tz-txt .clock { display: block; white-space: nowrap; }
+.ctry-search { width: 100%; box-sizing: border-box; margin: 0 0 12px; padding: 11px 14px; border-radius: 12px; background: var(--s1); border: 1px solid var(--line); color: inherit; font: inherit; font-size: 0.88rem; outline: none; }
+.ctry-search:focus { border-color: var(--gold-line); }
+.ctry-letter { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.16em; color: var(--gold-text, var(--gold)); margin: 16px 2px 8px; }
+.ctry-letter:first-child { margin-top: 4px; }
+.ctry-empty { padding: 18px 4px; font-size: 0.85rem; color: var(--muted); }
 </style>
 </head>
 <template id="__bundler_thumbnail">
@@ -853,17 +863,20 @@ html[data-theme="umbreon"] .progress-fill { background: linear-gradient(90deg, #
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg>
             </span>
             <div class="theme-hint-txt">
-              <div class="theme-hint-title">Tap <em>clock</em> or Pokéball</div>
-              <div class="theme-hint-sub">Pick your country time · HKT, IST, ICT…</div>
+              <div class="theme-hint-title">Tap <em>globe clock</em></div>
+              <div class="theme-hint-sub">Pick any country A–Z · Hong Kong is main</div>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="header-right">
-      <button class="clocks" id="clocksBox" type="button" title="Tap to change your country time" aria-label="Change country time" style="background:none;border:none;padding:0;cursor:pointer;text-align:right">
-        <div class="clock"><span id="clockLocalLabel">LOCAL</span><span id="clockLocal">--:--:--</span></div>
-        <div class="clock"><span>HKT</span><span id="clockHK">--:--:--</span></div>
+      <button class="clocks tz-pill" id="clocksBox" type="button" title="Select country time" aria-label="Select country time">
+        <svg class="tz-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="3.8" ry="9" opacity=".45"/><path d="M3.3 9.2h17.4M3.3 14.8h17.4" opacity=".45"/><circle cx="12" cy="12" r="5.2" fill="var(--s2)" stroke-width="1.6"/><path d="M12 9.4V12l1.9 1.3" stroke-width="1.8"/></svg>
+        <span class="tz-txt">
+          <span class="clock"><span id="clockLocalLabel">LOCAL</span><span id="clockLocal">--:--:--</span></span>
+          <span class="clock"><span>HKT</span><span id="clockHK">--:--:--</span></span>
+        </span>
       </button>
       <a class="icon-btn" href="https://discord.gg/ZBxUxc25Q" target="_blank" rel="noopener" aria-label="Join our Discord" title="Join our Discord">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.492c-1.53-.69-3.17-1.2-4.885-1.49a.075.075 0 0 0-.079.036c-.21.36-.444.83-.608 1.2a18.566 18.566 0 0 0-5.487 0 12.36 12.36 0 0 0-.617-1.2.077.077 0 0 0-.079-.037c-1.714.29-3.354.8-4.885 1.491a.07.07 0 0 0-.032.027C.533 9.09-.32 13.555.099 17.961a.08.08 0 0 0 .031.055 20.03 20.03 0 0 0 5.993 2.98.078.078 0 0 0 .084-.026 13.83 13.83 0 0 0 1.226-1.963.074.074 0 0 0-.041-.104 13.201 13.201 0 0 1-1.872-.878.075.075 0 0 1-.008-.125c.126-.093.252-.19.372-.287a.075.075 0 0 1 .078-.01c3.927 1.764 8.18 1.764 12.061 0a.075.075 0 0 1 .079.009c.12.098.246.195.373.288a.075.075 0 0 1-.006.125c-.598.344-1.22.635-1.873.877a.075.075 0 0 0-.041.105c.36.687.772 1.341 1.225 1.962a.077.077 0 0 0 .084.028 19.963 19.963 0 0 0 6.002-2.981.076.076 0 0 0 .032-.054c.5-5.094-.838-9.52-3.549-13.442a.06.06 0 0 0-.031-.028Zm-12.31 10.78c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.176 1.094 2.157 2.418 0 1.334-.956 2.42-2.157 2.42Zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.176 1.094 2.157 2.418 0 1.334-.947 2.42-2.157 2.42Z"/></svg>
@@ -1290,6 +1303,7 @@ html[data-theme="umbreon"] .progress-fill { background: linear-gradient(90deg, #
     <div id="countrySection">
       <div class="kicker" style="margin:18px 0 10px;padding-left:2px">Your country time</div>
       <p style="font-size:0.75rem;color:var(--muted);margin:0 0 12px;padding:0 2px;line-height:1.4">All event, weather, World Boss and server times will show in your selected country time. Server still runs on HKT.</p>
+      <input id="countrySearch" class="ctry-search" type="search" placeholder="Search country A–Z…" autocomplete="off" aria-label="Search country">
       <div id="countryList"></div>
     </div>
   </aside>
@@ -2674,38 +2688,27 @@ const THEMES = [
   { id: "umbreon",  name: "Umbreon", c: "#4a4a4f", mon: 197 },
   { id: "rgb",      name: "RGB",      c: null, mon: 137, animated: true }
 ];
-const COUNTRIES = [
-  { id: "hkt", name: "Hong Kong (Server)", short: "HKT", tz: "Asia/Hong_Kong", flag: "🇭🇰" },
-  { id: "ict", name: "Vietnam", short: "ICT", tz: "Asia/Ho_Chi_Minh", flag: "🇻🇳" },
-  { id: "ist", name: "India", short: "IST", tz: "Asia/Kolkata", flag: "🇮🇳" },
-  { id: "wib", name: "Indonesia (WIB)", short: "WIB", tz: "Asia/Jakarta", flag: "🇮🇩" },
-  { id: "wita", name: "Indonesia (WITA)", short: "WITA", tz: "Asia/Makassar", flag: "🇮🇩" },
-  { id: "wit", name: "Indonesia (WIT)", short: "WIT", tz: "Asia/Jayapura", flag: "🇮🇩" },
-  { id: "pht", name: "Philippines", short: "PHT", tz: "Asia/Manila", flag: "🇵🇭" },
-  { id: "tha", name: "Thailand", short: "ICT", tz: "Asia/Bangkok", flag: "🇹🇭" },
-  { id: "myt", name: "Malaysia", short: "MYT", tz: "Asia/Kuala_Lumpur", flag: "🇲🇾" },
-  { id: "sgt", name: "Singapore", short: "SGT", tz: "Asia/Singapore", flag: "🇸🇬" },
-  { id: "pkt", name: "Pakistan", short: "PKT", tz: "Asia/Karachi", flag: "🇵🇰" },
-  { id: "bst", name: "Bangladesh", short: "BST", tz: "Asia/Dhaka", flag: "🇧🇩" },
-  { id: "npt", name: "Nepal", short: "NPT", tz: "Asia/Kathmandu", flag: "🇳🇵" },
-  { id: "mmt", name: "Myanmar", short: "MMT", tz: "Asia/Yangon", flag: "🇲🇲" },
-  { id: "jst", name: "Japan", short: "JST", tz: "Asia/Tokyo", flag: "🇯🇵" },
-  { id: "kst", name: "Korea", short: "KST", tz: "Asia/Seoul", flag: "🇰🇷" },
-  { id: "cst", name: "China", short: "CST", tz: "Asia/Shanghai", flag: "🇨🇳" },
-  { id: "utc", name: "UTC", short: "UTC", tz: "UTC", flag: "🌐" }
-];
+const TZ_DATA = "HK|Hong Kong (Server)|Asia/Hong_Kong\nAF|Afghanistan|Asia/Kabul\nAX|Åland Islands|Europe/Mariehamn\nAL|Albania|Europe/Tirane\nDZ|Algeria|Africa/Algiers\nAD|Andorra|Europe/Andorra\nAO|Angola|Africa/Luanda\nAI|Anguilla|America/Anguilla\nAG|Antigua & Barbuda|America/Antigua\nAR|Argentina|America/Argentina/Buenos_Aires\nAM|Armenia|Asia/Yerevan\nAW|Aruba|America/Aruba\nAU|Australia (Brisbane)|Australia/Brisbane\nAU|Australia (Broken Hill)|Australia/Broken_Hill\nAU|Australia (Darwin)|Australia/Darwin\nAU|Australia (Eucla)|Australia/Eucla\nAU|Australia (Lord Howe)|Australia/Lord_Howe\nAU|Australia (Macquarie)|Antarctica/Macquarie\nAU|Australia (Perth)|Australia/Perth\nAT|Austria|Europe/Vienna\nAZ|Azerbaijan|Asia/Baku\nBS|Bahamas|America/Nassau\nBH|Bahrain|Asia/Bahrain\nBD|Bangladesh|Asia/Dhaka\nBB|Barbados|America/Barbados\nBY|Belarus|Europe/Minsk\nBE|Belgium|Europe/Brussels\nBZ|Belize|America/Belize\nBJ|Benin|Africa/Porto-Novo\nBM|Bermuda|Atlantic/Bermuda\nBT|Bhutan|Asia/Thimphu\nBO|Bolivia|America/La_Paz\nBA|Bosnia & Herzegovina|Europe/Sarajevo\nBW|Botswana|Africa/Gaborone\nBR|Brazil (Belem)|America/Belem\nBR|Brazil (Campo Grande)|America/Campo_Grande\nBR|Brazil (Eirunepe)|America/Eirunepe\nBR|Brazil (Noronha)|America/Noronha\nIO|British Indian Ocean Territory|Indian/Chagos\nBN|Brunei|Asia/Brunei\nBG|Bulgaria|Europe/Sofia\nBF|Burkina Faso|Africa/Ouagadougou\nBI|Burundi|Africa/Bujumbura\nKH|Cambodia|Asia/Phnom_Penh\nCM|Cameroon|Africa/Douala\nCA|Canada (Atikokan)|America/Atikokan\nCA|Canada (Blanc-Sablon)|America/Blanc-Sablon\nCA|Canada (Creston)|America/Creston\nCA|Canada (Edmonton)|America/Edmonton\nCA|Canada (Halifax)|America/Halifax\nCA|Canada (Regina)|America/Regina\nCA|Canada (St Johns)|America/St_Johns\nCA|Canada (Toronto)|America/Toronto\nCA|Canada (Vancouver)|America/Vancouver\nCA|Canada (Winnipeg)|America/Winnipeg\nCV|Cape Verde|Atlantic/Cape_Verde\nBQ|Caribbean NL|America/Kralendijk\nKY|Cayman Islands|America/Cayman\nCF|Central African Rep.|Africa/Bangui\nTD|Chad|Africa/Ndjamena\nCL|Chile (Coyhaique)|America/Coyhaique\nCL|Chile (Easter)|Pacific/Easter\nCL|Chile (Santiago)|America/Santiago\nCN|China (Shanghai)|Asia/Shanghai\nCN|China (Urumqi)|Asia/Urumqi\nCX|Christmas Island|Indian/Christmas\nCC|Cocos (Keeling) Islands|Indian/Cocos\nCO|Colombia|America/Bogota\nKM|Comoros|Indian/Comoro\nCG|Congo|Africa/Brazzaville\nCK|Cook Islands|Pacific/Rarotonga\nCR|Costa Rica|America/Costa_Rica\nHR|Croatia|Europe/Zagreb\nCU|Cuba|America/Havana\nCW|Curaçao|America/Curacao\nCY|Cyprus|Asia/Nicosia\nCZ|Czech Republic|Europe/Prague\nDK|Denmark|Europe/Copenhagen\nDJ|Djibouti|Africa/Djibouti\nDM|Dominica|America/Dominica\nDO|Dominican Republic|America/Santo_Domingo\nCD|DR Congo (Kinshasa)|Africa/Kinshasa\nCD|DR Congo (Lubumbashi)|Africa/Lubumbashi\nEC|Ecuador (Galapagos)|Pacific/Galapagos\nEC|Ecuador (Guayaquil)|America/Guayaquil\nEG|Egypt|Africa/Cairo\nSV|El Salvador|America/El_Salvador\nGQ|Equatorial Guinea|Africa/Malabo\nER|Eritrea|Africa/Asmara\nEE|Estonia|Europe/Tallinn\nSZ|Eswatini|Africa/Mbabane\nET|Ethiopia|Africa/Addis_Ababa\nFK|Falkland Islands|Atlantic/Stanley\nFO|Faroe Islands|Atlantic/Faroe\nFJ|Fiji|Pacific/Fiji\nFI|Finland|Europe/Helsinki\nFR|France|Europe/Paris\nGF|French Guiana|America/Cayenne\nPF|French Polynesia (Gambier)|Pacific/Gambier\nPF|French Polynesia (Marquesas)|Pacific/Marquesas\nPF|French Polynesia (Tahiti)|Pacific/Tahiti\nTF|French S. Terr.|Indian/Kerguelen\nGA|Gabon|Africa/Libreville\nGM|Gambia|Africa/Banjul\nGE|Georgia|Asia/Tbilisi\nDE|Germany|Europe/Berlin\nGH|Ghana|Africa/Accra\nGI|Gibraltar|Europe/Gibraltar\nGR|Greece|Europe/Athens\nGL|Greenland (Danmarkshavn)|America/Danmarkshavn\nGL|Greenland (Nuuk)|America/Nuuk\nGL|Greenland (Thule)|America/Thule\nGD|Grenada|America/Grenada\nGP|Guadeloupe|America/Guadeloupe\nGU|Guam|Pacific/Guam\nGT|Guatemala|America/Guatemala\nGG|Guernsey|Europe/Guernsey\nGN|Guinea|Africa/Conakry\nGW|Guinea-Bissau|Africa/Bissau\nGY|Guyana|America/Guyana\nHT|Haiti|America/Port-au-Prince\nHN|Honduras|America/Tegucigalpa\nHU|Hungary|Europe/Budapest\nIS|Iceland|Atlantic/Reykjavik\nIN|India|Asia/Kolkata\nID|Indonesia (Jakarta)|Asia/Jakarta\nID|Indonesia (Jayapura)|Asia/Jayapura\nID|Indonesia (Makassar)|Asia/Makassar\nIR|Iran|Asia/Tehran\nIQ|Iraq|Asia/Baghdad\nIE|Ireland|Europe/Dublin\nIM|Isle of Man|Europe/Isle_of_Man\nIL|Israel|Asia/Jerusalem\nIT|Italy|Europe/Rome\nCI|Ivory Coast|Africa/Abidjan\nJM|Jamaica|America/Jamaica\nJP|Japan|Asia/Tokyo\nJE|Jersey|Europe/Jersey\nJO|Jordan|Asia/Amman\nKZ|Kazakhstan|Asia/Almaty\nKE|Kenya|Africa/Nairobi\nKI|Kiribati (Kanton)|Pacific/Kanton\nKI|Kiribati (Kiritimati)|Pacific/Kiritimati\nKI|Kiribati (Tarawa)|Pacific/Tarawa\nKW|Kuwait|Asia/Kuwait\nKG|Kyrgyzstan|Asia/Bishkek\nLA|Laos|Asia/Vientiane\nLV|Latvia|Europe/Riga\nLB|Lebanon|Asia/Beirut\nLS|Lesotho|Africa/Maseru\nLR|Liberia|Africa/Monrovia\nLY|Libya|Africa/Tripoli\nLI|Liechtenstein|Europe/Vaduz\nLT|Lithuania|Europe/Vilnius\nLU|Luxembourg|Europe/Luxembourg\nMO|Macau|Asia/Macau\nMG|Madagascar|Indian/Antananarivo\nMW|Malawi|Africa/Blantyre\nMY|Malaysia|Asia/Kuala_Lumpur\nMV|Maldives|Indian/Maldives\nML|Mali|Africa/Bamako\nMT|Malta|Europe/Malta\nMH|Marshall Islands|Pacific/Majuro\nMQ|Martinique|America/Martinique\nMR|Mauritania|Africa/Nouakchott\nMU|Mauritius|Indian/Mauritius\nYT|Mayotte|Indian/Mayotte\nMX|Mexico (Cancun)|America/Cancun\nMX|Mexico (Ciudad Juarez)|America/Ciudad_Juarez\nMX|Mexico (Matamoros)|America/Matamoros\nMX|Mexico (Mazatlan)|America/Mazatlan\nMX|Mexico (Mexico City)|America/Mexico_City\nMX|Mexico (Tijuana)|America/Tijuana\nFM|Micronesia (Chuuk)|Pacific/Chuuk\nFM|Micronesia (Pohnpei)|Pacific/Pohnpei\nMD|Moldova|Europe/Chisinau\nMC|Monaco|Europe/Monaco\nMN|Mongolia (Hovd)|Asia/Hovd\nMN|Mongolia (Ulaanbaatar)|Asia/Ulaanbaatar\nME|Montenegro|Europe/Podgorica\nMS|Montserrat|America/Montserrat\nMA|Morocco|Africa/Casablanca\nMZ|Mozambique|Africa/Maputo\nMM|Myanmar (Burma)|Asia/Yangon\nNA|Namibia|Africa/Windhoek\nNR|Nauru|Pacific/Nauru\nNP|Nepal|Asia/Kathmandu\nNL|Netherlands|Europe/Amsterdam\nNC|New Caledonia|Pacific/Noumea\nNZ|New Zealand (Auckland)|Pacific/Auckland\nNZ|New Zealand (Chatham)|Pacific/Chatham\nNI|Nicaragua|America/Managua\nNE|Niger|Africa/Niamey\nNG|Nigeria|Africa/Lagos\nNU|Niue|Pacific/Niue\nNF|Norfolk Island|Pacific/Norfolk\nKP|North Korea|Asia/Pyongyang\nMK|North Macedonia|Europe/Skopje\nMP|Northern Mariana Islands|Pacific/Saipan\nNO|Norway|Europe/Oslo\nOM|Oman|Asia/Muscat\nPK|Pakistan|Asia/Karachi\nPW|Palau|Pacific/Palau\nPS|Palestine|Asia/Gaza\nPA|Panama|America/Panama\nPG|Papua New Guinea (Bougainville)|Pacific/Bougainville\nPG|Papua New Guinea (Port Moresby)|Pacific/Port_Moresby\nPY|Paraguay|America/Asuncion\nPE|Peru|America/Lima\nPH|Philippines|Asia/Manila\nPN|Pitcairn|Pacific/Pitcairn\nPL|Poland|Europe/Warsaw\nPT|Portugal (Azores)|Atlantic/Azores\nPT|Portugal (Lisbon)|Europe/Lisbon\nPR|Puerto Rico|America/Puerto_Rico\nQA|Qatar|Asia/Qatar\nRE|Réunion|Indian/Reunion\nRO|Romania|Europe/Bucharest\nRU|Russia (Astrakhan)|Europe/Astrakhan\nRU|Russia (Chita)|Asia/Chita\nRU|Russia (Irkutsk)|Asia/Irkutsk\nRU|Russia (Kaliningrad)|Europe/Kaliningrad\nRU|Russia (Kamchatka)|Asia/Kamchatka\nRU|Russia (Magadan)|Asia/Magadan\nRU|Russia (Moscow)|Europe/Moscow\nRU|Russia (Novosibirsk)|Asia/Novosibirsk\nRU|Russia (Omsk)|Asia/Omsk\nRU|Russia (Vladivostok)|Asia/Vladivostok\nRU|Russia (Yekaterinburg)|Asia/Yekaterinburg\nRW|Rwanda|Africa/Kigali\nAS|Samoa (American)|Pacific/Pago_Pago\nWS|Samoa (western)|Pacific/Apia\nSM|San Marino|Europe/San_Marino\nST|Sao Tome & Principe|Africa/Sao_Tome\nSA|Saudi Arabia|Asia/Riyadh\nSN|Senegal|Africa/Dakar\nRS|Serbia|Europe/Belgrade\nSC|Seychelles|Indian/Mahe\nSL|Sierra Leone|Africa/Freetown\nSG|Singapore|Asia/Singapore\nSK|Slovakia|Europe/Bratislava\nSI|Slovenia|Europe/Ljubljana\nSB|Solomon Islands|Pacific/Guadalcanal\nSO|Somalia|Africa/Mogadishu\nZA|South Africa|Africa/Johannesburg\nGS|South Georgia & the South Sandwich Islands|Atlantic/South_Georgia\nKR|South Korea|Asia/Seoul\nSS|South Sudan|Africa/Juba\nES|Spain (Canary)|Atlantic/Canary\nES|Spain (Madrid)|Europe/Madrid\nLK|Sri Lanka|Asia/Colombo\nBL|St Barthelemy|America/St_Barthelemy\nSH|St Helena|Atlantic/St_Helena\nKN|St Kitts & Nevis|America/St_Kitts\nLC|St Lucia|America/St_Lucia\nSX|St Maarten (Dutch)|America/Lower_Princes\nMF|St Martin (French)|America/Marigot\nPM|St Pierre & Miquelon|America/Miquelon\nVC|St Vincent|America/St_Vincent\nSD|Sudan|Africa/Khartoum\nSR|Suriname|America/Paramaribo\nSJ|Svalbard & Jan Mayen|Arctic/Longyearbyen\nSE|Sweden|Europe/Stockholm\nCH|Switzerland|Europe/Zurich\nSY|Syria|Asia/Damascus\nTW|Taiwan|Asia/Taipei\nTJ|Tajikistan|Asia/Dushanbe\nTZ|Tanzania|Africa/Dar_es_Salaam\nTH|Thailand|Asia/Bangkok\nTL|Timor-Leste|Asia/Dili\nTG|Togo|Africa/Lome\nTK|Tokelau|Pacific/Fakaofo\nTO|Tonga|Pacific/Tongatapu\nTT|Trinidad & Tobago|America/Port_of_Spain\nTN|Tunisia|Africa/Tunis\nTR|Turkey|Europe/Istanbul\nTM|Turkmenistan|Asia/Ashgabat\nTC|Turks & Caicos Is|America/Grand_Turk\nTV|Tuvalu|Pacific/Funafuti\nUG|Uganda|Africa/Kampala\nUA|Ukraine (Kyiv)|Europe/Kyiv\nUA|Ukraine (Simferopol)|Europe/Simferopol\nAE|United Arab Emirates|Asia/Dubai\nGB|United Kingdom|Europe/London\nUS|United States (Adak)|America/Adak\nUS|United States (Anchorage)|America/Anchorage\nUS|United States (Chicago)|America/Chicago\nUS|United States (Denver)|America/Denver\nUS|United States (Honolulu)|Pacific/Honolulu\nUS|United States (Los Angeles)|America/Los_Angeles\nUS|United States (New York)|America/New_York\nUS|United States (Phoenix)|America/Phoenix\nUY|Uruguay|America/Montevideo\nUM|US minor outlying islands (Midway)|Pacific/Midway\nUM|US minor outlying islands (Wake)|Pacific/Wake\nUZ|Uzbekistan|Asia/Samarkand\nVU|Vanuatu|Pacific/Efate\nVA|Vatican City|Europe/Vatican\nVE|Venezuela|America/Caracas\nVN|Vietnam|Asia/Ho_Chi_Minh\nVG|Virgin Islands (UK)|America/Tortola\nVI|Virgin Islands (US)|America/St_Thomas\nWF|Wallis & Futuna|Pacific/Wallis\nEH|Western Sahara|Africa/El_Aaiun\nYE|Yemen|Asia/Aden\nZM|Zambia|Africa/Lusaka\nZW|Zimbabwe|Africa/Harare\nUN|UTC|UTC";
+const TZ_ABBR = { "Asia/Hong_Kong":"HKT","Asia/Ho_Chi_Minh":"ICT","Asia/Kolkata":"IST","Asia/Jakarta":"WIB","Asia/Makassar":"WITA","Asia/Jayapura":"WIT","Asia/Manila":"PHT","Asia/Bangkok":"ICT","Asia/Kuala_Lumpur":"MYT","Asia/Singapore":"SGT","Asia/Karachi":"PKT","Asia/Dhaka":"BST","Asia/Kathmandu":"NPT","Asia/Yangon":"MMT","Asia/Tokyo":"JST","Asia/Seoul":"KST","Asia/Shanghai":"CST","UTC":"UTC" };
+const TZ_LEGACY = { hkt:"Asia/Hong_Kong", ict:"Asia/Ho_Chi_Minh", ist:"Asia/Kolkata", wib:"Asia/Jakarta", wita:"Asia/Makassar", wit:"Asia/Jayapura", pht:"Asia/Manila", tha:"Asia/Bangkok", myt:"Asia/Kuala_Lumpur", sgt:"Asia/Singapore", pkt:"Asia/Karachi", bst:"Asia/Dhaka", npt:"Asia/Kathmandu", mmt:"Asia/Yangon", jst:"Asia/Tokyo", kst:"Asia/Seoul", cst:"Asia/Shanghai", utc:"UTC" };
+function tzShort(tz) {
+  if (TZ_ABBR[tz]) return TZ_ABBR[tz];
+  try {
+    const p = new Intl.DateTimeFormat("en", { timeZone: tz, timeZoneName: "shortOffset" }).formatToParts(new Date()).find(x => x.type === "timeZoneName");
+    return p ? p.value.replace("GMT", "UTC") : "UTC";
+  } catch (e) { return "UTC"; }
+}
+const COUNTRIES = TZ_DATA.split("\n").map(l => {
+  const [cc, name, tz] = l.split("|");
+  return { id: tz, name, tz, cc, flag: cc === "UN" ? "🌐" : String.fromCodePoint(...[...cc].map(ch => 127397 + ch.charCodeAt(0))), get short() { return tzShort(this.tz); } };
+});
 let curTheme = "orange";
 try { const st = localStorage.getItem("lh_theme"); if (st && THEMES.some(t => t.id === st)) curTheme = st; } catch (e) {}
-let curCountry = "hkt";
+let curCountry = "Asia/Hong_Kong";
 try {
-  const ct = localStorage.getItem("lh_country");
+  let ct = localStorage.getItem("lh_country");
+  if (ct && TZ_LEGACY[ct]) ct = TZ_LEGACY[ct];
   if (ct && COUNTRIES.some(c => c.id === ct)) curCountry = ct;
-  else {
-    // auto-detect browser timezone if possible
-    const browserTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    const hit = COUNTRIES.find(c => c.tz === browserTz);
-    if (hit) curCountry = hit.id;
-  }
 } catch (e) {}
 function getCountry() { return COUNTRIES.find(c => c.id === curCountry) || COUNTRIES[0]; }
 function getTz() { return getCountry().tz; }
@@ -2774,13 +2777,35 @@ document.getElementById("themeList").innerHTML = THEMES.map(t => `
   </button>`).join("");
 document.querySelectorAll(".theme-row").forEach(r => r.addEventListener("click", () => applyTheme(r.dataset.theme)));
 applyTheme(curTheme);
-document.getElementById("countryList").innerHTML = COUNTRIES.map(c => `
-  <button class="theme-row country-row" data-country="${c.id}" type="button">
+function renderCountryList(q) {
+  q = (q || "").trim().toLowerCase();
+  const row = c => `
+  <button class="theme-row country-row${c.id === curCountry ? " on" : ""}" data-country="${c.id}" type="button">
     <span class="theme-dot" style="background:transparent;font-size:1rem;display:grid;place-items:center;box-shadow:none">${c.flag}</span>
     <span class="theme-name">${c.name} <span style="color:var(--muted);font-weight:500;font-size:0.78rem">(${c.short})</span></span>
     <svg class="theme-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-  </button>`).join("");
-document.querySelectorAll(".country-row").forEach(r => r.addEventListener("click", () => applyCountry(r.dataset.country)));
+  </button>`;
+  let html = "";
+  if (q) {
+    const hit = COUNTRIES.filter(c => (c.name + " " + c.tz + " " + c.short).toLowerCase().includes(q));
+    html = hit.length ? hit.map(row).join("") : '<div class="ctry-empty">No country found</div>';
+  } else {
+    html = '<div class="ctry-letter">★ Main timer</div>' + row(COUNTRIES[0]);
+    let last = "";
+    COUNTRIES.slice(1).forEach(c => {
+      const L = c.name.normalize("NFD").charAt(0).toUpperCase();
+      if (L !== last) { last = L; html += '<div class="ctry-letter">' + L + "</div>"; }
+      html += row(c);
+    });
+  }
+  document.getElementById("countryList").innerHTML = html;
+}
+renderCountryList("");
+document.getElementById("countryList").addEventListener("click", e => {
+  const r = e.target.closest(".country-row");
+  if (r) applyCountry(r.dataset.country);
+});
+document.getElementById("countrySearch").addEventListener("input", e => renderCountryList(e.target.value));
 applyCountry(curCountry);
 /* Floating tips — theme/country + menu; staggered show, then fade */
 (function () {
