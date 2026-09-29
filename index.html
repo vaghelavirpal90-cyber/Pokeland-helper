@@ -3197,7 +3197,7 @@ function openExternal(url) {
       if (code) {
         if (isAndroid) {
           // Open Discord app if installed, else browser
-          location.href = "intent://invite/" + code + "#Intent;scheme=https;package=com.discord;S.browser_fallback_url=" + encodeURIComponent(url) + ";end";
+          location.href = "intent://discord.gg/" + code + "#Intent;scheme=https;action=android.intent.action.VIEW;package=com.discord;S.browser_fallback_url=" + encodeURIComponent(url) + ";end";
           return;
         }
         if (isIOS) {
