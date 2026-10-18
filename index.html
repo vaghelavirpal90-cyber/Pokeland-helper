@@ -38,7 +38,8 @@
   --mono: 'JetBrains Mono', ui-monospace, monospace;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; scrollbar-width: none; }
+html::-webkit-scrollbar { display: none; }
 body {
   font-family: var(--font); background: var(--bg); color: var(--ink);
   min-height: 100dvh; line-height: 1.45; -webkit-font-smoothing: antialiased; overflow-x: hidden;
@@ -80,67 +81,28 @@ a { color: inherit; text-decoration: none; }
 .brand-mark svg { width: 34px; height: 34px; display: block; }
 .brand-name { font-size: 1rem; font-weight: 700; letter-spacing: -0.02em; }
 .brand-sub { font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
-.theme-hint {
-  position: absolute; left: 0; top: 100%; margin-top: 10px; z-index: 45;
-  width: min(268px, calc(100vw - 36px));
-  padding: 0; border-radius: 16px;
-  background: linear-gradient(160deg, rgba(var(--gold-rgb),0.16), var(--s1) 55%);
-  border: 1px solid var(--gold-line);
-  box-shadow: 0 14px 36px rgba(0,0,0,0.5), 0 0 0 1px rgba(var(--gold-rgb),0.1), inset 0 1px 0 rgba(255,255,255,0.04);
-  color: var(--ink); pointer-events: none;
-  opacity: 0; transform: translateY(-8px) scale(0.97); transition: opacity 0.4s ease, transform 0.4s cubic-bezier(.32,.72,0,1);
-  overflow: hidden;
-}
-.theme-hint.show { opacity: 1; transform: translateY(0) scale(1); }
-.theme-hint::before {
-  content: ""; position: absolute; left: 14px; top: -6px; width: 12px; height: 12px;
-  background: linear-gradient(135deg, rgba(var(--gold-rgb),0.22), var(--s1));
-  border-left: 1px solid var(--gold-line); border-top: 1px solid var(--gold-line);
-  transform: rotate(45deg); z-index: 1;
-}
-.theme-hint-head {
-  display: flex; align-items: center; gap: 8px;
-  padding: 11px 14px 9px; border-bottom: 1px solid var(--line);
-}
-.theme-hint-head strong {
-  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
-  color: var(--gold-text);
-}
-.theme-hint-body { padding: 8px 10px 10px; display: flex; flex-direction: column; gap: 6px; }
-.theme-hint-row {
-  display: flex; align-items: flex-start; gap: 10px;
-  padding: 8px 8px; border-radius: 11px; background: rgba(0,0,0,0.22);
-  border: 1px solid var(--line);
-}
-.theme-hint-ico {
-  width: 28px; height: 28px; flex-shrink: 0; border-radius: 9px;
-  display: grid; place-items: center; background: var(--gold-soft); color: var(--gold-text);
-}
-.theme-hint-ico svg { width: 15px; height: 15px; }
-.theme-hint-txt { min-width: 0; flex: 1; }
-.theme-hint-title { font-size: 0.8rem; font-weight: 700; letter-spacing: -0.01em; line-height: 1.25; }
-.theme-hint-title em { font-style: normal; color: var(--gold-text); }
-.theme-hint-sub { font-family: var(--mono); font-size: 0.58rem; color: var(--muted); margin-top: 2px; letter-spacing: 0.02em; line-height: 1.35; }
-.menu-hint {
-  position: absolute; right: 0; top: 100%; margin-top: 10px; z-index: 45;
-  width: min(200px, calc(100vw - 36px));
-  padding: 10px 12px; border-radius: 14px;
-  background: linear-gradient(160deg, rgba(var(--gold-rgb),0.14), var(--s1) 60%);
-  border: 1px solid var(--gold-line);
-  box-shadow: 0 12px 28px rgba(0,0,0,0.48), 0 0 0 1px rgba(var(--gold-rgb),0.08);
-  color: var(--ink); pointer-events: none;
-  opacity: 0; transform: translateY(-8px) scale(0.97); transition: opacity 0.4s ease, transform 0.4s cubic-bezier(.32,.72,0,1);
-}
-.menu-hint.show { opacity: 1; transform: translateY(0) scale(1); }
-.menu-hint::before {
-  content: ""; position: absolute; right: 12px; top: -6px; width: 12px; height: 12px;
-  background: linear-gradient(135deg, rgba(var(--gold-rgb),0.2), var(--s1));
-  border-left: 1px solid var(--gold-line); border-top: 1px solid var(--gold-line);
-  transform: rotate(45deg);
-}
-.menu-hint-title { font-size: 0.78rem; font-weight: 700; letter-spacing: -0.01em; }
-.menu-hint-title em { font-style: normal; color: var(--gold-text); }
-.menu-hint-sub { font-family: var(--mono); font-size: 0.56rem; color: var(--muted); margin-top: 3px; letter-spacing: 0.02em; line-height: 1.35; }
+.coach-scrim{position:fixed;inset:0;z-index:52;background:rgba(4,5,7,0.62);backdrop-filter:blur(12px) saturate(1.1);-webkit-backdrop-filter:blur(12px) saturate(1.1);opacity:0;pointer-events:none;transition:opacity .3s}
+.coach-scrim.on{opacity:1;pointer-events:auto}
+body.coaching{overflow:hidden}
+body.coaching .app{z-index:70}
+body.coaching .header{z-index:55;background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;border-bottom-color:transparent}
+.header .coach-off{opacity:.15;filter:blur(2px);pointer-events:none;transition:opacity .25s,filter .25s}
+.header .coach-on{position:relative;z-index:2;box-shadow:0 0 0 2px var(--gold),0 0 22px rgba(var(--gold-rgb),0.55);transition:box-shadow .25s}
+.coach-tip{position:absolute;z-index:3;top:0;left:0;width:min(250px,calc(100vw - 24px));padding:14px 14px 12px;border-radius:16px;background:var(--s1);border:1px solid var(--gold-line);box-shadow:0 18px 40px rgba(0,0,0,.55);opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .25s,transform .3s cubic-bezier(.32,.72,0,1),visibility 0s .3s}
+.coach-tip.show{opacity:1;visibility:visible;transform:none;transition:opacity .25s,transform .3s cubic-bezier(.32,.72,0,1)}
+.coach-tip::before{content:"";position:absolute;top:-7px;left:var(--ax,20px);width:12px;height:12px;background:var(--s1);border-left:1px solid var(--gold-line);border-top:1px solid var(--gold-line);transform:rotate(45deg)}
+.coach-step{font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-text)}
+.coach-title{font-size:1rem;font-weight:700;letter-spacing:-.01em;margin-top:4px}
+.coach-title em{font-style:normal;color:var(--gold-text)}
+.coach-sub{font-size:.82rem;color:var(--soft);line-height:1.4;margin-top:3px;text-wrap:pretty}
+.coach-foot{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+.coach-dont{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:.78rem;color:var(--soft);cursor:pointer;min-height:28px}
+.coach-dont input{width:18px;height:18px;margin:0;accent-color:var(--gold);flex-shrink:0}
+.coach-skip{font-size:.8rem;color:var(--muted);padding:8px 4px;min-height:38px}
+.coach-next{font-size:.85rem;font-weight:700;padding:8px 18px;min-height:38px;border-radius:10px;background:var(--gold);color:#0b0c10}
+.side-label{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin:18px 4px 8px}
+.side-soon{margin-left:auto;flex-shrink:0;font-family:var(--mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;padding:3px 7px;border-radius:6px;background:var(--s3);color:var(--muted);border:1px solid var(--line)}
+.side-row.is-soon .side-row-ico{background:var(--s2);color:var(--muted)}
 .header-right { position: relative; display: flex; align-items: center; gap: 10px; }
 .clocks { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
 .clock { font-family: var(--mono); font-size: 0.7rem; font-weight: 500; color: var(--soft); }
@@ -315,6 +277,26 @@ a { color: inherit; text-decoration: none; }
 .c-cell small { position:absolute; left:10px; bottom:6px; font-family:var(--mono); font-size:.5rem; letter-spacing:.2em; color:#c9a96a; }
 .gov-x { background:transparent; border:1px solid rgba(201,169,106,.6); color:#c9a96a; border-radius:2px; }
 .cal-star { position: absolute; top: 3px; right: 4px; font-size: 0.55rem; color: var(--gold-text); }
+.rt-tab{flex:1 1 0;min-width:0;white-space:normal;line-height:1.25;padding:7px 6px;text-align:center}
+.fl-hero{padding:16px;border-radius:var(--radius-lg);background:linear-gradient(155deg,var(--gold-soft),var(--s0) 70%);border:1px solid var(--gold-line);display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
+.fl-set{font-size:1.6rem;font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-top:6px}
+.fl-range{font-family:var(--mono);font-size:.68rem;color:var(--soft);margin-top:5px}
+.fl-cd-l{font-family:var(--mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-align:right}
+.fl-cd{font-family:var(--mono);font-size:1rem;font-weight:600;color:var(--ink);margin-top:3px;text-align:right}
+.fl-sets{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;margin:12px 0 18px}
+.fl-chip{min-height:54px;border-radius:12px;background:var(--s1);border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;position:relative}
+.fl-chip b{font-size:1.02rem;font-weight:700;color:var(--soft);line-height:1}
+.fl-chip span{font-family:var(--mono);font-size:.52rem;color:var(--dim);letter-spacing:.02em;white-space:nowrap}
+.fl-chip.sel{border-color:var(--gold-line);background:var(--gold-soft)}
+.fl-chip.sel b{color:var(--gold-text)}
+.fl-chip.live::after{content:"";position:absolute;top:5px;right:5px;width:6px;height:6px;border-radius:50%;background:var(--green)}
+.fl-head{display:flex;justify-content:space-between;align-items:baseline;margin:0 2px 8px}
+.fl-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.fl-mon{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:12px;background:var(--s1);border:1px solid var(--line);min-height:56px}
+.fl-mon img{width:38px;height:38px;object-fit:contain;flex-shrink:0}
+.fl-ph{width:38px;height:38px;border-radius:50%;background:var(--s2);border:1px solid var(--line);display:grid;place-items:center;font-family:var(--mono);font-size:.7rem;color:var(--muted);flex-shrink:0}
+.fl-n{font-size:.84rem;font-weight:600;line-height:1.2;min-width:0;text-wrap:pretty}
+.fl-note{font-family:var(--mono);font-size:.6rem;color:var(--dim);margin-top:12px;padding:0 2px;line-height:1.5}
 .search-bar { display: flex; gap: 8px; margin-bottom: 14px; }
 .search-input {
   flex: 1; min-height: 46px; padding: 0 14px 0 40px; border-radius: 14px; border: 1px solid var(--line);
@@ -626,8 +608,8 @@ html[data-theme="umbreon"] .progress-fill { background: linear-gradient(90deg, #
 .icon-btn:active { transform: scale(0.94); }
 .icon-btn svg { width: 17px; height: 17px; }
 .scrim {
-  position: fixed; inset: 0; z-index: 60; background: rgba(4,5,7,0.6);
-  backdrop-filter: blur(3px); opacity: 0; pointer-events: none; transition: opacity .2s;
+  position: fixed; inset: 0; z-index: 60; background: rgba(4,5,7,0.62);
+  backdrop-filter: blur(12px) saturate(1.1); -webkit-backdrop-filter: blur(12px) saturate(1.1); opacity: 0; pointer-events: none; transition: opacity .2s;
 }
 .scrim.on { opacity: 1; pointer-events: auto; }
 .drawer {
@@ -642,10 +624,11 @@ html[data-theme="umbreon"] .progress-fill { background: linear-gradient(90deg, #
 .drawer.on { transform: translateY(0); }
 .drawer #themeSection { order: 1; }
 .drawer #countrySection { order: 2; }
-.drawer.country-focus #themeSection { order: 2; margin-top: 18px; }
+.drawer.country-focus #themeSection { display: none; }
 .drawer.country-focus #countrySection { order: 1; }
 .drawer.country-focus #countrySection .kicker { margin-top: 0 !important; }
 .drawer:not(.country-focus) #themeSection { margin-top: 0; }
+.drawer:not(.country-focus) #countrySection { display: none; }
 .drawer > .sheet-grab,
 .drawer > .drawer-head { order: 0; flex-shrink: 0; }
 @keyframes pb-shake {
@@ -734,13 +717,18 @@ html[data-theme="umbreon"] .progress-fill { background: linear-gradient(90deg, #
 .ab-tile.accent { background: linear-gradient(150deg, rgba(var(--gold-rgb),0.20), var(--s1) 70%); border-color: var(--gold-line); }
 .ab-lab { font-family: var(--mono); font-size: 0.5rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dim); }
 .ab-big { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.035em; margin-top: 10px; }
+.ab-socials { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 10px; }
+.ab-social { display: flex; align-items: center; gap: 11px; padding: 14px; border-radius: 18px; background: var(--s1); border: 1px solid var(--line); color: var(--ink); transition: border-color .15s, transform .12s; }
+.ab-social:hover { border-color: var(--line-strong); }
+.ab-social:active { transform: scale(0.97); }
+.ab-social-ico { width: 36px; height: 36px; flex-shrink: 0; border-radius: 11px; display: grid; place-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
 .ab-cta {
   display: flex; align-items: center; gap: 14px; margin-top: 12px; padding: 18px;
   border-radius: 22px; background: var(--gold); color: #0b0c10;
 }
 .side-scrim {
-  position: fixed; inset: 0; z-index: 62; background: rgba(4,5,7,0.55);
-  backdrop-filter: blur(10px) saturate(1.1); -webkit-backdrop-filter: blur(10px) saturate(1.1);
+  position: fixed; inset: 0; z-index: 62; background: rgba(4,5,7,0.62);
+  backdrop-filter: blur(12px) saturate(1.1); -webkit-backdrop-filter: blur(12px) saturate(1.1);
   opacity: 0; pointer-events: none; transition: opacity .22s;
 }
 .side-scrim.on { opacity: 1; pointer-events: auto; }
@@ -834,7 +822,12 @@ html[data-theme="umbreon"] .progress-fill { background: linear-gradient(90deg, #
 .theme-name { flex: 1; font-size: 0.9rem; font-weight: 600; }
 .theme-check { width: 16px; height: 16px; color: var(--gold-text); opacity: 0; }
 .theme-row.on .theme-check { opacity: 1; }
-@media (min-width: 520px) { .app { border-left: 1px solid var(--line); border-right: 1px solid var(--line); } }
+@media (min-width: 520px) {
+  .app { border-left: 1px solid var(--line); border-right: 1px solid var(--line); }
+  .side { left: calc(50% - 240px); max-width: 300px; }
+  .side:not(.on) { visibility: hidden; transition: transform .26s cubic-bezier(.32,.72,0,1), visibility 0s .26s; }
+  .nav { left: calc(50% - 240px); right: calc(50% - 240px); }
+}
 .tz-pill { flex-direction: row; align-items: center; gap: 7px; padding: 4px 9px 4px 7px; border-radius: 11px; background: var(--s2); border: 1px solid var(--line); cursor: pointer; text-align: right; }
 .tz-pill:active { transform: scale(0.96); }
 .tz-ico { width: 20px; height: 20px; flex-shrink: 0; color: var(--gold-text, var(--gold)); }
@@ -855,7 +848,7 @@ html[data-theme="umbreon"] .progress-fill { background: linear-gradient(90deg, #
 <div class="app" id="app">
   <header class="header">
     <div class="brand">
-      <button class="brand-mark" id="btnMenu" type="button" aria-label="Tap Pokéball for theme colour & country time" title="Theme colour & country time">
+      <button class="brand-mark" id="btnMenu" type="button" aria-label="Tap Pokéball for theme colour" title="Theme colour">
         <svg viewBox="0 0 24 24">
           <rect x="0" y="0" width="24" height="12" fill="var(--gold)"/>
           <rect x="0" y="12" width="24" height="12" fill="#f4f6fb"/>
@@ -867,64 +860,58 @@ html[data-theme="umbreon"] .progress-fill { background: linear-gradient(90deg, #
         <div class="brand-name">Pokeland Helper</div>
         <div class="brand-sub">Live · Player tools</div>
       </div>
-      <div class="theme-hint" id="themeHint" role="status" aria-live="polite">
-        <div class="theme-hint-head">
-          <strong>Quick tips</strong>
-        </div>
-        <div class="theme-hint-body">
-          <div class="theme-hint-row">
-            <span class="theme-hint-ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M4 12h16"/><circle cx="12" cy="12" r="2.5"/></svg>
-            </span>
-            <div class="theme-hint-txt">
-              <div class="theme-hint-title">Tap <em>Pokéball</em></div>
-              <div class="theme-hint-sub">Change theme colour · Flareon, Jolteon & more</div>
-            </div>
-          </div>
-          <div class="theme-hint-row">
-            <span class="theme-hint-ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg>
-            </span>
-            <div class="theme-hint-txt">
-              <div class="theme-hint-title">Tap <em>globe clock</em></div>
-              <div class="theme-hint-sub">Pick any country A–Z · Hong Kong is main</div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
     <div class="header-right">
       <button class="clocks tz-pill" id="clocksBox" type="button" title="Select country time" aria-label="Select country time">
         <svg class="tz-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="3.8" ry="9" opacity=".45"/><path d="M3.3 9.2h17.4M3.3 14.8h17.4" opacity=".45"/><circle cx="12" cy="12" r="5.2" fill="var(--s2)" stroke-width="1.6"/><path d="M12 9.4V12l1.9 1.3" stroke-width="1.8"/></svg>
         <span class="tz-txt">
-          <span class="clock"><span id="clockLocalLabel">LOCAL</span><span id="clockLocal">--:--:--</span></span>
           <span class="clock"><span>HKT</span><span id="clockHK">--:--:--</span></span>
+          <span class="clock"><span id="clockLocalLabel">LOCAL</span><span id="clockLocal">--:--:--</span></span>
         </span>
       </button>
-      <a class="icon-btn" href="https://discord.gg/sT4zWNVEh" target="_blank" rel="noopener" aria-label="Join our Discord" title="Join our Discord">
+      <a class="icon-btn" href="https://discord.gg/tF6bVAvrn" target="_blank" rel="noopener" aria-label="Join our Discord" title="Join our Discord">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.492c-1.53-.69-3.17-1.2-4.885-1.49a.075.075 0 0 0-.079.036c-.21.36-.444.83-.608 1.2a18.566 18.566 0 0 0-5.487 0 12.36 12.36 0 0 0-.617-1.2.077.077 0 0 0-.079-.037c-1.714.29-3.354.8-4.885 1.491a.07.07 0 0 0-.032.027C.533 9.09-.32 13.555.099 17.961a.08.08 0 0 0 .031.055 20.03 20.03 0 0 0 5.993 2.98.078.078 0 0 0 .084-.026 13.83 13.83 0 0 0 1.226-1.963.074.074 0 0 0-.041-.104 13.201 13.201 0 0 1-1.872-.878.075.075 0 0 1-.008-.125c.126-.093.252-.19.372-.287a.075.075 0 0 1 .078-.01c3.927 1.764 8.18 1.764 12.061 0a.075.075 0 0 1 .079.009c.12.098.246.195.373.288a.075.075 0 0 1-.006.125c-.598.344-1.22.635-1.873.877a.075.075 0 0 0-.041.105c.36.687.772 1.341 1.225 1.962a.077.077 0 0 0 .084.028 19.963 19.963 0 0 0 6.002-2.981.076.076 0 0 0 .032-.054c.5-5.094-.838-9.52-3.549-13.442a.06.06 0 0 0-.031-.028Zm-12.31 10.78c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.176 1.094 2.157 2.418 0 1.334-.956 2.42-2.157 2.42Zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.176 1.094 2.157 2.418 0 1.334-.947 2.42-2.157 2.42Z"/></svg>
       </a>
       <button class="icon-btn" id="btnSide" type="button" aria-label="Menu">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></svg>
       </button>
-      <div class="menu-hint" id="menuHint" role="status" aria-live="polite">
-        <div class="menu-hint-title">Tap <em>☰ menu</em></div>
-        <div class="menu-hint-sub">Download · Pokemon Build · Team Build · Guide · About</div>
-      </div>
+    </div>
+    <div class="coach-tip" id="tipTheme" role="dialog" aria-live="polite">
+      <div class="coach-step">1 / 3</div>
+      <div class="coach-title">Tap the <em>Pokéball</em></div>
+      <div class="coach-sub">Change theme colour — Flareon, Jolteon &amp; more</div>
+      <div class="coach-foot"><button class="coach-skip" type="button">Skip</button><button class="coach-next" type="button">Next</button></div>
+    </div>
+    <div class="coach-tip" id="tipClock" role="dialog" aria-live="polite">
+      <div class="coach-step">2 / 3</div>
+      <div class="coach-title">Tap the <em>clock</em></div>
+      <div class="coach-sub">Pick any country A–Z · Hong Kong is the main time</div>
+      <div class="coach-foot"><button class="coach-skip" type="button">Skip</button><button class="coach-next" type="button">Next</button></div>
+    </div>
+    <div class="coach-tip" id="tipMenu" role="dialog" aria-live="polite">
+      <div class="coach-step">3 / 3</div>
+      <div class="coach-title">Open the <em>☰ menu</em></div>
+      <div class="coach-sub">Helpful guides, game download, builds &amp; about</div>
+      <div class="coach-foot"><span></span><button class="coach-next" type="button">Got it</button></div>
     </div>
   </header>
+  <div class="coach-scrim" id="coachScrim"></div>
   <main class="main">
     <section id="view-board">
-      <div class="card mt-18" id="notifNudge" style="padding:14px 16px;display:none;align-items:center;gap:12px">
-        <div style="width:36px;height:36px;border-radius:11px;background:var(--gold-soft);border:1px solid var(--gold-line);display:grid;place-items:center;flex-shrink:0">
-          <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold-text)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <div id="notifNudge" style="display:none;flex-direction:column;gap:14px;margin-top:14px;margin-bottom:14px;padding:16px;border-radius:18px;background:var(--s1);border:1px solid var(--gold-line)">
+        <div style="display:flex;align-items:flex-start;gap:12px">
+          <div style="width:40px;height:40px;border-radius:12px;background:var(--gold-soft);border:1px solid var(--gold-line);display:grid;place-items:center;flex-shrink:0">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold-text)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:19px;height:19px"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          </div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:0.95rem;font-weight:700;letter-spacing:-0.01em;line-height:1.25" id="notifNudgeTitle">Turn on alerts</div>
+            <div style="font-size:0.8rem;color:var(--soft);line-height:1.45;margin-top:4px;text-wrap:pretty" id="notifNudgeSub">Get a heads-up before rare weather and events start.</div>
+          </div>
         </div>
-        <div style="flex:1;min-width:0">
-          <div style="font-size:0.85rem;font-weight:700" id="notifNudgeTitle">Turn on alerts</div>
-          <div style="font-size:0.76rem;color:var(--muted);margin-top:2px" id="notifNudgeSub">Get a heads-up before rare weather and events start.</div>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px">
+          <button id="notifNudgeClose" type="button" style="min-height:44px;border-radius:12px;background:var(--s2);border:1px solid var(--line);color:var(--soft);font-size:0.85rem;font-weight:600">Dismiss</button>
+          <button class="btn btn-primary" id="notifNudgeBtn" type="button" style="min-height:44px;border-radius:12px;font-size:0.85rem;font-weight:700;justify-content:center">Enable</button>
         </div>
-        <button class="btn btn-primary" id="notifNudgeBtn" style="flex-shrink:0;padding:8px 14px;font-size:0.8rem">Enable</button>
-        <button id="notifNudgeClose" aria-label="Dismiss" style="background:none;border:none;color:var(--muted);font-size:1.1rem;line-height:1;padding:4px;flex-shrink:0">✕</button>
       </div>
       <div class="card card-glow hero" id="heroCard">
         <div class="hero-top">
@@ -982,16 +969,12 @@ html[data-theme="umbreon"] .progress-fill { background: linear-gradient(90deg, #
       </div>
     </section>
     <section id="view-rotation" class="hidden">
-      <div class="search-bar">
-        <input class="search-input" id="rotSearch" type="search" placeholder="Search legendaries…" autocomplete="off">
-        <button class="filter-btn" id="favFilter">★ Watchlist</button>
-      </div>
-      <div id="rotResults" class="result-list hidden"></div>
       <div id="rotCalendar">
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
           <div class="wx-tabs" id="rotTabs" style="flex:1;min-width:0;margin-bottom:0">
-            <button class="wx-tab on" data-rottab="capsule" type="button" style="white-space:nowrap">Legendary&nbsp;capsule</button>
-            <button class="wx-tab" data-rottab="happy" type="button" style="white-space:nowrap">Happy&nbsp;exchange</button>
+            <button class="wx-tab rt-tab on" data-rottab="capsule" type="button">Legendary<br>capsule</button>
+            <button class="wx-tab rt-tab" data-rottab="happy" type="button">Happy<br>exchange</button>
+            <button class="wx-tab rt-tab" data-rottab="flash" type="button">Flash<br>rotation</button>
           </div>
           <div id="rotViewSw" style="display:flex;align-items:center;gap:3px;flex-shrink:0;align-self:stretch;padding:4px;border-radius:12px;background:var(--s2);border:1px solid var(--line)">
             <button data-rotview="list" type="button" aria-label="List view" style="width:34px;align-self:stretch;flex-shrink:0;border-radius:9px;display:grid;place-items:center;color:var(--soft)">
@@ -1002,21 +985,43 @@ html[data-theme="umbreon"] .progress-fill { background: linear-gradient(90deg, #
             </button>
           </div>
         </div>
-        <div class="cal-nav">
+        <div class="search-bar">
+          <input class="search-input" id="rotSearch" type="search" placeholder="Search legendaries…" autocomplete="off">
+          <button class="filter-btn" id="favFilter">★ Watchlist</button>
+        </div>
+        <div id="rotResults" class="result-list hidden"></div>
+        <div id="rotBody">
+        <div id="rotFlash" class="hidden">
+          <div class="fl-hero">
+            <div style="min-width:0">
+              <div class="kicker gold" id="flKicker" style="margin-bottom:0">Live now</div>
+              <div class="fl-set" id="flSet">Set —</div>
+              <div class="fl-range" id="flRange">—</div>
+            </div>
+            <div style="flex-shrink:0">
+              <div class="fl-cd-l" id="flCdLabel">Changes in</div>
+              <div class="fl-cd" id="flCd">--:--:--</div>
+            </div>
+          </div>
+          <div class="fl-sets" id="flSets"></div>
+          <div class="fl-head"><span class="kicker" style="margin-bottom:0">In this set</span><span class="kicker" id="flCount" style="margin-bottom:0">—</span></div>
+          <div class="fl-grid" id="flGrid"></div>
+          <div class="fl-note" id="flNote"></div>
+        </div>
+        <div class="cal-nav" id="rotNav">
           <button id="rotPrev" aria-label="Previous month">‹</button>
           <div class="cal-month" id="rotMonth">—</div>
           <button id="rotNext" aria-label="Next month">›</button>
         </div>
         <div id="rotBars"></div>
         <div id="rotLegend" style="display:none;flex-wrap:wrap;gap:9px 14px;margin-top:14px;padding:0 2px"></div>
+        </div>
       </div>
     </section>
     <section id="view-weather" class="hidden">
       <div class="wx-tabs" id="wxTabs">
         <button class="wx-tab on" data-wxtab="now">Now</button>
         <button class="wx-tab" data-wxtab="calendar">Calendar</button>
-        <button class="wx-tab" data-wxtab="find">Find</button>
-        <button class="wx-tab" data-wxtab="alerts">Alerts</button>
       </div>
       <div id="wxNow">
         <div class="wx-hero" id="wxHero" style="background:linear-gradient(155deg,rgba(90,167,216,0.18),var(--s0));border-color:rgba(90,167,216,0.3)">
@@ -1043,6 +1048,10 @@ html[data-theme="umbreon"] .progress-fill { background: linear-gradient(90deg, #
           <div id="spawnGroups"></div>
         </div>
         <div class="wx-day-list" id="wxDays"></div>
+        <div style="display:flex;align-items:flex-start;gap:10px;margin:18px 0 4px;padding:11px 12px;border-radius:12px;background:var(--s1);border:1px solid var(--line)">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="flex-shrink:0;margin-top:1px;color:var(--gold-text)"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><circle cx="12" cy="7.8" r="0.6" fill="currentColor"/></svg>
+          <p style="font-size:0.78rem;line-height:1.45;color:var(--soft);text-wrap:pretty">Weather info here is mostly accurate, but it may sometimes differ from the game.</p>
+        </div>
       </div>
       <div id="wxCalendar" class="hidden">
         <div class="cal-nav">
@@ -1050,11 +1059,15 @@ html[data-theme="umbreon"] .progress-fill { background: linear-gradient(90deg, #
           <div class="cal-month" id="wxMonthLabel">—</div>
           <button id="wxMonthNext">›</button>
         </div>
-        <p style="font-size:0.75rem;color:var(--muted);margin-bottom:12px" id="wxMonthStatus"></p>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+          <p style="font-size:0.75rem;color:var(--muted);margin:0;flex:1;min-width:0" id="wxMonthStatus"></p>
+          <button id="wxMonthRefresh" type="button" style="flex-shrink:0;font-family:var(--mono);font-size:0.58rem;color:var(--gold-text);padding:6px 0">Refresh</button>
+        </div>
         <div class="cal-grid" id="wxCells"></div>
+        <div id="wxCalLegend" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 12px;margin-top:14px;padding:12px;border-radius:14px;background:var(--s1);border:1px solid var(--line)"></div>
         <div class="mt-18">
           <div class="kicker" id="wxPickedLabel">Pick a day</div>
-          <div id="wxPickedEvents"></div>
+          <div id="wxPickedEvents" style="display:flex;flex-direction:column;gap:8px"></div>
         </div>
       </div>
       <div id="wxFind" class="hidden">
@@ -1159,7 +1172,7 @@ html[data-theme="umbreon"] .progress-fill { background: linear-gradient(90deg, #
         <div style="font-size:1.6rem;margin-bottom:8px">🚀✨</div>
         <p style="font-size:0.95rem;font-weight:700;color:var(--ink)">Help us complete this project!</p>
         <p style="font-size:0.82rem;color:var(--soft);line-height:1.55;margin-top:8px;text-wrap:pretty">Team Build is in the works, and we'd love your ideas, feedback and support to help bring it to life sooner. Join our Discord and be part of the journey. 💛</p>
-        <a class="btn btn-primary mt-18" style="display:inline-flex;text-decoration:none" href="https://discord.gg/sT4zWNVEh" target="_blank" rel="noopener">💬 Join our Discord</a>
+        <a class="btn btn-primary mt-18" style="display:inline-flex;text-decoration:none" href="https://discord.gg/tF6bVAvrn" target="_blank" rel="noopener">💬 Join our Discord</a>
         <p style="font-size:0.72rem;color:var(--muted);margin-top:10px">🙏 Thank you for your support!</p>
       </div>
     </section>
@@ -1244,6 +1257,22 @@ html[data-theme="umbreon"] .progress-fill { background: linear-gradient(90deg, #
         </span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;flex-shrink:0"><path d="M5 12h13"/><path d="M13 6l6 6-6 6"/></svg>
       </a>
+      <div class="ab-socials">
+        <a class="ab-social" href="https://discord.gg/tF6bVAvrn" target="_blank" rel="noopener noreferrer">
+          <span class="ab-social-ico" style="background:#5865F2"><svg viewBox="0 0 24 24" width="18" height="18" fill="#fff"><path d="M20.317 4.492c-1.53-.69-3.17-1.2-4.885-1.49a.075.075 0 0 0-.079.036c-.21.36-.444.83-.608 1.2a18.566 18.566 0 0 0-5.487 0 12.36 12.36 0 0 0-.617-1.2.077.077 0 0 0-.079-.037c-1.714.29-3.354.8-4.885 1.491a.07.07 0 0 0-.032.027C.533 9.09-.32 13.555.099 17.961a.08.08 0 0 0 .031.055 20.03 20.03 0 0 0 5.993 2.98.078.078 0 0 0 .084-.026 13.83 13.83 0 0 0 1.226-1.963.074.074 0 0 0-.041-.104 13.201 13.201 0 0 1-1.872-.878.075.075 0 0 1-.008-.125c.126-.093.252-.19.372-.287a.075.075 0 0 1 .078-.01c3.927 1.764 8.18 1.764 12.061 0a.075.075 0 0 1 .079.009c.12.098.246.195.373.288a.075.075 0 0 1-.006.125c-.598.344-1.22.635-1.873.877a.075.075 0 0 0-.041.105c.36.687.772 1.341 1.225 1.962a.077.077 0 0 0 .084.028 19.963 19.963 0 0 0 6.002-2.981.076.076 0 0 0 .032-.054c.5-5.094-.838-9.52-3.549-13.442a.06.06 0 0 0-.031-.028Zm-12.31 10.78c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.176 1.094 2.157 2.418 0 1.334-.956 2.42-2.157 2.42Zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.176 1.094 2.157 2.418 0 1.334-.947 2.42-2.157 2.42Z"/></svg></span>
+          <span style="min-width:0">
+            <span style="display:block;font-size:0.88rem;font-weight:700;letter-spacing:-0.01em">Discord</span>
+            <span style="display:block;font-family:var(--mono);font-size:0.6rem;color:var(--muted);margin-top:2px">Join the group</span>
+          </span>
+        </a>
+        <a class="ab-social" href="https://www.youtube.com/@pokelandhelper" target="_blank" rel="noopener noreferrer">
+          <span class="ab-social-ico" style="background:#FF0000"><svg viewBox="0 0 24 24" width="18" height="18" fill="#fff"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.8zM9.75 15.5v-7l6.5 3.5-6.5 3.5z"/></svg></span>
+          <span style="min-width:0">
+            <span style="display:block;font-size:0.88rem;font-weight:700;letter-spacing:-0.01em">YouTube</span>
+            <span style="display:block;font-family:var(--mono);font-size:0.6rem;color:var(--muted);margin-top:2px">Subscribe</span>
+          </span>
+        </a>
+      </div>
 
       <p style="font-size:0.7rem;color:var(--dim);line-height:1.55;margin-top:18px;padding:0 4px;text-align:center;text-wrap:pretty">Unofficial fan project. Not affiliated with Pokeland Legends, FANKEY, Nintendo or The Pokemon Company.</p>
     </section>
@@ -1273,7 +1302,17 @@ html[data-theme="umbreon"] .progress-fill { background: linear-gradient(90deg, #
         <span class="side-row-sub">Tips &amp; how-tos</span>
       </span>
     </button>
-    <button class="side-row" data-side="builds" type="button">
+    <button class="side-row" data-side="download" type="button">
+      <span class="side-row-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11"/><path d="M8 10.5l4 3.5 4-3.5"/><path d="M4 17.5v1.5a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1.5"/></svg>
+      </span>
+      <span>
+        <span class="side-row-title">Download game</span>
+        <span class="side-row-sub">Get Pokeland Legends</span>
+      </span>
+    </button>
+    <div class="side-label">Coming soon</div>
+    <button class="side-row is-soon" data-side="builds" type="button">
       <span class="side-row-ico">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H19v16H5.5A1.5 1.5 0 0 0 4 20.5z"/><path d="M4 17.5A1.5 1.5 0 0 1 5.5 16H19"/><path d="M8.5 7.5h6"/><path d="M8.5 11h4"/></svg>
       </span>
@@ -1281,8 +1320,9 @@ html[data-theme="umbreon"] .progress-fill { background: linear-gradient(90deg, #
         <span class="side-row-title">Pokemon build</span>
         <span class="side-row-sub">Nature, items &amp; roles</span>
       </span>
+      <span class="side-soon">Soon</span>
     </button>
-    <button class="side-row" data-side="teams" type="button">
+    <button class="side-row is-soon" data-side="teams" type="button">
       <span class="side-row-ico">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3 20a6 6 0 0 1 12 0"/><circle cx="17.5" cy="9.5" r="2.2"/><path d="M16 15.6A4.6 4.6 0 0 1 21.5 20"/></svg>
       </span>
@@ -1290,16 +1330,9 @@ html[data-theme="umbreon"] .progress-fill { background: linear-gradient(90deg, #
         <span class="side-row-title">Team build</span>
         <span class="side-row-sub">Comps &amp; synergy</span>
       </span>
+      <span class="side-soon">Soon</span>
     </button>
-    <button class="side-row" data-side="download" type="button">
-      <span class="side-row-ico">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11"/><path d="M8 10.5l4 3.5 4-3.5"/><path d="M4 17.5v1.5a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1.5"/></svg>
-      </span>
-      <span>
-        <span class="side-row-title">Game</span>
-        <span class="side-row-sub">Download the game</span>
-      </span>
-    </button>
+    <div class="side-label">More</div>
     <button class="side-row" data-side="about" type="button">
       <span class="side-row-ico">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5"/><circle cx="12" cy="7.8" r=".9" fill="currentColor" stroke="none"/></svg>
@@ -1314,7 +1347,7 @@ html[data-theme="umbreon"] .progress-fill { background: linear-gradient(90deg, #
   <aside class="drawer" id="drawer" aria-label="Themes & country">
     <div class="sheet-grab"></div>
     <div class="drawer-head">
-      <div class="drawer-title" id="drawerTitle">Themes & time</div>
+      <div class="drawer-title" id="drawerTitle">Themes</div>
       <button class="icon-btn" id="btnClose" type="button" aria-label="Close">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg>
       </button>
@@ -1349,11 +1382,11 @@ html[data-theme="umbreon"] .progress-fill { background: linear-gradient(90deg, #
         Get live tips, rotation alerts, and hang with other players on Discord — plus guides &amp; updates on YouTube.
       </p>
       <div class="ann-actions">
-        <a class="btn ann-discord" id="annDiscord" href="https://discord.gg/sT4zWNVEh" target="_blank" rel="noopener noreferrer">
+        <a class="btn ann-discord" id="annDiscord" href="https://discord.gg/tF6bVAvrn" target="_blank" rel="noopener noreferrer">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M20.317 4.492c-1.53-.69-3.17-1.2-4.885-1.49a.075.075 0 0 0-.079.036c-.21.36-.444.83-.608 1.2a18.566 18.566 0 0 0-5.487 0 12.36 12.36 0 0 0-.617-1.2.077.077 0 0 0-.079-.037c-1.714.29-3.354.8-4.885 1.491a.07.07 0 0 0-.032.027C.533 9.09-.32 13.555.099 17.961a.08.08 0 0 0 .031.055 20.03 20.03 0 0 0 5.993 2.98.078.078 0 0 0 .084-.026 13.83 13.83 0 0 0 1.226-1.963.074.074 0 0 0-.041-.104 13.201 13.201 0 0 1-1.872-.878.075.075 0 0 1-.008-.125c.126-.093.252-.19.372-.287a.075.075 0 0 1 .078-.01c3.927 1.764 8.18 1.764 12.061 0a.075.075 0 0 1 .079.009c.12.098.246.195.373.288a.075.075 0 0 1-.006.125c-.598.344-1.22.635-1.873.877a.075.075 0 0 0-.041.105c.36.687.772 1.341 1.225 1.962a.077.077 0 0 0 .084.028 19.963 19.963 0 0 0 6.002-2.981.076.076 0 0 0 .032-.054c.5-5.094-.838-9.52-3.549-13.442a.06.06 0 0 0-.031-.028Zm-12.31 10.78c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.176 1.094 2.157 2.418 0 1.334-.956 2.42-2.157 2.42Zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.176 1.094 2.157 2.418 0 1.334-.947 2.42-2.157 2.42Z"/></svg>
           Join Discord group
         </a>
-        <a class="btn ann-yt" id="annYoutube" href="https://youtube.com/@pokelandhelper?si=--tKrc_chOyg1uGu" target="_blank" rel="noopener noreferrer">
+        <a class="btn ann-yt" id="annYoutube" href="https://www.youtube.com/@pokelandhelper" target="_blank" rel="noopener noreferrer">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.8zM9.75 15.5v-7l6.5 3.5-6.5 3.5z"/></svg>
           Subscribe on YouTube
         </a>
@@ -1471,7 +1504,6 @@ html[data-theme="umbreon"] .progress-fill { background: linear-gradient(90deg, #
   </nav>
 </div>
 <script>
-
 /* ═══ EXACT ORIGINAL DATA ═══ */
 const rotation = [
   "Deoxys","Ho-oh","Diancie","Greninja (Bond Form)","Tapu-Bulu","Terrakion","Poipole",
@@ -1704,7 +1736,7 @@ const DAILY_EVENTS = [
 // Live Poke Weather feed — scrapes the public schedule through CORS proxies.
 const WMETA = {
   'Mưa lớn':    { en: 'Heavy Rain',   c: '#3f8fd0' },
-  'Mưa giông':  { en: 'Thunderstorm', c: '#9277e8' },
+  'Mưa giông':  { en: 'Rainstorm',    c: '#9277e8' },
   'Mưa':        { en: 'Rain',         c: '#5aa7d8' },
   'Tuyết nhiều':{ en: 'Snow',         c: '#7fc0e0' },
   'Bão tuyết':  { en: 'Blizzard',     c: '#6ad0e8' },
@@ -1720,6 +1752,18 @@ const WICON = {
   'Sương mù': ICON(8047126), 'Bão cát': ICON(8047202), 'Trời đẹp': ICON(8047103)
 };
 
+/* Spawns per weather type — fixed in the game (same every day). [common, premium]. All 9 types (from thangtinshop). */
+const WX_SPAWNS = {
+  'Mưa lớn':     [['jolteon'], ['kartana', 'froakie']],
+  'Sương mù':    [[], ['latias', 'latios']],
+  'Bão cát':     [['rockruff'], ['entei', 'regirock', 'beldum']],
+  'Bão tuyết':   [['moltres'], ['yveltal', 'articuno']],
+  'Tuyết':       [['shelmet'], ['registeel']],
+  'Tuyết nhiều': [[], ['regice', 'kyurem']],
+  'Trời đẹp':    [[], []],
+  'Mưa':         [['phione'], ['shaymin-land']],
+  'Mưa giông':   [['zapdos'], ['phione', 'lugia']]
+};
 const WORDER = ['Mưa','Mưa lớn','Mưa giông','Tuyết','Tuyết nhiều','Bão tuyết','Sương mù','Bão cát','Trời đẹp'];
 
 const EVENT_RE = /(Mưa lớn|Mưa giông|Mưa|Tuyết nhiều|Bão tuyết|Tuyết|Sương mù|Bão cát|Trời đẹp)\s*[:*\s]*(\d{1,2}:\d{2})\s*[-–]\s*(\d{1,2}:\d{2})/g;
@@ -1735,8 +1779,8 @@ const NATIVE = typeof window !== 'undefined' && (
 const PROXIES = [].concat(
   NATIVE ? [{ url: u => u, kind: 'html' }] : [],
   [
-    { url: u => 'https://proxy.cors.sh/' + u, kind: 'html' },
     { url: u => 'https://api.cors.lol/?url=' + encodeURIComponent(u), kind: 'html' },
+    { url: u => 'https://proxy.cors.sh/' + u, kind: 'html' },
     { url: u => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(u), kind: 'html' },
     { url: u => 'https://api.codetabs.com/v1/proxy/?quest=' + encodeURIComponent(u), kind: 'html' },
     { url: u => 'https://r.jina.ai/' + u, kind: 'text' }
@@ -1771,6 +1815,15 @@ class WeatherFeed {
     this.lastSync = 0;
     this.fetching = false;
     this.spawnCache = {};
+    try { const sc = JSON.parse(localStorage.getItem("ph_wx_spawns") || "{}"); if (sc && typeof sc === "object") this.spawnCache = sc; } catch (e) {}
+    this.spawnTry = {};
+    // Spawns are fixed per weather type (same list every day) — cache by type so every event shows its list instantly
+    this.typeSpawns = {};
+    try { const ts = JSON.parse(localStorage.getItem("ph_wx_typespawns") || "{}"); if (ts && typeof ts === "object") this.typeSpawns = ts; } catch (e) {}
+    // Built-in lists (fixed per weather type) so spawns show instantly even on the very first launch
+    const mon = n => ({ name: n, img: BASE + '/images/pokemon/' + n + '.gif', img3d: 'https://img.pokemondb.net/sprites/home/normal/' + n + '.png' });
+    Object.keys(WX_SPAWNS).forEach(vi => { if (!this.typeSpawns[vi]) this.typeSpawns[vi] = { normal: WX_SPAWNS[vi][0].map(mon), premium: WX_SPAWNS[vi][1].map(mon), at: 0 }; });
+    Object.keys(this.spawnCache).forEach(k => this.learnTypes(this.spawnCache[k]));
     this.monthCache = {};
     this.monthLoading = false;
     this.monthError = null;
@@ -1778,27 +1831,47 @@ class WeatherFeed {
     this.notified = {};
     this.goodProxy = null;
     this.started = false;
+    this.typeCache = {}; this.typeAt = {};
+    try {
+      const mc = JSON.parse(localStorage.getItem("ph_wx_months2") || "{}");
+      Object.keys(mc).forEach(k => { if (mc[k] && mc[k].s) { this.typeCache[k] = mc[k].s; this.typeAt[k] = mc[k].at || 0; } });
+    } catch (e) {}
+  }
+
+  saveMonths() {
+    try {
+      const keys = Object.keys(this.typeCache).filter(k => Object.keys(this.typeCache[k] || {}).length > 0)
+        .sort((a, b) => { const [ay, am] = a.split("-").map(Number), [by, bm] = b.split("-").map(Number); return (by * 12 + bm) - (ay * 12 + am); }).slice(0, 4);
+      const out = {}; keys.forEach(k => out[k] = { s: this.typeCache[k], at: this.typeAt[k] || Date.now() });
+      localStorage.setItem("ph_wx_months2", JSON.stringify(out));
+    } catch (e) {}
   }
 
   // Month grid of every weather type, straight from the site's own JSON API.
   // Cached per weather type so a partial month can be completed on the next attempt.
-  async loadMonth(month, year) {
+  async loadMonth(month, year, force) {
     year = year || Number(new Intl.DateTimeFormat('en', { timeZone: 'Asia/Hong_Kong', year: 'numeric' }).format(new Date()));
     const key = year + '-' + month;
     this.month = month;
+    this.lastMonth = month; this.lastYear = year;
     this.typeCache = this.typeCache || {};
-    const store = this.typeCache[key] = this.typeCache[key] || {};
-    if (Object.keys(store).length === WORDER.length) {
-      this.monthLoading = false; this.monthError = null; this.build(key, month, year); this.emit(); return;
+    const curKey = new Intl.DateTimeFormat('en', { timeZone: 'Asia/Hong_Kong', year: 'numeric' }).format(new Date()) + '-' + Number(new Intl.DateTimeFormat('en', { timeZone: 'Asia/Hong_Kong', month: 'numeric' }).format(new Date()));
+    const cached = this.typeCache[key] || {};
+    const complete = Object.keys(cached).length === WORDER.length;
+    const fresh = !force && complete && (key !== curKey || Date.now() - (this.typeAt[key] || 0) < 6 * 3600e3);
+    if (fresh) {
+      this.monthLoading = false; this.monthError = null; this.build(key, month, year); this.emit(); this.seedFromMonths(); return;
     }
     if (this.monthBusy === key) return;
+    // Saved copy exists but is old: show it instantly, refresh quietly in the background
+    const background = complete;
+    if (background) { this.build(key, month, year); this.monthLoading = false; this.monthError = null; this.emit(); this.seedFromMonths(); }
+    const store = background ? {} : (this.typeCache[key] = cached);
     this.monthBusy = key;
-    this.monthLoading = true;
-    this.monthError = null;
-    this.emit();
+    if (!background) { this.monthLoading = true; this.monthError = null; this.emit(); }
 
     const one = async (vi, i) => {
-      const res = await this.grab(BASE + '/api/thoi-tiet/type?type=' + (i + 1) + '&month=' + month, { json: true });
+      const res = await this.grab(BASE + '/api/thoi-tiet/type?type=' + (i + 1) + '&month=' + month, { json: true, direct: true, timeout: 6000, maxProxies: 1 });
       let data;
       try { data = JSON.parse(res.body); }
       catch (e) { const m = res.body.match(/\{[\s\S]*\}/); data = m ? JSON.parse(m[0]) : null; }
@@ -1808,29 +1881,31 @@ class WeatherFeed {
         const raw = data[day];
         const list = Array.isArray(raw) ? raw : Object.values(raw || {});
         list.forEach(ev => {
-          const t = String(ev.time || '').match(/(\d{1,2}:\d{2})\s*[-–]\s*(\d{1,2}:\d{2})/);
+          const raw = String(ev.time || '');
+          const t = /24\s*\/\s*24/.test(raw) ? [raw, '00:00', '24:00'] : raw.match(/(\d{1,2}:\d{2})\s*[-–]\s*(\d{1,2}:\d{2})/);
           if (!t) return;
           const dmy = pad(Number(day)) + '-' + pad(month) + '-' + year;
           out.push({ day: String(Number(day)), vi, start: t[1], end: t[2], date: dmy, startMs: vnMs(dmy, t[1]), endMs: vnMs(dmy, t[2]) });
         });
       });
       store[vi] = out;
+      if (!background) this.seedFromMonths();
     };
 
-    // Two passes, two at a time — the working proxy rate-limits bursts.
+    // The month API allows direct (CORS) requests — fetch all 9 types at once, retry any misses once.
     for (let attempt = 0; attempt < 2; attempt++) {
       const todo = WORDER.map((vi, i) => [vi, i]).filter(([vi]) => !store[vi]);
       if (!todo.length) break;
-      for (let i = 0; i < todo.length; i += 2) {
-        await Promise.all(todo.slice(i, i + 2).map(([vi, idx]) => one(vi, idx).catch(() => {})));
-        this.build(key, month, year);
-        this.emit();
-      }
+      await Promise.all(todo.map(([vi, idx]) => one(vi, idx).catch(() => {})));
+      if (!background) { this.build(key, month, year); this.emit(); this.saveMonths(); }
     }
 
     this.monthBusy = null;
     this.monthLoading = false;
-    this.loadedTypes = Object.keys(store).length;
+    if (Object.keys(store).length === WORDER.length) {
+      this.typeCache[key] = store; this.typeAt[key] = Date.now(); this.saveMonths();
+    }
+    this.loadedTypes = Object.keys(this.typeCache[key] || {}).length;
     this.build(key, month, year);
     this.monthError = this.loadedTypes === 0 ? 'Month feed unreachable — tap retry.' : null;
     this.lastMonth = month; this.lastYear = year;
@@ -1840,7 +1915,8 @@ class WeatherFeed {
   build(key, month, year) {
     const store = (this.typeCache && this.typeCache[key]) || {};
     const byDay = {};
-    Object.keys(store).forEach(vi => store[vi].forEach(e => { (byDay[e.day] = byDay[e.day] || []).push(e); }));
+    // Clear weather has no special spawns — keep it out of the calendar grid (still fetched for Now)
+    Object.keys(store).forEach(vi => { if (vi === 'Trời đẹp') return; store[vi].forEach(e => { (byDay[e.day] = byDay[e.day] || []).push(e); }); });
     Object.keys(byDay).forEach(d => byDay[d].sort((a, b) => a.startMs - b.startMs));
     this.monthCache[key] = byDay;
   }
@@ -1859,7 +1935,7 @@ class WeatherFeed {
       const store = this.typeCache[key] = this.typeCache[key] || {};
       if (store[vi]) continue;
       try {
-        const res = await this.grab(BASE + '/api/thoi-tiet/type?type=' + (idx + 1) + '&month=' + m, { json: true });
+        const res = await this.grab(BASE + '/api/thoi-tiet/type?type=' + (idx + 1) + '&month=' + m, { json: true, direct: true, timeout: 6000, maxProxies: 1 });
         let data;
         try { data = JSON.parse(res.body); }
         catch (e) { const mm = res.body.match(/\{[\s\S]*\}/); data = mm ? JSON.parse(mm[0]) : null; }
@@ -1906,6 +1982,15 @@ class WeatherFeed {
     return this.loadMonth(month, year);
   }
 
+  /* Manual refresh: refetch all 9 types; old data stays visible until the new copy is complete */
+  refreshMonth(month, year) {
+    const key = year + '-' + month;
+    if (this.monthBusy === key) return;
+    this.monthRefreshing = true; this.emit();
+    const done = () => { this.monthRefreshing = false; this.emit(); };
+    return Promise.resolve(this.loadMonth(month, year, true)).then(done, done);
+  }
+
   monthDays(month, year) {
     year = year || Number(new Intl.DateTimeFormat('en', { timeZone: 'Asia/Hong_Kong', year: 'numeric' }).format(new Date()));
     return this.monthCache[year + '-' + month] || null;
@@ -1934,7 +2019,11 @@ class WeatherFeed {
   start(refreshSeconds = 90) {
     if (this.started) return;
     this.started = true;
+    // Today's spawn list first (priority) — Now shows it as soon as possible, even before the full sync
+    this.ensureSpawns(this.nextDmys(1)[0]);
     this.load();
+    // Learn all weather types' spawn lists in the background (doesn't wait for the main sync)
+    setTimeout(() => this.learnAllTypes(), 2500);
     this.pollId = setInterval(() => this.load(), Math.max(30, refreshSeconds) * 1000);
     this.onVis = () => { if (!document.hidden) this.load(); };
     document.addEventListener('visibilitychange', this.onVis);
@@ -1945,23 +2034,44 @@ class WeatherFeed {
     this.started = false;
   }
 
-  async grab(url, opts) {
+  /* Free proxy handles ~1 request at a time: queue proxied calls so they never collide (collisions = failures = slow
+     spawn lists). Priority calls (the spawn list on screen) jump the queue. Direct calls skip it. */
+  grab(url, opts) {
+    if (opts && opts.direct) return this.grabNow(url, opts);
+    this.q = this.q || [];
+    return new Promise((res, rej) => {
+      const job = { run: () => this.grabNow(url, opts).then(res, rej) };
+      if (opts && opts.priority) this.q.unshift(job); else this.q.push(job);
+      this.pump();
+    });
+  }
+  pump() {
+    if (this.qBusy || !this.q.length) return;
+    this.qBusy = true;
+    const job = this.q.shift();
+    job.run().finally(() => { this.qBusy = false; this.pump(); });
+  }
+
+  async grabNow(url, opts) {
     const wantJson = !!(opts && opts.json);
     const bust = url + (url.includes('?') ? '&' : '?') + '_=' + Date.now();
     const pool = PROXIES.filter(p => p.kind !== 'text' || (opts && opts.allowText));
     const pinned = this.goodProxy != null ? PROXIES[this.goodProxy] : null;
-    const ordered = pinned && pool.indexOf(pinned) >= 0
+    let ordered = pinned && pool.indexOf(pinned) >= 0
       ? [pinned].concat(pool.filter(p => p !== pinned)) : pool.slice();
+    if (opts && opts.maxProxies) ordered = ordered.slice(0, opts.maxProxies);
+    if (opts && opts.direct) ordered = [{ url: u => u, kind: 'html', direct: true }].concat(ordered);
+    const limit = (opts && opts.timeout) || PROXY_TIMEOUT;
     let lastErr = null;
     for (const p of ordered) {
       const ctl = new AbortController();
-      const to = setTimeout(() => ctl.abort(), PROXY_TIMEOUT);
+      const to = setTimeout(() => ctl.abort(), limit);
       try {
         const r = await fetch(p.url(bust), { cache: 'no-store', signal: ctl.signal });
         if (!r.ok) { lastErr = new Error('HTTP ' + r.status); continue; }
         const t = new TextDecoder('utf-8').decode(await r.arrayBuffer());
         const ok = wantJson ? /[{[]/.test(t || '') : (t && t.length > 800);
-        if (ok) { this.goodProxy = PROXIES.indexOf(p); return { body: t, kind: p.kind }; }
+        if (ok) { if (!p.direct) this.goodProxy = PROXIES.indexOf(p); return { body: t, kind: p.kind }; }
         lastErr = new Error('short response');
       } catch (e) {
         lastErr = e && e.name === 'AbortError' ? new Error('timeout') : e;
@@ -2033,6 +2143,47 @@ class WeatherFeed {
     return { blocks };
   }
 
+  learnTypes(parsed) {
+    let changed = false;
+    ((parsed && parsed.blocks) || []).forEach(b => {
+      if (!b.vi) return;
+      const has = (b.normal || []).length || (b.premium || []).length, old = this.typeSpawns[b.vi];
+      if (!has && old && ((old.normal || []).length || (old.premium || []).length)) return; // never overwrite a real list with an empty one
+      this.typeSpawns[b.vi] = { normal: b.normal || [], premium: b.premium || [], at: Date.now() };
+      changed = true;
+    });
+    if (changed) { try { localStorage.setItem("ph_wx_typespawns", JSON.stringify(this.typeSpawns)); } catch (e) {} }
+  }
+  /* Learn every weather type's spawn list once: for each unknown type, fetch the nearest upcoming day that has it */
+  async learnAllTypes() {
+    if (this.learning) return;
+    this.learning = true;
+    try {
+      const tried = {};
+      for (let guard = 0; guard < 8; guard++) {
+        const missing = WORDER.filter(vi => !this.typeSpawns[vi]);
+        if (!missing.length) break;
+        const today = this.nextDmys(1)[0].split("-").reverse().join("");
+        let pick = null;
+        Object.keys(this.typeCache || {}).forEach(k => Object.keys(this.typeCache[k] || {}).forEach(vi => {
+          if (!missing.includes(vi)) return;
+          this.typeCache[k][vi].forEach(e => {
+            const o = e.date.split("-").reverse().join("");
+            if (o >= today && !tried[e.date] && !this.spawnCache[e.date] && !(this.spawnEmpty || {})[e.date] && (!pick || o < pick.o)) pick = { o, date: e.date };
+          });
+        }));
+        if (!pick) break;
+        tried[pick.date] = 1;
+        try { await this.fetchSpawns(pick.date); } catch (e) { await new Promise(r => setTimeout(r, 2500)); }
+      }
+    } finally { this.learning = false; this.emit(); }
+  }
+  withType(e) {
+    if ((e.normal || []).length || (e.premium || []).length) return e;
+    const t = this.typeSpawns[e.vi];
+    return t ? Object.assign({}, e, { normal: t.normal, premium: t.premium, checked: true }) : e;
+  }
+
   applySpawns(events, parsed) {
     const blocks = (parsed && parsed.blocks) || [];
     const used = {};
@@ -2040,16 +2191,118 @@ class WeatherFeed {
       let b = blocks.find((x, n) => !used[n] && x.start === e.start && (used[n] = 1));
       if (!b) b = blocks.find((x, n) => !used[n] && x.vi === e.vi && (used[n] = 1));
       if (!b && blocks.length === events.length) { b = blocks[i]; used[i] = 1; }
-      return Object.assign({}, e, { normal: b ? b.normal : [], premium: b ? b.premium : [] });
+      return Object.assign({}, e, { normal: b ? b.normal : [], premium: b ? b.premium : [], checked: true });
     });
   }
 
-  async fetchSpawns(dmy) {
+  async fetchSpawns(dmy, priority) {
     if (this.spawnCache[dmy]) return this.spawnCache[dmy];
-    const dr = await this.grab(BASE + '/thoi-tiet/detail/' + dmy);
+    const dr = await this.grab(BASE + '/thoi-tiet/detail/' + dmy, { priority: !!priority });
     const parsed = this.parseDetail(dr.body);
-    if (parsed.blocks.length) this.spawnCache[dmy] = parsed;
+    this.learnTypes(parsed);
+    if (!parsed.blocks.length) { this.spawnEmpty = this.spawnEmpty || {}; this.spawnEmpty[dmy] = true; }
+    if (parsed.blocks.length) {
+      this.spawnCache[dmy] = parsed;
+      try {
+        const ord = k => k.split("-").reverse().join(""), today = ord(this.nextDmys(1)[0]);
+        const keep = {}; Object.keys(this.spawnCache).filter(k => ord(k) >= today).sort((a, b) => ord(a).localeCompare(ord(b))).slice(0, 8).forEach(k => keep[k] = this.spawnCache[k]);
+        localStorage.setItem("ph_wx_spawns", JSON.stringify(keep));
+      } catch (e) {}
+    }
     return parsed;
+  }
+
+  /* Make sure the spawn list for a given day is loaded; retries every 10s until it succeeds */
+  async ensureSpawns(dmy) {
+    if (!dmy || this.spawnCache[dmy]) return;
+    const t = this.spawnTry[dmy];
+    if (t && (t.busy || Date.now() - t.at < 4000)) return;
+    this.spawnTry[dmy] = { busy: true, at: Date.now() };
+    try {
+      const parsed = await this.fetchSpawns(dmy, true);
+      if (parsed.blocks.length) {
+        this.days = this.days.map(x => x.date === dmy ? Object.assign({}, x, { events: this.applySpawns(x.events, parsed) }) : x);
+        this.emit();
+      } else {
+        // Page loaded fine but lists no spawns for this day — stop showing "Loading…"
+        this.days = this.days.map(x => x.date === dmy ? Object.assign({}, x, { events: x.events.map(e => Object.assign({}, e, { checked: true })) }) : x);
+        this.spawnTry[dmy] = { busy: false, at: Date.now() + 5 * 60e3 };
+        this.emit();
+        return;
+      }
+    } catch (e) {}
+    this.spawnTry[dmy] = { busy: false, at: Date.now() };
+  }
+
+  /* Near month end the next 3 days spill into next month — fetch that month quietly (direct, no calendar UI state) */
+  async quietMonth(month, year) {
+    const key = year + '-' + month;
+    this.typeCache = this.typeCache || {};
+    const store = this.typeCache[key] = this.typeCache[key] || {};
+    if (Object.keys(store).length === WORDER.length) return this.seedFromMonths();
+    await Promise.all(WORDER.map(async (vi, i) => {
+      if (store[vi]) return;
+      try {
+        const res = await this.grab(BASE + '/api/thoi-tiet/type?type=' + (i + 1) + '&month=' + month, { json: true, direct: true, timeout: 6000, maxProxies: 1 });
+        const data = JSON.parse(res.body), out = [];
+        Object.keys(data).forEach(day => {
+          const raw = data[day];
+          (Array.isArray(raw) ? raw : Object.values(raw || {})).forEach(ev => {
+            const s = String(ev.time || '');
+            const t = /24\s*\/\s*24/.test(s) ? [s, '00:00', '24:00'] : s.match(/(\d{1,2}:\d{2})\s*[-–]\s*(\d{1,2}:\d{2})/);
+            if (!t) return;
+            const dmy = pad(Number(day)) + '-' + pad(month) + '-' + year;
+            out.push({ day: String(Number(day)), vi, start: t[1], end: t[2], date: dmy, startMs: vnMs(dmy, t[1]), endMs: vnMs(dmy, t[2]) });
+          });
+        });
+        store[vi] = out;
+      } catch (e) {}
+    }));
+    if (Object.keys(store).length === WORDER.length) { this.typeAt[key] = Date.now(); this.saveMonths(); }
+    this.build(key, month, year);
+    this.seedFromMonths();
+  }
+
+  /* Month API (direct, instant) also has today + next days' times — use it so Now paints immediately.
+     The proxied /thoi-tiet page still loads after and stays the source of truth (plus spawn lists). */
+  monthEventsFor(dmy) {
+    const [d, m, y] = dmy.split('-').map(Number);
+    const store = (this.typeCache || {})[y + '-' + m] || {};
+    const out = [];
+    Object.keys(store).forEach(vi => store[vi].forEach(e => { if (e.date === dmy) out.push({ vi: e.vi, start: e.start, end: e.end, startMs: e.startMs, endMs: e.endMs }); }));
+    return out.sort((a, b) => a.startMs - b.startMs);
+  }
+  nextDmys(n) {
+    const out = [], base = serverNow();
+    for (let i = 0; i < n; i++) { const d = new Date(base.getFullYear(), base.getMonth(), base.getDate() + i); out.push(pad(d.getDate()) + '-' + pad(d.getMonth() + 1) + '-' + d.getFullYear()); }
+    return out;
+  }
+  seedFromMonths() {
+    if (this.lastSync) return; // real feed already arrived
+    const days = this.nextDmys(3).map(date => {
+      let events = this.monthEventsFor(date);
+      const c = this.spawnCache[date]; if (c) events = this.applySpawns(events, c);
+      return { date, events };
+    });
+    if (!days.some(d => d.events.length)) return;
+    this.days = days;
+    this.loading = false;
+    this.emit();
+  }
+  /* The site's day rolls over on Vietnam time (1h behind HKT), so just after HKT midnight it still lists yesterday.
+     Always show exactly today + next 2 days (HKT); fill any missing day from the month API. */
+  windowDays(days) {
+    const want = this.nextDmys(3);
+    return want.map(date => days.find(d => d.date === date) || { date, events: this.monthEventsFor(date) });
+  }
+
+  // Add month-API events the page didn't list (e.g. all-day "24/24" windows)
+  mergeMonth(days) {
+    return days.map(d => {
+      const extra = this.monthEventsFor(d.date).filter(m => !d.events.some(e => e.vi === m.vi && e.start === m.start));
+      if (!extra.length) return d;
+      return Object.assign({}, d, { events: d.events.concat(extra).sort((a, b) => a.startMs - b.startMs) });
+    });
   }
 
   async load() {
@@ -2058,7 +2311,8 @@ class WeatherFeed {
     this.emit();
     try {
       const res = await this.grab(BASE + '/thoi-tiet', { allowText: true });
-      const days = res.kind === 'text' ? this.parseIndexText(res.body) : this.parseIndex(res.body);
+      let days = res.kind === 'text' ? this.parseIndexText(res.body) : this.parseIndex(res.body);
+      days = this.mergeMonth(this.windowDays(days));
       if (!days.length) throw new Error('no forecast rows found');
       const hadEvents = this.days.some(d => (d.events || []).length);
       if (hadEvents && !days.some(d => (d.events || []).length)) {
@@ -2077,6 +2331,11 @@ class WeatherFeed {
       this.lastSync = Date.now();
       this.fetching = false;
       this.emit();
+      // Calendar month still missing some weather types? Quietly fill the gaps on every sync (after the proxy cools down).
+      if (this.lastMonth && this.monthBusy == null) {
+        const mk = this.lastYear + '-' + this.lastMonth;
+        if (Object.keys((this.typeCache || {})[mk] || {}).length < WORDER.length) this.loadMonth(this.lastMonth, this.lastYear);
+      }
       for (const d of days) {
         if (this.spawnCache[d.date]) continue;
         try {
@@ -2087,6 +2346,10 @@ class WeatherFeed {
           this.emit();
         } catch (e) {}
       }
+      // Next day after the 3-day window too, so the list is ready when the next event rolls in
+      const after = this.nextDmys(4)[3];
+      if (after && !this.spawnCache[after]) await this.fetchSpawns(after).catch(() => {});
+      await this.learnAllTypes();
     } catch (e) {
       this.fetching = false;
       this.loading = false;
@@ -2115,6 +2378,12 @@ const clean = n => n.replace(/\s*\([^)]*\)/g, "");
 const BLANK = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
 const TYPE_CLASS = Object.fromEntries(Object.keys(typeColors).map(t => [t, "t-" + t.toLowerCase()]));
 
+/* World Boss: Groudon Mon–Fri, Pheromosa Sat–Sun (based on the day that boss occurrence falls on, server time) */
+function evIcon(e) {
+  if (e.id !== "wb") return e.icon;
+  const d = new Date(+serverNow() + (e.live ? 0 : (e.ms || 0))), wk = d.getDay() === 0 || d.getDay() === 6;
+  return '<img src="' + ART_3D + (wk ? 795 : 383) + '.png" alt="' + (wk ? "Pheromosa" : "Groudon") + '" style="width:100%;height:100%;object-fit:contain">';
+}
 function fmtCd(ms) {
   const s = Math.max(0, Math.floor(ms / 1000));
   const d = Math.floor(s / 86400), h = Math.floor((s % 86400) / 3600);
@@ -2182,8 +2451,59 @@ function matchups(types) {
   return { weak, resist };
 }
 
+const ROT_PH = { capsule: "Search legendaries…", happy: "Search happy exchange…", flash: "Search flash Pokémon…" };
+let rotHxHits = [];
+/* Flash (shiny exchange) rotation — one set per week, changes Fri 00:00 HKT */
+const FLASH = [
+  [["Zamazenta",889],["Zacian",888],["Team Rocket's Meowth",52],["Marshadow",802],["Silvally",773],["Nidoking",34],["Nidoqueen",31],["Magearna",801],["Master of Illusion",571],["Zoroark",571],["Ash's Charizard",6],["Ash's Squirtle",7],["Alolan Exeggutor",10114],["Crystal Onix",95],["Mega Rayquaza",10079],["Electivire",466],["Accelgor",617],["Super Metagross",10076],["Manaphy",490],["Moltres",146]],
+  [["White Kyurem",10023],["Black Kyurem",10022],["Kyurem",646],["Palkia",484],["Dialga",483],["Xerneas",716],["Super Latios",10063],["Latios",381],["Super Latias",10062],["Latias",380],["Deoxys",386],["Celebi",251],["Suicune",245],["Entei",244],["Raikou",243],["Earth Devil",383],["Groudon",383],["Super Sceptile",10065],["Super Houndoom",10048],["Super Absol",10057]],
+  [["Armor Mewtwo","https://img.pokemondb.net/sprites/go/normal/mewtwo-armored.png"],["Super Steelix",10072],["Super Beedrill",10090],["Super Abomasnow",10060],["Super Garchomp",10058],["Garchomp",445],["Super Banette",10056],["Super Manectric",10055],["Super Medicham",10054],["Super Gallade",10068],["Super Gardevoir",10051],["Super Blaziken",10050],["Super Heracross",10047],["Super Pinsir",10040],["Super Kangaskhan",10039],["Super Ampharos",10045],["Zygarde",10120],["Zygarde 50%",718],["Blissey",242],["Ocean Devil",382]],
+  [["Dark Lugia","https://img.pokemondb.net/sprites/go/normal/lugia-apex.png"],["Shadow Mewtwo X",10043],["Sky Forme Shaymin",10006],["Land Forme Shaymin",492],["Cresselia",488],["Regigigas",486],["Heatran",485],["Azelf",482],["Mesprit",481],["Uxie",480],["Jirachi",385],["Registeel",379],["Regice",378],["Regirock",377],["Goodra",706],["Super Diancie",10075],["Diancie",719],["Super Audino",10069]],
+  [["Ash's Infernape",392],["Infernape",392],["Vaporeon",134],["Sylveon",700],["Volcanion",721],["Keldeo (Resolute Form)",10024],["Hoopa Unbound",10086],["Hoopa Confined",720],["Genesect",649],["Meloetta Pirouette Forme",10018],["Meloetta",648],["Victini",494],["Landorus Therian Forme",10021],["Landorus",645],["Therian",10020],["Thundurus",642],["Tornadus",641],["Virizion",640],["Terrakion",639],["Earth Devil",383]],
+  [["Exeggutor",103],["Ninetales",38],["Oranguru",765],["Pangoro",675],["Necrozma",800],["Guzzlord",799],["Kartana",798],["Celesteela",797],["Xurkitree",796],["Pheromosa",795],["Buzzwole",794],["Nihilego",793],["Tapu Fini",788],["Tapu Bulu",787],["Tapu Lele",786],["Tapu Koko",785],["Lunala",792],["Solgaleo",791],["Primal Dialga","https://archives.bulbagarden.net/media/upload/7/7a/Primal_Dialga_art.png"],["Skeledactyl",142]],
+  [["Jessie's Arbok",24],["Umbreon",197],["Espeon",196],["Leafeon",470],["Glaceon",471],["Serena's Eevee",133],["Ash's Hawlucha",701],["Jolteon",135],["James' Mareanie",747],["Lunala",792],["Solgaleo",791],["James's Weezing",110],["Zygarde",10120],["Zygarde 50%",718],["Deoxys",386],["Ash Ketchum's Sceptile",254],["Agatha's Gengar",94],["Ash's Snorlax",143],["Mega Rayquaza",10079],["Rayquaza",384]]
+];
+const FLASH_NOTE = { 3: "2 more slots not announced yet" };
+const FLASH_ANCHOR = new Date(2026, 9, 16), FLASH_ANCHOR_SET = 5; // Fri 16 Oct 2026 = column 6 (Exeggutor … Aerodactyl)
+function flashWeek() {
+  const now = serverNow();
+  const ws = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  ws.setDate(ws.getDate() - ((ws.getDay() + 2) % 7));
+  const w = Math.round((ws - FLASH_ANCHOR) / 6048e5);
+  return { now, ws, live: (((FLASH_ANCHOR_SET + w) % 7) + 7) % 7 };
+}
+function flashStart(k, fw) { const d = new Date(fw.ws); d.setDate(d.getDate() + 7 * ((k - fw.live + 7) % 7)); return d; }
+function flashTick() {
+  const cd = document.getElementById("flCd");
+  if (!cd || state.rotTab !== "flash") return;
+  const fw = flashWeek(), k = state.flashSel == null ? fw.live : state.flashSel;
+  const t = new Date(fw.ws); t.setDate(t.getDate() + (k === fw.live ? 7 : 7 * ((k - fw.live + 7) % 7)));
+  cd.textContent = fmtCd(t - fw.now);
+}
+function renderFlash() {
+  const fw = flashWeek(), k = state.flashSel == null ? fw.live : state.flashSel, live = k === fw.live;
+  const st = flashStart(k, fw), en = new Date(st); en.setDate(en.getDate() + 6);
+  const dm = d => d.getDate() + " " + MON[d.getMonth()];
+  const ahead = (k - fw.live + 7) % 7;
+  document.getElementById("flKicker").textContent = live ? "Live now" : (ahead === 1 ? "Up next" : "Coming up");
+  document.getElementById("flSet").textContent = live ? "This week" : (ahead === 1 ? "Next week" : "In " + ahead + " weeks");
+  document.getElementById("flRange").textContent = "Fri " + dm(st) + " – Thu " + dm(en);
+  document.getElementById("flCdLabel").textContent = live ? "Changes in" : "Starts in";
+  document.getElementById("flSets").innerHTML = FLASH.map((_, j) => {
+    const i = (fw.live + j) % 7, s = flashStart(i, fw);
+    return '<button class="fl-chip' + (i === k ? " sel" : "") + (i === fw.live ? " live" : "") + '" data-flset="' + i + '" type="button" aria-label="Week of ' + dm(s) + '"><b>' + s.getDate() + '</b><span>' + (i === fw.live ? "Now" : MON[s.getMonth()]) + '</span></button>';
+  }).join("");
+  const list = FLASH[k];
+  document.getElementById("flCount").textContent = list.length + " Pokémon";
+  document.getElementById("flGrid").innerHTML = list.map(([n, id]) => '<div class="fl-mon">' +
+    (id ? '<img src="' + (typeof id === "string" ? id.replace("/go/normal/", "/go/shiny/") : ART_3D + "shiny/" + id + '.png') + '" alt="" loading="lazy">' : '<span class="fl-ph">' + n.replace(/[^A-Za-z]/g, "")[0] + '</span>') +
+    '<span class="fl-n">' + n + '</span></div>').join("");
+  document.getElementById("flNote").textContent = FLASH_NOTE[k] || "";
+  flashTick();
+}
+setInterval(flashTick, 1000);
 const state = {
-  view: "board", favs: [], sel: null, q: "", favOnly: false, rotOffset: 0, rotTab: "capsule", rotView: "cal", jumpDay: null,
+  view: "board", favs: [], sel: null, q: "", favOnly: false, rotOffset: 0, rotTab: "capsule", qs: { capsule: "", happy: "", flash: "" }, flashSel: null, rotView: "cal", jumpDay: null,
   wxTab: "now", wxQuery: "", wxType: null, wxMonth: null, wxYear: null, wxDay: null, wxSel: null,
   alerts: {}, notif: "default"
 };
@@ -2246,9 +2566,12 @@ function initWeather() {
   state.wxMonth = month;
   state.wxYear = year;
   wx.loadMonth(month, year);
+  const d3 = new Date(serverNow().getFullYear(), serverNow().getMonth(), serverNow().getDate() + 2);
+  if (d3.getMonth() + 1 !== month) wx.quietMonth(d3.getMonth() + 1, d3.getFullYear());
 }
 
 function go(view) {
+  if (view !== "weather") state.wxSel = null; // a picked weather window resets when you leave Weather
   state.view = view; state.sel = null;
   document.querySelectorAll(".nav-item").forEach(el => el.classList.toggle("on", el.dataset.view === view));
   ["board","rotation","weather","events","server","download","builds","teams","guide","guide-tickets","about"].forEach(v => {
@@ -2346,7 +2669,7 @@ function renderBoard() {
   } else { favEl.innerHTML = ""; favEmpty.classList.remove("hidden"); }
   document.getElementById("boardEvents").innerHTML = evs.slice(0, 4).map(e => `
     <div class="event-item${e.live ? " live" : ""}">
-      <div class="event-ico">${e.icon}</div>
+      <div class="event-ico">${evIcon(e)}</div>
       <div class="event-body"><div class="event-name">${e.name}</div><div class="event-desc">${e.desc}</div></div>
       <div class="event-right"><div class="event-cd" data-ev="${e.id}">${fmtCd(e.ms)}</div><div class="event-status" data-evs="${e.id}">${e.live ? "ENDS IN" : "STARTS IN"}</div></div>
     </div>`).join("");
@@ -2394,19 +2717,42 @@ function openHappySheet(row, withName, dayMs) {
 
 function renderRotation() {
   const today = new Date();
-  const q = state.q.trim().toLowerCase();
+  const tab0 = state.rotTab || "capsule";
+  const input = document.getElementById("rotSearch");
+  input.placeholder = ROT_PH[tab0];
+  if (input.value !== state.qs[tab0]) input.value = state.qs[tab0];
+  document.getElementById("favFilter").style.display = tab0 === "capsule" ? "" : "none";
+  document.querySelectorAll("#rotTabs .wx-tab").forEach(t => t.classList.toggle("on", t.dataset.rottab === tab0));
+  const q = state.qs[tab0].trim().toLowerCase();
   const favSet = new Set(state.favs);
   const upcoming = entries().filter(e => midnight(e.date) >= midnight(today));
-  let results = [];
-  if (q.length >= 2) results = upcoming.filter(e => e.name.toLowerCase().includes(q)).slice(0, 30);
-  else if (state.favOnly) results = upcoming.filter(e => favSet.has(e.name)).slice(0, 30);
-  const showResults = results.length > 0 || q.length >= 2 || state.favOnly;
+  const favOn = tab0 === "capsule" && state.favOnly;
+  const showResults = q.length >= 2 || favOn;
   document.getElementById("rotResults").classList.toggle("hidden", !showResults);
-  document.getElementById("rotCalendar").classList.toggle("hidden", showResults);
-  if (showResults) {
+  document.getElementById("rotBody").classList.toggle("hidden", showResults);
+  document.getElementById("rotViewSw").style.visibility = showResults || tab0 === "flash" ? "hidden" : "";
+  const dmy = d => DOW[d.getDay()] + " " + d.getDate() + " " + MON[d.getMonth()];
+  const none = '<div class="empty"><p>No matches</p></div>';
+  if (showResults && tab0 === "capsule") {
+    const results = (q.length >= 2 ? upcoming.filter(e => e.name.toLowerCase().includes(q)) : upcoming.filter(e => favSet.has(e.name))).slice(0, 30);
     document.getElementById("rotResults").innerHTML = results.length
-      ? results.map(e => `<button class="result-row" data-name="${e.name}"><img src="${sprite(e.name)}" alt="" loading="lazy"><span class="result-name">${e.name}</span><span class="result-date">${DOW[e.date.getDay()]} ${e.date.getDate()} ${MON[e.date.getMonth()]}</span></button>`).join("")
-      : '<div class="empty"><p>No matches</p></div>';
+      ? results.map(e => `<button class="result-row" data-name="${e.name}"><img src="${sprite(e.name)}" alt="" loading="lazy"><span class="result-name">${e.name}</span><span class="result-date">${dmy(e.date)}</span></button>`).join("")
+      : none;
+  } else if (showResults && tab0 === "happy") {
+    rotHxHits = [];
+    upcoming.slice(0, 120).forEach(e => happyRows(e.name).forEach((r, ri) => {
+      if (rotHxHits.length < 30 && (r.title + " " + r.label).toLowerCase().includes(q)) rotHxHits.push({ r, ri, with: e.name, ms: e.date.getTime() });
+    }));
+    document.getElementById("rotResults").innerHTML = rotHxHits.length
+      ? rotHxHits.map((x, i) => `<button class="result-row" data-hxr="${i}" style="text-align:left">${happySprites(x.r, 36)}<span class="result-name">${x.r.title}</span><span class="result-date">${dmy(new Date(x.ms))}</span></button>`).join("")
+      : none;
+  } else if (showResults && tab0 === "flash") {
+    const fw = flashWeek(), hits = [];
+    FLASH.forEach((list, k) => list.forEach(([n, id]) => { if (n.toLowerCase().includes(q)) hits.push({ n, id, k, ahead: (k - fw.live + 7) % 7 }); }));
+    hits.sort((a, b) => a.ahead - b.ahead);
+    document.getElementById("rotResults").innerHTML = hits.length
+      ? hits.map(x => `<button class="result-row" data-flr="${x.k}">${x.id ? `<img src="${typeof x.id === "string" ? x.id.replace("/go/normal/", "/go/shiny/") : ART_3D + "shiny/" + x.id + ".png"}" alt="" loading="lazy">` : '<span class="fl-ph">' + x.n[0] + '</span>'}<span class="result-name">${x.n}</span><span class="result-date" style="width:auto;${x.ahead ? "" : "color:var(--green)"}">${x.ahead ? "Fri " + flashStart(x.k, fw).getDate() + " " + MON[flashStart(x.k, fw).getMonth()] : "Live now"}</span></button>`).join("")
+      : none;
   } else {
     const anchor = new Date(today.getFullYear(), today.getMonth() + state.rotOffset, 1);
     const y = anchor.getFullYear(), mo = anchor.getMonth();
@@ -2414,6 +2760,17 @@ function renderRotation() {
     const tab = state.rotTab || "capsule";
     document.getElementById("rotMonth").textContent = MONL[mo] + " " + y;
     document.querySelectorAll("#rotTabs .wx-tab").forEach(t => t.classList.toggle("on", t.dataset.rottab === tab));
+    const isFlash = tab === "flash";
+    document.getElementById("rotFlash").classList.toggle("hidden", !isFlash);
+    document.getElementById("rotNav").style.display = isFlash ? "none" : "";
+    document.getElementById("rotBars").style.display = isFlash ? "none" : "";
+    if (isFlash) {
+      document.getElementById("rotLegend").style.display = "none";
+      renderFlash();
+      document.getElementById("favFilter").classList.toggle("on", state.favOnly);
+      document.getElementById("favFilter").textContent = state.favs.length ? "★ Watchlist · " + state.favs.length : "★ Watchlist";
+      return;
+    }
     document.querySelectorAll("#rotViewSw [data-rotview]").forEach(b => {
       const on = b.dataset.rotview === (state.rotView || "list");
       b.style.background = on ? "var(--s0)" : "transparent";
@@ -2529,7 +2886,7 @@ function renderEvents() {
   const evs = DAILY_EVENTS.map(e => Object.assign({}, e, eventStatus(e))).sort((a, b) => (b.live - a.live) || (a.ms - b.ms));
   document.getElementById("eventsFull").innerHTML = evs.map(e => `
     <div class="event-item${e.live ? " live" : ""}">
-      <div class="event-ico">${e.icon}</div>
+      <div class="event-ico">${evIcon(e)}</div>
       <div class="event-body"><div class="event-name">${e.name}</div><div class="event-desc">${e.desc} · ${e.at} ${c.short}</div></div>
       <div class="event-right"><div class="event-cd">${fmtCd(e.ms)}</div><div class="event-status">${e.live ? "ENDS IN" : (e.ms < 3600000 ? "SOON" : "STARTS IN")}</div></div>
     </div>`).join("");
@@ -2563,10 +2920,11 @@ function renderWeather() {
 
   if (!wx) return;
   const now = Date.now();
-  const all = wx.allEvents();
+  const all = wx.allEvents().map(e => wx.withType(e));
   const current = all.find(e => e.startMs <= now && now < e.endMs) || null;
   const next = all.find(e => e.startMs > now) || null;
-  const picked = state.wxSel ? all.find(e => e.date === state.wxSel.date && e.start === state.wxSel.start && e.vi === state.wxSel.vi) : null;
+  const picked = state.wxSel ? (all.find(e => e.date === state.wxSel.date && e.start === state.wxSel.start && e.vi === state.wxSel.vi)
+    || all.find(e => e.date === state.wxSel.date && e.vi === state.wxSel.vi)) : null;
   const hero = picked || current || next;
   const meta = hero ? (WMETA[hero.vi] || { en: hero.vi, c: "#8C94A3" }) : { en: "", c: "#5aa7d8" };
   const heroLive = !!hero && hero.startMs <= now && now < hero.endMs;
@@ -2584,16 +2942,18 @@ function renderWeather() {
   document.getElementById("wxKicker").textContent = heroLive ? "Happening now" : picked ? "Selected window" : hero ? "Next event" : "No events ahead";
   document.getElementById("wxKicker").className = "kicker " + (heroLive ? "green" : "");
   document.getElementById("wxWindow").textContent = hero
-    ? fmtTimeInTz(hero.startMs) + " – " + fmtTimeInTz(hero.endMs) + " " + ctry.short
+    ? (hero.end === "24:00" ? "All day · " + dayTitle(hero.date) : fmtTimeInTz(hero.startMs) + " – " + fmtTimeInTz(hero.endMs) + " " + ctry.short)
     : "Nothing in the next three days";
   document.getElementById("wxIcon").src = hero && WICON[hero.vi] ? WICON[hero.vi] : BLANK;
-  document.getElementById("wxCd").textContent = hero ? fmtCd(heroLive ? hero.endMs - now : hero.startMs - now) : "--:--:--";
-  document.getElementById("wxCdLabel").textContent = hero ? (heroLive ? "until it ends" : "until it starts") : "";
-  document.getElementById("wxSync").textContent = wx.error ? "Reconnecting" : wx.loading ? "Fetching" : age !== null ? "Synced " + (age < 5 ? "just now" : age + "s ago") : "Live";
+  const heroDone = !!hero && hero.endMs <= now;
+  document.getElementById("wxCd").textContent = hero ? (heroDone ? "Ended" : fmtCd(heroLive ? hero.endMs - now : hero.startMs - now)) : "--:--:--";
+  document.getElementById("wxCdLabel").textContent = hero && !heroDone ? (heroLive ? "until it ends" : "until it starts") : "";
+  document.getElementById("wxSync").textContent = wx.error ? "Reconnecting" : (wx.loading || (wx.fetching && !wx.lastSync)) ? "Fetching" : age !== null ? "Synced " + (age < 5 ? "just now" : age + "s ago") : "Live";
   document.getElementById("wxDot").className = "dot " + (wx.error ? "red" : wx.fetching ? "gold" : "green");
   document.getElementById("wxHero").style.background = "linear-gradient(155deg," + meta.c + "26,var(--s0))";
   document.getElementById("wxHero").style.borderColor = meta.c + "3d";
-  document.getElementById("spawnHeading").textContent = heroLive ? "Appearing right now" : "Will appear";
+  document.getElementById("spawnHeading").textContent = heroLive ? "Appearing now" : heroDone ? "Appeared" : "Will appear";
+  if (hero && !((hero.normal || []).length || (hero.premium || []).length)) wx.ensureSpawns(hero.date);
 
   let groups = "";
   if (hero && hero.normal && hero.normal.length) {
@@ -2604,18 +2964,20 @@ function renderWeather() {
     groups += '<div class="kicker gold" style="margin-top:12px">Premium</div><div class="spawn-grid">' +
       hero.premium.map(m => `<div class="spawn-mon"><img src="${m.img3d || m.img}" alt="" onerror="this.onerror=null;this.src='${m.img}'"><span>${m.name}</span></div>`).join("") + "</div>";
   }
-  if (!groups) groups = '<div class="empty"><p>Spawn list loads with the live feed</p></div>';
+  if (!groups) groups = !hero ? '<div class="empty"><p>Spawn list loads with the live feed</p></div>'
+    : hero.checked ? '<div class="empty"><p>No special spawns listed for this weather</p></div>'
+    : '<div class="empty"><p>Loading spawn list…</p></div>';
   document.getElementById("spawnGroups").innerHTML = groups;
 
   document.getElementById("wxDays").innerHTML = (wx.days || []).map(d => {
     return `<div><div class="wx-day-title">${dayTitle(d.date)}</div>${(d.events || []).map(e => {
       const m2 = WMETA[e.vi] || { en: e.vi, c: "#8C94A3" };
       const st = stateOf(e);
-      return `<button class="wx-event" data-wx="${e.date}|${e.start}|${e.vi}">
+      return `<button class="wx-event" data-wx="${d.date}|${e.start}|${e.vi}">
         <span class="rail" style="background:${m2.c}"></span>
         <img src="${WICON[e.vi] || BLANK}" alt="">
         <span class="wx-event-name">${m2.en}</span>
-        <span class="wx-event-window">${fmtTimeInTz(e.startMs)} – ${fmtTimeInTz(e.endMs)}</span>
+        <span class="wx-event-window">${e.end === "24:00" ? "All day" : fmtTimeInTz(e.startMs) + " – " + fmtTimeInTz(e.endMs)}</span>
         <span class="wx-event-tag" style="color:${st === "LIVE" ? "var(--green)" : st === "DONE" ? "var(--dim)" : m2.c}">${st}</span>
       </button>`;
     }).join("")}</div>`;
@@ -2627,6 +2989,9 @@ function renderWeather() {
   const byDay = wx.monthDays ? wx.monthDays(month, year) : {};
   const wxTypeCount = wx.monthTypeCount ? wx.monthTypeCount(month, year) : 0;
   document.getElementById("wxMonthLabel").textContent = MONL[month - 1] + " " + year;
+  { const hk = serverNow(), atCur = year * 12 + month <= hk.getFullYear() * 12 + hk.getMonth() + 1, pb = document.getElementById("wxMonthPrev");
+    pb.disabled = atCur; pb.style.opacity = atCur ? "0.25" : ""; pb.style.pointerEvents = atCur ? "none" : ""; }
+  document.getElementById("wxMonthRefresh").textContent = wx.monthRefreshing ? "Refreshing…" : "Refresh";
   document.getElementById("wxMonthStatus").textContent = wx.monthLoading
     ? "Loading " + wxTypeCount + "/9 types…"
     : wxTypeCount === 9
@@ -2641,19 +3006,75 @@ function renderWeather() {
     const list = (byDay && byDay[String(d)]) || [];
     const isToday = todayDmy === pad2(d) + "-" + pad2(month) + "-" + year;
     const isPicked = state.wxDay === d;
-    const dots = list.slice(0, 4).map(e => `<span style="width:6px;height:6px;border-radius:50%;background:${(WMETA[e.vi]||{}).c||'#8C94A3'};display:inline-block;margin:1px"></span>`).join("");
+    // One icon per weather type that day (×N if it happens more than once), max 4 + overflow count
+    const counts = {}; list.forEach(e => { counts[e.vi] = (counts[e.vi] || 0) + 1; });
+    const types = WORDER.filter(vi => counts[vi]);
+    const shown = types.slice(0, types.length > 4 ? 3 : 4);
+    const icons = shown.map(vi => `<span style="position:relative;width:22px;height:22px;display:grid;place-items:center" title="${(WMETA[vi]||{}).en||vi}"><img src="${WICON[vi]||BLANK}" alt="" style="width:22px;height:22px;margin:0;object-fit:contain">${counts[vi] > 1 ? `<b style="position:absolute;right:-3px;bottom:-3px;min-width:12px;height:12px;padding:0 2px;border-radius:6px;background:var(--s3);border:1px solid var(--line);font:700 0.5rem/10px var(--mono);color:var(--ink);text-align:center">${counts[vi]}</b>` : ""}</span>`).join("")
+      + (types.length > shown.length ? `<span style="width:22px;height:22px;display:grid;place-items:center;border-radius:7px;background:var(--s2);font:600 0.58rem var(--mono);color:var(--muted)">+${types.length - shown.length}</span>` : "");
     cells += `<button class="cal-cell${isToday ? " today" : ""}" data-wxday="${d}" style="${isPicked ? "border-color:rgba(var(--gold-rgb),.55);background:rgba(var(--gold-rgb),.14)" : ""}">
-      <span class="cal-num">${d}</span><div style="display:flex;flex-wrap:wrap;justify-content:center;margin-top:4px">${dots}</div></button>`;
+      <span class="cal-num">${d}</span><div style="display:grid;grid-template-columns:repeat(2,22px);gap:3px;justify-content:center;margin-top:4px">${icons}</div></button>`;
   }
   document.getElementById("wxCells").innerHTML = cells;
+  const legend = document.getElementById("wxCalLegend");
+  if (legend && !legend.childElementCount) legend.innerHTML = WORDER.filter(vi => vi !== "Trời đẹp").map(vi =>
+    `<span style="display:flex;align-items:center;gap:6px;font-size:0.72rem;color:var(--soft)"><img src="${WICON[vi]||BLANK}" alt="" style="width:18px;height:18px;object-fit:contain">${(WMETA[vi]||{}).en||vi}</span>`).join("");
   const pickedList = (byDay && state.wxDay && byDay[String(state.wxDay)]) || [];
   document.getElementById("wxPickedLabel").textContent = state.wxDay
     ? pickedList.length + " events on " + state.wxDay + " " + MON[month - 1]
     : "Pick a day to list its weather";
-  document.getElementById("wxPickedEvents").innerHTML = pickedList.map(e => {
+  const pDmy = state.wxDay ? pad2(state.wxDay) + "-" + pad2(month) + "-" + year : null;
+  const pCache = pDmy && wx.spawnCache[pDmy];
+  const pFull = (pCache ? wx.applySpawns(pickedList, pCache) : pickedList).map(e => wx.withType(e));
+  const nowMs = Date.now();
+  const monGrid = (label, gold, list) => list && list.length ? `<div class="kicker${gold ? " gold" : ""}" style="margin-top:12px">${label}</div><div class="spawn-grid">` +
+    list.map(m => `<div class="spawn-mon"><img src="${m.img3d || m.img}" alt="" loading="lazy" onerror="this.onerror=null;this.src='${m.img}'"><span>${m.name}</span></div>`).join("") + "</div>" : "";
+  document.getElementById("wxPickedEvents").innerHTML = pFull.map((e, i) => {
     const m2 = WMETA[e.vi] || { en: e.vi, c: "#8C94A3" };
-    return `<div class="wx-event"><span class="rail" style="background:${m2.c}"></span><img src="${WICON[e.vi]||BLANK}" alt=""><span class="wx-event-name">${m2.en}</span><span class="wx-event-window">${fmtTimeInTz(e.startMs)} – ${fmtTimeInTz(e.endMs)} ${ctry.short}</span></div>`;
+    const key = pDmy + "|" + e.start + "|" + e.vi, open = state.wxCalOpen === key;
+    const allDay = e.end === "24:00";
+    const win = allDay ? "All day" : fmtTimeInTz(e.startMs) + " – " + fmtTimeInTz(e.endMs) + " " + ctry.short;
+    let body = "";
+    if (open) {
+      const live = e.startMs <= nowMs && nowMs < e.endMs, done = e.endMs <= nowMs;
+      const mins = Math.round((e.endMs - e.startMs) / 60000);
+      const dur = allDay ? "All day" : (mins >= 60 ? Math.floor(mins / 60) + "h" + (mins % 60 ? " " + (mins % 60) + "m" : "") : mins + "m");
+      const status = done ? "Ended" : live ? "Live · ends in " + fmtCd(e.endMs - nowMs) : "Starts in " + fmtCd(e.startMs - nowMs);
+      const spawns = monGrid("Common", false, e.normal) + monGrid("Premium", true, e.premium);
+      const failed = ((wx.calFail || {})[pDmy] || {}).n >= 2;
+      const sp = spawns || (pCache || e.checked || (wx.spawnEmpty || {})[pDmy]
+        ? '<div class="empty" style="padding:14px 0 4px"><p>No special spawns listed for this weather</p></div>'
+        : failed
+        ? '<div class="empty" style="padding:14px 0 4px"><p>Spawn list unavailable right now</p><button type="button" data-wxcal-retry="' + pDmy + '" style="margin-top:8px;font:600 0.72rem var(--mono);color:var(--gold-text);padding:6px 10px">Tap to retry</button></div>'
+        : '<div class="empty" style="padding:14px 0 4px"><p>Loading spawn list…</p></div>');
+      body = `<div style="padding:4px 14px 14px">
+        <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px">
+          <div style="padding:8px 10px;border-radius:10px;background:var(--s2)"><div style="font:600 0.55rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Time</div><div style="font-size:0.78rem;font-weight:600;margin-top:3px">${allDay ? "All day" : fmtTimeInTz(e.startMs) + "–" + fmtTimeInTz(e.endMs)}</div></div>
+          <div style="padding:8px 10px;border-radius:10px;background:var(--s2)"><div style="font:600 0.55rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Lasts</div><div style="font-size:0.78rem;font-weight:600;margin-top:3px">${dur}</div></div>
+          <div style="padding:8px 10px;border-radius:10px;background:var(--s2)"><div style="font:600 0.55rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Status</div><div style="font-size:0.78rem;font-weight:600;margin-top:3px;color:${live ? "var(--green)" : "var(--ink)"}" data-wxcal-cd="${i}">${done ? "Ended" : live ? "Live" : "Upcoming"}</div></div>
+        </div>
+        <div style="font-family:var(--mono);font-size:0.66rem;color:var(--soft);margin-top:8px">${status}</div>
+        <div class="kicker" style="margin-top:14px;margin-bottom:0">${done ? "Appeared" : live ? "Appearing now" : "Will appear"}</div>
+        ${sp}
+      </div>`;
+    }
+    return `<div style="border-radius:16px;background:var(--s1);border:1px solid ${open ? m2.c + "66" : "var(--line)"};overflow:hidden">
+      <button class="wx-event" data-wxcal="${key}" type="button" style="width:100%;text-align:left;border:0;border-radius:0;background:transparent">
+        <span class="rail" style="background:${m2.c}"></span><img src="${WICON[e.vi]||BLANK}" alt=""><span class="wx-event-name">${m2.en}</span><span class="wx-event-window">${win}</span>
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="flex-shrink:0;margin-left:6px;color:var(--muted);transition:transform .2s;transform:rotate(${open ? 180 : 0}deg)"><path d="M6 9l6 6 6-6"/></svg>
+      </button>${body}</div>`;
   }).join("");
+  // Fetch the opened day's spawns: throttled per day (20s after a failure), max 2 tries, then a tap-to-retry message
+  wx.calFail = wx.calFail || {};
+  const cf = pDmy ? wx.calFail[pDmy] : null;
+  const openVi = state.wxCalOpen ? state.wxCalOpen.split("|")[2] : null;
+  if (state.wxCalOpen && pDmy && state.wxCalOpen.startsWith(pDmy + "|") && !pCache && !(wx.spawnEmpty || {})[pDmy] && !wx.typeSpawns[openVi]
+      && wx.calSpawnBusy !== pDmy && !(cf && (cf.n >= 2 || Date.now() - cf.at < 20000))) {
+    wx.calSpawnBusy = pDmy;
+    wx.fetchSpawns(pDmy, true)
+      .catch(() => { const c = wx.calFail[pDmy] || { n: 0 }; wx.calFail[pDmy] = { n: c.n + 1, at: Date.now() }; })
+      .then(() => { wx.calSpawnBusy = null; if (state.view === "weather") renderWeather(); });
+  }
 
   // Find
   document.getElementById("wxTypeChips").innerHTML = WORDER.map(vi => {
@@ -2719,8 +3140,92 @@ const THEMES = [
   { id: "espeon",   name: "Espeon",   c: "#b98ae0", mon: 196 },
   { id: "sylveon",  name: "Sylveon",  c: "#ff9dc2", mon: 700 },
   { id: "umbreon",  name: "Umbreon", c: "#4a4a4f", mon: 197 },
-  { id: "rgb",      name: "RGB",      c: null, mon: 137, animated: true }
+  { id: "daily",    name: "Today's legendary", c: null, mon: null, daily: true }
 ];
+/* Daily theme: accent comes from today's legendary artwork (falls back to its type colour) */
+function dailyName() {
+  // Same "today" as the Board hero card, so the accent always matches the legendary shown there
+  const n = new Date(), e = entryFor(n.getFullYear(), n.getMonth(), n.getDate());
+  return e ? e.name : null;
+}
+function hexToRgb(h) { const n = parseInt(h.slice(1), 16); return [n >> 16 & 255, n >> 8 & 255, n & 255]; }
+function rgbToHsl(r, g, b) {
+  r /= 255; g /= 255; b /= 255;
+  const mx = Math.max(r, g, b), mn = Math.min(r, g, b), l = (mx + mn) / 2;
+  if (mx === mn) return [0, 0, l];
+  const d = mx - mn, s = l > 0.5 ? d / (2 - mx - mn) : d / (mx + mn);
+  const h = mx === r ? (g - b) / d + (g < b ? 6 : 0) : mx === g ? (b - r) / d + 2 : (r - g) / d + 4;
+  return [h * 60, s, l];
+}
+/* OKLab helpers: keep the artwork's real hue + chroma, normalise only perceived lightness */
+const s2l = c => (c /= 255) <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+const l2s = c => Math.round(255 * Math.min(1, Math.max(0, c <= 0.0031308 ? 12.92 * c : 1.055 * Math.pow(c, 1 / 2.4) - 0.055)));
+function toOklab(r, g, b) {
+  r = s2l(r); g = s2l(g); b = s2l(b);
+  const l = Math.cbrt(0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b);
+  const m = Math.cbrt(0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b);
+  const s = Math.cbrt(0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b);
+  return [0.2104542553 * l + 0.7936177850 * m - 0.0040720468 * s, 1.9779984951 * l - 2.4285922050 * m + 0.4505937099 * s, 0.0259040371 * l + 0.7827717662 * m - 0.8086757660 * s];
+}
+function oklabToLinear(L, A, B) {
+  const l = (L + 0.3963377774 * A + 0.2158037573 * B) ** 3, m = (L - 0.1055613458 * A - 0.0638541728 * B) ** 3, s = (L - 0.0894841775 * A - 1.2914855480 * B) ** 3;
+  return [4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s, -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s, -0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * s];
+}
+function tuneAccent(r, g, b) {
+  const [L0, A, B] = toOklab(r, g, b);
+  const h = Math.atan2(B, A);
+  let C = Math.min(0.22, Math.max(0.1, Math.hypot(A, B) * 1.1));
+  const L = Math.min(0.8, Math.max(0.66, 0.6 + 0.25 * L0));
+  let lin;
+  for (let k = 0; k < 30; k++) { lin = oklabToLinear(L, C * Math.cos(h), C * Math.sin(h)); if (lin.every(v => v >= -0.001 && v <= 1.001)) break; C *= 0.94; }
+  return "#" + lin.map(l2s).map(v => v.toString(16).padStart(2, "0")).join("");
+}
+function typeAccent(name) { const t = (pokemonTypes[name] || [])[0]; const c = typeColors[t] || "#ef6a2b"; return tuneAccent(...hexToRgb(c)); }
+function artAccent(src) {
+  return new Promise(res => {
+    const img = new Image(); img.crossOrigin = "anonymous";
+    img.onload = () => {
+      try {
+        const cv = document.createElement("canvas"); cv.width = cv.height = 64;
+        const cx = cv.getContext("2d"); cx.drawImage(img, 0, 0, 64, 64);
+        const px = cx.getImageData(0, 0, 64, 64).data, bins = Array.from({ length: 36 }, () => ({ w: 0, a: 0, b: 0, l: 0 }));
+        for (let i = 0; i < px.length; i += 4) {
+          if (px[i + 3] < 200) continue;
+          const [L, A, B] = toOklab(px[i], px[i + 1], px[i + 2]);
+          const C = Math.hypot(A, B);
+          if (C < 0.045 || L < 0.22) continue;
+          const deg = (Math.atan2(B, A) * 180 / Math.PI + 360) % 360, bn = bins[Math.floor(deg / 10) % 36], w = C * C;
+          bn.w += w; bn.a += A * w; bn.b += B * w; bn.l += L * w;
+        }
+        /* merge each bin with its neighbours so one hue family wins, then use that family's real average colour */
+        let best = null, bestW = 0;
+        bins.forEach((bn, i) => { const w = bn.w + 0.5 * (bins[(i + 35) % 36].w + bins[(i + 1) % 36].w); if (w > bestW) { bestW = w; best = bn; } });
+        if (!best || best.w < 0.05) return res(null);
+        const lin = oklabToLinear(best.l / best.w, best.a / best.w, best.b / best.w).map(l2s);
+        res(tuneAccent(lin[0], lin[1], lin[2]));
+      } catch (e) { res(null); }
+    };
+    img.onerror = () => res(null);
+    img.src = src;
+  });
+}
+let dailyFor = null;
+async function applyDaily(force) {
+  const name = dailyName();
+  if (!name || (!force && name === dailyFor)) return;
+  dailyFor = name;
+  let c = null;
+  try { const s = JSON.parse(localStorage.getItem("lh_daily_c2") || "null"); if (s && s.name === name) c = s.c; } catch (e) {}
+  if (!c) { const src = sprite(name); c = (src !== BLANK && await artAccent(src)) || typeAccent(name); }
+  try { localStorage.setItem("lh_daily_c2", JSON.stringify({ name, c })); } catch (e) {}
+  if (curTheme !== "daily") return;
+  const [r, g, b] = hexToRgb(c), root = document.documentElement;
+  root.style.setProperty("--gold", c);
+  root.style.setProperty("--gold-rgb", r + "," + g + "," + b);
+  const dot = document.querySelector('.theme-row[data-theme="daily"] .theme-dot'); if (dot) dot.style.background = c;
+  const mon = document.getElementById("abMon"); if (mon) mon.src = sprite(name);
+}
+setInterval(() => { if (curTheme === "daily") applyDaily(); }, 60000);
 const TZ_DATA = "HK|Hong Kong (Server)|Asia/Hong_Kong\nAF|Afghanistan|Asia/Kabul\nAX|Åland Islands|Europe/Mariehamn\nAL|Albania|Europe/Tirane\nDZ|Algeria|Africa/Algiers\nAD|Andorra|Europe/Andorra\nAO|Angola|Africa/Luanda\nAI|Anguilla|America/Anguilla\nAG|Antigua & Barbuda|America/Antigua\nAR|Argentina|America/Argentina/Buenos_Aires\nAM|Armenia|Asia/Yerevan\nAW|Aruba|America/Aruba\nAU|Australia (Brisbane)|Australia/Brisbane\nAU|Australia (Broken Hill)|Australia/Broken_Hill\nAU|Australia (Darwin)|Australia/Darwin\nAU|Australia (Eucla)|Australia/Eucla\nAU|Australia (Lord Howe)|Australia/Lord_Howe\nAU|Australia (Macquarie)|Antarctica/Macquarie\nAU|Australia (Perth)|Australia/Perth\nAT|Austria|Europe/Vienna\nAZ|Azerbaijan|Asia/Baku\nBS|Bahamas|America/Nassau\nBH|Bahrain|Asia/Bahrain\nBD|Bangladesh|Asia/Dhaka\nBB|Barbados|America/Barbados\nBY|Belarus|Europe/Minsk\nBE|Belgium|Europe/Brussels\nBZ|Belize|America/Belize\nBJ|Benin|Africa/Porto-Novo\nBM|Bermuda|Atlantic/Bermuda\nBT|Bhutan|Asia/Thimphu\nBO|Bolivia|America/La_Paz\nBA|Bosnia & Herzegovina|Europe/Sarajevo\nBW|Botswana|Africa/Gaborone\nBR|Brazil (Belem)|America/Belem\nBR|Brazil (Campo Grande)|America/Campo_Grande\nBR|Brazil (Eirunepe)|America/Eirunepe\nBR|Brazil (Noronha)|America/Noronha\nIO|British Indian Ocean Territory|Indian/Chagos\nBN|Brunei|Asia/Brunei\nBG|Bulgaria|Europe/Sofia\nBF|Burkina Faso|Africa/Ouagadougou\nBI|Burundi|Africa/Bujumbura\nKH|Cambodia|Asia/Phnom_Penh\nCM|Cameroon|Africa/Douala\nCA|Canada (Atikokan)|America/Atikokan\nCA|Canada (Blanc-Sablon)|America/Blanc-Sablon\nCA|Canada (Creston)|America/Creston\nCA|Canada (Edmonton)|America/Edmonton\nCA|Canada (Halifax)|America/Halifax\nCA|Canada (Regina)|America/Regina\nCA|Canada (St Johns)|America/St_Johns\nCA|Canada (Toronto)|America/Toronto\nCA|Canada (Vancouver)|America/Vancouver\nCA|Canada (Winnipeg)|America/Winnipeg\nCV|Cape Verde|Atlantic/Cape_Verde\nBQ|Caribbean NL|America/Kralendijk\nKY|Cayman Islands|America/Cayman\nCF|Central African Rep.|Africa/Bangui\nTD|Chad|Africa/Ndjamena\nCL|Chile (Coyhaique)|America/Coyhaique\nCL|Chile (Easter)|Pacific/Easter\nCL|Chile (Santiago)|America/Santiago\nCN|China (Shanghai)|Asia/Shanghai\nCN|China (Urumqi)|Asia/Urumqi\nCX|Christmas Island|Indian/Christmas\nCC|Cocos (Keeling) Islands|Indian/Cocos\nCO|Colombia|America/Bogota\nKM|Comoros|Indian/Comoro\nCG|Congo|Africa/Brazzaville\nCK|Cook Islands|Pacific/Rarotonga\nCR|Costa Rica|America/Costa_Rica\nHR|Croatia|Europe/Zagreb\nCU|Cuba|America/Havana\nCW|Curaçao|America/Curacao\nCY|Cyprus|Asia/Nicosia\nCZ|Czech Republic|Europe/Prague\nDK|Denmark|Europe/Copenhagen\nDJ|Djibouti|Africa/Djibouti\nDM|Dominica|America/Dominica\nDO|Dominican Republic|America/Santo_Domingo\nCD|DR Congo (Kinshasa)|Africa/Kinshasa\nCD|DR Congo (Lubumbashi)|Africa/Lubumbashi\nEC|Ecuador (Galapagos)|Pacific/Galapagos\nEC|Ecuador (Guayaquil)|America/Guayaquil\nEG|Egypt|Africa/Cairo\nSV|El Salvador|America/El_Salvador\nGQ|Equatorial Guinea|Africa/Malabo\nER|Eritrea|Africa/Asmara\nEE|Estonia|Europe/Tallinn\nSZ|Eswatini|Africa/Mbabane\nET|Ethiopia|Africa/Addis_Ababa\nFK|Falkland Islands|Atlantic/Stanley\nFO|Faroe Islands|Atlantic/Faroe\nFJ|Fiji|Pacific/Fiji\nFI|Finland|Europe/Helsinki\nFR|France|Europe/Paris\nGF|French Guiana|America/Cayenne\nPF|French Polynesia (Gambier)|Pacific/Gambier\nPF|French Polynesia (Marquesas)|Pacific/Marquesas\nPF|French Polynesia (Tahiti)|Pacific/Tahiti\nTF|French S. Terr.|Indian/Kerguelen\nGA|Gabon|Africa/Libreville\nGM|Gambia|Africa/Banjul\nGE|Georgia|Asia/Tbilisi\nDE|Germany|Europe/Berlin\nGH|Ghana|Africa/Accra\nGI|Gibraltar|Europe/Gibraltar\nGR|Greece|Europe/Athens\nGL|Greenland (Danmarkshavn)|America/Danmarkshavn\nGL|Greenland (Nuuk)|America/Nuuk\nGL|Greenland (Thule)|America/Thule\nGD|Grenada|America/Grenada\nGP|Guadeloupe|America/Guadeloupe\nGU|Guam|Pacific/Guam\nGT|Guatemala|America/Guatemala\nGG|Guernsey|Europe/Guernsey\nGN|Guinea|Africa/Conakry\nGW|Guinea-Bissau|Africa/Bissau\nGY|Guyana|America/Guyana\nHT|Haiti|America/Port-au-Prince\nHN|Honduras|America/Tegucigalpa\nHU|Hungary|Europe/Budapest\nIS|Iceland|Atlantic/Reykjavik\nIN|India|Asia/Kolkata\nID|Indonesia (Jakarta)|Asia/Jakarta\nID|Indonesia (Jayapura)|Asia/Jayapura\nID|Indonesia (Makassar)|Asia/Makassar\nIR|Iran|Asia/Tehran\nIQ|Iraq|Asia/Baghdad\nIE|Ireland|Europe/Dublin\nIM|Isle of Man|Europe/Isle_of_Man\nIL|Israel|Asia/Jerusalem\nIT|Italy|Europe/Rome\nCI|Ivory Coast|Africa/Abidjan\nJM|Jamaica|America/Jamaica\nJP|Japan|Asia/Tokyo\nJE|Jersey|Europe/Jersey\nJO|Jordan|Asia/Amman\nKZ|Kazakhstan|Asia/Almaty\nKE|Kenya|Africa/Nairobi\nKI|Kiribati (Kanton)|Pacific/Kanton\nKI|Kiribati (Kiritimati)|Pacific/Kiritimati\nKI|Kiribati (Tarawa)|Pacific/Tarawa\nKW|Kuwait|Asia/Kuwait\nKG|Kyrgyzstan|Asia/Bishkek\nLA|Laos|Asia/Vientiane\nLV|Latvia|Europe/Riga\nLB|Lebanon|Asia/Beirut\nLS|Lesotho|Africa/Maseru\nLR|Liberia|Africa/Monrovia\nLY|Libya|Africa/Tripoli\nLI|Liechtenstein|Europe/Vaduz\nLT|Lithuania|Europe/Vilnius\nLU|Luxembourg|Europe/Luxembourg\nMO|Macau|Asia/Macau\nMG|Madagascar|Indian/Antananarivo\nMW|Malawi|Africa/Blantyre\nMY|Malaysia|Asia/Kuala_Lumpur\nMV|Maldives|Indian/Maldives\nML|Mali|Africa/Bamako\nMT|Malta|Europe/Malta\nMH|Marshall Islands|Pacific/Majuro\nMQ|Martinique|America/Martinique\nMR|Mauritania|Africa/Nouakchott\nMU|Mauritius|Indian/Mauritius\nYT|Mayotte|Indian/Mayotte\nMX|Mexico (Cancun)|America/Cancun\nMX|Mexico (Ciudad Juarez)|America/Ciudad_Juarez\nMX|Mexico (Matamoros)|America/Matamoros\nMX|Mexico (Mazatlan)|America/Mazatlan\nMX|Mexico (Mexico City)|America/Mexico_City\nMX|Mexico (Tijuana)|America/Tijuana\nFM|Micronesia (Chuuk)|Pacific/Chuuk\nFM|Micronesia (Pohnpei)|Pacific/Pohnpei\nMD|Moldova|Europe/Chisinau\nMC|Monaco|Europe/Monaco\nMN|Mongolia (Hovd)|Asia/Hovd\nMN|Mongolia (Ulaanbaatar)|Asia/Ulaanbaatar\nME|Montenegro|Europe/Podgorica\nMS|Montserrat|America/Montserrat\nMA|Morocco|Africa/Casablanca\nMZ|Mozambique|Africa/Maputo\nMM|Myanmar (Burma)|Asia/Yangon\nNA|Namibia|Africa/Windhoek\nNR|Nauru|Pacific/Nauru\nNP|Nepal|Asia/Kathmandu\nNL|Netherlands|Europe/Amsterdam\nNC|New Caledonia|Pacific/Noumea\nNZ|New Zealand (Auckland)|Pacific/Auckland\nNZ|New Zealand (Chatham)|Pacific/Chatham\nNI|Nicaragua|America/Managua\nNE|Niger|Africa/Niamey\nNG|Nigeria|Africa/Lagos\nNU|Niue|Pacific/Niue\nNF|Norfolk Island|Pacific/Norfolk\nKP|North Korea|Asia/Pyongyang\nMK|North Macedonia|Europe/Skopje\nMP|Northern Mariana Islands|Pacific/Saipan\nNO|Norway|Europe/Oslo\nOM|Oman|Asia/Muscat\nPK|Pakistan|Asia/Karachi\nPW|Palau|Pacific/Palau\nPS|Palestine|Asia/Gaza\nPA|Panama|America/Panama\nPG|Papua New Guinea (Bougainville)|Pacific/Bougainville\nPG|Papua New Guinea (Port Moresby)|Pacific/Port_Moresby\nPY|Paraguay|America/Asuncion\nPE|Peru|America/Lima\nPH|Philippines|Asia/Manila\nPN|Pitcairn|Pacific/Pitcairn\nPL|Poland|Europe/Warsaw\nPT|Portugal (Azores)|Atlantic/Azores\nPT|Portugal (Lisbon)|Europe/Lisbon\nPR|Puerto Rico|America/Puerto_Rico\nQA|Qatar|Asia/Qatar\nRE|Réunion|Indian/Reunion\nRO|Romania|Europe/Bucharest\nRU|Russia (Astrakhan)|Europe/Astrakhan\nRU|Russia (Chita)|Asia/Chita\nRU|Russia (Irkutsk)|Asia/Irkutsk\nRU|Russia (Kaliningrad)|Europe/Kaliningrad\nRU|Russia (Kamchatka)|Asia/Kamchatka\nRU|Russia (Magadan)|Asia/Magadan\nRU|Russia (Moscow)|Europe/Moscow\nRU|Russia (Novosibirsk)|Asia/Novosibirsk\nRU|Russia (Omsk)|Asia/Omsk\nRU|Russia (Vladivostok)|Asia/Vladivostok\nRU|Russia (Yekaterinburg)|Asia/Yekaterinburg\nRW|Rwanda|Africa/Kigali\nAS|Samoa (American)|Pacific/Pago_Pago\nWS|Samoa (western)|Pacific/Apia\nSM|San Marino|Europe/San_Marino\nST|Sao Tome & Principe|Africa/Sao_Tome\nSA|Saudi Arabia|Asia/Riyadh\nSN|Senegal|Africa/Dakar\nRS|Serbia|Europe/Belgrade\nSC|Seychelles|Indian/Mahe\nSL|Sierra Leone|Africa/Freetown\nSG|Singapore|Asia/Singapore\nSK|Slovakia|Europe/Bratislava\nSI|Slovenia|Europe/Ljubljana\nSB|Solomon Islands|Pacific/Guadalcanal\nSO|Somalia|Africa/Mogadishu\nZA|South Africa|Africa/Johannesburg\nGS|South Georgia & the South Sandwich Islands|Atlantic/South_Georgia\nKR|South Korea|Asia/Seoul\nSS|South Sudan|Africa/Juba\nES|Spain (Canary)|Atlantic/Canary\nES|Spain (Madrid)|Europe/Madrid\nLK|Sri Lanka|Asia/Colombo\nBL|St Barthelemy|America/St_Barthelemy\nSH|St Helena|Atlantic/St_Helena\nKN|St Kitts & Nevis|America/St_Kitts\nLC|St Lucia|America/St_Lucia\nSX|St Maarten (Dutch)|America/Lower_Princes\nMF|St Martin (French)|America/Marigot\nPM|St Pierre & Miquelon|America/Miquelon\nVC|St Vincent|America/St_Vincent\nSD|Sudan|Africa/Khartoum\nSR|Suriname|America/Paramaribo\nSJ|Svalbard & Jan Mayen|Arctic/Longyearbyen\nSE|Sweden|Europe/Stockholm\nCH|Switzerland|Europe/Zurich\nSY|Syria|Asia/Damascus\nTW|Taiwan|Asia/Taipei\nTJ|Tajikistan|Asia/Dushanbe\nTZ|Tanzania|Africa/Dar_es_Salaam\nTH|Thailand|Asia/Bangkok\nTL|Timor-Leste|Asia/Dili\nTG|Togo|Africa/Lome\nTK|Tokelau|Pacific/Fakaofo\nTO|Tonga|Pacific/Tongatapu\nTT|Trinidad & Tobago|America/Port_of_Spain\nTN|Tunisia|Africa/Tunis\nTR|Turkey|Europe/Istanbul\nTM|Turkmenistan|Asia/Ashgabat\nTC|Turks & Caicos Is|America/Grand_Turk\nTV|Tuvalu|Pacific/Funafuti\nUG|Uganda|Africa/Kampala\nUA|Ukraine (Kyiv)|Europe/Kyiv\nUA|Ukraine (Simferopol)|Europe/Simferopol\nAE|United Arab Emirates|Asia/Dubai\nGB|United Kingdom|Europe/London\nUS|United States (Adak)|America/Adak\nUS|United States (Anchorage)|America/Anchorage\nUS|United States (Chicago)|America/Chicago\nUS|United States (Denver)|America/Denver\nUS|United States (Honolulu)|Pacific/Honolulu\nUS|United States (Los Angeles)|America/Los_Angeles\nUS|United States (New York)|America/New_York\nUS|United States (Phoenix)|America/Phoenix\nUY|Uruguay|America/Montevideo\nUM|US minor outlying islands (Midway)|Pacific/Midway\nUM|US minor outlying islands (Wake)|Pacific/Wake\nUZ|Uzbekistan|Asia/Samarkand\nVU|Vanuatu|Pacific/Efate\nVA|Vatican City|Europe/Vatican\nVE|Venezuela|America/Caracas\nVN|Vietnam|Asia/Ho_Chi_Minh\nVG|Virgin Islands (UK)|America/Tortola\nVI|Virgin Islands (US)|America/St_Thomas\nWF|Wallis & Futuna|Pacific/Wallis\nEH|Western Sahara|Africa/El_Aaiun\nYE|Yemen|Asia/Aden\nZM|Zambia|Africa/Lusaka\nZW|Zimbabwe|Africa/Harare\nUN|UTC|UTC";
 const TZ_ABBR = { "Asia/Hong_Kong":"HKT","Asia/Ho_Chi_Minh":"ICT","Asia/Kolkata":"IST","Asia/Jakarta":"WIB","Asia/Makassar":"WITA","Asia/Jayapura":"WIT","Asia/Manila":"PHT","Asia/Bangkok":"ICT","Asia/Kuala_Lumpur":"MYT","Asia/Singapore":"SGT","Asia/Karachi":"PKT","Asia/Dhaka":"BST","Asia/Kathmandu":"NPT","Asia/Yangon":"MMT","Asia/Tokyo":"JST","Asia/Seoul":"KST","Asia/Shanghai":"CST","UTC":"UTC" };
 const TZ_LEGACY = { hkt:"Asia/Hong_Kong", ict:"Asia/Ho_Chi_Minh", ist:"Asia/Kolkata", wib:"Asia/Jakarta", wita:"Asia/Makassar", wit:"Asia/Jayapura", pht:"Asia/Manila", tha:"Asia/Bangkok", myt:"Asia/Kuala_Lumpur", sgt:"Asia/Singapore", pkt:"Asia/Karachi", bst:"Asia/Dhaka", npt:"Asia/Kathmandu", mmt:"Asia/Yangon", jst:"Asia/Tokyo", kst:"Asia/Seoul", cst:"Asia/Shanghai", utc:"UTC" };
@@ -2794,21 +3299,22 @@ function startRgbCycle() {
 function applyTheme(id) {
   curTheme = id;
   stopRgbCycle();
-  if (id === "orange") document.documentElement.removeAttribute("data-theme");
+  if (id === "orange" || id === "daily") document.documentElement.removeAttribute("data-theme");
   else document.documentElement.setAttribute("data-theme", id);
   if (id === "rgb") startRgbCycle();
   try { localStorage.setItem("lh_theme", id); } catch (e) {}
-  document.querySelectorAll(".theme-row").forEach(r => r.classList.toggle("on", r.dataset.theme === id));
+  document.querySelectorAll(".theme-row[data-theme]").forEach(r => r.classList.toggle("on", r.dataset.theme === id));
   const t = THEMES.find(x => x.id === id) || THEMES[0], mon = document.getElementById("abMon");
+  if (id === "daily") { applyDaily(true); return; }
   if (mon) mon.src = ART_3D + t.mon + ".png";
 }
 document.getElementById("themeList").innerHTML = THEMES.map(t => `
   <button class="theme-row" data-theme="${t.id}" type="button">
-    <span class="theme-dot${t.animated ? " rgb-dot" : ""}"${t.c ? ` style="background:${t.c}"` : ""}></span>
-    <span class="theme-name">${t.name}</span>
+    <span class="theme-dot${t.animated ? " rgb-dot" : ""}"${t.c ? ` style="background:${t.c}"` : t.daily ? ` style="background:conic-gradient(#f85888,#78c850,#6890f0,#f8d030,#f85888)"` : ""}></span>
+    <span class="theme-name">${t.name}${t.daily ? `<span style="display:block;font-family:var(--mono);font-size:0.58rem;color:var(--muted);font-weight:500;margin-top:2px">Changes daily · ${dailyName() || ""}</span>` : ""}</span>
     <svg class="theme-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
   </button>`).join("");
-document.querySelectorAll(".theme-row").forEach(r => r.addEventListener("click", () => applyTheme(r.dataset.theme)));
+document.querySelectorAll(".theme-row[data-theme]").forEach(r => r.addEventListener("click", () => applyTheme(r.dataset.theme)));
 applyTheme(curTheme);
 function renderCountryList(q) {
   q = (q || "").trim().toLowerCase();
@@ -2840,20 +3346,71 @@ document.getElementById("countryList").addEventListener("click", e => {
 });
 document.getElementById("countrySearch").addEventListener("input", e => renderCountryList(e.target.value));
 applyCountry(curCountry);
-/* Floating tips — theme/country + menu; staggered show, then fade */
+/* First-visit coach marks: Pokéball → clock → menu, one at a time */
 (function () {
-  const tip = document.getElementById("themeHint");
-  const menuTip = document.getElementById("menuHint");
-  const show = el => { if (el) requestAnimationFrame(() => el.classList.add("show")); };
-  const hide = el => {
-    if (!el) return;
-    el.classList.remove("show");
-    setTimeout(() => { if (el.parentNode) el.remove(); }, 420);
+  const KEY = "plh_coach_v1";
+  const header = document.querySelector(".header"), sc = document.getElementById("coachScrim");
+  const steps = [["tipTheme","btnMenu"],["tipClock","clocksBox"],["tipMenu","btnSide"]]
+    .map(([t, g]) => ({ tip: document.getElementById(t), target: document.getElementById(g) }))
+    .filter(s => s.tip && s.target);
+  const cleanup = () => { steps.forEach(s => s.tip.remove()); if (sc) sc.remove(); };
+  /* 1st launch: mandatory (no Skip). Later launches: Skip + "Don't show again" */
+  const HIDE = "plh_coach_hide";
+  let runs = 0, hide = false;
+  try { runs = Number(localStorage.getItem(KEY)) || 0; hide = localStorage.getItem(HIDE) === "1"; } catch (e) {}
+  if (hide || !header || !sc || !steps.length) return cleanup();
+  const first = runs === 0;
+  let dontShow = false;
+  steps.forEach(s => {
+    if (first) { const sk = s.tip.querySelector(".coach-skip"); if (sk) sk.replaceWith(document.createElement("span")); return; }
+    const lb = document.createElement("label"); lb.className = "coach-dont";
+    lb.innerHTML = '<input type="checkbox"><span>Don\'t show this again</span>';
+    s.tip.querySelector(".coach-foot").before(lb);
+  });
+  const boxes = steps.map(s => s.tip.querySelector(".coach-dont input")).filter(Boolean);
+  boxes.forEach(b => b.addEventListener("change", () => { dontShow = b.checked; boxes.forEach(o => o.checked = dontShow); }));
+  const parts = Array.from(header.querySelectorAll(".brand-mark, .brand > div, #clocksBox, .header-right > .icon-btn"));
+  let i = -1, active = false;
+  const place = s => {
+    const hr = header.getBoundingClientRect(), r = s.target.getBoundingClientRect(), w = s.tip.offsetWidth;
+    const cx = r.left + r.width / 2 - hr.left;
+    const left = Math.max(12, Math.min(cx - w / 2, hr.width - w - 12));
+    s.tip.style.left = left + "px";
+    s.tip.style.top = (r.bottom - hr.top + 12) + "px";
+    s.tip.style.setProperty("--ax", (cx - left - 7) + "px");
   };
-  show(tip);
-  setTimeout(() => show(menuTip), 450);
-  setTimeout(() => hide(tip), 4200);
-  setTimeout(() => hide(menuTip), 4800);
+  const onResize = () => { if (steps[i]) place(steps[i]); };
+  function end() {
+    if (!active) return; active = false;
+    try { localStorage.setItem(KEY, String(runs + 1)); if (dontShow) localStorage.setItem(HIDE, "1"); } catch (e) {}
+    steps.forEach(s => s.tip.classList.remove("show"));
+    parts.forEach(p => p.classList.remove("coach-off", "coach-on"));
+    sc.classList.remove("on"); document.body.classList.remove("coaching");
+    window.removeEventListener("resize", onResize);
+    setTimeout(cleanup, 350);
+  }
+  function go(n) {
+    if (steps[i]) steps[i].tip.classList.remove("show");
+    i = n; if (i >= steps.length) return end();
+    const s = steps[i];
+    parts.forEach(p => { p.classList.toggle("coach-on", p === s.target); p.classList.toggle("coach-off", p !== s.target); });
+    place(s); s.tip.classList.add("show");
+  }
+  steps.forEach((s, n) => {
+    s.tip.querySelector(".coach-next").addEventListener("click", () => go(n + 1));
+    const skip = s.tip.querySelector(".coach-skip"); if (skip) skip.addEventListener("click", end);
+    if (!first) s.target.addEventListener("click", () => { if (active) end(); });
+  });
+  sc.addEventListener("click", () => go(i + 1));
+  window.addEventListener("resize", onResize);
+  setTimeout(function start() {
+    const ann = document.getElementById("annOverlay");
+    if (ann && ann.classList.contains("open")) {
+      const mo = new MutationObserver(() => { if (!ann.classList.contains("open")) { mo.disconnect(); setTimeout(start, 400); } });
+      return mo.observe(ann, { attributes: true, attributeFilter: ["class"] });
+    }
+    active = true; window.scrollTo(0, 0); document.body.classList.add("coaching"); sc.classList.add("on"); go(0);
+  }, 1800);
 })();
 const drawer = document.getElementById("drawer"), scrim = document.getElementById("scrim");
 function setDrawer(on, focus) {
@@ -2865,7 +3422,7 @@ function setDrawer(on, focus) {
   const isCountry = focus === "country";
   drawer.classList.toggle("country-focus", isCountry);
   const title = document.getElementById("drawerTitle");
-  if (title) title.textContent = isCountry ? "Country time" : "Themes & time";
+  if (title) title.textContent = isCountry ? "Country time" : "Themes";
   drawer.scrollTop = 0;
   drawer.classList.add("on");
   scrim.classList.add("on");
@@ -2970,7 +3527,7 @@ document.getElementById("statEvent").addEventListener("click", () => go("events"
 document.getElementById("statServer").addEventListener("click", () => go("server"));
 document.getElementById("weekStrip").addEventListener("click", e => { const c = e.target.closest("[data-name]"); if (c) openSheet(c.dataset.name); });
 document.getElementById("favList").addEventListener("click", e => { const c = e.target.closest("[data-name]"); if (c) openSheet(c.dataset.name); });
-document.getElementById("rotSearch").addEventListener("input", e => { state.q = e.target.value; renderRotation(); });
+document.getElementById("rotSearch").addEventListener("input", e => { state.qs[state.rotTab || "capsule"] = e.target.value; renderRotation(); });
 document.getElementById("favFilter").addEventListener("click", () => { state.favOnly = !state.favOnly; renderRotation(); });
 document.getElementById("rotPrev").addEventListener("click", () => { state.rotOffset--; renderRotation(); });
 document.getElementById("rotNext").addEventListener("click", () => { state.rotOffset++; renderRotation(); });
@@ -2987,6 +3544,7 @@ document.getElementById("rotBars").addEventListener("click", e => {
   if (c) openSheet(c.dataset.name);
 });
 document.getElementById("rotTabs").addEventListener("click", e => { const t = e.target.closest("[data-rottab]"); if (t) { state.rotTab = t.dataset.rottab; renderRotation(); } });
+document.getElementById("rotFlash").addEventListener("click", e => { const c = e.target.closest("[data-flset]"); if (c) { state.flashSel = Number(c.dataset.flset); renderFlash(); } });
 document.getElementById("rotViewSw").addEventListener("click", e => { const b = e.target.closest("[data-rotview]"); if (b) { state.rotView = b.dataset.rotview; renderRotation(); } });
 document.getElementById("hxOverlay").addEventListener("click", e => { if (e.target === e.currentTarget) document.getElementById("hxOverlay").classList.remove("open"); });
 document.getElementById("hxClose").addEventListener("click", () => document.getElementById("hxOverlay").classList.remove("open"));
@@ -3000,19 +3558,31 @@ document.getElementById("hxDayList").addEventListener("click", e => {
   document.getElementById("hxDayOverlay").classList.remove("open");
   openHappySheet(row, r.dataset.hxwith, Number(r.dataset.hxday));
 });
-document.getElementById("rotResults").addEventListener("click", e => { const r = e.target.closest("[data-name]"); if (r) openSheet(r.dataset.name); });
+document.getElementById("rotResults").addEventListener("click", e => {
+  const f = e.target.closest("[data-flr]");
+  if (f) { state.flashSel = Number(f.dataset.flr); state.qs.flash = ""; renderRotation(); return; }
+  const x = e.target.closest("[data-hxr]");
+  if (x) { const hit = rotHxHits[Number(x.dataset.hxr)]; if (hit) openHappySheet(hit.r, hit.with, hit.ms); return; }
+  const r = e.target.closest("[data-name]"); if (r) openSheet(r.dataset.name);
+});
 document.getElementById("wxTabs").addEventListener("click", e => { const t = e.target.closest("[data-wxtab]"); if (t) { state.wxTab = t.dataset.wxtab; renderWeather(); } });
 document.getElementById("wxTypeChips").addEventListener("click", e => {
   const c = e.target.closest("[data-wtype]");
   if (c) { state.wxType = state.wxType === c.dataset.wtype ? null : c.dataset.wtype; if (state.wxType && wx) wx.loadTypeYear(state.wxType); renderWeather(); }
 });
 document.getElementById("wxQuery").addEventListener("input", e => { state.wxQuery = e.target.value; renderWeather(); });
+document.getElementById("wxMonthRefresh").addEventListener("click", () => {
+  if (!wx || wx.monthRefreshing) return;
+  wx.refreshMonth(state.wxMonth, state.wxYear); renderWeather();
+});
 document.getElementById("wxMonthStatus").addEventListener("click", () => {
   if (!wx || wx.monthLoading) return;
   const count = wx.monthTypeCount ? wx.monthTypeCount(state.wxMonth, state.wxYear) : 0;
   if (count < 9) { wx.retryMonth(state.wxMonth, state.wxYear); renderWeather(); }
 });
 document.getElementById("wxMonthPrev").addEventListener("click", () => {
+  const hk = serverNow(), curM = hk.getMonth() + 1, curY = hk.getFullYear();
+  if ((state.wxYear || curY) * 12 + state.wxMonth <= curY * 12 + curM) return;
   if (state.wxMonth === 1) { state.wxMonth = 12; state.wxYear = (state.wxYear || new Date().getFullYear()) - 1; }
   else { state.wxMonth = state.wxMonth - 1; }
   state.wxDay = null;
@@ -3024,13 +3594,24 @@ document.getElementById("wxMonthNext").addEventListener("click", () => {
   state.wxDay = null;
   if (wx) wx.loadMonth(state.wxMonth, state.wxYear); renderWeather();
 });
+document.getElementById("wxPickedEvents").addEventListener("click", e => {
+  const r = e.target.closest("[data-wxcal-retry]");
+  if (r) { if (wx && wx.calFail) delete wx.calFail[r.dataset.wxcalRetry]; renderWeather(); return; }
+  const b = e.target.closest("[data-wxcal]");
+  if (b) { state.wxCalOpen = state.wxCalOpen === b.dataset.wxcal ? null : b.dataset.wxcal; renderWeather(); }
+});
 document.getElementById("wxCells").addEventListener("click", e => {
   const c = e.target.closest("[data-wxday]");
-  if (c) { state.wxDay = Number(c.dataset.wxday); renderWeather(); }
+  if (c) { state.wxDay = Number(c.dataset.wxday); state.wxCalOpen = null; renderWeather(); }
 });
 document.getElementById("wxDays").addEventListener("click", e => {
   const b = e.target.closest("[data-wx]");
-  if (b) { const [date, start, vi] = b.dataset.wx.split("|"); state.wxSel = { date, start, vi }; state.wxTab = "now"; renderWeather(); }
+  if (b) {
+    const [date, start, vi] = b.dataset.wx.split("|"); state.wxSel = { date, start, vi }; state.wxTab = "now"; renderWeather();
+    // Hero + its spawn list sit above the day list — bring them into view
+    const hero = document.getElementById("wxHero");
+    if (hero) window.scrollTo({ top: Math.max(0, hero.getBoundingClientRect().top + window.scrollY - 80), behavior: "smooth" });
+  }
 });
 document.getElementById("wxHits").addEventListener("click", e => {
   const b = e.target.closest("[data-wx]");
@@ -3133,7 +3714,9 @@ function openNotifModal() {
   const steps = document.getElementById("notifModalSteps");
   const cta = document.getElementById("notifModalCta");
 
+  if (!steps.dataset.orig) steps.dataset.orig = steps.innerHTML;
   if (s === "ios-not-installed") {
+    steps.innerHTML = steps.dataset.orig;
     title.textContent = "Get alerts on iPhone";
     sub.textContent = "Safari needs one extra step before it can send alerts. It only takes a moment:";
     steps.style.display = "flex";
@@ -3292,6 +3875,7 @@ function showAnnouncement(force) {
   if (!el) return;
   // Avoid stacking if already open
   if (el.classList.contains("open")) return;
+  if (document.body.classList.contains("coaching")) return;
   if (!force && annOpenOnce) return;
   annOpenOnce = true;
   el.classList.add("open");
