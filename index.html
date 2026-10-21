@@ -4118,6 +4118,18 @@ function hideAnnouncement(permanent) {
 })();
 
 
+// Re-check the permission reminder when the app is reopened and when its 3-day snooze expires.
+// This only shows an in-page reminder; the browser's permission prompt still requires a user tap.
+function refreshNotificationReminder() {
+  if (typeof updateNotifNudge === "function") updateNotifNudge();
+}
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "visible") refreshNotificationReminder();
+});
+window.addEventListener("pageshow", refreshNotificationReminder);
+setInterval(refreshNotificationReminder, 60 * 1000);
+
+
 initWeather();
 
 setInterval(() => {
