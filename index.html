@@ -3839,7 +3839,7 @@ function updateNotifNudge() {
   if (!box) return;
   const s = notifState();
   state.notif = (typeof Notification !== "undefined") ? Notification.permission : "default";
-  if (s === "granted" || s === "unsupported") { box.style.display = "none"; return; }
+  if (s === "granted") { box.style.display = "none"; return; }
   let snoozeUntil = 0;
   try { snoozeUntil = Number(localStorage.getItem(NUDGE_SNOOZE_KEY)) || 0; } catch (e) {}
   if (Date.now() < snoozeUntil) { box.style.display = "none"; return; }
@@ -3857,6 +3857,10 @@ function updateNotifNudge() {
       ? "Remove this from your Home Screen and add it again to reset."
       : "Turn them on in your phone's Settings → Apps → Pokeland Helper → Notifications.";
     btn.textContent = "Got it";
+  } else if (s === "unsupported") {
+    title.textContent = "Check Android notifications";
+    sub.textContent = "If alerts aren't working in the APK, open Android Settings → Apps → Pokeland Helper → Notifications. This screen can't request native APK permission itself.";
+    btn.textContent = "Got it";
   } else {
     title.textContent = "Turn on alerts";
     sub.textContent = "Get a heads-up before rare weather and events start.";
@@ -3866,7 +3870,7 @@ function updateNotifNudge() {
 document.getElementById("notifNudgeBtn").addEventListener("click", async () => {
   const s = notifState();
   if (s === "ios-not-installed") { openNotifModal(); return; }
-  if (s === "denied") {
+  if (s === "denied" || s === "unsupported") {
     try { localStorage.setItem(NUDGE_SNOOZE_KEY, String(Date.now() + 3 * 86400000)); } catch (e) {}
     updateNotifNudge();
     return;
