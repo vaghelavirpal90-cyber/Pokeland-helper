@@ -1342,12 +1342,21 @@ html.lg .cal-nav button:last-child::before { transform: scaleX(-1); }
       </div>
     </section>
     <section id="view-builds" class="hidden">
-      <div class="empty">
-        <div class="kicker gold" style="margin-bottom:10px">Pokemon Build</div>
-        <p style="font-size:1.05rem;font-weight:700;color:var(--soft);margin-top:0">Nature, items &amp; roles</p>
-        <p style="margin-top:6px">Per-Pokemon pages for Pokeland Legends: best nature and character (role), skill and awakening priority, held item and gem picks, vit and friendship targets, plus counters by type — for legendaries and key farm units.</p>
-        <a class="btn btn-primary mt-18" style="display:inline-flex;text-decoration:none;flex:0 0 auto" href="https://pokemon-guilde.pages.dev/" target="_blank" rel="noopener">Open Pokemon Build →</a>
+      <div class="empty" style="padding:18px 14px 14px">
+        <div class="kicker gold" style="margin-bottom:10px">POKÉMON GUIDE · LIVE</div>
+        <p style="font-size:1.25rem;font-weight:800;color:var(--ink);margin-top:0">Pokémon Guide — Legendary Hub</p>
+        <p style="margin-top:6px">Roles, items &amp; awakening picks — one legendary at a time.</p>
       </div>
+      <a href="https://pokemon-guilde.pages.dev/" target="_blank" rel="noopener" aria-label="Open Pokémon Guide website" style="display:block;position:relative;overflow:hidden;border:1px solid var(--line);border-radius:22px;background:#08090d;box-shadow:0 12px 32px #0005;text-decoration:none">
+        <div style="height:430px;overflow:hidden;position:relative;pointer-events:none">
+          <iframe title="Pokémon Guide live preview" src="https://pokemon-guilde.pages.dev/" loading="lazy" tabindex="-1" aria-hidden="true" style="display:block;width:100%;height:620px;border:0;pointer-events:none;background:#08090d"></iframe>
+        </div>
+        <div style="position:absolute;inset:auto 0 0;padding:36px 18px 18px;background:linear-gradient(transparent,#08090df5 38%);display:flex;align-items:center;justify-content:space-between;gap:12px">
+          <span style="color:#f4f5fa;font-weight:800;font-size:.95rem">Tap to open full guide</span>
+          <span style="color:#ffc94d;font-weight:800;font-size:1.1rem">↗</span>
+        </div>
+      </a>
+      <p style="font-size:.78rem;color:var(--muted);text-align:center;margin:12px 0 0">Preview of the live website · tap anywhere to open</p>
     </section>
     <section id="view-teams" class="hidden">
       <div class="empty">
@@ -1498,16 +1507,15 @@ html.lg .cal-nav button:last-child::before { transform: scaleX(-1); }
         <span class="side-row-sub">Get Pokeland Legends</span>
       </span>
     </button>
-    <div class="side-label">Coming soon</div>
-    <button class="side-row is-soon" data-side="builds" type="button">
+    <button class="side-row" data-side="builds" type="button">
       <span class="side-row-ico">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H19v16H5.5A1.5 1.5 0 0 0 4 20.5z"/><path d="M4 17.5A1.5 1.5 0 0 1 5.5 16H19"/><path d="M8.5 7.5h6"/><path d="M8.5 11h4"/></svg>
       </span>
       <span>
-        <span class="side-row-title">Pokemon build</span>
+        <span class="side-row-title">Pokemon Guide</span>
         <span class="side-row-sub">Nature, items &amp; roles</span>
       </span>
-      <span class="side-soon">Soon</span>
+      <span class="side-soon" style="color:var(--gold);border-color:var(--gold)">LIVE</span>
     </button>
     <button class="side-row is-soon" data-side="teams" type="button">
       <span class="side-row-ico">
