@@ -1,6 +1,6 @@
 // Pokeland Helper — service worker
 // Bump CACHE_NAME whenever index.html changes to force an update.
-const CACHE_NAME = "pokeland-helper-v1";
+const CACHE_NAME = "pokeland-helper-v2";
 const CORE_ASSETS = [
   "./",
   "./index.html",
@@ -34,14 +34,16 @@ self.addEventListener("fetch", (event) => {
   if (request.method !== "GET") return;
 
   if (request.mode === "navigate") {
+    // wiki.html loads inside an iframe: cache it under its own key so it never replaces the app shell
+    const key = new URL(request.url).pathname.endsWith("/wiki.html") ? request : "./index.html";
     event.respondWith(
       fetch(request)
         .then((response) => {
           const copy = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put("./index.html", copy));
+          caches.open(CACHE_NAME).then((cache) => cache.put(key, copy));
           return response;
         })
-        .catch(() => caches.match("./index.html"))
+        .catch(() => caches.match(key))
     );
     return;
   }
