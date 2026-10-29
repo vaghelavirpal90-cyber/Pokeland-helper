@@ -4126,14 +4126,23 @@ function bindExternalLinks() {
   });
 }
 
-/* ── Required launch announcement: game/code first, community second ── */
+/* ── Gentle launch announcement: show at most once per 24 hours ── */
+const ANNOUNCEMENT_LAST_SHOWN_KEY = "pokelandHelperAnnouncementLastShown";
+const ANNOUNCEMENT_COOLDOWN_MS = 24 * 60 * 60 * 1000;
 let annOpenOnce = false;
 function showAnnouncement(force) {
   const el = document.getElementById("annOverlay");
   if (!el || el.classList.contains("open")) return;
   if (document.body.classList.contains("coaching")) return;
-  if (!force && annOpenOnce) return;
+  if (!force) {
+    try {
+      const lastShown = Number(localStorage.getItem(ANNOUNCEMENT_LAST_SHOWN_KEY) || 0);
+      if (Date.now() - lastShown < ANNOUNCEMENT_COOLDOWN_MS) return;
+    } catch (_) {}
+  }
+  if (annOpenOnce) return;
   annOpenOnce = true;
+  try { localStorage.setItem(ANNOUNCEMENT_LAST_SHOWN_KEY, String(Date.now())); } catch (_) {}
   const gamePage = document.getElementById("annGamePage");
   const communityPage = document.getElementById("annCommunityPage");
   if (gamePage) gamePage.hidden = false;
@@ -4185,19 +4194,10 @@ function hideAnnouncement() {
     }
     setTimeout(function () { copy.textContent = "Copy redeem code"; }, 1800);
   });
-  // No permanent opt-out. The announcement returns on app launch/resume.
+  // The announcement is not forced on every app resume; it appears at most daily.
   bindExternalLinks();
-  function scheduleShow(ms, force) { setTimeout(function () { showAnnouncement(!!force); }, ms); }
-  scheduleShow(600);
-  scheduleShow(1400);
-  window.addEventListener("load", function () { scheduleShow(500); });
-  window.addEventListener("pageshow", function (e) {
-    annOpenOnce = false;
-    scheduleShow(e.persisted ? 350 : 700, true);
-  });
-  document.addEventListener("visibilitychange", function () {
-    if (document.visibilityState === "visible") scheduleShow(400, true);
-  });
+  setTimeout(function () { showAnnouncement(false); }, 900);
+  window.addEventListener("pageshow", function () { showAnnouncement(false); });
 })();
 
 
