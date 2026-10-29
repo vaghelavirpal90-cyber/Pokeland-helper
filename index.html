@@ -382,7 +382,7 @@ body.coaching .header{z-index:55;background:transparent;backdrop-filter:none;-we
   box-shadow: 0 24px 60px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.04) inset;
   transform: translateY(18px) scale(0.97);
   transition: transform 0.32s cubic-bezier(0.32, 0.72, 0, 1);
-  position: relative; overflow: hidden;
+  position: relative; overflow-x: hidden; overflow-y: auto;
 }
 .ann-overlay.open .ann-card { transform: translateY(0) scale(1); }
 .ann-card::before {
@@ -1612,38 +1612,48 @@ html.lg .cal-nav button:last-child::before { transform: scaleX(-1); }
   
   <div class="ann-overlay" id="annOverlay" aria-hidden="true">
     <div class="ann-card" role="dialog" aria-modal="true" aria-labelledby="annTitle">
-      <div class="ann-icon-row">
-        <div class="ann-icons" aria-hidden="true">
-          <div class="ann-ico discord">
-            <svg viewBox="0 0 24 24" fill="#fff"><path d="M20.317 4.492c-1.53-.69-3.17-1.2-4.885-1.49a.075.075 0 0 0-.079.036c-.21.36-.444.83-.608 1.2a18.566 18.566 0 0 0-5.487 0 12.36 12.36 0 0 0-.617-1.2.077.077 0 0 0-.079-.037c-1.714.29-3.354.8-4.885 1.491a.07.07 0 0 0-.032.027C.533 9.09-.32 13.555.099 17.961a.08.08 0 0 0 .031.055 20.03 20.03 0 0 0 5.993 2.98.078.078 0 0 0 .084-.026 13.83 13.83 0 0 0 1.226-1.963.074.074 0 0 0-.041-.104 13.201 13.201 0 0 1-1.872-.878.075.075 0 0 1-.008-.125c.126-.093.252-.19.372-.287a.075.075 0 0 1 .078-.01c3.927 1.764 8.18 1.764 12.061 0a.075.075 0 0 1 .079.009c.12.098.246.195.373.288a.075.075 0 0 1-.006.125c-.598.344-1.22.635-1.873.877a.075.075 0 0 0-.041.105c.36.687.772 1.341 1.225 1.962a.077.077 0 0 0 .084.028 19.963 19.963 0 0 0 6.002-2.981.076.076 0 0 0 .032-.054c.5-5.094-.838-9.52-3.549-13.442a.06.06 0 0 0-.031-.028Zm-12.31 10.78c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.176 1.094 2.157 2.418 0 1.334-.956 2.42-2.157 2.42Zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.176 1.094 2.157 2.418 0 1.334-.947 2.42-2.157 2.42Z"/></svg>
-          </div>
-          <div class="ann-ico yt">
-            <svg viewBox="0 0 24 24" fill="#fff"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.8zM9.75 15.5v-7l6.5 3.5-6.5 3.5z"/></svg>
-          </div>
+      <section class="ann-page" id="annGamePage">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+          <div style="font-size:2rem" aria-hidden="true">🎮</div>
+          <span class="ann-badge"><span style="width:6px;height:6px;border-radius:50%;background:var(--gold-text)"></span> New Game</span>
         </div>
-        <span class="ann-badge"><span style="width:6px;height:6px;border-radius:50%;background:var(--gold-text)"></span> Community</span>
-      </div>
-      <h2 class="ann-title" id="annTitle">New Game: <span>Legends Revolution</span></h2>
-      <p class="ann-body">
-        Discover a new monster-catching adventure with F2P-friendly progression, daily events, faster battles, and rewards for active players.
-      </p>
-      <div style="position:relative;padding:12px;border-radius:14px;background:var(--s1);border:1px solid var(--gold-line);margin-bottom:14px">
-        <div style="font-size:.78rem;font-weight:700;margin-bottom:6px">✨ Game highlights</div>
-        <div style="font-size:.74rem;color:var(--soft);line-height:1.55">🌍 English, Spanish &amp; Portuguese · 🎁 VIP progression through gameplay · ⚡ ×10 battles and training · 🛒 Player Market · 🎡 Daily free Wheel spins + sign-up gift codes · 🎟️ Invite rewards · 🏆 Daily events</div>
-      </div>
-      <a class="btn btn-primary" id="annGameDownload" href="https://legendsrevolution.com.br/r/WH5T35" target="_blank" rel="noopener noreferrer" style="position:relative;width:100%;min-height:48px;margin-bottom:14px;text-decoration:none;display:flex;align-items:center;justify-content:center">🎮 Download Legends Revolution ↗</a>
-      <p class="ann-body" style="margin-bottom:10px">Also connect with the Pokeland Helper community:</p>
-      <div class="ann-actions">
-        <a class="btn ann-discord" id="annDiscord" href="https://discord.gg/tF6bVAvrn" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M20.317 4.492c-1.53-.69-3.17-1.2-4.885-1.49a.075.075 0 0 0-.079.036c-.21.36-.444.83-.608 1.2a18.566 18.566 0 0 0-5.487 0 12.36 12.36 0 0 0-.617-1.2.077.077 0 0 0-.079-.037c-1.714.29-3.354.8-4.885 1.491a.07.07 0 0 0-.032.027C.533 9.09-.32 13.555.099 17.961a.08.08 0 0 0 .031.055 20.03 20.03 0 0 0 5.993 2.98.078.078 0 0 0 .084-.026 13.83 13.83 0 0 0 1.226-1.963.074.074 0 0 0-.041-.104 13.201 13.201 0 0 1-1.872-.878.075.075 0 0 1-.008-.125c.126-.093.252-.19.372-.287a.075.075 0 0 1 .078-.01c3.927 1.764 8.18 1.764 12.061 0a.075.075 0 0 1 .079.009c.12.098.246.195.373.288a.075.075 0 0 1-.006.125c-.598.344-1.22.635-1.873.877a.075.075 0 0 0-.041.105c.36.687.772 1.341 1.225 1.962a.077.077 0 0 0 .084.028 19.963 19.963 0 0 0 6.002-2.981.076.076 0 0 0 .032-.054c.5-5.094-.838-9.52-3.549-13.442a.06.06 0 0 0-.031-.028Zm-12.31 10.78c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.176 1.094 2.157 2.418 0 1.334-.956 2.42-2.157 2.42Zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.176 1.094 2.157 2.418 0 1.334-.947 2.42-2.157 2.42Z"/></svg>
-          Join Discord group
-        </a>
-        <a class="btn ann-yt" id="annYoutube" href="https://www.youtube.com/@pokelandhelper" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.8zM9.75 15.5v-7l6.5 3.5-6.5 3.5z"/></svg>
-          Subscribe on YouTube
-        </a>
-        <button class="btn ann-close-btn" id="annClose" type="button">Continue to Pokeland Helper</button>
-      </div>
+        <h2 class="ann-title" id="annTitle">Legends <span>Revolution</span></h2>
+        <p class="ann-body">Discover a new monster-catching adventure with F2P-friendly progression, daily events, faster battles, and rewards for active players.</p>
+        <div style="position:relative;padding:12px;border-radius:14px;background:var(--s1);border:1px solid var(--gold-line);margin-bottom:14px">
+          <div style="font-size:.82rem;font-weight:700;margin-bottom:6px">✨ Game highlights</div>
+          <div style="font-size:.76rem;color:var(--soft);line-height:1.55">🌍 English, Spanish &amp; Portuguese<br>🎁 VIP progression through gameplay<br>⚡ ×10 battles and training<br>🛒 Player Market and Trainer Tokens<br>🎡 Daily free Wheel spins + sign-up gift codes<br>🎟️ Invite rewards · 🏆 Daily events</div>
+        </div>
+        <a class="btn btn-primary" id="annGameDownload" href="https://legendsrevolution.com.br/r/WH5T35" target="_blank" rel="noopener noreferrer" style="position:relative;width:100%;min-height:48px;margin-bottom:14px;text-decoration:none;display:flex;align-items:center;justify-content:center">🎮 Download Legends Revolution ↗</a>
+        <div style="position:relative;padding:14px;border-radius:14px;background:var(--s1);border:1px solid var(--gold-line);margin-bottom:14px">
+          <div style="font-size:.95rem;font-weight:700;margin-bottom:8px">🎁 Redeem Code</div>
+          <div style="font-family:var(--mono);font-size:1.03rem;font-weight:700;letter-spacing:.04em;color:var(--gold-text);overflow-wrap:anywhere;margin-bottom:10px">RBRNAAVT9DXXDQIG</div>
+          <div style="font-size:.78rem;color:var(--soft);line-height:1.55">
+            <strong style="color:var(--ink)">How to redeem in-game:</strong><br>
+            1. Log in using the same email and password as the website.<br>
+            2. Tap your portrait in the top-left corner.<br>
+            3. Open <strong style="color:var(--ink)">Settings</strong>.<br>
+            4. Tap <strong style="color:var(--ink)">Redeem Code</strong>.<br>
+            5. Enter the code without dashes and confirm.
+          </div>
+          <button class="btn" id="annCopyCode" type="button" style="width:100%;min-height:40px;margin-top:12px;border:1px solid var(--line-strong);background:var(--s2)">Copy redeem code</button>
+        </div>
+        <button class="btn btn-primary" id="annNextCommunity" type="button" style="width:100%;min-height:48px">Next: YouTube &amp; Discord →</button>
+        <p style="font-size:.7rem;color:var(--muted);text-align:center;margin-top:10px">Game announcement and redeem code</p>
+      </section>
+      <section class="ann-page" id="annCommunityPage" hidden>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+          <div style="font-size:2rem" aria-hidden="true">🌐</div>
+          <span class="ann-badge"><span style="width:6px;height:6px;border-radius:50%;background:var(--gold-text)"></span> Community</span>
+        </div>
+        <h2 class="ann-title">Stay connected with <span>Pokeland Helper</span></h2>
+        <p class="ann-body">Get updates, guides, events, tips, and help from the community.</p>
+        <div class="ann-actions">
+          <a class="btn ann-discord" id="annDiscord" href="https://discord.gg/tF6bVAvrn" target="_blank" rel="noopener noreferrer">Join Discord group</a>
+          <a class="btn ann-yt" id="annYoutube" href="https://www.youtube.com/@pokelandhelper" target="_blank" rel="noopener noreferrer">Subscribe on YouTube</a>
+          <button class="btn ann-close-btn" id="annClose" type="button">Continue to Pokeland Helper</button>
+          <button class="btn" id="annBackGame" type="button" style="min-height:40px;border:1px solid var(--line-strong);background:var(--s2)">← Back to game announcement</button>
+        </div>
+      </section>
     </div>
   </div>
 
@@ -4116,7 +4126,7 @@ function bindExternalLinks() {
   });
 }
 
-/* ── Required launch announcement: Legends Revolution + community links ── */
+/* ── Required launch announcement: game/code first, community second ── */
 let annOpenOnce = false;
 function showAnnouncement(force) {
   const el = document.getElementById("annOverlay");
@@ -4124,6 +4134,10 @@ function showAnnouncement(force) {
   if (document.body.classList.contains("coaching")) return;
   if (!force && annOpenOnce) return;
   annOpenOnce = true;
+  const gamePage = document.getElementById("annGamePage");
+  const communityPage = document.getElementById("annCommunityPage");
+  if (gamePage) gamePage.hidden = false;
+  if (communityPage) communityPage.hidden = true;
   el.classList.add("open");
   el.setAttribute("aria-hidden", "false");
 }
@@ -4136,16 +4150,44 @@ function hideAnnouncement() {
 (function initAnnouncement() {
   const close = document.getElementById("annClose");
   const overlay = document.getElementById("annOverlay");
-  if (!close || !overlay) return;
-  // No permanent opt-out: the announcement returns on the next app launch.
+  const next = document.getElementById("annNextCommunity");
+  const back = document.getElementById("annBackGame");
+  const copy = document.getElementById("annCopyCode");
+  if (!close || !overlay || !next || !back) return;
   close.addEventListener("click", hideAnnouncement);
-  // Intentionally do not close when the backdrop is tapped.
+  next.addEventListener("click", function () {
+    document.getElementById("annGamePage").hidden = true;
+    document.getElementById("annCommunityPage").hidden = false;
+    const card = overlay.querySelector(".ann-card");
+    if (card) card.scrollTop = 0;
+  });
+  back.addEventListener("click", function () {
+    document.getElementById("annCommunityPage").hidden = true;
+    document.getElementById("annGamePage").hidden = false;
+    const card = overlay.querySelector(".ann-card");
+    if (card) card.scrollTop = 0;
+  });
+  if (copy) copy.addEventListener("click", async function () {
+    const code = "RBRNAAVT9DXXDQIG";
+    try {
+      await navigator.clipboard.writeText(code);
+      copy.textContent = "Code copied!";
+    } catch (e) {
+      const field = document.createElement("textarea");
+      field.value = code;
+      field.style.position = "fixed";
+      field.style.opacity = "0";
+      document.body.appendChild(field);
+      field.select();
+      try { document.execCommand("copy"); copy.textContent = "Code copied!"; }
+      catch (_) { copy.textContent = code; }
+      field.remove();
+    }
+    setTimeout(function () { copy.textContent = "Copy redeem code"; }, 1800);
+  });
+  // No permanent opt-out. The announcement returns on app launch/resume.
   bindExternalLinks();
-
-  // App/WebView launch, reload, and resume from background.
-  function scheduleShow(ms, force) {
-    setTimeout(function () { showAnnouncement(!!force); }, ms);
-  }
+  function scheduleShow(ms, force) { setTimeout(function () { showAnnouncement(!!force); }, ms); }
   scheduleShow(600);
   scheduleShow(1400);
   window.addEventListener("load", function () { scheduleShow(500); });
