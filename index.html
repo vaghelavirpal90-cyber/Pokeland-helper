@@ -1609,6 +1609,29 @@ html.lg .cal-nav button:last-child::before { transform: scaleX(-1); }
     </div>
   </aside>
   
+  <div class="ann-overlay" id="rebornOverlay" aria-hidden="true">
+    <div class="ann-card" role="dialog" aria-modal="true" aria-labelledby="rebornTitle">
+      <div class="ann-icon-row">
+        <div class="ann-icons" aria-hidden="true"><div class="ann-ico" style="background:linear-gradient(135deg,#f8c34a,#df7029);font-size:1.4rem">🎮</div></div>
+        <span class="ann-badge"><span style="width:6px;height:6px;border-radius:50%;background:var(--gold-text)"></span> Game Announcement</span>
+      </div>
+      <h2 class="ann-title" id="rebornTitle">New Game: <span>Legends Reborn</span></h2>
+      <p class="ann-body">Check out these in-game events and rewards from Legends Reborn.</p>
+      <div style="position:relative;padding:14px;border-radius:14px;background:var(--s1);border:1px solid var(--gold-line);margin:14px 0">
+        <div style="font-size:.92rem;font-weight:800;margin-bottom:6px">🏆 Reborn Pass</div>
+        <div style="font-size:.78rem;color:var(--soft);line-height:1.55">Progress through pass levels and view the free rewards alongside the premium Trainer Real reward track, featuring Ho-Oh.</div>
+      </div>
+      <div style="position:relative;padding:14px;border-radius:14px;background:var(--s1);border:1px solid var(--gold-line);margin-bottom:14px">
+        <div style="font-size:.92rem;font-weight:800;margin-bottom:6px">🎁 Weekly Spending Event</div>
+        <div style="font-size:.78rem;color:var(--soft);line-height:1.55">Weekly diamond-spending milestones show progress and reward items as spending targets are reached.</div>
+      </div>
+      <div class="ann-actions">
+        <button class="btn ann-close-btn" id="rebornClose" type="button">Continue to Pokeland Helper</button>
+        <button class="btn" id="rebornCommunity" type="button" style="min-height:44px;border:1px solid var(--line-strong);background:var(--s2)">YouTube &amp; Discord community</button>
+      </div>
+    </div>
+  </div>
+
   <div class="ann-overlay" id="annOverlay" aria-hidden="true">
     <div class="ann-card" role="dialog" aria-modal="true" aria-labelledby="annTitle">
       <div class="ann-icon-row">
@@ -4115,16 +4138,15 @@ function bindExternalLinks() {
   });
 }
 
-/* ── Announcement: community (Discord + YouTube) ── */
-const ANN_KEY = "ph_ann_community_v1";
+/* ── Separate Legends Reborn popup + optional community popup ── */
+const REBORN_LAST_SHOWN_KEY = "ph_reborn_last_shown";
+const REBORN_COOLDOWN_MS = 60 * 60 * 1000;
 let annNever = false;
-let annOpenOnce = false; // only auto-popup once per cold JS context; reopen via visibility still ok if not dismissed
+let annOpenOnce = false;
 function showAnnouncement(force) {
-  try { if (localStorage.getItem(ANN_KEY) === "1") return; } catch (e) {}
   const el = document.getElementById("annOverlay");
-  if (!el) return;
-  // Avoid stacking if already open
-  if (el.classList.contains("open")) return;
+  if (!el || el.classList.contains("open")) return;
+  try { if (localStorage.getItem(ANN_KEY) === "1") return; } catch (e) {}
   if (document.body.classList.contains("coaching")) return;
   if (!force && annOpenOnce) return;
   annOpenOnce = true;
@@ -4146,37 +4168,51 @@ function hideAnnouncement(permanent) {
   const overlay = document.getElementById("annOverlay");
   const discord = document.getElementById("annDiscord");
   const yt = document.getElementById("annYoutube");
-  if (!never || !close || !overlay) return;
-  never.addEventListener("click", (e) => {
-    e.preventDefault();
-    annNever = !annNever;
-    never.classList.toggle("on", annNever);
-  });
-  close.addEventListener("click", () => hideAnnouncement(annNever));
-  overlay.addEventListener("click", e => { if (e.target === overlay) hideAnnouncement(annNever); });
-  const markIfNever = () => { if (annNever) hideAnnouncement(true); };
-  if (discord) discord.addEventListener("click", markIfNever);
-  if (yt) yt.addEventListener("click", markIfNever);
-  bindExternalLinks();
-
-  // AppMint / WebView often resumes without a full reload.
-  // Fire on load, pageshow (incl. bfcache), and when app becomes visible.
-  function scheduleShow(ms, force) {
-    setTimeout(function () { showAnnouncement(!!force); }, ms);
+  const rebornOverlay = document.getElementById("rebornOverlay");
+  const rebornClose = document.getElementById("rebornClose");
+  const rebornCommunity = document.getElementById("rebornCommunity");
+  if (never && close && overlay) {
+    never.addEventListener("click", (e) => {
+      e.preventDefault();
+      annNever = !annNever;
+      never.classList.toggle("on", annNever);
+    });
+    close.addEventListener("click", () => hideAnnouncement(annNever));
+    overlay.addEventListener("click", e => { if (e.target === overlay) hideAnnouncement(annNever); });
+    const markIfNever = () => { if (annNever) hideAnnouncement(true); };
+    if (discord) discord.addEventListener("click", markIfNever);
+    if (yt) yt.addEventListener("click", markIfNever);
   }
-  scheduleShow(600);
-  scheduleShow(1400); // second try after splash / late paint
-  window.addEventListener("load", function () { scheduleShow(500); });
-  window.addEventListener("pageshow", function (e) {
-    // e.persisted = restored from cache (common when "opening" app again)
-    annOpenOnce = false; // allow show again after process death / new session
-    scheduleShow(e.persisted ? 350 : 700, true);
-  });
-  document.addEventListener("visibilitychange", function () {
-    if (document.visibilityState === "visible") {
-      // Opening app from background / launcher without full reload
-      scheduleShow(400, true);
+  function showRebornPopup() {
+    if (!rebornOverlay || rebornOverlay.classList.contains("open")) return;
+    try {
+      const last = Number(localStorage.getItem(REBORN_LAST_SHOWN_KEY) || 0);
+      if (Date.now() - last < REBORN_COOLDOWN_MS) return;
+      localStorage.setItem(REBORN_LAST_SHOWN_KEY, String(Date.now()));
+    } catch (e) {}
+    rebornOverlay.classList.add("open");
+    rebornOverlay.setAttribute("aria-hidden", "false");
+  }
+  function hideRebornPopup() {
+    if (!rebornOverlay) return;
+    rebornOverlay.classList.remove("open");
+    rebornOverlay.setAttribute("aria-hidden", "true");
+  }
+  if (rebornClose) rebornClose.addEventListener("click", hideRebornPopup);
+  if (rebornOverlay) rebornOverlay.addEventListener("click", e => { if (e.target === rebornOverlay) hideRebornPopup(); });
+  if (rebornCommunity) rebornCommunity.addEventListener("click", function () {
+    hideRebornPopup();
+    if (overlay) {
+      overlay.classList.add("open");
+      overlay.setAttribute("aria-hidden", "false");
     }
+  });
+  bindExternalLinks();
+  // The game popup is separate and shown at most once per hour. Community links open only when requested.
+  setTimeout(showRebornPopup, 900);
+  window.addEventListener("pageshow", showRebornPopup);
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "visible") showRebornPopup();
   });
 })();
 
