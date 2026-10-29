@@ -378,11 +378,10 @@ body.coaching .header{z-index:55;background:transparent;backdrop-filter:none;-we
   border: 1px solid var(--gold-line);
   border-radius: 26px;
   padding: 22px 20px 18px;
-  max-height: calc(100dvh - 32px - var(--safe-b)); overflow-y: auto; overscroll-behavior: contain;
   box-shadow: 0 24px 60px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.04) inset;
   transform: translateY(18px) scale(0.97);
   transition: transform 0.32s cubic-bezier(0.32, 0.72, 0, 1);
-  position: relative; overflow-x: hidden; overflow-y: auto;
+  position: relative; overflow: hidden;
 }
 .ann-overlay.open .ann-card { transform: translateY(0) scale(1); }
 .ann-card::before {
@@ -1612,47 +1611,38 @@ html.lg .cal-nav button:last-child::before { transform: scaleX(-1); }
   
   <div class="ann-overlay" id="annOverlay" aria-hidden="true">
     <div class="ann-card" role="dialog" aria-modal="true" aria-labelledby="annTitle">
-      <section class="ann-page" id="annGamePage">
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
-          <div style="font-size:2rem" aria-hidden="true">🎮</div>
-          <span class="ann-badge"><span style="width:6px;height:6px;border-radius:50%;background:var(--gold-text)"></span> New Game</span>
-        </div>
-        <h2 class="ann-title" id="annTitle">Legends <span>Revolution</span></h2>
-        <p class="ann-body">Discover a new monster-catching adventure with F2P-friendly progression, daily events, faster battles, and rewards for active players.</p>
-        <div style="position:relative;padding:12px;border-radius:14px;background:var(--s1);border:1px solid var(--gold-line);margin-bottom:14px">
-          <div style="font-size:.82rem;font-weight:700;margin-bottom:6px">✨ Game highlights</div>
-          <div style="font-size:.76rem;color:var(--soft);line-height:1.55">🌍 English, Spanish &amp; Portuguese<br>🎁 VIP progression through gameplay<br>⚡ ×10 battles and training<br>🛒 Player Market and Trainer Tokens<br>🎡 Daily free Wheel spins + sign-up gift codes<br>🎟️ Invite rewards · 🏆 Daily events</div>
-        </div>
-        <a class="btn btn-primary" id="annGameDownload" href="https://legendsrevolution.com.br/r/WH5T35" target="_blank" rel="noopener noreferrer" style="position:relative;width:100%;min-height:48px;margin-bottom:14px;text-decoration:none;display:flex;align-items:center;justify-content:center">🎮 Download Legends Revolution ↗</a>
-        <button class="btn btn-primary" id="annNextCommunity" type="button" style="width:100%;min-height:48px">Next: YouTube &amp; Discord →</button>
-        <p style="font-size:.7rem;color:var(--muted);text-align:center;margin-top:10px">Game announcement</p>
-      </section>
-      <section class="ann-page" id="annCommunityPage" hidden>
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
-          <div style="font-size:2rem" aria-hidden="true">🌐</div>
-          <span class="ann-badge"><span style="width:6px;height:6px;border-radius:50%;background:var(--gold-text)"></span> Community</span>
-        </div>
-        <h2 class="ann-title">Pokeland Helper <span>Community</span></h2>
-        <p class="ann-body">Choose where you want to connect. This community poster is separate from the game announcement.</p>
-        <div style="display:grid;grid-template-columns:1fr;gap:12px;margin:16px 0">
-          <div style="padding:16px;border-radius:18px;border:1px solid rgba(255,70,70,.45);background:linear-gradient(145deg,rgba(255,25,35,.16),var(--s1) 70%);text-align:center">
-            <div style="font-size:2rem;margin-bottom:6px">▶️</div>
-            <div style="font-size:1.12rem;font-weight:800;color:var(--ink)">YouTube</div>
-            <div style="font-size:.8rem;color:var(--soft);margin:5px 0 12px">Build guides · Updates · Tips &amp; tricks</div>
-            <a class="btn ann-yt" id="annYoutube" href="https://www.youtube.com/@pokelandhelper" target="_blank" rel="noopener noreferrer" style="display:flex;justify-content:center;text-decoration:none;width:100%">Subscribe on YouTube ↗</a>
+      <div class="ann-icon-row">
+        <div class="ann-icons" aria-hidden="true">
+          <div class="ann-ico discord">
+            <svg viewBox="0 0 24 24" fill="#fff"><path d="M20.317 4.492c-1.53-.69-3.17-1.2-4.885-1.49a.075.075 0 0 0-.079.036c-.21.36-.444.83-.608 1.2a18.566 18.566 0 0 0-5.487 0 12.36 12.36 0 0 0-.617-1.2.077.077 0 0 0-.079-.037c-1.714.29-3.354.8-4.885 1.491a.07.07 0 0 0-.032.027C.533 9.09-.32 13.555.099 17.961a.08.08 0 0 0 .031.055 20.03 20.03 0 0 0 5.993 2.98.078.078 0 0 0 .084-.026 13.83 13.83 0 0 0 1.226-1.963.074.074 0 0 0-.041-.104 13.201 13.201 0 0 1-1.872-.878.075.075 0 0 1-.008-.125c.126-.093.252-.19.372-.287a.075.075 0 0 1 .078-.01c3.927 1.764 8.18 1.764 12.061 0a.075.075 0 0 1 .079.009c.12.098.246.195.373.288a.075.075 0 0 1-.006.125c-.598.344-1.22.635-1.873.877a.075.075 0 0 0-.041.105c.36.687.772 1.341 1.225 1.962a.077.077 0 0 0 .084.028 19.963 19.963 0 0 0 6.002-2.981.076.076 0 0 0 .032-.054c.5-5.094-.838-9.52-3.549-13.442a.06.06 0 0 0-.031-.028Zm-12.31 10.78c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.176 1.094 2.157 2.418 0 1.334-.956 2.42-2.157 2.42Zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.176 1.094 2.157 2.418 0 1.334-.947 2.42-2.157 2.42Z"/></svg>
           </div>
-          <div style="padding:16px;border-radius:18px;border:1px solid rgba(100,115,255,.5);background:linear-gradient(145deg,rgba(80,95,255,.2),var(--s1) 70%);text-align:center">
-            <div style="font-size:2rem;margin-bottom:6px">🎮</div>
-            <div style="font-size:1.12rem;font-weight:800;color:var(--ink)">Discord</div>
-            <div style="font-size:.8rem;color:var(--soft);margin:5px 0 12px">Get help · Meet players · Community news</div>
-            <a class="btn ann-discord" id="annDiscord" href="https://discord.gg/tF6bVAvrn" target="_blank" rel="noopener noreferrer" style="display:flex;justify-content:center;text-decoration:none;width:100%">Join Discord ↗</a>
+          <div class="ann-ico yt">
+            <svg viewBox="0 0 24 24" fill="#fff"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.8zM9.75 15.5v-7l6.5 3.5-6.5 3.5z"/></svg>
           </div>
         </div>
-        <div class="ann-actions">
-          <button class="btn ann-close-btn" id="annClose" type="button">Continue to Pokeland Helper</button>
-          <button class="btn" id="annBackGame" type="button" style="min-height:40px;border:1px solid var(--line-strong);background:var(--s2)">← Back to game announcement</button>
-        </div>
-      </section>
+        <span class="ann-badge"><span style="width:6px;height:6px;border-radius:50%;background:var(--gold-text)"></span> Community</span>
+      </div>
+      <h2 class="ann-title" id="annTitle">Join the <span>Pokeland</span> crew</h2>
+      <p class="ann-body">
+        Get live tips, rotation alerts, and hang with other players on Discord — plus guides &amp; updates on YouTube.
+      </p>
+      <div class="ann-actions">
+        <a class="btn ann-discord" id="annDiscord" href="https://discord.gg/tF6bVAvrn" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M20.317 4.492c-1.53-.69-3.17-1.2-4.885-1.49a.075.075 0 0 0-.079.036c-.21.36-.444.83-.608 1.2a18.566 18.566 0 0 0-5.487 0 12.36 12.36 0 0 0-.617-1.2.077.077 0 0 0-.079-.037c-1.714.29-3.354.8-4.885 1.491a.07.07 0 0 0-.032.027C.533 9.09-.32 13.555.099 17.961a.08.08 0 0 0 .031.055 20.03 20.03 0 0 0 5.993 2.98.078.078 0 0 0 .084-.026 13.83 13.83 0 0 0 1.226-1.963.074.074 0 0 0-.041-.104 13.201 13.201 0 0 1-1.872-.878.075.075 0 0 1-.008-.125c.126-.093.252-.19.372-.287a.075.075 0 0 1 .078-.01c3.927 1.764 8.18 1.764 12.061 0a.075.075 0 0 1 .079.009c.12.098.246.195.373.288a.075.075 0 0 1-.006.125c-.598.344-1.22.635-1.873.877a.075.075 0 0 0-.041.105c.36.687.772 1.341 1.225 1.962a.077.077 0 0 0 .084.028 19.963 19.963 0 0 0 6.002-2.981.076.076 0 0 0 .032-.054c.5-5.094-.838-9.52-3.549-13.442a.06.06 0 0 0-.031-.028Zm-12.31 10.78c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.176 1.094 2.157 2.418 0 1.334-.956 2.42-2.157 2.42Zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.176 1.094 2.157 2.418 0 1.334-.947 2.42-2.157 2.42Z"/></svg>
+          Join Discord group
+        </a>
+        <a class="btn ann-yt" id="annYoutube" href="https://www.youtube.com/@pokelandhelper" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.8zM9.75 15.5v-7l6.5 3.5-6.5 3.5z"/></svg>
+          Subscribe on YouTube
+        </a>
+        <button class="btn ann-close-btn" id="annClose" type="button">Maybe later</button>
+      </div>
+      <label class="ann-never" id="annNever">
+        <span class="ann-check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0b0c10" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        </span>
+        <span class="ann-never-label">Don't show this again</span>
+      </label>
     </div>
   </div>
 
@@ -4125,60 +4115,69 @@ function bindExternalLinks() {
   });
 }
 
-/* ── Gentle launch announcement: show at most once per 24 hours ── */
-const ANNOUNCEMENT_LAST_SHOWN_KEY = "pokelandHelperAnnouncementLastShown";
-const ANNOUNCEMENT_COOLDOWN_MS = 60 * 60 * 1000;
-let annOpenOnce = false;
+/* ── Announcement: community (Discord + YouTube) ── */
+const ANN_KEY = "ph_ann_community_v1";
+let annNever = false;
+let annOpenOnce = false; // only auto-popup once per cold JS context; reopen via visibility still ok if not dismissed
 function showAnnouncement(force) {
+  try { if (localStorage.getItem(ANN_KEY) === "1") return; } catch (e) {}
   const el = document.getElementById("annOverlay");
-  if (!el || el.classList.contains("open")) return;
+  if (!el) return;
+  // Avoid stacking if already open
+  if (el.classList.contains("open")) return;
   if (document.body.classList.contains("coaching")) return;
-  if (!force) {
-    try {
-      const lastShown = Number(localStorage.getItem(ANNOUNCEMENT_LAST_SHOWN_KEY) || 0);
-      if (Date.now() - lastShown < ANNOUNCEMENT_COOLDOWN_MS) return;
-    } catch (_) {}
-  }
-  if (annOpenOnce) return;
+  if (!force && annOpenOnce) return;
   annOpenOnce = true;
-  try { localStorage.setItem(ANNOUNCEMENT_LAST_SHOWN_KEY, String(Date.now())); } catch (_) {}
-  const gamePage = document.getElementById("annGamePage");
-  const communityPage = document.getElementById("annCommunityPage");
-  if (gamePage) gamePage.hidden = false;
-  if (communityPage) communityPage.hidden = true;
   el.classList.add("open");
   el.setAttribute("aria-hidden", "false");
 }
-function hideAnnouncement() {
+function hideAnnouncement(permanent) {
   const el = document.getElementById("annOverlay");
   if (!el) return;
   el.classList.remove("open");
   el.setAttribute("aria-hidden", "true");
+  if (permanent || annNever) {
+    try { localStorage.setItem(ANN_KEY, "1"); } catch (e) {}
+  }
 }
 (function initAnnouncement() {
+  const never = document.getElementById("annNever");
   const close = document.getElementById("annClose");
   const overlay = document.getElementById("annOverlay");
-  const next = document.getElementById("annNextCommunity");
-  const back = document.getElementById("annBackGame");
-  if (!close || !overlay || !next || !back) return;
-  close.addEventListener("click", hideAnnouncement);
-  next.addEventListener("click", function () {
-    document.getElementById("annGamePage").hidden = true;
-    document.getElementById("annCommunityPage").hidden = false;
-    const card = overlay.querySelector(".ann-card");
-    if (card) card.scrollTop = 0;
+  const discord = document.getElementById("annDiscord");
+  const yt = document.getElementById("annYoutube");
+  if (!never || !close || !overlay) return;
+  never.addEventListener("click", (e) => {
+    e.preventDefault();
+    annNever = !annNever;
+    never.classList.toggle("on", annNever);
   });
-  back.addEventListener("click", function () {
-    document.getElementById("annCommunityPage").hidden = true;
-    document.getElementById("annGamePage").hidden = false;
-    const card = overlay.querySelector(".ann-card");
-    if (card) card.scrollTop = 0;
-  });
-
-  // The announcement is not forced on every app resume; it appears at most daily.
+  close.addEventListener("click", () => hideAnnouncement(annNever));
+  overlay.addEventListener("click", e => { if (e.target === overlay) hideAnnouncement(annNever); });
+  const markIfNever = () => { if (annNever) hideAnnouncement(true); };
+  if (discord) discord.addEventListener("click", markIfNever);
+  if (yt) yt.addEventListener("click", markIfNever);
   bindExternalLinks();
-  setTimeout(function () { showAnnouncement(false); }, 900);
-  window.addEventListener("pageshow", function () { showAnnouncement(false); });
+
+  // AppMint / WebView often resumes without a full reload.
+  // Fire on load, pageshow (incl. bfcache), and when app becomes visible.
+  function scheduleShow(ms, force) {
+    setTimeout(function () { showAnnouncement(!!force); }, ms);
+  }
+  scheduleShow(600);
+  scheduleShow(1400); // second try after splash / late paint
+  window.addEventListener("load", function () { scheduleShow(500); });
+  window.addEventListener("pageshow", function (e) {
+    // e.persisted = restored from cache (common when "opening" app again)
+    annOpenOnce = false; // allow show again after process death / new session
+    scheduleShow(e.persisted ? 350 : 700, true);
+  });
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "visible") {
+      // Opening app from background / launcher without full reload
+      scheduleShow(400, true);
+    }
+  });
 })();
 
 
