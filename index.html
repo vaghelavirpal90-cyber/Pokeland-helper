@@ -1100,6 +1100,11 @@ html.lg .cal-nav button:last-child::before { transform: scaleX(-1); }
           <button class="btn btn-primary" id="notifNudgeBtn" type="button" style="min-height:44px;border-radius:12px;font-size:0.85rem;font-weight:700;justify-content:center">Enable</button>
         </div>
       </div>
+      <button class="card" data-go="legends" type="button" style="width:100%;display:flex;align-items:center;gap:13px;padding:14px;margin-bottom:14px;text-align:left;background:linear-gradient(135deg,rgba(239,106,43,.14),var(--s1));border-color:var(--gold-line)">
+        <span style="width:44px;height:44px;flex-shrink:0;border-radius:14px;display:grid;place-items:center;background:var(--gold-soft);font-size:1.35rem">🎮</span>
+        <span style="flex:1;min-width:0"><span style="display:block;font-size:.62rem;font-family:var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--gold-text)">New game announcement</span><span style="display:block;font-size:1rem;font-weight:700;margin-top:2px">Legends Revolution</span><span style="display:block;font-size:.76rem;color:var(--muted);margin-top:2px">F2P-friendly features, events &amp; rewards</span></span>
+        <span aria-hidden="true" style="font-size:1.25rem;color:var(--gold-text)">›</span>
+      </button>
       <div class="card card-glow hero" id="heroCard">
         <div class="hero-top">
           <div class="hero-info">
@@ -1341,6 +1346,34 @@ html.lg .cal-nav button:last-child::before { transform: scaleX(-1); }
         <p style="font-size:0.85rem;color:var(--soft);line-height:1.55;margin-top:8px;text-wrap:pretty">Save diamonds for the first legendary rotation. Claim all three daily Vit Gift windows — friendship vit is the slowest resource in the game. Weather &amp; events follow Hong Kong server time (HKT) — pick your country in Themes &amp; time so times show in your local clock.</p>
       </div>
     </section>
+    <section id="view-legends" class="hidden">
+      <div class="kicker gold" style="padding-left:2px">NEW GAME ANNOUNCEMENT</div>
+      <div class="card card-glow" style="padding:20px;margin-top:10px">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+          <div style="width:54px;height:54px;border-radius:16px;display:grid;place-items:center;background:var(--gold-soft);border:1px solid var(--gold-line);font-size:1.7rem">🎮</div>
+          <div><div style="font-size:.68rem;font-family:var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--gold-text)">Discover a new adventure</div><h2 style="font-size:1.4rem;line-height:1.15;margin-top:4px">Legends Revolution</h2></div>
+        </div>
+        <p style="font-size:.88rem;color:var(--soft);line-height:1.55">Explore a monster-catching game with F2P-friendly progression, daily events, faster battles, and rewards for active players.</p>
+        <div class="section" style="margin-top:18px">
+          <div class="section-head"><span class="section-title">Game highlights</span></div>
+          <div style="display:grid;gap:10px">
+            <div class="event-item"><div class="event-ico">🌍</div><div class="event-body"><div class="event-name">3 languages</div><div class="event-desc">English, Spanish, and Portuguese</div></div></div>
+            <div class="event-item"><div class="event-ico">🆕</div><div class="event-body"><div class="event-name">Fresh Season 1 server</div><div class="event-desc">Everyone starts from zero · October 29, 8:00 PM Brasília time</div></div></div>
+            <div class="event-item"><div class="event-ico">🎁</div><div class="event-body"><div class="event-name">F2P-friendly progression</div><div class="event-desc">Earn VIP progression through gameplay and leveling, without recharging</div></div></div>
+            <div class="event-item"><div class="event-ico">⚔️</div><div class="event-body"><div class="event-name">Choose your second monster</div><div class="event-desc">Pick from 3 options</div></div></div>
+            <div class="event-item"><div class="event-ico">⚡</div><div class="event-body"><div class="event-name">Faster gameplay</div><div class="event-desc">Battles up to ×10 speed and ×10 Training for everyone</div></div></div>
+            <div class="event-item"><div class="event-ico">🛒</div><div class="event-body"><div class="event-name">Player Market</div><div class="event-desc">Trade items with Trainer Tokens earned by playing over time</div></div></div>
+            <div class="event-item"><div class="event-ico">🎡</div><div class="event-body"><div class="event-name">Daily free Wheel spins + sign-up gift codes</div><div class="event-desc">Free Wheel spins every day, with gift codes provided when you sign up</div></div></div>
+            <div class="event-item"><div class="event-ico">🎁</div><div class="event-body"><div class="event-name">Invite friends</div><div class="event-desc">Rewards up to 400 Porcos Revolution, the game's strongest trade currency</div></div></div>
+            <div class="event-item"><div class="event-ico">📊</div><div class="event-body"><div class="event-name">Capsule odds shown in-game</div><div class="event-desc">Check the odds directly in the game</div></div></div>
+            <div class="event-item"><div class="event-ico">🏆</div><div class="event-body"><div class="event-name">Daily events · Brasília time</div><div class="event-desc">Global BOSS at 7:00 PM · Pokémon Riot at 7:30 PM</div></div></div>
+            <div class="event-item"><div class="event-ico">💎</div><div class="event-body"><div class="event-name">More features</div><div class="event-desc">Includes Supreme Refine Stone and other in-game features</div></div></div>
+          </div>
+        </div>
+        <a class="btn btn-primary" href="https://legendsrevolution.com.br/r/WH5T35" target="_blank" rel="noopener noreferrer" style="width:100%;margin-top:18px">Download Legends Revolution ↗</a>
+        <p style="font-size:.68rem;color:var(--muted);margin-top:10px;text-align:center">Open the link to access the game download.</p>
+      </div>
+    </section>
     <section id="view-builds" class="hidden">
       <div class="empty" style="padding:18px 14px 14px">
         <div class="kicker gold" style="margin-bottom:10px">POKÉMON GUIDE · LIVE</div>
@@ -1535,6 +1568,16 @@ html.lg .cal-nav button:last-child::before { transform: scaleX(-1); }
       <span class="side-soon">Soon</span>
     </button>
     <div class="side-label">More</div>
+    <button class="side-row" data-side="legends" type="button">
+      <span class="side-row-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/><path d="M7 4.5 9 7M17 4.5 15 7M7 19.5 9 17M17 19.5 15 17"/></svg>
+      </span>
+      <span>
+        <span class="side-row-title">Legends Revolution</span>
+        <span class="side-row-sub">New game announcement</span>
+      </span>
+      <span class="side-soon" style="color:var(--gold);border-color:var(--gold)">NEW</span>
+    </button>
     <button class="side-row" data-side="about" type="button">
       <span class="side-row-ico">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5"/><circle cx="12" cy="7.8" r=".9" fill="currentColor" stroke="none"/></svg>
@@ -2776,7 +2819,7 @@ function go(view) {
   if (view !== "weather") state.wxSel = null; // a picked weather window resets when you leave Weather
   state.view = view; state.sel = null;
   document.querySelectorAll(".nav-item").forEach(el => el.classList.toggle("on", el.dataset.view === view));
-  ["board","rotation","weather","events","server","download","builds","wiki","teams","guide","guide-tickets","about"].forEach(v => {
+  ["board","rotation","weather","events","server","download","legends","builds","wiki","teams","guide","guide-tickets","about"].forEach(v => {
     const el = document.getElementById("view-" + v);
     if (el) el.classList.toggle("hidden", v !== view);
   });
@@ -3981,7 +4024,7 @@ document.getElementById("sheetOverlay").addEventListener("click", e => { if (e.t
 document.getElementById("sheetFav").addEventListener("click", () => { if (state.sel) { toggleFav(state.sel); openSheet(state.sel); } });
 
 const hash = (location.hash || "").slice(1);
-if (["board","rotation","weather","events","server","download","builds","wiki","teams","guide","guide-tickets","about"].includes(hash)) go(hash);
+if (["board","rotation","weather","events","server","download","legends","builds","wiki","teams","guide","guide-tickets","about"].includes(hash)) go(hash);
 else render();
 
 
