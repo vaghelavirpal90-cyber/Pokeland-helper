@@ -1624,19 +1624,6 @@ html.lg .cal-nav button:last-child::before { transform: scaleX(-1); }
           <div style="font-size:.76rem;color:var(--soft);line-height:1.55">🌍 English, Spanish &amp; Portuguese<br>🎁 VIP progression through gameplay<br>⚡ ×10 battles and training<br>🛒 Player Market and Trainer Tokens<br>🎡 Daily free Wheel spins + sign-up gift codes<br>🎟️ Invite rewards · 🏆 Daily events</div>
         </div>
         <a class="btn btn-primary" id="annGameDownload" href="https://legendsrevolution.com.br/r/WH5T35" target="_blank" rel="noopener noreferrer" style="position:relative;width:100%;min-height:48px;margin-bottom:14px;text-decoration:none;display:flex;align-items:center;justify-content:center">🎮 Download Legends Revolution ↗</a>
-        <div style="position:relative;padding:14px;border-radius:14px;background:var(--s1);border:1px solid var(--gold-line);margin-bottom:14px">
-          <div style="font-size:.95rem;font-weight:700;margin-bottom:8px">🎁 Redeem Code</div>
-          <div style="font-family:var(--mono);font-size:1.03rem;font-weight:700;letter-spacing:.04em;color:var(--gold-text);overflow-wrap:anywhere;margin-bottom:10px">RBRNAAVT9DXXDQIG</div>
-          <div style="font-size:.78rem;color:var(--soft);line-height:1.55">
-            <strong style="color:var(--ink)">How to redeem in-game:</strong><br>
-            1. Log in using the same email and password as the website.<br>
-            2. Tap your portrait in the top-left corner.<br>
-            3. Open <strong style="color:var(--ink)">Settings</strong>.<br>
-            4. Tap <strong style="color:var(--ink)">Redeem Code</strong>.<br>
-            5. Enter the code without dashes and confirm.
-          </div>
-          <button class="btn" id="annCopyCode" type="button" style="width:100%;min-height:40px;margin-top:12px;border:1px solid var(--line-strong);background:var(--s2)">Copy redeem code</button>
-        </div>
         <button class="btn btn-primary" id="annNextCommunity" type="button" style="width:100%;min-height:48px">Next: YouTube &amp; Discord →</button>
         <p style="font-size:.7rem;color:var(--muted);text-align:center;margin-top:10px">Game announcement and redeem code</p>
       </section>
@@ -4128,7 +4115,7 @@ function bindExternalLinks() {
 
 /* ── Gentle launch announcement: show at most once per 24 hours ── */
 const ANNOUNCEMENT_LAST_SHOWN_KEY = "pokelandHelperAnnouncementLastShown";
-const ANNOUNCEMENT_COOLDOWN_MS = 24 * 60 * 60 * 1000;
+const ANNOUNCEMENT_COOLDOWN_MS = 60 * 60 * 1000;
 let annOpenOnce = false;
 function showAnnouncement(force) {
   const el = document.getElementById("annOverlay");
@@ -4161,7 +4148,6 @@ function hideAnnouncement() {
   const overlay = document.getElementById("annOverlay");
   const next = document.getElementById("annNextCommunity");
   const back = document.getElementById("annBackGame");
-  const copy = document.getElementById("annCopyCode");
   if (!close || !overlay || !next || !back) return;
   close.addEventListener("click", hideAnnouncement);
   next.addEventListener("click", function () {
@@ -4176,24 +4162,7 @@ function hideAnnouncement() {
     const card = overlay.querySelector(".ann-card");
     if (card) card.scrollTop = 0;
   });
-  if (copy) copy.addEventListener("click", async function () {
-    const code = "RBRNAAVT9DXXDQIG";
-    try {
-      await navigator.clipboard.writeText(code);
-      copy.textContent = "Code copied!";
-    } catch (e) {
-      const field = document.createElement("textarea");
-      field.value = code;
-      field.style.position = "fixed";
-      field.style.opacity = "0";
-      document.body.appendChild(field);
-      field.select();
-      try { document.execCommand("copy"); copy.textContent = "Code copied!"; }
-      catch (_) { copy.textContent = code; }
-      field.remove();
-    }
-    setTimeout(function () { copy.textContent = "Copy redeem code"; }, 1800);
-  });
+
   // The announcement is not forced on every app resume; it appears at most daily.
   bindExternalLinks();
   setTimeout(function () { showAnnouncement(false); }, 900);
