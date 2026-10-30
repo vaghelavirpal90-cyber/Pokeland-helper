@@ -360,6 +360,9 @@ body.coaching .header{z-index:55;background:transparent;backdrop-filter:none;-we
 .wx-event-window { font-family: var(--mono); font-size: 0.62rem; color: var(--muted); }
 .wx-event-tag { font-family: var(--mono); font-size: 0.52rem; letter-spacing: 0.1em; }
 
+
+/* Legends Revolution registration guide popup */
+.lr-guide-overlay{position:fixed;inset:0;z-index:230;background:rgba(3,4,7,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;padding:18px;opacity:0;pointer-events:none;transition:opacity .25s}.lr-guide-overlay.open{opacity:1;pointer-events:auto}.lr-guide-card{width:100%;max-width:390px;max-height:min(88vh,760px);overflow:auto;background:linear-gradient(165deg,rgba(var(--gold-rgb),.16),var(--s0) 55%);border:1px solid var(--gold-line);border-radius:24px;padding:20px;box-shadow:0 24px 60px rgba(0,0,0,.55);transform:translateY(12px) scale(.98);transition:transform .28s}.lr-guide-overlay.open .lr-guide-card{transform:translateY(0) scale(1)}.lr-guide-card h3{font-size:1.15rem;margin:8px 34px 10px 0}.lr-guide-card p{font-size:.84rem;color:var(--soft);line-height:1.5;margin:8px 0 14px}.lr-guide-card img{display:block;width:100%;height:auto;border-radius:14px;border:1px solid var(--line);margin:12px 0}.lr-guide-close{position:absolute;right:14px;top:12px;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--s1);color:var(--text);font-size:20px}
 /* ── Premium announcement modal (community) ── */
 .ann-overlay {
   position: fixed; inset: 0; z-index: 210;
@@ -1300,7 +1303,7 @@ html.lg .cal-nav button:last-child::before { transform: scaleX(-1); }
       <div class="card mt-18" style="padding:18px;background:linear-gradient(155deg,rgba(79,214,156,0.12),var(--s1));border-color:rgba(79,214,156,0.28)">
         <p style="font-size:0.88rem;color:var(--soft);line-height:1.55;text-wrap:pretty">A fresh Season 1 server where everyone starts from zero — trade on the Player Market using Trainer Tokens earned just by playing, pick your 2nd monster from 3 options, and push battles up to x10 speed with x10 Training.</p>
         <div style="display:flex;flex-direction:column;gap:8px;margin-top:16px">
-          <a class="btn btn-primary" href="https://legendsrevolution.com.br/baixar" target="_blank" rel="noopener" style="background:linear-gradient(135deg,rgba(79,214,156,0.28),var(--gold-soft));border-color:rgba(79,214,156,0.45);color:var(--ink)">Download Legends Revolution</a>
+          <button class="btn btn-primary" id="openLegendsRebornGuide" type="button" style="background:linear-gradient(135deg,rgba(79,214,156,0.28),var(--gold-soft));border-color:rgba(79,214,156,0.45);color:var(--ink)">Download Legends Revolution</button>
         </div>
         <div style="font-family:var(--mono);font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);margin-top:14px">Season 1 started 10/29 · official site</div>
       </div>
@@ -4371,6 +4374,11 @@ if ("serviceWorker" in navigator) {
     draggable(sh, ".sheet-handle", () => ov.dispatchEvent(new MouseEvent("click", { bubbles: true })));
   });
 })();
+
+/* Legends Revolution registration guide popup */
+(function(){const overlay=document.getElementById("lrGuideOverlay"),open=document.getElementById("openLegendsRebornGuide"),close=document.getElementById("lrGuideClose");if(!overlay||!open||!close)return;const hide=()=>{overlay.classList.remove("open");overlay.setAttribute("aria-hidden","true");};open.addEventListener("click",()=>{overlay.classList.add("open");overlay.setAttribute("aria-hidden","false");});close.addEventListener("click",hide);overlay.addEventListener("click",e=>{if(e.target===overlay)hide();});document.addEventListener("keydown",e=>{if(e.key==="Escape")hide();});})();
 </script>
+
+<div class="lr-guide-overlay" id="lrGuideOverlay" aria-hidden="true"><div class="lr-guide-card" role="dialog" aria-modal="true" aria-labelledby="lrGuideTitle" style="position:relative"><button class="lr-guide-close" id="lrGuideClose" type="button" aria-label="Close">×</button><span class="ann-badge">NEW GAME</span><h3 id="lrGuideTitle">Legends Revolution</h3><p><strong>Before downloading:</strong> Create your account first and make sure invite code <strong style="color:var(--gold-text)">WH5T35</strong> is entered during registration. Then download the game and sign in.</p><a class="btn btn-primary" href="https://legendsrevolution.com.br/r/WH5T35" target="_blank" rel="noopener noreferrer" style="display:flex;justify-content:center;width:100%">Register · Code WH5T35</a><p style="margin:12px 0 6px">Check the highlighted invite-code field on the registration page:</p><img src="legends-revolution/file_00000000bed48208bfa024f34c71e51d.png" alt="Registration screenshot showing invite code WH5T35"><a class="btn" href="https://legendsrevolution.com.br/baixar" target="_blank" rel="noopener noreferrer" style="display:flex;justify-content:center;width:100%">Download Legends Revolution</a></div></div>
 </body>
 </html>
