@@ -838,165 +838,6 @@ html[data-theme="umbreon"] .progress-fill { background: linear-gradient(90deg, #
 .ctry-letter { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.16em; color: var(--gold-text, var(--gold)); margin: 16px 2px 8px; }
 .ctry-letter:first-child { margin-top: 4px; }
 .ctry-empty { padding: 18px 4px; font-size: 0.85rem; color: var(--muted); }
-
-/* ── Play Store New Game Template & Compact Popup ── */
-.ps-banner {
-  position: relative; width: 100%; height: 188px; border-radius: 22px; overflow: hidden;
-  border: 1px solid var(--line-strong); background: var(--s1);
-  box-shadow: 0 12px 32px rgba(0,0,0,0.42);
-}
-.ps-banner img { width: 100%; height: 100%; object-fit: cover; }
-.ps-banner-scrim {
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(7,8,11,0.96) 8%, rgba(7,8,11,0.35) 55%, rgba(7,8,11,0.15));
-}
-.ps-banner-tag {
-  position: absolute; top: 12px; left: 12px;
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 5px 10px; border-radius: 999px;
-  background: rgba(7,8,11,0.78); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(79,214,156,0.45); color: var(--green);
-  font-family: var(--mono); font-size: 0.58rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
-}
-.ps-app-header {
-  display: flex; align-items: center; gap: 14px; margin-top: -34px; padding: 0 10px; position: relative; z-index: 2;
-}
-.ps-app-icon {
-  width: 72px; height: 72px; border-radius: 18px; flex-shrink: 0; overflow: hidden;
-  border: 2px solid rgba(255,255,255,0.16); background: var(--s2);
-  box-shadow: 0 10px 26px rgba(0,0,0,0.55); position: relative;
-}
-.ps-app-icon img { width: 100%; height: 100%; object-fit: cover; }
-.ps-app-title { font-size: 1.32rem; font-weight: 700; letter-spacing: -0.025em; line-height: 1.15; color: var(--ink); }
-.ps-app-dev { font-size: 0.78rem; font-weight: 600; color: var(--green); margin-top: 3px; }
-.ps-app-sub { font-family: var(--mono); font-size: 0.58rem; color: var(--muted); margin-top: 3px; letter-spacing: 0.04em; }
-.ps-metrics {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px;
-  margin-top: 16px; padding: 12px 6px; border-radius: 18px;
-  background: var(--s1); border: 1px solid var(--line); text-align: center;
-}
-.ps-metric { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; }
-.ps-metric:not(:last-child)::after {
-  content: ""; position: absolute; right: 0; top: 18%; bottom: 18%; width: 1px; background: var(--line-strong);
-}
-.ps-metric-val { font-size: 0.92rem; font-weight: 700; color: var(--ink); display: inline-flex; align-items: center; gap: 3px; }
-.ps-metric-sub { font-family: var(--mono); font-size: 0.54rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
-.ps-code-box {
-  margin-top: 14px; padding: 14px 16px; border-radius: 18px;
-  background: linear-gradient(145deg, rgba(var(--gold-rgb),0.16), var(--s1) 70%);
-  border: 1px dashed var(--gold-line);
-  display: flex; align-items: center; justify-content: space-between; gap: 12px;
-}
-.ps-code-lbl { font-family: var(--mono); font-size: 0.56rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-text); }
-.ps-code-val { font-family: var(--mono); font-size: 1.25rem; font-weight: 700; letter-spacing: 0.08em; color: var(--ink); margin-top: 2px; }
-.ps-code-note { font-size: 0.72rem; color: var(--soft); margin-top: 2px; }
-.ps-copy-btn {
-  padding: 9px 14px; border-radius: 999px; background: var(--gold); color: #0b0c10;
-  font-size: 0.76rem; font-weight: 700; flex-shrink: 0; display: inline-flex; align-items: center; gap: 6px;
-  box-shadow: 0 6px 16px rgba(var(--gold-rgb),0.3);
-}
-.ps-cta-row { display: flex; flex-direction: column; gap: 9px; margin-top: 12px; }
-.ps-btn-install {
-  width: 100%; min-height: 48px; border-radius: 999px;
-  background: linear-gradient(135deg, #01875f, #14a877) !important;
-  border: 1px solid rgba(79,214,156,0.45) !important; color: #fff !important;
-  font-size: 0.9rem; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  box-shadow: 0 8px 22px rgba(1,135,95,0.38);
-}
-.ps-btn-login {
-  width: 100%; min-height: 46px; border-radius: 999px;
-  background: rgba(var(--gold-rgb),0.18) !important;
-  border: 1px solid var(--gold-line) !important; color: var(--gold-text) !important;
-  font-size: 0.85rem; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-}
-.ps-shot-wrap {
-  flex-shrink: 0; width: 268px; border-radius: 16px; overflow: hidden;
-  background: var(--s1); border: 1px solid var(--line-strong);
-}
-.ps-shot-wrap .shot-img {
-  width: 100%; height: 150px; border-radius: 0; border: none; display: block; object-fit: cover;
-}
-.ps-shot-cap {
-  padding: 7px 11px; font-family: var(--mono); font-size: 0.58rem; color: var(--soft);
-  display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--line);
-}
-.ps-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-.ps-chip {
-  padding: 5px 10px; border-radius: 999px; background: var(--s2); border: 1px solid var(--line);
-  font-size: 0.72rem; color: var(--soft); font-weight: 500;
-}
-.ps-feat-list { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
-.ps-feat-item {
-  display: flex; align-items: flex-start; gap: 11px; padding: 11px 12px;
-  border-radius: 14px; background: var(--s2); border: 1px solid var(--line);
-}
-.ps-feat-ico {
-  width: 32px; height: 32px; border-radius: 10px; flex-shrink: 0;
-  display: grid; place-items: center; font-size: 0.95rem;
-  background: rgba(79,214,156,0.12); border: 1px solid rgba(79,214,156,0.28);
-}
-.ps-feat-title { font-size: 0.84rem; font-weight: 700; color: var(--ink); line-height: 1.25; }
-.ps-feat-desc { font-size: 0.75rem; color: var(--soft); margin-top: 2px; line-height: 1.4; }
-
-/* ── Compact "Chota Sa" New Game Popup ── */
-.lr-pop-overlay {
-  position: fixed; inset: 0; z-index: 215;
-  background: rgba(3,4,7,0.72); backdrop-filter: blur(12px) saturate(1.2); -webkit-backdrop-filter: blur(12px) saturate(1.2);
-  display: flex; align-items: center; justify-content: center;
-  padding: 18px; opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
-}
-.lr-pop-overlay.open { opacity: 1; pointer-events: auto; }
-.lr-pop-card {
-  width: 100%; max-width: 328px;
-  background: linear-gradient(165deg, rgba(1,135,95,0.20), var(--s0) 52%);
-  border: 1px solid rgba(79,214,156,0.42); border-radius: 26px;
-  overflow: hidden; box-shadow: 0 22px 54px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.14);
-  transform: translateY(14px) scale(0.95); transition: transform 0.32s cubic-bezier(0.32, 0.72, 0, 1);
-  position: relative;
-}
-.lr-pop-overlay.open .lr-pop-card { transform: translateY(0) scale(1); }
-.lr-pop-hero { position: relative; height: 118px; width: 100%; overflow: hidden; background: var(--s2); }
-.lr-pop-hero img { width: 100%; height: 100%; object-fit: cover; }
-.lr-pop-hero::after {
-  content: ""; position: absolute; inset: 0;
-  background: linear-gradient(to top, var(--s0) 4%, rgba(12,14,19,0.25) 65%, rgba(12,14,19,0.4));
-}
-.lr-pop-x {
-  position: absolute; top: 10px; right: 10px; z-index: 3;
-  width: 30px; height: 30px; border-radius: 50%;
-  background: rgba(7,8,11,0.75); border: 1px solid rgba(255,255,255,0.18);
-  color: var(--ink); display: grid; place-items: center;
-}
-.lr-pop-pill {
-  position: absolute; top: 10px; left: 12px; z-index: 3;
-  padding: 4px 9px; border-radius: 999px;
-  background: rgba(1,135,95,0.88); border: 1px solid rgba(79,214,156,0.5);
-  color: #fff; font-family: var(--mono); font-size: 0.54rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
-}
-.lr-pop-body { padding: 4px 16px 16px; position: relative; z-index: 2; }
-.lr-pop-head { display: flex; align-items: center; gap: 10px; margin-top: -22px; margin-bottom: 8px; }
-.lr-pop-ico {
-  width: 46px; height: 46px; border-radius: 13px; overflow: hidden; flex-shrink: 0;
-  border: 1.5px solid rgba(79,214,156,0.55); background: var(--s2); box-shadow: 0 6px 16px rgba(0,0,0,0.45);
-}
-.lr-pop-ico img { width: 100%; height: 100%; object-fit: cover; }
-.lr-pop-title { font-size: 1.05rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; }
-.lr-pop-sub { font-family: var(--mono); font-size: 0.58rem; color: var(--green); margin-top: 2px; }
-.lr-pop-code-bar {
-  display: flex; align-items: center; justify-content: space-between; gap: 8px;
-  padding: 8px 11px; border-radius: 12px; background: var(--s1); border: 1px dashed var(--gold-line);
-  margin: 8px 0 10px;
-}
-.lr-pop-code-txt { font-family: var(--mono); font-size: 0.72rem; color: var(--soft); }
-.lr-pop-code-txt strong { color: var(--gold-text); font-size: 0.88rem; letter-spacing: 0.06em; margin-left: 4px; }
-.lr-pop-copy {
-  padding: 5px 10px; border-radius: 999px; background: var(--gold-soft); border: 1px solid var(--gold-line);
-  color: var(--gold-text); font-family: var(--mono); font-size: 0.6rem; font-weight: 700; text-transform: uppercase;
-}
-.lr-pop-list { font-size: 0.76rem; color: var(--soft); line-height: 1.45; margin-bottom: 12px; display: flex; flex-direction: column; gap: 3px; }
-.lr-pop-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
-.lr-pop-btns .btn-full { grid-column: span 2; }
-
 </style>
 <style id="liquid-glass">
 /* ═══ Liquid Glass prototype layer — only active with html.lg ═══ */
@@ -1294,21 +1135,6 @@ html.lg .cal-nav button:last-child::before { transform: scaleX(-1); }
           <span class="stat-meta" id="statSrvCd">—</span>
         </button>
       </div>
-      <div class="card mt-14" style="padding:13px 14px;background:linear-gradient(135deg,rgba(1,135,95,0.18),var(--s1) 70%);border-color:rgba(79,214,156,0.35);display:flex;align-items:center;gap:12px">
-        <img src="blobstore:///contrib_service/ttl_1d/zy3tfhhkk7cagc4kb6ip2g2ui22nj41793338463" alt="Legends Revolution" style="width:46px;height:46px;border-radius:12px;object-fit:cover;flex-shrink:0;border:1px solid rgba(79,214,156,0.45)">
-        <div style="flex:1;min-width:0">
-          <div style="display:flex;align-items:center;gap:6px">
-            <span style="font-family:var(--mono);font-size:0.52rem;letter-spacing:0.12em;text-transform:uppercase;padding:2px 6px;border-radius:999px;background:var(--green-soft);color:var(--green);font-weight:700">New Game</span>
-            <span style="font-family:var(--mono);font-size:0.58rem;color:var(--gold-text)">Code: WH5T35</span>
-          </div>
-          <div style="font-size:0.9rem;font-weight:700;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Legends Revolution · Season 1</div>
-          <div style="font-size:0.72rem;color:var(--soft);margin-top:1px">x10 Speed · Player Market · 3 Languages</div>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:5px;flex-shrink:0">
-          <button class="btn" data-go="newgame" type="button" style="min-height:32px;padding:0 11px;font-size:0.72rem;background:var(--green-soft);border-color:rgba(79,214,156,0.45);color:var(--green)">Store Page</button>
-          <button class="btn" id="btnOpenLrPop" type="button" style="min-height:28px;padding:0 9px;font-size:0.65rem;color:var(--soft)">Quick Info</button>
-        </div>
-      </div>
       <div class="section">
         <div class="section-head">
           <span class="section-title">This week</span>
@@ -1464,6 +1290,53 @@ html.lg .cal-nav button:last-child::before { transform: scaleX(-1); }
     <section id="view-download" class="hidden">
       <div class="hero-shot">
         <div class="hero-shot-img">
+          <img src="legends-revolution/1.jpg" alt="Legends Revolution" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+        </div>
+        <div class="hero-shot-plate">
+          <h2 style="font-size:1.35rem;font-weight:700;letter-spacing:-0.03em;line-height:1.1">Legends Revolution</h2>
+          <p style="font-family:var(--mono);font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--soft);margin-top:6px">Season 1 · live now · EN / ES / PT</p>
+        </div>
+      </div>
+      <div class="card mt-18" style="padding:18px;background:linear-gradient(155deg,rgba(79,214,156,0.12),var(--s1));border-color:rgba(79,214,156,0.28)">
+        <p style="font-size:0.88rem;color:var(--soft);line-height:1.55;text-wrap:pretty">A fresh Season 1 server where everyone starts from zero — trade on the Player Market using Trainer Tokens earned just by playing, pick your 2nd monster from 3 options, and push battles up to x10 speed with x10 Training.</p>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:16px">
+          <a class="btn btn-primary" href="https://legendsrevolution.com.br/baixar" target="_blank" rel="noopener" style="background:linear-gradient(135deg,rgba(79,214,156,0.28),var(--gold-soft));border-color:rgba(79,214,156,0.45);color:var(--ink)">Download Legends Revolution</a>
+        </div>
+        <div style="font-family:var(--mono);font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);margin-top:14px">Season 1 started 10/29 · official site</div>
+      </div>
+
+      <div class="mt-18">
+        <div class="kicker" style="padding-left:2px">Screens</div>
+        <div class="shot-strip">
+          <img class="shot-img" src="legends-revolution/2.jpg" alt="Legends Revolution screenshot 2" loading="lazy">
+          <img class="shot-img" src="legends-revolution/3.jpg" alt="Legends Revolution screenshot 3" loading="lazy">
+          <img class="shot-img" src="legends-revolution/4.jpg" alt="Legends Revolution screenshot 4" loading="lazy">
+          <img class="shot-img" src="legends-revolution/5.jpg" alt="Legends Revolution screenshot 5" loading="lazy">
+          <img class="shot-img" src="legends-revolution/6.jpg" alt="Legends Revolution screenshot 6" loading="lazy">
+        </div>
+      </div>
+
+      <div class="card mt-18" style="padding:18px">
+        <div class="kicker">Why play</div>
+        <div style="margin-top:8px">
+          <div class="dl-spec"><span>Languages</span><span>English, Spanish, Portuguese</span></div>
+          <div class="dl-spec"><span>Season 1</span><span>Started 10/29, 8 PM (Brasília)</span></div>
+          <div class="dl-spec"><span>Market</span><span>Trade using Trainer Tokens</span></div>
+          <div class="dl-spec"><span>Battle &amp; training speed</span><span>Up to x10</span></div>
+          <div class="dl-spec"><span>Daily perks</span><span>Free Wheel spin · Supreme Refine Stone</span></div>
+          <div class="dl-spec"><span>Global events</span><span>BOSS 7:00 PM · Riot 7:30 PM (BRT)</span></div>
+          <div class="dl-spec"><span>Invite reward</span><span>Up to 400 Porcos Revolution</span></div>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:10px;margin-top:28px;margin-bottom:2px">
+        <div style="height:1px;flex:1;background:var(--line)"></div>
+        <div class="kicker gold" style="margin:0">Also available</div>
+        <div style="height:1px;flex:1;background:var(--line)"></div>
+      </div>
+
+      <div class="hero-shot mt-18">
+        <div class="hero-shot-img">
           <img src="https://www.pokelandlegends.com/images/home/banner.jpg" alt="Pokeland Legends" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
         </div>
         <div class="hero-shot-plate">
@@ -1513,148 +1386,6 @@ html.lg .cal-nav button:last-child::before { transform: scaleX(-1); }
       <div class="card mt-18" style="padding:18px">
         <div class="kicker">Day one tips</div>
         <p style="font-size:0.85rem;color:var(--soft);line-height:1.55;margin-top:8px;text-wrap:pretty">Save diamonds for the first legendary rotation. Claim all three daily Vit Gift windows — friendship vit is the slowest resource in the game. Weather &amp; events follow Hong Kong server time (HKT) — pick your country in Themes &amp; time so times show in your local clock.</p>
-      </div>
-    </section>
-    <section id="view-newgame" class="hidden">
-      <div class="ps-banner">
-        <img src="blobstore:///contrib_service/ttl_1d/svqjdfsdiyatgybh4bcg43gfdwgnu21793338463" alt="Legends Revolution Rayquaza Dynamax">
-        <div class="ps-banner-scrim"></div>
-        <span class="ps-banner-tag"><span class="dot green"></span> Google Play Style · Season 1 Live</span>
-      </div>
-
-      <div class="ps-app-header">
-        <div class="ps-app-icon">
-          <img src="blobstore:///contrib_service/ttl_1d/zy3tfhhkk7cagc4kb6ip2g2ui22nj41793338463" alt="Legends Revolution Icon">
-        </div>
-        <div style="min-width:0;flex:1">
-          <h2 class="ps-app-title">Legends Revolution</h2>
-          <div class="ps-app-dev">Legends Revolution BR · Season 1 Server</div>
-          <div class="ps-app-sub">RPG · Monster Tamer · EN / ES / PT</div>
-        </div>
-      </div>
-
-      <div class="ps-metrics">
-        <div class="ps-metric">
-          <span class="ps-metric-val">4.9 <span style="color:var(--gold-text);font-size:0.82rem">★</span></span>
-          <span class="ps-metric-sub">Season 1</span>
-        </div>
-        <div class="ps-metric">
-          <span class="ps-metric-val" style="color:var(--green)">x10</span>
-          <span class="ps-metric-sub">Battle &amp; Train</span>
-        </div>
-        <div class="ps-metric">
-          <span class="ps-metric-val">3 Langs</span>
-          <span class="ps-metric-sub">EN · ES · PT</span>
-        </div>
-        <div class="ps-metric">
-          <span class="ps-metric-val" style="color:var(--gold-text)">400</span>
-          <span class="ps-metric-sub">Porcos Invite</span>
-        </div>
-      </div>
-
-      <div class="ps-code-box">
-        <div style="min-width:0">
-          <div class="ps-code-lbl">★ Note This Code First</div>
-          <div class="ps-code-val" id="lrCodeText">WH5T35</div>
-          <div class="ps-code-note">Must use login link below with code <strong>WH5T35</strong> for Game ID</div>
-        </div>
-        <button class="ps-copy-btn" id="btnCopyCodePage" type="button">
-          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-          <span id="copyCodePageLbl">Copy Code</span>
-        </button>
-      </div>
-
-      <div class="ps-cta-row">
-        <a class="btn ps-btn-install" href="https://legendsrevolution.com.br/baixar" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m8 11 4 4 4-4"/><path d="M4 18v2a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-2"/></svg>
-          Install / Download Game (APK)
-        </a>
-        <a class="btn ps-btn-login" href="https://legendsrevolution.com.br/r/WH5T35" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
-          Login Game ID (Must Use Link · WH5T35)
-        </a>
-      </div>
-
-      <div class="mt-18">
-        <div class="section-head" style="margin-bottom:8px">
-          <span class="section-title">In-game screenshots</span>
-          <span style="font-family:var(--mono);font-size:0.58rem;color:var(--muted)">Tap photo to zoom</span>
-        </div>
-        <div class="shot-strip">
-          <div class="ps-shot-wrap">
-            <img class="shot-img" src="blobstore:///contrib_service/ttl_1d/zy3tfhhkk7cagc4kb6ip2g2ui22nj41793338463" alt="Legends Revolution Town Hub, VIP & Market">
-            <div class="ps-shot-cap"><span>Town Hub · Player Market</span><span>1 / 3</span></div>
-          </div>
-          <div class="ps-shot-wrap">
-            <img class="shot-img" src="blobstore:///contrib_service/ttl_1d/ym373xisixabk6ie5figlvx6hqdzky1793338463" alt="Legends Revolution Passe Reborn Ho-Oh & Latias Latios">
-            <div class="ps-shot-cap"><span>Passe Reborn · Ho-Oh &amp; Eon Duo</span><span>2 / 3</span></div>
-          </div>
-          <div class="ps-shot-wrap">
-            <img class="shot-img" src="blobstore:///contrib_service/ttl_1d/svqjdfsdiyatgybh4bcg43gfdwgnu21793338463" alt="Legends Revolution Rayquaza Dynamax Resonance">
-            <div class="ps-shot-cap"><span>Rayquaza Dynamax · Resonance</span><span>3 / 3</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card mt-18" style="padding:18px">
-        <div class="kicker gold">About this game</div>
-        <h3 style="font-size:1.05rem;font-weight:700;margin-bottom:6px">What makes Legends Revolution different</h3>
-        <p style="font-size:0.82rem;color:var(--soft);line-height:1.5">Start fresh from zero on Season 1 with built-in x10 battle &amp; training speed, transparent capsule odds, and a player-driven Trainer Token economy.</p>
-        <div class="ps-chips">
-          <span class="ps-chip">🌐 EN / ES / PT</span>
-          <span class="ps-chip">⚡ x10 Battle &amp; Training</span>
-          <span class="ps-chip">🏪 Player Market</span>
-          <span class="ps-chip">🎡 Free Daily Wheel</span>
-          <span class="ps-chip">💎 Supreme Refine Stone</span>
-        </div>
-        <div class="ps-feat-list">
-          <div class="ps-feat-item">
-            <div class="ps-feat-ico">🌐</div>
-            <div><div class="ps-feat-title">3 Languages Supported</div><div class="ps-feat-desc">Play in English, Spanish, or Portuguese seamlessly.</div></div>
-          </div>
-          <div class="ps-feat-item">
-            <div class="ps-feat-ico">🚀</div>
-            <div><div class="ps-feat-title">Fresh Season 1 Server</div><div class="ps-feat-desc">Everyone starts from zero on 10/29 at 8:00 PM Brasília time.</div></div>
-          </div>
-          <div class="ps-feat-item">
-            <div class="ps-feat-ico">🏪</div>
-            <div><div class="ps-feat-title">Player Market &amp; Passive Trainer Tokens</div><div class="ps-feat-desc">Trade items in the Player Market with Trainer Tokens earned automatically over time just by playing.</div></div>
-          </div>
-          <div class="ps-feat-item">
-            <div class="ps-feat-ico">🐉</div>
-            <div><div class="ps-feat-title">Pick Your 2nd Monster (3 Options)</div><div class="ps-feat-desc">Choose your second partner monster from 3 curated starter options.</div></div>
-          </div>
-          <div class="ps-feat-item">
-            <div class="ps-feat-ico">⚡</div>
-            <div><div class="ps-feat-title">x10 Battles &amp; x10 Training for Everyone</div><div class="ps-feat-desc">Battles run up to x10 speed for all players alongside x10 Training speed.</div></div>
-          </div>
-          <div class="ps-feat-item">
-            <div class="ps-feat-ico">🎯</div>
-            <div><div class="ps-feat-title">All Capsule Odds Shown + Daily Wheel</div><div class="ps-feat-desc">Full capsule drop rates are displayed in-game, plus claim free spins on the Wheel every day and unlock the Supreme Refine Stone.</div></div>
-          </div>
-          <div class="ps-feat-item">
-            <div class="ps-feat-ico">🐷</div>
-            <div><div class="ps-feat-title">Invite Friends: Up to 400 Porcos Revolution</div><div class="ps-feat-desc">Earn up to 400 Porcos Revolution (the strongest trade currency) by inviting friends with code <strong>WH5T35</strong>.</div></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card mt-18" style="padding:18px;background:linear-gradient(155deg,rgba(79,214,156,0.10),var(--s1));border-color:rgba(79,214,156,0.28)">
-        <div class="kicker green">Daily Server Schedule · Brasília Time (BRT)</div>
-        <div class="dl-step"><span class="dl-num" style="background:var(--green-soft);color:var(--green)">19:00</span><div><div style="font-size:0.88rem;font-weight:700">Global BOSS &amp; Pokémon Riot (Session 1)</div><div style="font-size:0.78rem;color:var(--muted);margin-top:2px">Every day at 7:00 PM Brasília time.</div></div></div>
-        <div class="dl-step"><span class="dl-num" style="background:var(--green-soft);color:var(--green)">19:30</span><div><div style="font-size:0.88rem;font-weight:700">Global BOSS &amp; Pokémon Riot (Session 2)</div><div style="font-size:0.78rem;color:var(--muted);margin-top:2px">Every day at 7:30 PM Brasília time.</div></div></div>
-        <div class="dl-step"><span class="dl-num">20:00</span><div><div style="font-size:0.88rem;font-weight:700">Fresh Season 1 Server Launch</div><div style="font-size:0.78rem;color:var(--muted);margin-top:2px">10/29 at 8:00 PM Brasília time — everyone starts from zero.</div></div></div>
-      </div>
-
-      <div class="card mt-18" style="padding:18px">
-        <div class="kicker">Game info &amp; official links</div>
-        <div style="margin-top:8px">
-          <div class="dl-spec"><span>Invite / Login Code</span><span style="font-family:var(--mono);font-weight:700;color:var(--gold-text)">WH5T35</span></div>
-          <div class="dl-spec"><span>Login Game ID Web</span><a href="https://legendsrevolution.com.br/r/WH5T35" target="_blank" rel="noopener noreferrer" style="color:var(--green);text-decoration:underline">legendsrevolution.com.br/r/WH5T35</a></div>
-          <div class="dl-spec"><span>Download Client</span><a href="https://legendsrevolution.com.br/baixar" target="_blank" rel="noopener noreferrer" style="color:var(--green);text-decoration:underline">legendsrevolution.com.br/baixar</a></div>
-          <div class="dl-spec"><span>Languages</span><span>English, Spanish, Portuguese</span></div>
-          <div class="dl-spec"><span>Trade Currencies</span><span>Trainer Tokens &amp; Porcos Revolution</span></div>
-        </div>
       </div>
     </section>
     <section id="view-builds" class="hidden">
@@ -1803,16 +1534,6 @@ html.lg .cal-nav button:last-child::before { transform: scaleX(-1); }
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg>
       </button>
     </div>
-    <button class="side-row" data-side="newgame" type="button" style="border-color:rgba(79,214,156,0.38);background:linear-gradient(135deg,rgba(1,135,95,0.18),var(--s1))">
-      <span class="side-row-ico" style="background:var(--green-soft);color:var(--green)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-      </span>
-      <span>
-        <span class="side-row-title">New game · Legends Rev.</span>
-        <span class="side-row-sub">Play Store · Code WH5T35</span>
-      </span>
-      <span class="side-soon" style="color:var(--green);border-color:rgba(79,214,156,0.45);background:var(--green-soft)">NEW</span>
-    </button>
     <button class="side-row" data-side="guide" type="button">
       <span class="side-row-ico">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M9 7h7"/><path d="M9 11h5"/></svg>
@@ -1892,49 +1613,6 @@ html.lg .cal-nav button:last-child::before { transform: scaleX(-1); }
     </div>
   </aside>
   
-  <div class="lr-pop-overlay" id="lrPopOverlay" aria-hidden="true">
-    <div class="lr-pop-card" role="dialog" aria-modal="true" aria-labelledby="lrPopTitle">
-      <div class="lr-pop-hero">
-        <img src="blobstore:///contrib_service/ttl_1d/zy3tfhhkk7cagc4kb6ip2g2ui22nj41793338463" alt="Legends Revolution">
-        <span class="lr-pop-pill">★ New Game · S1</span>
-        <button class="lr-pop-x" id="lrPopCloseX" type="button" aria-label="Close popup">
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg>
-        </button>
-      </div>
-      <div class="lr-pop-body">
-        <div class="lr-pop-head">
-          <div class="lr-pop-ico">
-            <img src="blobstore:///contrib_service/ttl_1d/ym373xisixabk6ie5figlvx6hqdzky1793338463" alt="Passe Reborn">
-          </div>
-          <div>
-            <div class="lr-pop-title" id="lrPopTitle">Legends Revolution</div>
-            <div class="lr-pop-sub">EN · ES · PT · x10 Speed &amp; Training</div>
-          </div>
-        </div>
-        <div class="lr-pop-code-bar">
-          <span class="lr-pop-code-txt">Login Code:<strong>WH5T35</strong></span>
-          <button class="lr-pop-copy" id="btnCopyCodePop" type="button">Copy</button>
-        </div>
-        <div class="lr-pop-list">
-          <div>• <strong>Must use code link</strong> to login Game ID</div>
-          <div>• <strong>Player Market</strong> &amp; up to <strong>400 Porcos</strong> invite reward</div>
-          <div>• <strong>Global BOSS &amp; Riot:</strong> 7:00 PM &amp; 7:30 PM BRT</div>
-        </div>
-        <div class="lr-pop-btns">
-          <button class="btn ps-btn-install btn-full" id="lrPopOpenStore" type="button" style="min-height:42px;font-size:0.82rem">
-            Open Play Store Page
-          </button>
-          <a class="btn ps-btn-login" href="https://legendsrevolution.com.br/r/WH5T35" target="_blank" rel="noopener noreferrer" style="min-height:38px;font-size:0.74rem;padding:0 10px">
-            Login ID
-          </a>
-          <a class="btn" href="https://legendsrevolution.com.br/baixar" target="_blank" rel="noopener noreferrer" style="min-height:38px;font-size:0.74rem;padding:0 10px;border-color:rgba(79,214,156,0.35);color:var(--green)">
-            Download
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div class="ann-overlay" id="annOverlay" aria-hidden="true">
     <div class="ann-card" role="dialog" aria-modal="true" aria-labelledby="annTitle">
       <div class="ann-icon-row">
@@ -3145,7 +2823,7 @@ function go(view) {
   if (view !== "weather") state.wxSel = null; // a picked weather window resets when you leave Weather
   state.view = view; state.sel = null;
   document.querySelectorAll(".nav-item").forEach(el => el.classList.toggle("on", el.dataset.view === view));
-  ["board","rotation","weather","events","server","download","builds","wiki","teams","guide","guide-tickets","about","newgame"].forEach(v => {
+  ["board","rotation","weather","events","server","download","builds","wiki","teams","guide","guide-tickets","about"].forEach(v => {
     const el = document.getElementById("view-" + v);
     if (el) el.classList.toggle("hidden", v !== view);
   });
@@ -3977,11 +3655,6 @@ applyCountry(curCountry);
   window.addEventListener("resize", onResize);
   setTimeout(function start() {
     const ann = document.getElementById("annOverlay");
-    const lrPop = document.getElementById("lrPopOverlay");
-    if (lrPop && lrPop.classList.contains("open")) {
-      const mo0 = new MutationObserver(() => { if (!lrPop.classList.contains("open")) { mo0.disconnect(); setTimeout(start, 400); } });
-      return mo0.observe(lrPop, { attributes: true, attributeFilter: ["class"] });
-    }
     if (ann && ann.classList.contains("open")) {
       const mo = new MutationObserver(() => { if (!ann.classList.contains("open")) { mo.disconnect(); setTimeout(start, 400); } });
       return mo.observe(ann, { attributes: true, attributeFilter: ["class"] });
@@ -4006,31 +3679,18 @@ function setDrawer(on, focus) {
 }
 document.getElementById("btnMenu").addEventListener("click", () => setDrawer(true, "theme"));
 document.getElementById("clocksBox").addEventListener("click", () => setDrawer(true, "country"));
-const allShots = Array.from(document.querySelectorAll(".shot-img"));
-let shots = allShots;
+const shots = Array.from(document.querySelectorAll(".shot-img"));
 const lb = document.getElementById("shotLb"), lbImg = document.getElementById("shotLbImg"), lbNav = document.getElementById("shotLbNav");
 let lbIdx = 0;
-function renderLbDots() {
-  lbNav.innerHTML = shots.map((_, n) => `<i class="${n === lbIdx ? "on" : ""}"></i>`).join("");
-}
-renderLbDots();
+lbNav.innerHTML = shots.map(() => "<i></i>").join("");
 function showShot(i) {
   lbIdx = (i + shots.length) % shots.length;
   lbImg.src = shots[lbIdx].src;
   if (typeof resetZoom === "function") resetZoom();
-  renderLbDots();
+  lbNav.querySelectorAll("i").forEach((d, n) => d.classList.toggle("on", n === lbIdx));
 }
-function setLb(on, i, grp) {
-  if (grp && grp.length) shots = grp;
-  if (on) showShot(i);
-  lb.classList.toggle("on", on);
-  resetZoom();
-}
-allShots.forEach(im => im.addEventListener("click", () => {
-  const strip = im.closest(".shot-strip");
-  const grp = strip ? Array.from(strip.querySelectorAll(".shot-img")) : allShots;
-  setLb(true, Math.max(0, grp.indexOf(im)), grp);
-}));
+function setLb(on, i) { if (on) showShot(i); lb.classList.toggle("on", on); resetZoom(); }
+shots.forEach((im, i) => im.addEventListener("click", () => setLb(true, i)));
 document.getElementById("shotLbClose").addEventListener("click", () => setLb(false));
 lb.addEventListener("click", e => { if (e.target === lb) setLb(false); });
 let zScale = 1, zx = 0, zy = 0, pinchBase = 0, dragFrom = null, pts = new Map();
@@ -4368,7 +4028,7 @@ document.getElementById("sheetOverlay").addEventListener("click", e => { if (e.t
 document.getElementById("sheetFav").addEventListener("click", () => { if (state.sel) { toggleFav(state.sel); openSheet(state.sel); } });
 
 const hash = (location.hash || "").slice(1);
-if (["board","rotation","weather","events","server","download","builds","wiki","teams","guide","guide-tickets","about","newgame"].includes(hash)) go(hash);
+if (["board","rotation","weather","events","server","download","builds","wiki","teams","guide","guide-tickets","about"].includes(hash)) go(hash);
 else render();
 
 
@@ -4448,7 +4108,7 @@ function openExternal(url) {
 }
 
 function bindExternalLinks() {
-  document.querySelectorAll('a[href*="discord.gg"], a[href*="discord.com"], a[href*="youtube.com"], a[href*="youtu.be"], a[href*="legendsrevolution.com.br"]').forEach(function (a) {
+  document.querySelectorAll('a[href*="discord.gg"], a[href*="discord.com"], a[href*="youtube.com"], a[href*="youtu.be"]').forEach(function (a) {
     if (a.dataset.extBound === "1") return;
     a.dataset.extBound = "1";
     a.addEventListener("click", function (e) {
@@ -4469,8 +4129,6 @@ function showAnnouncement(force) {
   if (!el) return;
   // Avoid stacking if already open
   if (el.classList.contains("open")) return;
-  const lrPop = document.getElementById("lrPopOverlay");
-  if (lrPop && lrPop.classList.contains("open")) return;
   if (document.body.classList.contains("coaching")) return;
   if (!force && annOpenOnce) return;
   annOpenOnce = true;
@@ -4538,70 +4196,6 @@ document.addEventListener("visibilitychange", () => {
 window.addEventListener("pageshow", refreshNotificationReminder);
 setInterval(refreshNotificationReminder, 60 * 1000);
 
-
-
-/* ── Legends Revolution Mini Popup & Copy Referral Code ── */
-(function initLegendsRevolution() {
-  const pop = document.getElementById("lrPopOverlay");
-  const closeX = document.getElementById("lrPopCloseX");
-  const openStore = document.getElementById("lrPopOpenStore");
-  const openBtn = document.getElementById("btnOpenLrPop");
-  const copyPageBtn = document.getElementById("btnCopyCodePage");
-  const copyPageLbl = document.getElementById("copyCodePageLbl");
-  const copyPopBtn = document.getElementById("btnCopyCodePop");
-  const CODE = "WH5T35";
-
-  function copyCode(feedbackEl, defaultText) {
-    const done = () => {
-      if (!feedbackEl) return;
-      feedbackEl.textContent = "Copied!";
-      setTimeout(() => { feedbackEl.textContent = defaultText; }, 1800);
-    };
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(CODE).then(done).catch(() => fallbackCopy(done));
-    } else {
-      fallbackCopy(done);
-    }
-  }
-  function fallbackCopy(cb) {
-    try {
-      const ta = document.createElement("textarea");
-      ta.value = CODE;
-      ta.style.position = "fixed";
-      ta.style.opacity = "0";
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand("copy");
-      document.body.removeChild(ta);
-      if (cb) cb();
-    } catch (e) {}
-  }
-
-  if (copyPageBtn) copyPageBtn.addEventListener("click", () => copyCode(copyPageLbl, "Copy Code"));
-  if (copyPopBtn) copyPopBtn.addEventListener("click", () => copyCode(copyPopBtn, "Copy"));
-
-  function openLrPop() {
-    if (!pop) return;
-    pop.classList.add("open");
-    pop.setAttribute("aria-hidden", "false");
-  }
-  function closeLrPop() {
-    if (!pop) return;
-    pop.classList.remove("open");
-    pop.setAttribute("aria-hidden", "true");
-  }
-
-  if (closeX) closeX.addEventListener("click", closeLrPop);
-  if (pop) pop.addEventListener("click", e => { if (e.target === pop) closeLrPop(); });
-  if (openBtn) openBtn.addEventListener("click", openLrPop);
-  if (openStore) openStore.addEventListener("click", () => {
-    closeLrPop();
-    go("newgame");
-  });
-
-  // Show the compact popup once on launch so the user sees it immediately
-  setTimeout(openLrPop, 350);
-})();
 
 initWeather();
 
