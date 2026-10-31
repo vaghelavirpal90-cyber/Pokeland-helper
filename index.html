@@ -1643,11 +1643,10 @@ html.lg .cal-nav button:last-child::before { transform: scaleX(-1); }
         Get live tips, rotation alerts, and hang with other players on Discord — plus guides &amp; updates on YouTube.
       </p>
       <div class="ann-video" id="annFeaturedVideo">
-        <button class="ann-video-thumb" id="annVideoPlay" type="button" aria-label="Play Legends Reborn Review">
+        <a class="ann-video-thumb" id="annVideoPlay" href="https://youtu.be/pUE0iMPPPzQ" target="_blank" rel="noopener noreferrer" aria-label="Watch Legends Reborn Review on YouTube">
           <img src="legends-revolution/Screenshot_20261029_155314_Legends_Reborn.jpg" alt="Legends Reborn weekly rewards event thumbnail" loading="eager">
           <span class="ann-video-play"><span>▶</span></span>
-        </button>
-        <iframe class="ann-video-frame" id="annVideoFrame" title="Legends Reborn Review" hidden allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </a>
       </div>
       <p class="ann-video-title">Legends Reborn Review 🎮🔥 | Gameplay, Features, Free Rewards &amp; How to Start Playing!</p>
       <div class="ann-actions">
@@ -4140,7 +4139,7 @@ function bindExternalLinks() {
 }
 
 /* ── Announcement: community (Discord + YouTube) ── */
-const ANN_KEY = "ph_ann_community_v2";
+const ANN_KEY = "ph_ann_community_v3";
 let annNever = false;
 let annOpenOnce = false; // only auto-popup once per cold JS context; reopen via visibility still ok if not dismissed
 function showAnnouncement(force) {
@@ -4175,13 +4174,7 @@ function hideAnnouncement(permanent) {
   const discord = document.getElementById("annDiscord");
   const yt = document.getElementById("annYoutube");
   const videoPlay = document.getElementById("annVideoPlay");
-  const videoFrame = document.getElementById("annVideoFrame");
   if (!never || !close || !overlay) return;
-  if (videoPlay && videoFrame) videoPlay.addEventListener("click", () => {
-    videoFrame.src = "https://www.youtube-nocookie.com/embed/pUE0iMPPPzQ?autoplay=1&rel=0";
-    videoFrame.hidden = false;
-    videoPlay.hidden = true;
-  });
   never.addEventListener("click", (e) => {
     e.preventDefault();
     annNever = !annNever;
