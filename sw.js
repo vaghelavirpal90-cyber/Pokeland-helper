@@ -1,6 +1,6 @@
 // Pokeland Helper — service worker
 // Bump CACHE_NAME whenever index.html changes to force an update.
-const CACHE_NAME = "pokeland-helper-v3";
+const CACHE_NAME = "pokeland-helper-v4";
 const CORE_ASSETS = [
   "./",
   "./index.html",
