@@ -2366,7 +2366,7 @@ function bindExternalLinks() {
 }
 
 /* ── Announcement: community (Discord + YouTube) ── */
-const ANN_KEY = "ph_ann_community_v4";
+const ANN_KEY = "ph_ann_gear_refine_v1";
 let annNever = false;
 let annOpenOnce = false; // only auto-popup once per cold JS context; reopen via visibility still ok if not dismissed
 function showAnnouncement(force) {
