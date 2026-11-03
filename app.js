@@ -2611,5 +2611,4 @@ if ("serviceWorker" in navigator) {
   });
 })();
 
-/* Legends Revolution registration guide popup */
-(function(){const overlay=document.getElementById("lrGuideOverlay"),open=document.getElementById("openLegendsRebornGuide"),close=document.getElementById("lrGuideClose");if(!overlay||!open||!close)return;const hide=()=>{overlay.classList.remove("open");overlay.setAttribute("aria-hidden","true");};open.addEventListener("click",()=>{overlay.classList.add("open");overlay.setAttribute("aria-hidden","false");});close.addEventListener("click",hide);overlay.addEventListener("click",e=>{if(e.target===overlay)hide();});document.addEventListener("keydown",e=>{if(e.key==="Escape")hide();});})();
+/* Legends Revolution registration popup removed; download link now opens the registration page directly. */
