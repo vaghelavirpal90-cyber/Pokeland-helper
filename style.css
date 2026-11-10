@@ -1007,3 +1007,40 @@ html.lg .cal-nav button::before { content: ""; position: absolute; inset: 0; mar
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 5l-7 7 7 7'/%3E%3C/svg%3E") center / contain no-repeat;
           mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 5l-7 7 7 7'/%3E%3C/svg%3E") center / contain no-repeat; }
 html.lg .cal-nav button:last-child::before { transform: scaleX(-1); }
+
+
+/* ═══ Mobile GPU performance pass ═══
+   Keep the Liquid Glass look, but avoid repainting blurred layers while scrolling
+   on touch devices. Translucent surfaces remain; only expensive live blur is removed. */
+@media (hover: none) and (pointer: coarse) {
+  html.lg *,
+  html.lg *::before,
+  html.lg *::after {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  html.lg .header {
+    background: rgba(7, 8, 11, .97);
+  }
+
+  html.lg .nav-inner {
+    background: rgba(18, 21, 28, .97);
+  }
+
+  /* Pause decorative-only motion; keep functional countdowns and feedback intact. */
+  html.lg .hero-sprite,
+  html.lg .pb-ball,
+  html.lg .pb-half,
+  html.lg .pb-seam,
+  html.lg .pb-flash,
+  html.lg .pb-pika,
+  html.lg .ab-rings,
+  html.lg .rgb-dot {
+    animation: none !important;
+  }
+
+  html.lg .ab-marquee > div {
+    animation-play-state: paused !important;
+  }
+}
