@@ -188,7 +188,7 @@ body.coaching .header{z-index:55;background:transparent;backdrop-filter:none;-we
 .fav-chip img { width: 32px; height: 32px; object-fit: contain; }
 .fav-chip span { font-size: 0.78rem; font-weight: 500; white-space: nowrap; }
 .fav-next { font-size: 0.65rem; color: var(--muted); }
-.cal-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.cal-nav { display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
 .cal-nav button { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: var(--s2); border: 1px solid var(--line); color: var(--soft); }
 .cal-month { font-size: 1rem; font-weight: 600; }
 .wx-status-retry { cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
