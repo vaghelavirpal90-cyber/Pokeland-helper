@@ -1250,11 +1250,15 @@ function renderRotation() {
       ? hits.map(x => `<button class="result-row" data-flr="${x.k}">${x.id ? `<img src="${typeof x.id === "string" ? x.id.replace("/go/normal/", "/go/shiny/") : ART_3D + "shiny/" + x.id + ".png"}" alt="" loading="lazy">` : '<span class="fl-ph">' + x.n[0] + '</span>'}<span class="result-name">${x.n}</span><span class="result-date" style="width:auto;${x.ahead ? "" : "color:var(--green)"}">${x.ahead ? "Fri " + flashStart(x.k, fw).getDate() + " " + MON[flashStart(x.k, fw).getMonth()] : "Live now"}</span></button>`).join("")
       : none;
   } else {
+    if (state.rotOffset < 0) state.rotOffset = 0;
     const anchor = new Date(today.getFullYear(), today.getMonth() + state.rotOffset, 1);
     const y = anchor.getFullYear(), mo = anchor.getMonth();
     const dim = new Date(y, mo + 1, 0).getDate();
     const tab = state.rotTab || "capsule";
     document.getElementById("rotMonth").textContent = MONL[mo] + " " + y;
+    document.getElementById("rotPrev").disabled = state.rotOffset === 0;
+    document.getElementById("rotPrev").style.opacity = state.rotOffset === 0 ? "0.28" : "";
+    document.getElementById("rotPrev").style.pointerEvents = state.rotOffset === 0 ? "none" : "";
     document.querySelectorAll("#rotTabs .wx-tab").forEach(t => t.classList.toggle("on", t.dataset.rottab === tab));
     const isFlash = tab === "flash";
     document.getElementById("rotFlash").classList.toggle("hidden", !isFlash);
@@ -2025,7 +2029,7 @@ document.getElementById("weekStrip").addEventListener("click", e => { const c = 
 document.getElementById("favList").addEventListener("click", e => { const c = e.target.closest("[data-name]"); if (c) openSheet(c.dataset.name); });
 document.getElementById("rotSearch").addEventListener("input", e => { state.qs[state.rotTab || "capsule"] = e.target.value; renderRotation(); });
 document.getElementById("favFilter").addEventListener("click", () => { state.favOnly = !state.favOnly; renderRotation(); });
-document.getElementById("rotPrev").addEventListener("click", () => { state.rotOffset--; renderRotation(); });
+document.getElementById("rotPrev").addEventListener("click", () => { if (state.rotOffset <= 0) return; state.rotOffset--; renderRotation(); });
 document.getElementById("rotNext").addEventListener("click", () => { state.rotOffset++; renderRotation(); });
 document.getElementById("rotBars").addEventListener("click", e => {
   const g = e.target.closest("[data-goday]");
