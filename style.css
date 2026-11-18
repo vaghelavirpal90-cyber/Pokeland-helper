@@ -493,12 +493,9 @@ body.coaching .header{z-index:55;background:transparent;backdrop-filter:none;-we
   box-shadow: 0 24px 60px rgba(0,0,0,0.55), 0 0 0 1px rgba(var(--gold-rgb),0.08);
   padding: 28px 22px 20px; text-align: center;
   transform: scale(0.94) translateY(8px); transition: transform 0.35s cubic-bezier(.32,.72,0,1);
-  max-height: min(640px, 88dvh); overflow-y: auto; -webkit-overflow-scrolling: touch;
 }
 .notif-modal-overlay.open .notif-modal { transform: scale(1) translateY(0); }
-.notif-modal-icon { position: relative; width: 76px; height: 76px; margin: 0 auto 16px; display: grid; place-items: center; transition: width .2s, height .2s, margin .2s; }
-.notif-modal-icon.compact { width: 52px; height: 52px; margin-bottom: 10px; }
-.notif-modal-icon.compact .notif-modal-ring { display: none; }
+.notif-modal-icon { position: relative; width: 76px; height: 76px; margin: 0 auto 16px; display: grid; place-items: center; }
 .notif-modal-ring {
   position: absolute; inset: 0; border-radius: 50%; border: 1px solid var(--gold-line);
   animation: notifRing 2.2s cubic-bezier(0,0,0.3,1) infinite;
@@ -522,13 +519,8 @@ body.coaching .header{z-index:55;background:transparent;backdrop-filter:none;-we
 .notif-step-txt { font-size: 0.62rem; color: var(--muted); line-height: 1.35; }
 .notif-step-arrow { color: var(--dim); flex-shrink: 0; padding-top: 10px; }
 .notif-step-arrow svg { width: 12px; height: 12px; }
-.notif-modal-actions {
-  position: sticky; bottom: -20px; margin: 0 -22px -20px; padding: 10px 22px 20px;
-  background: linear-gradient(0deg, var(--s0) 55%, transparent 100%);
-}
 .notif-modal-cta { width: 100%; padding: 13px; border-radius: 14px; background: var(--gold); color: #0b0c10; font-weight: 700; font-size: 0.88rem; margin-bottom: 10px; }
 .notif-modal-later { font-size: 0.78rem; color: var(--muted); padding: 4px; }
-.notif-modal-actions.single .notif-modal-later { display: none; }
 .sheet-overlay {
   position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,0.55); backdrop-filter: blur(6px);
   display: flex; align-items: flex-end; justify-content: center;

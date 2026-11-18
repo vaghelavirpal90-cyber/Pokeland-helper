@@ -2289,8 +2289,6 @@ function openNotifModal() {
   const sub = document.getElementById("notifModalSub");
   const steps = document.getElementById("notifModalSteps");
   const cta = document.getElementById("notifModalCta");
-  const icon = document.getElementById("notifModalIcon");
-  const actions = cta.closest(".notif-modal-actions");
 
   if (!steps.dataset.orig) steps.dataset.orig = steps.innerHTML;
   if (s === "ios-not-installed") {
@@ -2298,8 +2296,6 @@ function openNotifModal() {
     title.textContent = "Get alerts on iPhone";
     sub.textContent = "Safari needs one extra step before it can send alerts. It only takes a moment:";
     steps.style.display = "flex";
-    icon.classList.add("compact");
-    actions.classList.add("single");
     cta.textContent = "Got it";
     cta.onclick = () => closeNotifModal();
   } else if (s === "denied") {
@@ -2308,16 +2304,12 @@ function openNotifModal() {
       ? "Remove this app from your Home Screen and add it again — that resets the permission."
       : "Turn them back on from your phone's Settings → Apps → Pokeland Helper → Notifications.";
     steps.style.display = "none";
-    icon.classList.remove("compact");
-    actions.classList.add("single");
     cta.textContent = "Got it";
     cta.onclick = () => closeNotifModal();
   } else {
     title.textContent = "Never miss a rare spawn";
     sub.textContent = "Turn on alerts and get a heads-up before rare weather and events go live.";
     steps.style.display = "none";
-    icon.classList.remove("compact");
-    actions.classList.remove("single");
     cta.textContent = "Turn on alerts";
     cta.onclick = async () => {
       try {
