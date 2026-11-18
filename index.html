@@ -147,24 +147,32 @@
         <div class="fav-row" id="favList"></div>
         <div class="empty hidden" id="favEmpty"><p>Star legendaries to track them here</p></div>
       </div>
-      <div class="section">
+      <div class="section" style="margin-top:24px">
         <div class="section-head">
-          <span class="section-title">Upcoming events</span>
-          <button class="section-link" data-go="events">All →</button>
+          <span class="section-title">Explore Pokeland</span>
+          <span class="kicker gold">TOOLS &amp; GUIDES</span>
         </div>
-        <div class="event-list" id="boardEvents"></div>
+        <button type="button" data-side="wiki" aria-label="Open Pokeland Wiki" style="width:100%;display:flex;align-items:center;gap:14px;text-align:left;padding:17px;margin:0 0 12px;border-radius:18px;border:1px solid var(--gold-line);background:linear-gradient(115deg,var(--gold-soft),var(--s1) 68%);color:var(--ink);cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+          <span style="width:46px;height:46px;flex:0 0 46px;display:grid;place-items:center;border-radius:14px;background:var(--s2);border:1px solid var(--gold-line);color:var(--gold-text)">
+            <svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 0 4 22z"/><path d="M4 5.5v14A2.5 2.5 0 0 1 6.5 17H20M9 7h7M9 11h6"/></svg>
+          </span>
+          <span style="display:block;min-width:0;flex:1">
+            <span style="display:block;font-size:.66rem;font-family:var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--gold-text);font-weight:700;margin-bottom:4px">PLAYER KNOWLEDGE BASE</span>
+            <span style="display:block;font-size:1rem;font-weight:800;letter-spacing:-.025em">Pokeland Wiki</span>
+            <span style="display:block;font-size:.76rem;color:var(--soft);margin-top:3px;line-height:1.4">Pokémon database, gear, items and game guides</span>
+          </span>
+          <span style="font-size:1.25rem;color:var(--gold-text);font-weight:700">→</span>
+        </button>
+        <button type="button" data-side="builds" aria-label="Open Pokémon Builds" style="width:100%;display:flex;align-items:center;gap:14px;text-align:left;padding:17px;margin:0 0 4px;border-radius:18px;border:1px solid var(--line);background:linear-gradient(115deg,var(--s2),var(--s1) 72%);color:var(--ink);cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+          <span style="width:46px;height:46px;flex:0 0 46px;display:grid;place-items:center;border-radius:14px;background:var(--s1);border:1px solid var(--line);font-size:23px">⚔️</span>
+          <span style="display:block;min-width:0;flex:1">
+            <span style="display:block;font-size:.66rem;font-family:var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--soft);font-weight:700;margin-bottom:4px">TEAM SETUPS &amp; STRATEGY</span>
+            <span style="display:block;font-size:1rem;font-weight:800;letter-spacing:-.025em">Pokémon Builds</span>
+            <span style="display:block;font-size:.76rem;color:var(--soft);margin-top:3px;line-height:1.4">Explore Pokémon builds, roles and battle guides</span>
+          </span>
+          <span style="font-size:1.25rem;color:var(--soft);font-weight:700">→</span>
+        </button>
       </div>
-      <button type="button" data-side="wiki" aria-label="Open Pokeland Wiki" style="width:100%;display:flex;align-items:center;gap:14px;text-align:left;padding:17px;margin:18px 0 4px;border-radius:18px;border:1px solid var(--gold-line);background:linear-gradient(115deg,var(--gold-soft),var(--s1) 68%);color:var(--ink);cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.12)">
-        <span style="width:46px;height:46px;flex:0 0 46px;display:grid;place-items:center;border-radius:14px;background:var(--s2);border:1px solid var(--gold-line);color:var(--gold-text)">
-          <svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 0 4 22z"/><path d="M4 5.5v14A2.5 2.5 0 0 1 6.5 17H20M9 7h7M9 11h6"/></svg>
-        </span>
-        <span style="display:block;min-width:0;flex:1">
-          <span style="display:block;font-size:.66rem;font-family:var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--gold-text);font-weight:700;margin-bottom:4px">PLAYER KNOWLEDGE BASE</span>
-          <span style="display:block;font-size:1rem;font-weight:800;letter-spacing:-.025em">Pokeland Wiki</span>
-          <span style="display:block;font-size:.76rem;color:var(--soft);margin-top:3px;line-height:1.4">Explore Pokémon, builds, gear and game guides</span>
-        </span>
-        <span style="font-size:1.25rem;color:var(--gold-text);font-weight:700">→</span>
-      </button>
     </section>
     <section id="view-rotation" class="hidden">
       <div id="rotCalendar">
