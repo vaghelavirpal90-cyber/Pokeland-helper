@@ -1163,12 +1163,7 @@ function renderBoard() {
       return `<button class="fav-chip" data-name="${n}"><img src="${sprite(n)}" alt="" loading="lazy"><div><div>${clean(n)}</div><div class="fav-next">${nextLabel}</div></div></button>`;
     }).join("");
   } else { favEl.innerHTML = ""; favEmpty.classList.remove("hidden"); }
-  document.getElementById("boardEvents").innerHTML = evs.slice(0, 4).map(e => `
-    <div class="event-item${e.live ? " live" : ""}">
-      <div class="event-ico">${evIcon(e)}</div>
-      <div class="event-body"><div class="event-name">${e.name}</div><div class="event-desc">${e.desc}</div></div>
-      <div class="event-right"><div class="event-cd" data-ev="${e.id}">${fmtCd(e.ms)}</div><div class="event-status" data-evs="${e.id}">${e.live ? "ENDS IN" : "STARTS IN"}</div></div>
-    </div>`).join("");
+
 }
 
 function openHappyDay(d) {
