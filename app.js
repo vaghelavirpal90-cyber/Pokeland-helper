@@ -1066,6 +1066,7 @@ function initWeather() {
 }
 
 function go(view) {
+  const previousView = state.view;
   if (view !== "weather") state.wxSel = null; // a picked weather window resets when you leave Weather
   state.view = view; state.sel = null;
   document.querySelectorAll(".nav-item").forEach(el => el.classList.toggle("on", el.dataset.view === view));
@@ -1073,18 +1074,64 @@ function go(view) {
     const el = document.getElementById("view-" + v);
     if (el) el.classList.toggle("hidden", v !== view);
   });
-  if (view === "wiki") { const f = document.getElementById("wikiFrame"); if (f && !f.getAttribute("src")) f.setAttribute("src", f.dataset.src); }
+  if (view === "wiki") {
+    const f = document.getElementById("wikiFrame");
+    if (f) {
+      if (!f.getAttribute("src")) f.setAttribute("src", f.dataset.src);
+      // Same-origin Wiki: reset its own document scroll, not just the parent page.
+      const resetWiki = () => {
+        try {
+          const doc = f.contentDocument;
+          if (doc) {
+            if (doc.scrollingElement) doc.scrollingElement.scrollTop = 0;
+            doc.documentElement.scrollTop = 0;
+            if (doc.body) doc.body.scrollTop = 0;
+            f.contentWindow.scrollTo(0, 0);
+          }
+        } catch (e) {}
+      };
+      if (f.dataset.topResetBound !== "1") {
+        f.addEventListener("load", resetWiki);
+        f.dataset.topResetBound = "1";
+      }
+      resetWiki();
+      requestAnimationFrame(resetWiki);
+    }
+  }
+  if (view === "builds" && previousView !== "builds") {
+    // The Build site is cross-origin, so its inner scroll cannot be controlled directly.
+    // Reloading its iframe on each fresh entry restores the embedded page to its start.
+    const f = document.querySelector("#view-builds iframe");
+    if (f) {
+      const src = f.getAttribute("src") || f.dataset.src;
+      if (src) f.setAttribute("src", src);
+    }
+  }
   try { history.replaceState(null, "", "#" + view); } catch (e) {}
   render();
   // Switching views must always start at the top, including after an iframe becomes visible.
   const resetViewScroll = () => {
-    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    const scroller = document.scrollingElement || document.documentElement;
+    scroller.scrollTop = 0;
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
+    window.scrollTo(0, 0);
     const main = document.querySelector("main");
     if (main) main.scrollTop = 0;
     const activeView = document.getElementById("view-" + view);
     if (activeView) activeView.scrollTop = 0;
+    if (view === "wiki") {
+      const f = document.getElementById("wikiFrame");
+      try {
+        const doc = f && f.contentDocument;
+        if (doc) {
+          if (doc.scrollingElement) doc.scrollingElement.scrollTop = 0;
+          doc.documentElement.scrollTop = 0;
+          if (doc.body) doc.body.scrollTop = 0;
+          f.contentWindow.scrollTo(0, 0);
+        }
+      } catch (e) {}
+    }
   };
   resetViewScroll();
   requestAnimationFrame(() => {
