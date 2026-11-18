@@ -721,15 +721,19 @@ html[data-theme="umbreon"] .progress-fill { background: linear-gradient(90deg, #
 .side-scrim.on { opacity: 1; pointer-events: auto; }
 .side {
   position: fixed; top: 0; left: 0; bottom: 0; z-index: 63; width: 78%; max-width: 300px;
-  background: var(--s0); border-right: 1px solid var(--line-strong);
+  background: rgba(10,12,17,0.985) !important;
+  opacity: 1 !important; isolation: isolate;
+  -webkit-backdrop-filter: blur(18px) saturate(1.12);
+  backdrop-filter: blur(18px) saturate(1.12);
+  border-right: 1px solid var(--line-strong);
   transform: translateX(-101%); transition: transform .26s cubic-bezier(.32,.72,0,1);
   display: flex; flex-direction: column; padding: 18px 14px calc(20px + var(--safe-b));
-  box-shadow: 18px 0 44px rgba(0,0,0,0.5);
+  box-shadow: 18px 0 44px rgba(0,0,0,0.62);
 }
 .side.on { transform: translateX(0); }
 .side-row {
   width: 100%; display: flex; align-items: center; gap: 12px; padding: 14px;
-  border-radius: 14px; background: var(--s1); border: 1px solid var(--line); text-align: left;
+  border-radius: 14px; background: #151820; border: 1px solid var(--line); text-align: left;
   min-height: 56px; transition: border-color .15s;
 }
 .side-row + .side-row { margin-top: 8px; }
