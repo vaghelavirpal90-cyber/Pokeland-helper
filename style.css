@@ -1094,3 +1094,19 @@ html.lg .cal-nav button:last-child::before { transform: scaleX(-1); }
 
 /* Prevent embedded content from anchoring the outer app at a stale scroll offset */
 html, body, .app, .main { overflow-anchor: none; }
+
+
+/* Separate game tabs inside the shared announcement popup */
+.ann-game-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:4px;margin:12px 0 16px;border:1px solid var(--line);border-radius:14px;background:var(--s1);position:relative}
+.ann-game-tab{min-height:40px;padding:8px 6px;border:1px solid transparent;border-radius:10px;background:transparent;color:var(--muted);font:600 .78rem inherit;cursor:pointer}
+.ann-game-tab.active{background:var(--gold-soft);border-color:var(--gold-line);color:var(--gold-text)}
+.ann-game-panel[hidden]{display:none!important}
+.ann-origin-dates{display:grid;gap:9px;margin:14px 0}
+.ann-origin-dates>div,.ann-origin-referral{padding:12px 14px;border:1px solid var(--line);border-radius:13px;background:var(--s1)}
+.ann-origin-dates span,.ann-origin-referral>span{display:block;font:600 .6rem var(--mono);letter-spacing:.1em;color:var(--gold-text)}
+.ann-origin-dates strong,.ann-origin-referral strong{display:block;margin-top:4px;font-size:1rem;font-weight:800;color:var(--ink)}
+.ann-origin-dates small,.ann-origin-referral small{display:block;margin-top:4px;font-size:.72rem;line-height:1.4;color:var(--muted)}
+.ann-origin-servers{font-size:.75rem;line-height:1.5;color:var(--soft);margin:0 0 12px}
+.ann-origin-referral{background:linear-gradient(145deg,rgba(244,125,165,.12),var(--s1));border-color:rgba(244,125,165,.38)}
+.ann-origin-referral>span{color:#f47da5}
+.ann-origin-referral strong{font-size:1.2rem;letter-spacing:.05em}
