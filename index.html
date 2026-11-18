@@ -605,6 +605,11 @@
   <div class="ann-overlay" id="annOverlay" aria-hidden="true">
     <div class="ann-card" role="dialog" aria-modal="true" aria-labelledby="annTitle">
       <div class="ann-icon-row"><div class="ann-icons" aria-hidden="true"><div class="ann-ico yt"><svg viewBox="0 0 24 24" fill="#fff"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.8zM9.75 15.5v-7l6.5 3.5-6.5 3.5z"/></svg></div></div><span class="ann-badge">NOW AVAILABLE</span></div>
+      <div class="ann-game-tabs" role="tablist" aria-label="Game announcements">
+        <button class="ann-game-tab active" id="annTabWorld" type="button" role="tab" aria-selected="true" aria-controls="annWorldPanel">Pokeland World</button>
+        <button class="ann-game-tab" id="annTabOrigin" type="button" role="tab" aria-selected="false" aria-controls="annOriginPanel">Origin Reborn</button>
+      </div>
+      <section id="annWorldPanel" class="ann-game-panel" role="tabpanel" aria-labelledby="annTabWorld">
       <h2 class="ann-title" id="annTitle">POKELAND WORLD <span>IS HERE!</span></h2>
       <p class="ann-body">The game is now available to download on <strong>Android and iPhone</strong>. Get everything ready for launch!</p>
       <div style="padding:13px 14px;border-radius:14px;background:var(--s1);border:1px solid var(--line);margin-bottom:14px">
@@ -622,6 +627,23 @@
         <div style="font-size:.76rem;line-height:1.45;color:var(--soft)">Your friend gets <strong>10% extra</strong> on every top-up — and you earn <strong>10%</strong> too!</div>
         <div style="font-size:.72rem;color:var(--muted);margin-top:7px">Enter the code through the From Play octopus icon in-game.</div>
       </div>
+      </section>
+      <section id="annOriginPanel" class="ann-game-panel" role="tabpanel" aria-labelledby="annTabOrigin" hidden>
+        <div class="ann-icon-row"><span class="ann-badge">DATES ANNOUNCED</span></div>
+        <h2 class="ann-title">ORIGIN REBORN <span>IS COMING!</span></h2>
+        <p class="ann-body">Get ready for the Open Beta and official launch.</p>
+        <div class="ann-origin-dates">
+          <div><span>OPEN BETA</span><strong>November 19–21</strong><small>Servers open November 20 · 00:00 UTC</small></div>
+          <div><span>OFFICIAL LAUNCH</span><strong>November 26, 2026</strong><small>Launch time to be announced</small></div>
+        </div>
+        <p class="ann-origin-servers">3 servers at launch · +1 new server daily until 10, then every Thursday at 21:00 BRT.</p>
+        <div class="ann-origin-referral">
+          <span>REGISTRATION REFERRAL CODE</span>
+          <strong>INFINITE#0221</strong>
+          <small>Enter this code during registration.</small>
+        </div>
+        <a class="btn ann-discord" href="https://discord.gg/9XyUPX2WkS" target="_blank" rel="noopener noreferrer" style="width:100%;justify-content:center;margin-top:12px">Join Origin Reborn Discord ↗</a>
+      </section>
       <div class="ann-actions" style="margin-top:14px"><button class="btn ann-close-btn" id="annClose" type="button" style="width:100%">Got it</button></div>
     </div>
   </div>
