@@ -2484,6 +2484,22 @@ function hideAnnouncement(permanent) {
   const discord = document.getElementById("annDiscord");
   const yt = document.getElementById("annYoutube");
   const videoPlay = document.getElementById("annVideoPlay");
+  const gameTabs = [
+    { button: document.getElementById("annTabWorld"), panel: document.getElementById("annWorldPanel") },
+    { button: document.getElementById("annTabOrigin"), panel: document.getElementById("annOriginPanel") }
+  ];
+  gameTabs.forEach((tab, index) => {
+    if (!tab.button || !tab.panel) return;
+    tab.button.addEventListener("click", () => {
+      gameTabs.forEach((item, itemIndex) => {
+        if (!item.button || !item.panel) return;
+        const active = itemIndex === index;
+        item.button.classList.toggle("active", active);
+        item.button.setAttribute("aria-selected", String(active));
+        item.panel.hidden = !active;
+      });
+    });
+  });
   if (!close || !overlay) return;
   close.addEventListener("click", () => hideAnnouncement(annNever));
   overlay.addEventListener("click", e => { if (e.target === overlay) hideAnnouncement(annNever); });
