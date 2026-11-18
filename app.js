@@ -2081,7 +2081,7 @@ function setSide(on) { side.classList.toggle("on", on); sideScrim.classList.togg
 document.getElementById("btnSide").addEventListener("click", () => setSide(true));
 document.getElementById("btnSideClose").addEventListener("click", () => setSide(false));
 sideScrim.addEventListener("click", () => setSide(false));
-document.querySelectorAll("[data-side]").forEach(b => b.addEventListener("click", () => { setSide(false); if (b.dataset.side === "builds") { window.open("https://pokemon-guilde.pages.dev/", "_blank", "noopener,noreferrer"); return; } go(b.dataset.side); }));
+document.querySelectorAll("[data-side]").forEach(b => b.addEventListener("click", () => { setSide(false); go(b.dataset.side); }));
 document.getElementById("btnClose").addEventListener("click", () => setDrawer(false));
 scrim.addEventListener("click", () => setDrawer(false));
 
