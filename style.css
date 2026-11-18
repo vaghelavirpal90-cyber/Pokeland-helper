@@ -1098,7 +1098,7 @@ html, body, .app, .main { overflow-anchor: none; }
 
 /* Separate game tabs inside the shared announcement popup */
 .ann-game-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:4px;margin:12px 0 16px;border:1px solid var(--line);border-radius:14px;background:var(--s1);position:relative}
-.ann-game-tab{min-height:40px;padding:8px 6px;border:1px solid transparent;border-radius:10px;background:transparent;color:var(--muted);font:600 .78rem inherit;cursor:pointer}
+.ann-game-tab{min-height:40px;padding:8px 6px;border:1px solid transparent;border-radius:10px;background:transparent;color:var(--muted);font-family:inherit;font-size:.78rem;font-weight:600;cursor:pointer}
 .ann-game-tab.active{background:var(--gold-soft);border-color:var(--gold-line);color:var(--gold-text)}
 .ann-game-panel[hidden]{display:none!important}
 .ann-origin-dates{display:grid;gap:9px;margin:14px 0}
