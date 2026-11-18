@@ -1098,15 +1098,27 @@ function go(view) {
       requestAnimationFrame(resetWiki);
     }
   }
-  if (view === "builds" && previousView !== "builds") {
-    // The Build site is cross-origin, so its inner scroll cannot be controlled directly.
-    // Reloading its iframe on each fresh entry restores the embedded page to its start.
-    const f = document.querySelector("#view-builds iframe");
-    if (f) {
-      const src = f.getAttribute("src") || f.dataset.src;
-      if (src) f.setAttribute("src", src);
+  // The iframe load event can scroll the parent page after the initial navigation.
+  // Bind once and force the outer app back to its top after either embed finishes loading.
+  const forceAppTop = () => {
+    const header = document.querySelector(".header");
+    if (header) header.scrollIntoView({ block: "start", behavior: "instant" });
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  };
+  ["wikiFrame", "buildFrame"].forEach(id => {
+    const frame = document.getElementById(id);
+    if (frame && frame.dataset.parentTopBound !== "1") {
+      frame.addEventListener("load", () => {
+        forceAppTop();
+        requestAnimationFrame(forceAppTop);
+        setTimeout(forceAppTop, 120);
+        setTimeout(forceAppTop, 400);
+      });
+      frame.dataset.parentTopBound = "1";
     }
-  }
+  });
   try { history.replaceState(null, "", "#" + view); } catch (e) {}
   render();
   // Switching views must always start at the top, including after an iframe becomes visible.
@@ -1138,6 +1150,10 @@ function go(view) {
     resetViewScroll();
     requestAnimationFrame(resetViewScroll);
   });
+  // Late layout/iframe focus can restore a stale scroll offset; override it after layout settles.
+  setTimeout(resetViewScroll, 120);
+  setTimeout(resetViewScroll, 400);
+  setTimeout(resetViewScroll, 700);
 }
 function toggleFav(name) {
   const i = state.favs.indexOf(name);
