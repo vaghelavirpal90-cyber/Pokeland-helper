@@ -1056,30 +1056,30 @@ html.lg .cal-nav button:last-child::before { transform: scaleX(-1); }
 
 /* Home: distinct, restrained colour accents for the two discovery cards */
 #view-board button[data-side="wiki"][aria-label="Open Pokeland Wiki"] {
-  border-color: rgba(64,190,255,.48) !important;
-  background: linear-gradient(112deg, rgba(20,105,160,.30) 0%, rgba(16,24,38,.96) 58%, #10131b 100%) !important;
-  box-shadow: 0 8px 26px rgba(0,110,190,.10), inset 0 1px 0 rgba(120,210,255,.08) !important;
+  border-color: rgba(244,125,165,.48) !important;
+  background: linear-gradient(112deg, rgba(112,42,68,.34) 0%, rgba(16,24,38,.96) 58%, #10131b 100%) !important;
+  box-shadow: 0 8px 26px rgba(170,65,100,.10), inset 0 1px 0 rgba(255,170,195,.07) !important;
 }
 #view-board button[data-side="wiki"][aria-label="Open Pokeland Wiki"] > span:first-child {
-  color: #63caff !important;
-  border-color: rgba(80,190,255,.42) !important;
-  background: linear-gradient(145deg, rgba(23,112,174,.30), rgba(13,28,45,.95)) !important;
+  color: #f47da5 !important;
+  border-color: rgba(244,125,165,.42) !important;
+  background: linear-gradient(145deg, rgba(130,48,78,.32), rgba(13,28,45,.95)) !important;
 }
 #view-board button[data-side="wiki"][aria-label="Open Pokeland Wiki"] > span:nth-child(2) > span:first-child,
 #view-board button[data-side="wiki"][aria-label="Open Pokeland Wiki"] > span:last-child {
-  color: #73d2ff !important;
+  color: #f47da5 !important;
 }
 
 #view-board button[data-side="builds"][aria-label="Open Pokémon Builds"] {
-  border-color: rgba(174,125,255,.46) !important;
-  background: linear-gradient(112deg, rgba(105,62,160,.30) 0%, rgba(24,20,39,.96) 58%, #11121b 100%) !important;
-  box-shadow: 0 8px 26px rgba(120,70,210,.12), inset 0 1px 0 rgba(205,170,255,.08) !important;
+  border-color: rgba(244,125,165,.46) !important;
+  background: linear-gradient(112deg, rgba(105,42,68,.34) 0%, rgba(24,20,39,.96) 58%, #11121b 100%) !important;
+  box-shadow: 0 8px 26px rgba(170,65,100,.10), inset 0 1px 0 rgba(255,170,195,.07) !important;
 }
 #view-board button[data-side="builds"][aria-label="Open Pokémon Builds"] > span:first-child {
-  border-color: rgba(174,125,255,.42) !important;
-  background: linear-gradient(145deg, rgba(110,66,170,.32), rgba(30,23,49,.95)) !important;
+  border-color: rgba(244,125,165,.42) !important;
+  background: linear-gradient(145deg, rgba(126,45,76,.32), rgba(30,23,49,.95)) !important;
 }
 #view-board button[data-side="builds"][aria-label="Open Pokémon Builds"] > span:nth-child(2) > span:first-child,
 #view-board button[data-side="builds"][aria-label="Open Pokémon Builds"] > span:last-child {
-  color: #c39aff !important;
+  color: #f47da5 !important;
 }
