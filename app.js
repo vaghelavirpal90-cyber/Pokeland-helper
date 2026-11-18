@@ -1069,7 +1069,7 @@ function go(view) {
   if (view !== "weather") state.wxSel = null; // a picked weather window resets when you leave Weather
   state.view = view; state.sel = null;
   document.querySelectorAll(".nav-item").forEach(el => el.classList.toggle("on", el.dataset.view === view));
-  ["board","rotation","weather","events","server","download","builds","wiki","teams","guide","guide-tickets","about"].forEach(v => {
+  ["board","rotation","weather","events","server","download","builds","wiki","teams","guide","guide-tickets","youtube","about"].forEach(v => {
     const el = document.getElementById("view-" + v);
     if (el) el.classList.toggle("hidden", v !== view);
   });
@@ -2370,7 +2370,7 @@ function bindExternalLinks() {
 }
 
 /* ── Announcement: community (Discord + YouTube) ── */
-const ANN_KEY = "ph_ann_gear_refine_v1";
+const ANN_KEY = "ph_ann_pokeland_world_download_v1";
 let annNever = false;
 let annOpenOnce = false; // only auto-popup once per cold JS context; reopen via visibility still ok if not dismissed
 function showAnnouncement(force) {
