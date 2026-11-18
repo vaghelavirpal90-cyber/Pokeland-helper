@@ -1075,8 +1075,22 @@ function go(view) {
   });
   if (view === "wiki") { const f = document.getElementById("wikiFrame"); if (f && !f.getAttribute("src")) f.setAttribute("src", f.dataset.src); }
   try { history.replaceState(null, "", "#" + view); } catch (e) {}
-  window.scrollTo({ top: 0 });
   render();
+  // Switching views must always start at the top, including after an iframe becomes visible.
+  const resetViewScroll = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    const main = document.querySelector("main");
+    if (main) main.scrollTop = 0;
+    const activeView = document.getElementById("view-" + view);
+    if (activeView) activeView.scrollTop = 0;
+  };
+  resetViewScroll();
+  requestAnimationFrame(() => {
+    resetViewScroll();
+    requestAnimationFrame(resetViewScroll);
+  });
 }
 function toggleFav(name) {
   const i = state.favs.indexOf(name);
