@@ -2484,6 +2484,13 @@ function hideAnnouncement(permanent) {
   const discord = document.getElementById("annDiscord");
   const yt = document.getElementById("annYoutube");
   const videoPlay = document.getElementById("annVideoPlay");
+  const worldPanel = document.getElementById("annWorldPanel");
+  if (worldPanel) {
+    Array.from(worldPanel.children).forEach(child => {
+      const content = child.textContent || "";
+      if (content.includes("INFINITE#0221") || content.includes("FRIEND REFERRAL CODE")) child.remove();
+    });
+  }
   const gameTabs = [
     { button: document.getElementById("annTabWorld"), panel: document.getElementById("annWorldPanel") },
     { button: document.getElementById("annTabOrigin"), panel: document.getElementById("annOriginPanel") }
