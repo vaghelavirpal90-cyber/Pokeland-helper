@@ -1083,3 +1083,6 @@ html.lg .cal-nav button:last-child::before { transform: scaleX(-1); }
 #view-board button[data-side="builds"][aria-label="Open Pokémon Builds"] > span:last-child {
   color: #f47da5 !important;
 }
+
+/* Prevent embedded content from anchoring the outer app at a stale scroll offset */
+html, body, .app, .main { overflow-anchor: none; }
