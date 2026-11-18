@@ -1048,3 +1048,7 @@ html.lg .cal-nav button:last-child::before { transform: scaleX(-1); }
     animation-play-state: paused !important;
   }
 }
+
+/* Announcement modal: solid dark surface, not translucent glass */
+.ann-overlay { background: rgba(0,0,0,.88); }
+.ann-card, html.lg .ann-card { background: linear-gradient(165deg, #151117 0%, #0b0d12 48%, #080a0f 100%) !important; }
