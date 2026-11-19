@@ -2342,18 +2342,7 @@ document.getElementById("notifModalLater").addEventListener("click", () => {
   try { localStorage.setItem(NUDGE_SNOOZE_KEY, String(Date.now() + 3 * 86400000)); } catch (e) {}
   closeNotifModal();
 });
-// Show the modal once, on first visit, a couple seconds in — never interrupt the very first paint.
-(function initNotifModal() {
-  let seen = false;
-  try { seen = localStorage.getItem(MODAL_SEEN_KEY) === "1"; } catch (e) {}
-  const s = notifState();
-  if (!seen && s !== "granted" && s !== "unsupported") {
-    setTimeout(() => {
-      openNotifModal();
-      try { localStorage.setItem(MODAL_SEEN_KEY, "1"); } catch (e) {}
-    }, 2200);
-  }
-})();
+// First-visit notification popup disabled. Alerts remain available from the Weather controls.
 document.getElementById("sheetOverlay").addEventListener("click", e => { if (e.target === e.currentTarget) closeSheet(); });
 document.getElementById("sheetFav").addEventListener("click", () => { if (state.sel) { toggleFav(state.sel); openSheet(state.sel); } });
 
@@ -2514,25 +2503,7 @@ function hideAnnouncement(permanent) {
   if (yt) yt.addEventListener("click", () => hideAnnouncement(false));
   bindExternalLinks();
 
-  // AppMint / WebView often resumes without a full reload.
-  // Fire on load, pageshow (incl. bfcache), and when app becomes visible.
-  function scheduleShow(ms, force) {
-    setTimeout(function () { showAnnouncement(!!force); }, ms);
-  }
-  scheduleShow(600);
-  scheduleShow(1400); // second try after splash / late paint
-  window.addEventListener("load", function () { scheduleShow(500); });
-  window.addEventListener("pageshow", function (e) {
-    // e.persisted = restored from cache (common when "opening" app again)
-    annOpenOnce = false; // allow show again after process death / new session
-    scheduleShow(e.persisted ? 350 : 700, true);
-  });
-  document.addEventListener("visibilitychange", function () {
-    if (document.visibilityState === "visible") {
-      // Opening app from background / launcher without full reload
-      scheduleShow(400, true);
-    }
-  });
+  // Automatic announcement pop-up disabled; announcement content remains available in the app.
 })();
 
 
