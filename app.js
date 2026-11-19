@@ -2506,31 +2506,6 @@ function hideAnnouncement(permanent) {
   // Automatic announcement pop-up disabled; announcement content remains available in the app.
 })();
 
-/* One-time video announcement popup. The older game and notification popups stay disabled. */
-(function initVideoPopup() {
-  const overlay = document.getElementById("videoPopOverlay");
-  const closeButton = document.getElementById("videoPopClose");
-  if (!overlay || !closeButton) return;
-  const seenKey = "ph_video_popup_dbihgO_lrvg_seen_v1";
-  function closeVideoPopup() {
-    overlay.classList.remove("open");
-    overlay.setAttribute("aria-hidden", "true");
-    try { localStorage.setItem(seenKey, "1"); } catch (e) {}
-  }
-  closeButton.addEventListener("click", closeVideoPopup);
-  overlay.addEventListener("click", event => {
-    if (event.target === overlay) closeVideoPopup();
-  });
-  setTimeout(() => {
-    let seen = false;
-    try { seen = localStorage.getItem(seenKey) === "1"; } catch (e) {}
-    if (!seen && !document.body.classList.contains("coaching")) {
-      overlay.classList.add("open");
-      overlay.setAttribute("aria-hidden", "false");
-    }
-  }, 2200);
-})();
-
 // Re-check the permission reminder when the app is reopened and when its 3-day snooze expires.
 // This only shows an in-page reminder; the browser's permission prompt still requires a user tap.
 function refreshNotificationReminder() {
