@@ -2529,8 +2529,7 @@ function hideAnnouncement(permanent) {
       overlay.setAttribute("aria-hidden", "false");
     }
   }, 2200);
-}
-
+})();
 
 // Re-check the permission reminder when the app is reopened and when its 3-day snooze expires.
 // This only shows an in-page reminder; the browser's permission prompt still requires a user tap.
