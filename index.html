@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=youtube-menu-1119">
+<link rel="stylesheet" href="style.css?v=video-popup-1119">
 <!-- Cloudflare Web Analytics -->
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"0b7b7ad7cab2447b9d1afc52bb5fe4a0"}'></script>
 <!-- End Cloudflare Web Analytics -->
@@ -608,6 +608,20 @@
     </div>
   </aside>
   
+  <div class="video-pop-overlay" id="videoPopOverlay" aria-hidden="true">
+    <section class="video-pop-card" role="dialog" aria-modal="true" aria-labelledby="videoPopTitle">
+      <button class="video-pop-close" id="videoPopClose" type="button" aria-label="Close video announcement">×</button>
+      <span class="video-pop-badge">▶ NEW VIDEO</span>
+      <h2 id="videoPopTitle">Pokeland World Beta Testing</h2>
+      <p>Discover the Ashchu starter, Advance Capsule and rewards for spenders and non-spenders.</p>
+      <a class="video-pop-poster" href="https://youtu.be/dbihgO_lrvg?si=9AThSpRmxjzYl2wx" target="_blank" rel="noopener noreferrer" aria-label="Watch the Pokeland World beta testing video on YouTube">
+        <img src="pokeland-world/FB_IMG_1794324753988.jpg" alt="Original Pokeland World beta testing poster featuring Ashchu and rewards" loading="eager">
+        <span class="video-pop-play" aria-hidden="true">▶</span>
+      </a>
+      <a class="video-pop-cta" href="https://youtu.be/dbihgO_lrvg?si=9AThSpRmxjzYl2wx" target="_blank" rel="noopener noreferrer">Watch full video on YouTube ↗</a>
+      <div class="video-pop-foot">Also available anytime in Menu → YouTube</div>
+    </section>
+  </div>
   <div class="ann-overlay" id="annOverlay" aria-hidden="true">
     <div class="ann-card" role="dialog" aria-modal="true" aria-labelledby="annTitle">
       <div class="ann-icon-row"><div class="ann-icons" aria-hidden="true"><div class="ann-ico yt"><svg viewBox="0 0 24 24" fill="#fff"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.8zM9.75 15.5v-7l6.5 3.5-6.5 3.5z"/></svg></div></div><span class="ann-badge">NOW AVAILABLE</span></div>
@@ -752,7 +766,7 @@
     </div>
   </nav>
 </div>
-<script defer src="app.js?v=youtube-menu-1119"></script>
+<script defer src="app.js?v=video-popup-1119"></script>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <filter id="lg-refract" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
     <feTurbulence type="fractalNoise" baseFrequency="0.006 0.011" numOctaves="2" seed="11" result="n"/>
