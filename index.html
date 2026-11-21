@@ -762,7 +762,12 @@
       <div style="margin:0 0 14px;padding:12px 13px;border:1px solid var(--gold-line);border-radius:14px;background:var(--gold-soft)">
         <div style="font-size:.8rem;line-height:1.45;color:var(--ink)">Use my Creator Code for in-game purchases to get <strong style="color:var(--gold-text)">10% extra!</strong></div>
         <div style="margin-top:9px;font:600 .58rem var(--mono);letter-spacing:.12em;color:var(--muted)">CREATOR CODE</div>
-        <div style="margin-top:3px;font:800 1.05rem var(--mono);letter-spacing:.03em;color:var(--gold-text)">INFINITE#0221</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:3px">
+          <strong style="font:800 1.05rem var(--mono);letter-spacing:.03em;color:var(--gold-text)">INFINITE#0221</strong>
+          <button id="creatorCodeCopy" type="button" aria-label="Copy creator code" style="display:inline-flex;align-items:center;gap:6px;min-height:34px;padding:7px 11px;border:1px solid var(--gold-line);border-radius:9px;background:var(--s1);color:var(--gold-text);font-size:.72rem;font-weight:700;cursor:pointer">
+            <span aria-hidden="true">▢</span> <span id="creatorCodeCopyLabel">Copy</span>
+          </button>
+        </div>
         <div style="margin-top:4px;font-size:.68rem;color:var(--muted)">The # number changes monthly.</div>
       </div>
       <p>Watch Pokeland Origin gameplay by <strong>LionV</strong>.</p>
@@ -979,6 +984,49 @@
   });
   first.addEventListener("click", function (event) {
     if (event.target === first || event.target.closest("#videoPopClose")) showSecond();
+  });
+})();
+</script>
+
+<script>
+/* Copy the monthly creator code from the Origin gameplay popup. */
+(function () {
+  const button = document.getElementById("creatorCodeCopy");
+  const label = document.getElementById("creatorCodeCopyLabel");
+  if (!button || !label) return;
+  const code = "INFINITE#0221";
+  button.addEventListener("click", async function () {
+    let copied = false;
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(code);
+        copied = true;
+      } else {
+        const field = document.createElement("textarea");
+        field.value = code;
+        field.setAttribute("readonly", "");
+        field.style.position = "fixed";
+        field.style.opacity = "0";
+        document.body.appendChild(field);
+        field.select();
+        copied = document.execCommand("copy");
+        field.remove();
+      }
+    } catch (error) {
+      copied = false;
+    }
+    label.textContent = copied ? "Copied!" : "Select code";
+    if (!copied) {
+      const selection = window.getSelection();
+      const range = document.createRange();
+      const codeText = button.parentElement.querySelector("strong");
+      if (codeText && selection) {
+        range.selectNodeContents(codeText);
+        selection.removeAllRanges();
+        selection.addRange(range);
+      }
+    }
+    if (copied) window.setTimeout(function () { label.textContent = "Copy"; }, 1800);
   });
 })();
 </script>
