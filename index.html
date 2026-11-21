@@ -794,6 +794,16 @@
         <div style="font-size:1.1rem;font-weight:800;margin-top:4px">November 19 · 00:00 UTC</div>
         <div style="font-size:.74rem;color:var(--muted);margin-top:3px">Login opens when the open beta starts</div>
       </div>
+      <div style="padding:13px 14px;border-radius:14px;background:var(--gold-soft);border:1px solid var(--gold-line);margin-bottom:14px">
+        <div style="font-size:.8rem;line-height:1.45;color:var(--ink)">Use my Creator Code for a <strong style="color:var(--gold-text)">10% discount on recharges</strong> after the official release.</div>
+        <div style="margin-top:9px;font:600 .58rem var(--mono);letter-spacing:.12em;color:var(--muted)">POKELAND WORLD CREATOR CODE</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:3px">
+          <strong style="font:800 1.05rem var(--mono);letter-spacing:.03em;color:var(--gold-text)">INFINITE</strong>
+          <button id="worldCreatorCodeCopy" type="button" aria-label="Copy Pokeland World creator code" style="display:inline-flex;align-items:center;gap:6px;min-height:34px;padding:7px 11px;border:1px solid var(--gold-line);border-radius:9px;background:var(--s1);color:var(--gold-text);font-size:.72rem;font-weight:700;cursor:pointer">
+            <span aria-hidden="true">▢</span> <span id="worldCreatorCodeCopyLabel">Copy</span>
+          </button>
+        </div>
+      </div>
       <div style="display:grid;gap:8px;margin-bottom:14px">
         <a class="btn btn-primary" href="https://pkldwrld.com/downloads" target="_blank" rel="noopener noreferrer" style="justify-content:center">↓ Download Pokeland World</a>
         <a class="btn btn-ghost" href="https://pkldwrld.com/open-beta" target="_blank" rel="noopener noreferrer" style="justify-content:center">Open Beta dates &amp; events ↗</a>
@@ -989,45 +999,48 @@
 </script>
 
 <script>
-/* Copy the monthly creator code from the Origin gameplay popup. */
+/* Copy the game-specific creator codes from their respective announcement cards. */
 (function () {
-  const button = document.getElementById("creatorCodeCopy");
-  const label = document.getElementById("creatorCodeCopyLabel");
-  if (!button || !label) return;
-  const code = "INFINITE#0221";
-  button.addEventListener("click", async function () {
-    let copied = false;
-    try {
-      if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(code);
-        copied = true;
-      } else {
-        const field = document.createElement("textarea");
-        field.value = code;
-        field.setAttribute("readonly", "");
-        field.style.position = "fixed";
-        field.style.opacity = "0";
-        document.body.appendChild(field);
-        field.select();
-        copied = document.execCommand("copy");
-        field.remove();
+  function bindCreatorCodeCopy(buttonId, labelId, code) {
+    const button = document.getElementById(buttonId);
+    const label = document.getElementById(labelId);
+    if (!button || !label) return;
+    button.addEventListener("click", async function () {
+      let copied = false;
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(code);
+          copied = true;
+        } else {
+          const field = document.createElement("textarea");
+          field.value = code;
+          field.setAttribute("readonly", "");
+          field.style.position = "fixed";
+          field.style.opacity = "0";
+          document.body.appendChild(field);
+          field.select();
+          copied = document.execCommand("copy");
+          field.remove();
+        }
+      } catch (error) {
+        copied = false;
       }
-    } catch (error) {
-      copied = false;
-    }
-    label.textContent = copied ? "Copied!" : "Select code";
-    if (!copied) {
-      const selection = window.getSelection();
-      const range = document.createRange();
-      const codeText = button.parentElement.querySelector("strong");
-      if (codeText && selection) {
-        range.selectNodeContents(codeText);
-        selection.removeAllRanges();
-        selection.addRange(range);
+      label.textContent = copied ? "Copied!" : "Select code";
+      if (!copied) {
+        const selection = window.getSelection();
+        const range = document.createRange();
+        const codeText = button.parentElement.querySelector("strong");
+        if (codeText && selection) {
+          range.selectNodeContents(codeText);
+          selection.removeAllRanges();
+          selection.addRange(range);
+        }
       }
-    }
-    if (copied) window.setTimeout(function () { label.textContent = "Copy"; }, 1800);
-  });
+      if (copied) window.setTimeout(function () { label.textContent = "Copy"; }, 1800);
+    });
+  }
+  bindCreatorCodeCopy("creatorCodeCopy", "creatorCodeCopyLabel", "INFINITE#0221");
+  bindCreatorCodeCopy("worldCreatorCodeCopy", "worldCreatorCodeCopyLabel", "INFINITE");
 })();
 </script>
 
