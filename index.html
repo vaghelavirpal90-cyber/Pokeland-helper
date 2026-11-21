@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=video-popup-fix-1119">
+<link rel="stylesheet" href="style.css?v=account-popup-layout-1121">
 <!-- Cloudflare Web Analytics -->
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"0b7b7ad7cab2447b9d1afc52bb5fe4a0"}'></script>
 <!-- End Cloudflare Web Analytics -->
@@ -960,29 +960,45 @@
 
 
 <script>
-/* Keep the video announcement independent from app.js initialization. */
+/* Show account registration first; keep YouTube announcements as compact floating cards. */
 (function () {
-  const show = function () {
-    const overlay = document.getElementById("videoPopOverlay");
-    const closeButton = document.getElementById("videoPopClose");
-    if (!overlay || !closeButton) return;
-    const close = function () {
-      overlay.classList.remove("open");
-      overlay.setAttribute("aria-hidden", "true");
-    };
-    closeButton.addEventListener("click", close, { once: true });
-    overlay.addEventListener("click", function (event) {
-      if (event.target === overlay) close();
-    });
-    window.setTimeout(function () {
-      overlay.classList.add("open");
-      overlay.setAttribute("aria-hidden", "false");
-    }, 1800);
+  const account = document.getElementById("annOverlay");
+  const accountClose = document.getElementById("annClose");
+  const video = document.getElementById("videoPopOverlay");
+  const videoClose = document.getElementById("videoPopClose");
+  if (!account || !accountClose || !video || !videoClose) return;
+
+  const showVideo = function () {
+    video.classList.add("floating", "open");
+    video.setAttribute("aria-hidden", "false");
+  };
+  const closeVideo = function () {
+    video.classList.remove("open");
+    video.setAttribute("aria-hidden", "true");
+  };
+  videoClose.addEventListener("click", closeVideo);
+  video.addEventListener("click", function (event) {
+    if (event.target === video) closeVideo();
+  });
+
+  const revealVideoAfterAccount = function () {
+    window.setTimeout(showVideo, 450);
+  };
+  accountClose.addEventListener("click", revealVideoAfterAccount, { once: true });
+  account.addEventListener("click", function (event) {
+    if (event.target === account) revealVideoAfterAccount();
+  }, { once: true });
+
+  const showAccount = function () {
+    account.classList.add("open");
+    account.setAttribute("aria-hidden", "false");
   };
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", show, { once: true });
+    document.addEventListener("DOMContentLoaded", function () {
+      window.setTimeout(showAccount, 500);
+    }, { once: true });
   } else {
-    show();
+    window.setTimeout(showAccount, 500);
   }
 })();
 </script>
@@ -996,7 +1012,7 @@
   if (!first || !second || !closeButton) return;
   const showSecond = function () {
     window.setTimeout(function () {
-      second.classList.add("open");
+      second.classList.add("floating", "open");
       second.setAttribute("aria-hidden", "false");
     }, 450);
   };
