@@ -1140,4 +1140,3 @@ html, body, .app, .main { overflow-anchor: none; }
 .video-pop-cta{display:flex;align-items:center;justify-content:center;min-height:48px;margin-top:13px;padding:12px 14px;border-radius:13px;background:linear-gradient(135deg,#ff3434,#c90000);color:#fff;text-decoration:none;font-size:.86rem;font-weight:800;box-shadow:0 8px 22px rgba(220,25,25,.25)}
 .video-pop-foot{margin-top:12px;text-align:center;color:var(--muted);font:.58rem var(--mono);letter-spacing:.04em}
 @media(min-width:600px){.video-pop-card{padding:24px 22px 20px}}
-
