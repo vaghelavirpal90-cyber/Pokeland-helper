@@ -2503,7 +2503,8 @@ function hideAnnouncement(permanent) {
   if (yt) yt.addEventListener("click", () => hideAnnouncement(false));
   bindExternalLinks();
 
-  // Automatic announcement pop-up disabled; announcement content remains available in the app.
+  // Show the main account-registration announcement before the smaller video cards.
+  window.setTimeout(() => showAnnouncement(false), 650);
 })();
 
 // Re-check the permission reminder when the app is reopened and when its 3-day snooze expires.
