@@ -361,6 +361,19 @@ body.coaching .header{z-index:55;background:transparent;backdrop-filter:none;-we
   position: relative; overflow: hidden;
 }
 .ann-overlay.open .ann-card { transform: translateY(0) scale(1); }
+/* Pokeland World account + video content inside the existing announcement modal */
+.ann-card { max-height: calc(100vh - 32px); max-height: calc(100dvh - 32px); overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
+.ann-video { display:block; position:relative; overflow:hidden; aspect-ratio:16/9; border:1px solid var(--gold-line); border-radius:15px; margin:0 0 14px; background:#080a0f; text-decoration:none; }
+.ann-video img { display:block; width:100%; height:100%; object-fit:cover; }
+.ann-video-play { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); display:grid; place-items:center; width:54px; height:38px; border-radius:12px; background:#e62117; color:#fff; font-size:19px; box-shadow:0 8px 24px rgba(0,0,0,.35); }
+.ann-video-caption { position:absolute; left:0; right:0; bottom:0; padding:22px 11px 9px; background:linear-gradient(transparent,rgba(0,0,0,.82)); color:#fff; font-size:.72rem; font-weight:700; }
+.ann-account-box { padding:13px 14px; border:1px solid rgba(88,101,242,.35); border-radius:15px; background:linear-gradient(145deg,rgba(88,101,242,.12),var(--s1)); margin-bottom:14px; }
+.ann-account-kicker { font:600 .6rem var(--mono); letter-spacing:.12em; color:#9ba5ff; text-transform:uppercase; margin-bottom:7px; }
+.ann-account-box p { color:var(--soft); font-size:.76rem; line-height:1.5; margin:6px 0 9px; }
+.ann-account-box ol { margin:8px 0 10px; padding-left:19px; color:var(--ink); font-size:.76rem; line-height:1.55; }
+.ann-account-box li { padding-left:3px; margin:4px 0; }
+.ann-account-box .ann-account-note { padding-top:9px; border-top:1px solid var(--line); color:var(--muted); font-size:.7rem; margin-bottom:0; }
+
 .ann-card::before {
   content: ""; position: absolute; top: -40%; right: -30%;
   width: 220px; height: 220px; border-radius: 50%;
