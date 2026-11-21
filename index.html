@@ -781,66 +781,18 @@
   </div>
   <div class="ann-overlay" id="annOverlay" aria-hidden="true">
     <div class="ann-card" role="dialog" aria-modal="true" aria-labelledby="annTitle">
-      <div class="ann-icon-row"><div class="ann-icons" aria-hidden="true"><div class="ann-ico yt"><svg viewBox="0 0 24 24" fill="#fff"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.8zM9.75 15.5v-7l6.5 3.5-6.5 3.5z"/></svg></div></div><span class="ann-badge">NOW AVAILABLE</span></div>
-      <div class="ann-game-tabs" role="tablist" aria-label="Game announcements">
-        <button class="ann-game-tab active" id="annTabWorld" type="button" role="tab" aria-selected="true" aria-controls="annWorldPanel">Pokeland World</button>
-        <button class="ann-game-tab" id="annTabOrigin" type="button" role="tab" aria-selected="false" aria-controls="annOriginPanel">Origin Reborn</button>
+      <h2 class="ann-title" id="annTitle">NEW ACCOUNT SIGN-UP</h2>
+      <p class="ann-body">Request your Pokeland World account through the official Discord server. Sign-up links are sent one at a time, so there may be a queue.</p>
+      <div class="ann-account-box">
+        <ol>
+          <li>Join the official Pokeland World Discord.</li>
+          <li>Open <strong>#📝・sign-up</strong>.</li>
+          <li>Press <strong>Request sign-up</strong> and enter your email. Only the bot can see it.</li>
+          <li>Press <strong>Check my place</strong> to check your queue position.</li>
+        </ol>
+        <p class="ann-account-note">The email comes from <strong>pkldwrld.com</strong>. Check your spam folder too. The link is valid for 24 hours. Your Discord account must be at least 1 day old, and you must have been in the server for at least 1 hour.</p>
+        <a class="btn ann-discord" id="annDiscord" href="https://discord.gg/6PXvEvz5yE" target="_blank" rel="noopener noreferrer" style="width:100%;justify-content:center;margin-top:12px">Join Official Discord &amp; Request Account ↗</a>
       </div>
-      <section id="annWorldPanel" class="ann-game-panel" role="tabpanel" aria-labelledby="annTabWorld">
-        <h2 class="ann-title" id="annTitle">POKELAND WORLD <span>GAMEPLAY &amp; ACCOUNT</span></h2>
-        <p class="ann-body">Watch the Pokeland World preview, then follow the steps below to request your game account.</p>
-
-        <a class="ann-video" href="https://youtu.be/j-7K9VjpRqM" target="_blank" rel="noopener noreferrer" aria-label="Watch Pokeland World gameplay preview on YouTube">
-          <img src="https://img.youtube.com/vi/j-7K9VjpRqM/hqdefault.jpg" alt="Pokeland World gameplay preview video thumbnail" loading="lazy">
-          <span class="ann-video-play" aria-hidden="true">▶</span>
-          <span class="ann-video-caption">Pokeland World · Gameplay &amp; Overview</span>
-        </a>
-
-        <div class="ann-account-box">
-          <div class="ann-account-kicker">NEW ACCOUNT SIGN-UP</div>
-          <p>Request your account in the official Discord server. Sign-up links are sent one at a time, so there may be a queue.</p>
-          <ol>
-            <li>Join the official Pokeland World Discord.</li>
-            <li>Open <strong>#📝・sign-up</strong>.</li>
-            <li>Press <strong>Request sign-up</strong> and enter your email. Only the bot can see it.</li>
-            <li>Press <strong>Check my place</strong> to check your queue position.</li>
-          </ol>
-          <p class="ann-account-note">The email comes from <strong>pkldwrld.com</strong>. Check your spam folder too. The link is valid for 24 hours. Your Discord account must be at least 1 day old, and you must have been in the server for at least 1 hour.</p>
-          <a class="btn ann-discord" href="https://discord.gg/6PXvEvz5yE" target="_blank" rel="noopener noreferrer" style="width:100%;justify-content:center;margin-top:12px">Join Official Discord &amp; Request Account ↗</a>
-        </div>
-
-        <div style="padding:13px 14px;border-radius:14px;background:var(--gold-soft);border:1px solid var(--gold-line);margin:14px 0">
-          <div style="font-size:.8rem;line-height:1.45;color:var(--ink)">Use my Creator Code for a <strong style="color:var(--gold-text)">10% discount on recharges</strong> after the official release.</div>
-          <div style="margin-top:9px;font:600 .58rem var(--mono);letter-spacing:.12em;color:var(--muted)">POKELAND WORLD CREATOR CODE</div>
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:3px">
-            <strong style="font:800 1.05rem var(--mono);letter-spacing:.03em;color:var(--gold-text)">INFINITE0221</strong>
-            <button id="worldCreatorCodeCopy" type="button" aria-label="Copy Pokeland World creator code" style="display:inline-flex;align-items:center;gap:6px;min-height:34px;padding:7px 11px;border:1px solid var(--gold-line);border-radius:9px;background:var(--s1);color:var(--gold-text);font-size:.72rem;font-weight:700;cursor:pointer">
-              <span aria-hidden="true">▢</span> <span id="worldCreatorCodeCopyLabel">Copy</span>
-            </button>
-          </div>
-        </div>
-
-        <div style="display:grid;gap:8px;margin-bottom:4px">
-          <a class="btn btn-primary" href="https://pkldwrld.com/downloads" target="_blank" rel="noopener noreferrer" style="justify-content:center">↓ Download Pokeland World</a>
-          <a class="btn btn-ghost" href="https://pkldwrld.com/open-beta" target="_blank" rel="noopener noreferrer" style="justify-content:center">Open Beta dates &amp; events ↗</a>
-        </div>
-      </section>
-      <section id="annOriginPanel" class="ann-game-panel" role="tabpanel" aria-labelledby="annTabOrigin" hidden>
-        <div class="ann-icon-row"><span class="ann-badge">DATES ANNOUNCED</span></div>
-        <h2 class="ann-title">ORIGIN REBORN <span>IS COMING!</span></h2>
-        <p class="ann-body">Get ready for the Open Beta and official launch.</p>
-        <div class="ann-origin-dates">
-          <div><span>OPEN BETA</span><strong>November 19–21</strong><small>Servers open November 20 · 00:00 UTC</small></div>
-          <div><span>OFFICIAL LAUNCH</span><strong>November 26, 2026</strong><small>Launch time to be announced</small></div>
-        </div>
-        <p class="ann-origin-servers">3 servers at launch · +1 new server daily until 10, then every Thursday at 21:00 BRT.</p>
-        <div class="ann-origin-referral">
-          <span>REGISTRATION REFERRAL CODE</span>
-          <strong>INFINITE#0221</strong>
-          <small>Enter this code during registration.</small>
-        </div>
-        <a class="btn ann-discord" href="https://discord.gg/9XyUPX2WkS" target="_blank" rel="noopener noreferrer" style="width:100%;justify-content:center;margin-top:12px">Join Origin Reborn Discord ↗</a>
-      </section>
       <div class="ann-actions" style="margin-top:14px"><button class="btn ann-close-btn" id="annClose" type="button" style="width:100%">Got it</button></div>
     </div>
   </div>
