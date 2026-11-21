@@ -754,6 +754,20 @@
       <div class="video-pop-foot">Also available anytime in Menu → YouTube</div>
     </section>
   </div>
+  <div class="video-pop-overlay" id="videoPopOverlay2" aria-hidden="true">
+    <section class="video-pop-card" role="dialog" aria-modal="true" aria-labelledby="videoPopTitle2">
+      <button class="video-pop-close" id="videoPopClose2" type="button" aria-label="Close video announcement">×</button>
+      <span class="video-pop-badge">▶ NEW VIDEO</span>
+      <h2 id="videoPopTitle2">Latest Pokeland Video</h2>
+      <p>Check out the latest video from Pokeland Helper.</p>
+      <a class="video-pop-poster" href="https://youtu.be/XIIZplO2j0g" target="_blank" rel="noopener noreferrer" aria-label="Watch the latest Pokeland video on YouTube">
+        <img src="https://img.youtube.com/vi/XIIZplO2j0g/maxresdefault.jpg" alt="Latest Pokeland video thumbnail" loading="eager">
+        <span class="video-pop-play" aria-hidden="true">▶</span>
+      </a>
+      <a class="video-pop-cta" href="https://youtu.be/XIIZplO2j0g" target="_blank" rel="noopener noreferrer">Watch full video on YouTube ↗</a>
+      <div class="video-pop-foot">Also available anytime in Menu → YouTube</div>
+    </section>
+  </div>
   <div class="ann-overlay" id="annOverlay" aria-hidden="true">
     <div class="ann-card" role="dialog" aria-modal="true" aria-labelledby="annTitle">
       <div class="ann-icon-row"><div class="ann-icons" aria-hidden="true"><div class="ann-ico yt"><svg viewBox="0 0 24 24" fill="#fff"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.8zM9.75 15.5v-7l6.5 3.5-6.5 3.5z"/></svg></div></div><span class="ann-badge">NOW AVAILABLE</span></div>
@@ -933,6 +947,33 @@
   } else {
     show();
   }
+})();
+</script>
+
+<script>
+/* Show the second video announcement after the existing video popup is dismissed. */
+(function () {
+  const first = document.getElementById("videoPopOverlay");
+  const second = document.getElementById("videoPopOverlay2");
+  const closeButton = document.getElementById("videoPopClose2");
+  if (!first || !second || !closeButton) return;
+  const showSecond = function () {
+    window.setTimeout(function () {
+      second.classList.add("open");
+      second.setAttribute("aria-hidden", "false");
+    }, 450);
+  };
+  const closeSecond = function () {
+    second.classList.remove("open");
+    second.setAttribute("aria-hidden", "true");
+  };
+  closeButton.addEventListener("click", closeSecond);
+  second.addEventListener("click", function (event) {
+    if (event.target === second) closeSecond();
+  });
+  first.addEventListener("click", function (event) {
+    if (event.target === first || event.target.closest("#videoPopClose")) showSecond();
+  });
 })();
 </script>
 
