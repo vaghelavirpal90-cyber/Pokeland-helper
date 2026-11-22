@@ -2439,7 +2439,7 @@ function bindExternalLinks() {
 }
 
 /* ── Announcement: community (Discord + YouTube) ── */
-const ANN_KEY = "ph_ann_pokeland_world_download_v1";
+const ANN_KEY = "ph_ann_signup_website_v2";
 let annNever = false;
 let annOpenOnce = false; // only auto-popup once per cold JS context; reopen via visibility still ok if not dismissed
 function showAnnouncement(force) {
