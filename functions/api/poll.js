@@ -51,11 +51,14 @@ export async function onRequest(context) {
     if (request.method === "POST") {
       let body;
       try { body = await request.json(); } catch (error) { return json({ error: "Invalid request." }, 400); }
-      const option = body && body.option;
-      if (!OPTIONS.includes(option)) return json({ error: "Please select a valid game." }, 400);
-      await env.DB.prepare(
+      const options = body && body.options;
+      if (!Array.isArray(options) || options.length < 1 || options.length > 2 ||
+          new Set(options).size !== options.length || options.some(option => !OPTIONS.includes(option))) {
+        return json({ error: "Select one or two valid games." }, 400);
+      }
+      await env.DB.batch(options.map(option => env.DB.prepare(
         "UPDATE game_poll_votes SET votes = votes + 1 WHERE option_id = ?"
-      ).bind(option).run();
+      ).bind(option)));
     }
     return json(await getResults(env.DB));
   } catch (error) {
