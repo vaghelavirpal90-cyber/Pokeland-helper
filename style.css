@@ -1443,7 +1443,7 @@ body.poll-modal-open{overflow:hidden}
 #gamePollModal .poll-option-stats{gap:0}
 #gamePollModal .poll-option-meta{
   min-width:0;padding:0;border:0;border-radius:0;background:none;
-  color:#f4f7ff;font:800 clamp(1.15rem,4.2vw,1.45rem) var(--font,inherit);
+  color:#f4f7ff;font-size:clamp(1.15rem,4.2vw,1.45rem);font-weight:800;
   letter-spacing:-.04em
 }
 #gamePollModal .poll-track{
