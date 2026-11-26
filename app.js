@@ -2700,7 +2700,7 @@ if ("serviceWorker" in navigator) {
     button.style.setProperty("--game-accent", choice.color);
     button.style.setProperty("--game-tint", choice.tint);
     button.setAttribute("aria-pressed", "false");
-    button.innerHTML = '<span class="poll-option-head"><span class="poll-option-name"></span><span class="poll-option-stats"><strong class="poll-option-count">0</strong><span class="poll-option-meta">0%</span></span></span><span class="poll-track"><span class="poll-fill"></span></span>';
+    button.innerHTML = '<span class="poll-option-head"><span class="poll-option-leading"><span class="poll-option-mark" aria-hidden="true"></span><span class="poll-option-name"></span></span><span class="poll-option-stats"><strong class="poll-option-meta">0%</strong></span></span><span class="poll-track"><span class="poll-fill"></span></span><span class="poll-option-foot"><span class="poll-option-count">0 votes</span><span class="poll-option-pick"></span></span>';
     button.querySelector(".poll-option-name").textContent = choice.label;
     button.addEventListener("click", () => {
       if (voted() || busy) return;
@@ -2713,14 +2713,20 @@ if ("serviceWorker" in navigator) {
   choices.forEach(choice => root.appendChild(makeOption(choice)));
   function voted() { try { return localStorage.getItem(storageKey) === "1"; } catch (e) { return false; } }
   function renderSelection() {
+    const hasVoted = voted();
+    const modal = document.getElementById("gamePollModal");
+    if (modal) modal.classList.toggle("poll-has-voted", hasVoted);
     root.querySelectorAll(".poll-option").forEach(row => {
       const active = selected.has(row.dataset.pollOption);
       row.classList.toggle("poll-selected", active);
       row.setAttribute("aria-pressed", String(active));
-      row.disabled = voted() || busy || (!active && selected.size >= 2);
+      row.disabled = hasVoted || busy || (!active && selected.size >= 2);
+      const pick = row.querySelector(".poll-option-pick");
+      if (pick) pick.textContent = active ? "Your pick" : "";
     });
-    submit.disabled = voted() || busy || selected.size === 0;
-    statusEl.textContent = voted() ? "Thanks for voting!" : selected.size + "/2 selected · Choose up to two";
+    submit.disabled = hasVoted || busy || selected.size === 0;
+    submit.hidden = hasVoted;
+    statusEl.textContent = hasVoted ? "Vote submitted" : selected.size + "/2 selected · Choose up to two";
   }
   function render(data) {
     const total = Number(data.total) || 0;
