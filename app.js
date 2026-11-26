@@ -2623,3 +2623,103 @@ if ("serviceWorker" in navigator) {
 })();
 
 /* Legends Revolution registration popup removed; download link now opens the registration page directly. */
+
+
+// ── Community game poll (Cloudflare Pages Function + D1) ───────────────────
+(function initGamePoll() {
+  const root = document.getElementById("gamePollOptions");
+  const totalEl = document.getElementById("gamePollTotal");
+  const statusEl = document.getElementById("gamePollStatus");
+  if (!root || !totalEl || !statusEl) return;
+
+  const choices = [
+    { id: "pokeland-legends", label: "Pokeland Legends" },
+    { id: "pokeland-world", label: "Pokeland World" },
+    { id: "origin-reborn", label: "Origin Reborn" },
+    { id: "legends-revolution", label: "Legends Revolution" },
+    { id: "pokeverse", label: "Pokeverse" }
+  ];
+  const storageKey = "pokeland_helper_game_poll_v1";
+  let busy = false;
+
+  function makeOption(choice) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "poll-option";
+    button.dataset.pollOption = choice.id;
+    button.innerHTML = '<span class="poll-option-head"><span class="poll-option-name"></span><strong class="poll-option-count">0</strong></span><span class="poll-track"><span class="poll-fill"></span></span><span class="poll-option-meta">0%</span>';
+    button.querySelector(".poll-option-name").textContent = choice.label;
+    button.addEventListener("click", () => castVote(choice.id));
+    return button;
+  }
+
+  choices.forEach(choice => root.appendChild(makeOption(choice)));
+
+  function voted() {
+    try { return localStorage.getItem(storageKey) === "1"; } catch (e) { return false; }
+  }
+
+  function render(data) {
+    const total = Number(data.total) || 0;
+    totalEl.textContent = total + (total === 1 ? " vote" : " votes");
+    choices.forEach(choice => {
+      const row = root.querySelector('[data-poll-option="' + choice.id + '"]');
+      if (!row) return;
+      const count = Number(data.counts && data.counts[choice.id]) || 0;
+      const percent = total ? Math.round(count / total * 100) : 0;
+      row.querySelector(".poll-option-count").textContent = count.toLocaleString();
+      row.querySelector(".poll-fill").style.width = percent + "%";
+      row.querySelector(".poll-option-meta").textContent = percent + "%";
+      row.disabled = voted() || busy;
+      row.classList.toggle("poll-selected", voted() && data.lastChoice === choice.id);
+    });
+    statusEl.textContent = voted() ? "Thanks for voting!" : "Tap a game to vote";
+  }
+
+  async function refresh() {
+    try {
+      const response = await fetch("/api/poll", { cache: "no-store", headers: { "Accept": "application/json" } });
+      if (!response.ok) throw new Error("Poll unavailable");
+      const data = await response.json();
+      render(data);
+    } catch (error) {
+      if (!root.children.length || root.querySelector(".poll-loading")) {
+        root.innerHTML = '<p class="poll-error">Poll is temporarily unavailable. Please try again.</p>';
+      }
+      totalEl.textContent = "Results unavailable";
+      statusEl.textContent = "Please refresh later";
+    }
+  }
+
+  async function castVote(option) {
+    if (busy || voted() || !choices.some(choice => choice.id === option)) return;
+    busy = true;
+    root.querySelectorAll(".poll-option").forEach(button => { button.disabled = true; });
+    statusEl.textContent = "Submitting your vote…";
+    try {
+      const response = await fetch("/api/poll", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({ option })
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || "Could not submit vote");
+      try { localStorage.setItem(storageKey, "1"); } catch (e) {}
+      render(data);
+    } catch (error) {
+      statusEl.textContent = error.message || "Vote failed. Try again.";
+    } finally {
+      busy = false;
+      root.querySelectorAll(".poll-option").forEach(button => { button.disabled = voted(); });
+      if (!voted()) refresh();
+    }
+  }
+
+  refresh();
+  window.setInterval(() => {
+    if (document.visibilityState === "visible") refresh();
+  }, 10000);
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") refresh();
+  });
+})();
