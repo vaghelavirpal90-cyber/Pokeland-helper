@@ -2642,7 +2642,7 @@ if ("serviceWorker" in navigator) {
 /* Legends Revolution registration popup removed; download link now opens the registration page directly. */
 
 
-// Community poll opens once on the home screen per browser session.
+// Community poll opens automatically on every fresh page load while the home screen is active.
 (function bindGamePollModal() {
   const modal = document.getElementById("gamePollModal");
   const closeButton = document.getElementById("gamePollClose");
@@ -2651,14 +2651,13 @@ if ("serviceWorker" in navigator) {
     modal.classList.remove("open");
     modal.setAttribute("aria-hidden", "true");
     document.body.classList.remove("poll-modal-open");
-    try { sessionStorage.setItem("pokeland_poll_seen_v2", "1"); } catch (e) {}
   }
   closeButton.addEventListener("click", closePoll);
   modal.addEventListener("click", event => { if (event.target === modal) closePoll(); });
   document.addEventListener("keydown", event => {
     if (event.key === "Escape" && modal.classList.contains("open")) closePoll();
   });
-  if (!sessionStorage.getItem("pokeland_poll_seen_v2") && document.getElementById("view-board") && !document.getElementById("view-board").classList.contains("hidden")) {
+  if (document.getElementById("view-board") && !document.getElementById("view-board").classList.contains("hidden")) {
     window.setTimeout(() => {
       if (modal.classList.contains("open")) return;
       modal.classList.add("open");
