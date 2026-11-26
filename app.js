@@ -2078,20 +2078,23 @@ document.addEventListener("keydown", e => {
 });
 const side = document.getElementById("side"), sideScrim = document.getElementById("sideScrim");
 function setSide(on) { side.classList.toggle("on", on); sideScrim.classList.toggle("on", on); }
+function openCommunityPoll() {
+  const modal = document.getElementById("gamePollModal");
+  if (!modal) return;
+  modal.classList.add("open");
+  modal.setAttribute("aria-hidden", "false");
+  document.body.classList.add("poll-modal-open");
+}
 document.getElementById("btnSide").addEventListener("click", () => setSide(true));
+document.getElementById("btnPollQuick").addEventListener("click", openCommunityPoll);
 document.getElementById("btnSideClose").addEventListener("click", () => setSide(false));
 sideScrim.addEventListener("click", () => setSide(false));
 document.querySelectorAll("[data-side]").forEach(b => b.addEventListener("click", () => {
   setSide(false);
   if (b.dataset.side === "poll") {
-    const modal = document.getElementById("gamePollModal");
-    if (modal) {
-      modal.classList.add("open");
-      modal.setAttribute("aria-hidden", "false");
-      document.body.classList.add("poll-modal-open");
-      const close = document.getElementById("gamePollClose");
-      if (close) close.focus();
-    }
+    openCommunityPoll();
+    const close = document.getElementById("gamePollClose");
+    if (close) close.focus();
     return;
   }
   go(b.dataset.side);
