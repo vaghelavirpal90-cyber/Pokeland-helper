@@ -2672,11 +2672,11 @@ if ("serviceWorker" in navigator) {
   const statusEl = document.getElementById("gamePollStatus");
   if (!root || !totalEl || !statusEl) return;
   const choices = [
-    { id: "pokeland-legends", label: "Pokeland Legends" },
-    { id: "pokeland-world", label: "Pokeland World" },
-    { id: "origin-reborn", label: "Origin Reborn" },
-    { id: "legends-revolution", label: "Legends Revolution" },
-    { id: "pokeverse", label: "Pokeverse" }
+    { id: "pokeland-legends", label: "Pokeland Legends", color: "#ff6548", tint: "rgba(255,101,72,.16)" },
+    { id: "pokeland-world", label: "Pokeland World", color: "#36c9ff", tint: "rgba(54,201,255,.16)" },
+    { id: "origin-reborn", label: "Origin Reborn", color: "#b18cff", tint: "rgba(177,140,255,.16)" },
+    { id: "legends-revolution", label: "Legends Revolution", color: "#a8e65c", tint: "rgba(168,230,92,.16)" },
+    { id: "pokeverse", label: "Pokeverse", color: "#ff79bd", tint: "rgba(255,121,189,.16)" }
   ];
   const storageKey = "pokeland_helper_game_poll_v1";
   let busy = false;
@@ -2694,8 +2694,10 @@ if ("serviceWorker" in navigator) {
     button.type = "button";
     button.className = "poll-option";
     button.dataset.pollOption = choice.id;
+    button.style.setProperty("--game-accent", choice.color);
+    button.style.setProperty("--game-tint", choice.tint);
     button.setAttribute("aria-pressed", "false");
-    button.innerHTML = '<span class="poll-option-head"><span class="poll-option-name"></span><strong class="poll-option-count">0</strong></span><span class="poll-track"><span class="poll-fill"></span></span><span class="poll-option-meta">0%</span>';
+    button.innerHTML = '<span class="poll-option-head"><span class="poll-option-name"></span><span class="poll-option-stats"><strong class="poll-option-count">0</strong><span class="poll-option-meta">0%</span></span></span><span class="poll-track"><span class="poll-fill"></span></span>';
     button.querySelector(".poll-option-name").textContent = choice.label;
     button.addEventListener("click", () => {
       if (voted() || busy) return;
@@ -2715,17 +2717,17 @@ if ("serviceWorker" in navigator) {
       row.disabled = voted() || busy || (!active && selected.size >= 2);
     });
     submit.disabled = voted() || busy || selected.size === 0;
-    statusEl.textContent = voted() ? "Thanks for voting!" : selected.size + "/2 selected · You can choose up to two";
+    statusEl.textContent = voted() ? "Thanks for voting!" : selected.size + "/2 selected · Choose up to two";
   }
   function render(data) {
     const total = Number(data.total) || 0;
-    totalEl.textContent = total.toLocaleString() + (total === 1 ? " vote" : " votes");
+    totalEl.textContent = total.toLocaleString() + (total === 1 ? " selection" : " selections");
     choices.forEach(choice => {
       const row = root.querySelector('[data-poll-option="' + choice.id + '"]');
       if (!row) return;
       const count = Number(data.counts && data.counts[choice.id]) || 0;
       const percent = total ? Math.round(count / total * 100) : 0;
-      row.querySelector(".poll-option-count").textContent = count.toLocaleString();
+      row.querySelector(".poll-option-count").textContent = count.toLocaleString() + (count === 1 ? " vote" : " votes");
       row.querySelector(".poll-fill").style.width = percent + "%";
       row.querySelector(".poll-option-meta").textContent = percent + "%";
     });
@@ -2764,4 +2766,4 @@ if ("serviceWorker" in navigator) {
   refresh();
   window.setInterval(() => { if (document.visibilityState === "visible") refresh(); }, 10000);
   document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") refresh(); });
-})();
+})();;
