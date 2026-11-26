@@ -1,12 +1,12 @@
 // Pokeland Helper — service worker
 // Bump CACHE_NAME whenever index.html changes to force an update.
-const CACHE_NAME = "pokeland-helper-v28";
+const CACHE_NAME = "pokeland-helper-v29";
 const CORE_ASSETS = [
   "./",
   "./index.html",
   "./manifest.json",
-  "./app.js?v=poll-quick-access-1126",
-  "./style.css?v=poll-quick-access-1126",
+  "./app.js?v=poll-label-access-1126",
+  "./style.css?v=poll-label-access-1126",
   "./icons/icon-192.png",
   "./icons/icon-512.png"
 ];
