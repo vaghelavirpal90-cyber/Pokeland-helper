@@ -2639,7 +2639,7 @@ if ("serviceWorker" in navigator) {
 /* Legends Revolution registration popup removed; download link now opens the registration page directly. */
 
 
-// Community poll modal controls
+// Community poll opens once on the home screen per browser session.
 (function bindGamePollModal() {
   const modal = document.getElementById("gamePollModal");
   const closeButton = document.getElementById("gamePollClose");
@@ -2648,12 +2648,21 @@ if ("serviceWorker" in navigator) {
     modal.classList.remove("open");
     modal.setAttribute("aria-hidden", "true");
     document.body.classList.remove("poll-modal-open");
+    try { sessionStorage.setItem("pokeland_poll_seen", "1"); } catch (e) {}
   }
   closeButton.addEventListener("click", closePoll);
   modal.addEventListener("click", event => { if (event.target === modal) closePoll(); });
   document.addEventListener("keydown", event => {
     if (event.key === "Escape" && modal.classList.contains("open")) closePoll();
   });
+  if (!sessionStorage.getItem("pokeland_poll_seen") && document.getElementById("view-board") && !document.getElementById("view-board").classList.contains("hidden")) {
+    window.setTimeout(() => {
+      if (modal.classList.contains("open")) return;
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("poll-modal-open");
+    }, 900);
+  }
 })();
 
 // ── Community game poll (Cloudflare Pages Function + D1) ───────────────────
@@ -2662,7 +2671,6 @@ if ("serviceWorker" in navigator) {
   const totalEl = document.getElementById("gamePollTotal");
   const statusEl = document.getElementById("gamePollStatus");
   if (!root || !totalEl || !statusEl) return;
-
   const choices = [
     { id: "pokeland-legends", label: "Pokeland Legends" },
     { id: "pokeland-world", label: "Pokeland World" },
@@ -2672,27 +2680,46 @@ if ("serviceWorker" in navigator) {
   ];
   const storageKey = "pokeland_helper_game_poll_v1";
   let busy = false;
+  const selected = new Set();
+
+  const submit = document.createElement("button");
+  submit.type = "button";
+  submit.className = "poll-submit";
+  submit.textContent = "Submit vote";
+  submit.disabled = true;
+  root.after(submit);
 
   function makeOption(choice) {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "poll-option";
     button.dataset.pollOption = choice.id;
+    button.setAttribute("aria-pressed", "false");
     button.innerHTML = '<span class="poll-option-head"><span class="poll-option-name"></span><strong class="poll-option-count">0</strong></span><span class="poll-track"><span class="poll-fill"></span></span><span class="poll-option-meta">0%</span>';
     button.querySelector(".poll-option-name").textContent = choice.label;
-    button.addEventListener("click", () => castVote(choice.id));
+    button.addEventListener("click", () => {
+      if (voted() || busy) return;
+      if (selected.has(choice.id)) selected.delete(choice.id);
+      else if (selected.size < 2) selected.add(choice.id);
+      renderSelection();
+    });
     return button;
   }
-
   choices.forEach(choice => root.appendChild(makeOption(choice)));
-
-  function voted() {
-    try { return localStorage.getItem(storageKey) === "1"; } catch (e) { return false; }
+  function voted() { try { return localStorage.getItem(storageKey) === "1"; } catch (e) { return false; } }
+  function renderSelection() {
+    root.querySelectorAll(".poll-option").forEach(row => {
+      const active = selected.has(row.dataset.pollOption);
+      row.classList.toggle("poll-selected", active);
+      row.setAttribute("aria-pressed", String(active));
+      row.disabled = voted() || busy || (!active && selected.size >= 2);
+    });
+    submit.disabled = voted() || busy || selected.size === 0;
+    statusEl.textContent = voted() ? "Thanks for voting!" : selected.size + "/2 selected · You can choose up to two";
   }
-
   function render(data) {
     const total = Number(data.total) || 0;
-    totalEl.textContent = total + (total === 1 ? " vote" : " votes");
+    totalEl.textContent = total.toLocaleString() + (total === 1 ? " vote" : " votes");
     choices.forEach(choice => {
       const row = root.querySelector('[data-poll-option="' + choice.id + '"]');
       if (!row) return;
@@ -2701,37 +2728,28 @@ if ("serviceWorker" in navigator) {
       row.querySelector(".poll-option-count").textContent = count.toLocaleString();
       row.querySelector(".poll-fill").style.width = percent + "%";
       row.querySelector(".poll-option-meta").textContent = percent + "%";
-      row.disabled = voted() || busy;
-      row.classList.toggle("poll-selected", voted() && data.lastChoice === choice.id);
     });
-    statusEl.textContent = voted() ? "Thanks for voting!" : "Tap a game to vote";
+    renderSelection();
+    if (voted()) submit.textContent = "Vote submitted";
   }
-
   async function refresh() {
     try {
-      const response = await fetch("/api/poll", { cache: "no-store", headers: { "Accept": "application/json" } });
+      const response = await fetch("/api/poll", { cache: "no-store", headers: { Accept: "application/json" } });
       if (!response.ok) throw new Error("Poll unavailable");
-      const data = await response.json();
-      render(data);
+      render(await response.json());
     } catch (error) {
-      if (!root.children.length || root.querySelector(".poll-loading")) {
-        root.innerHTML = '<p class="poll-error">Poll is temporarily unavailable. Please try again.</p>';
-      }
+      if (root.querySelector(".poll-loading")) root.innerHTML = '<p class="poll-error">Poll is temporarily unavailable. Please try again.</p>';
       totalEl.textContent = "Results unavailable";
       statusEl.textContent = "Please refresh later";
     }
   }
-
-  async function castVote(option) {
-    if (busy || voted() || !choices.some(choice => choice.id === option)) return;
-    busy = true;
-    root.querySelectorAll(".poll-option").forEach(button => { button.disabled = true; });
-    statusEl.textContent = "Submitting your vote…";
+  submit.addEventListener("click", async () => {
+    if (busy || voted() || !selected.size) return;
+    busy = true; renderSelection(); statusEl.textContent = "Submitting your vote…";
     try {
       const response = await fetch("/api/poll", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "Accept": "application/json" },
-        body: JSON.stringify({ option })
+        method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ options: Array.from(selected) })
       });
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "Could not submit vote");
@@ -2739,18 +2757,11 @@ if ("serviceWorker" in navigator) {
       render(data);
     } catch (error) {
       statusEl.textContent = error.message || "Vote failed. Try again.";
-    } finally {
-      busy = false;
-      root.querySelectorAll(".poll-option").forEach(button => { button.disabled = voted(); });
-      if (!voted()) refresh();
+      busy = false; renderSelection(); return;
     }
-  }
-
-  refresh();
-  window.setInterval(() => {
-    if (document.visibilityState === "visible") refresh();
-  }, 10000);
-  document.addEventListener("visibilitychange", () => {
-    if (document.visibilityState === "visible") refresh();
+    busy = false; renderSelection();
   });
+  refresh();
+  window.setInterval(() => { if (document.visibilityState === "visible") refresh(); }, 10000);
+  document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") refresh(); });
 })();
