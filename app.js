@@ -2498,7 +2498,7 @@ setInterval(() => {
 // PWA: register service worker (enables Install prompt + offline shell)
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("sw.js").catch(() => {});
+    navigator.serviceWorker.register("sw.js", { updateViaCache: "none" }).then(registration => registration.update()).catch(() => {});
   });
 }
 /* ═══ Liquid Glass prototype — behaviour ═══ */
@@ -2648,14 +2648,14 @@ if ("serviceWorker" in navigator) {
     modal.classList.remove("open");
     modal.setAttribute("aria-hidden", "true");
     document.body.classList.remove("poll-modal-open");
-    try { sessionStorage.setItem("pokeland_poll_seen", "1"); } catch (e) {}
+    try { sessionStorage.setItem("pokeland_poll_seen_v2", "1"); } catch (e) {}
   }
   closeButton.addEventListener("click", closePoll);
   modal.addEventListener("click", event => { if (event.target === modal) closePoll(); });
   document.addEventListener("keydown", event => {
     if (event.key === "Escape" && modal.classList.contains("open")) closePoll();
   });
-  if (!sessionStorage.getItem("pokeland_poll_seen") && document.getElementById("view-board") && !document.getElementById("view-board").classList.contains("hidden")) {
+  if (!sessionStorage.getItem("pokeland_poll_seen_v2") && document.getElementById("view-board") && !document.getElementById("view-board").classList.contains("hidden")) {
     window.setTimeout(() => {
       if (modal.classList.contains("open")) return;
       modal.classList.add("open");
