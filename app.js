@@ -2081,7 +2081,21 @@ function setSide(on) { side.classList.toggle("on", on); sideScrim.classList.togg
 document.getElementById("btnSide").addEventListener("click", () => setSide(true));
 document.getElementById("btnSideClose").addEventListener("click", () => setSide(false));
 sideScrim.addEventListener("click", () => setSide(false));
-document.querySelectorAll("[data-side]").forEach(b => b.addEventListener("click", () => { setSide(false); go(b.dataset.side); }));
+document.querySelectorAll("[data-side]").forEach(b => b.addEventListener("click", () => {
+  setSide(false);
+  if (b.dataset.side === "poll") {
+    const modal = document.getElementById("gamePollModal");
+    if (modal) {
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("poll-modal-open");
+      const close = document.getElementById("gamePollClose");
+      if (close) close.focus();
+    }
+    return;
+  }
+  go(b.dataset.side);
+}));
 document.getElementById("btnClose").addEventListener("click", () => setDrawer(false));
 scrim.addEventListener("click", () => setDrawer(false));
 
@@ -2624,6 +2638,23 @@ if ("serviceWorker" in navigator) {
 
 /* Legends Revolution registration popup removed; download link now opens the registration page directly. */
 
+
+// Community poll modal controls
+(function bindGamePollModal() {
+  const modal = document.getElementById("gamePollModal");
+  const closeButton = document.getElementById("gamePollClose");
+  if (!modal || !closeButton) return;
+  function closePoll() {
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("poll-modal-open");
+  }
+  closeButton.addEventListener("click", closePoll);
+  modal.addEventListener("click", event => { if (event.target === modal) closePoll(); });
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && modal.classList.contains("open")) closePoll();
+  });
+})();
 
 // ── Community game poll (Cloudflare Pages Function + D1) ───────────────────
 (function initGamePoll() {
