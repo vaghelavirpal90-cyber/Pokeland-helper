@@ -1269,3 +1269,80 @@ body.poll-modal-open{overflow:hidden}
 .poll-modal-note{margin-top:12px;color:#7f8da3;font-size:.55rem;letter-spacing:.1em}
 .poll-modal-close{width:35px;height:35px;right:13px;top:13px;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.16);font-size:23px}
 @media(max-width:380px){.poll-modal{padding:22px 14px 15px}.poll-modal .poll-option{padding:12px 11px 11px}.poll-modal .poll-option-name{font-size:.84rem}.poll-modal .poll-option-count{font-size:.67rem}.poll-modal .poll-foot{font-size:.66rem}}
+
+
+/* Community poll — liquid glass finish */
+/* Scoped exclusively to the community poll modal */
+#gamePollModal.poll-modal-overlay{
+  background:rgba(3,7,18,.68);
+  -webkit-backdrop-filter:blur(22px) saturate(155%);
+  backdrop-filter:blur(22px) saturate(155%);
+}
+#gamePollModal .poll-modal{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:28px;
+  background:
+    radial-gradient(ellipse at 4% 0%,rgba(87,180,255,.2),transparent 42%),
+    radial-gradient(ellipse at 100% 8%,rgba(194,112,255,.16),transparent 38%),
+    linear-gradient(145deg,rgba(28,43,67,.82),rgba(12,20,36,.78) 55%,rgba(9,15,29,.84));
+  -webkit-backdrop-filter:blur(30px) saturate(160%);
+  backdrop-filter:blur(30px) saturate(160%);
+  box-shadow:0 28px 90px rgba(0,0,0,.58),inset 0 1px 0 rgba(255,255,255,.22),inset 0 -1px 0 rgba(255,255,255,.05);
+}
+#gamePollModal .poll-modal:after{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset:0;
+  pointer-events:none;
+  border-radius:inherit;
+  background:linear-gradient(125deg,rgba(255,255,255,.12),transparent 26%,transparent 72%,rgba(255,255,255,.045));
+}
+#gamePollModal .poll-modal:before{
+  height:2px;
+  opacity:.9;
+  filter:drop-shadow(0 0 8px rgba(112,190,255,.55));
+}
+#gamePollModal .poll-modal-close{
+  border:1px solid rgba(255,255,255,.22);
+  background:rgba(255,255,255,.1);
+  -webkit-backdrop-filter:blur(14px);
+  backdrop-filter:blur(14px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.2);
+}
+#gamePollModal .poll-option{
+  border:1px solid color-mix(in srgb,var(--game-accent) 48%,rgba(255,255,255,.16));
+  background:linear-gradient(115deg,color-mix(in srgb,var(--game-accent) 13%,rgba(255,255,255,.075)),rgba(255,255,255,.045) 65%);
+  -webkit-backdrop-filter:blur(16px) saturate(135%);
+  backdrop-filter:blur(16px) saturate(135%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.11),0 7px 22px rgba(0,0,0,.12);
+}
+#gamePollModal .poll-option.poll-selected{
+  border-color:color-mix(in srgb,var(--game-accent) 75%,white);
+  background:linear-gradient(115deg,color-mix(in srgb,var(--game-accent) 24%,rgba(255,255,255,.1)),rgba(255,255,255,.075));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 0 22px color-mix(in srgb,var(--game-accent) 20%,transparent);
+}
+#gamePollModal .poll-track{
+  background:rgba(255,255,255,.13);
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.22);
+}
+#gamePollModal .poll-option-meta{
+  background:color-mix(in srgb,var(--game-accent) 14%,rgba(255,255,255,.08));
+  -webkit-backdrop-filter:blur(10px);
+  backdrop-filter:blur(10px);
+}
+#gamePollModal .poll-submit{
+  border:1px solid rgba(255,255,255,.28);
+  box-shadow:0 10px 28px rgba(255,140,70,.2),inset 0 1px 0 rgba(255,255,255,.48),inset 0 -1px 0 rgba(0,0,0,.12);
+}
+#gamePollModal .poll-foot{
+  border-top-color:rgba(255,255,255,.14);
+}
+@supports not ((backdrop-filter:blur(2px)) or (-webkit-backdrop-filter:blur(2px))){
+  #gamePollModal.poll-modal-overlay{background:rgba(3,7,18,.92)}
+  #gamePollModal .poll-modal{background:#111b2d}
+  #gamePollModal .poll-option{background:rgba(255,255,255,.07)}
+}
