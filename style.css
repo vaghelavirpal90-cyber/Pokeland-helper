@@ -1551,3 +1551,44 @@ body.poll-modal-open{overflow:hidden}
   #gamePollModal .poll-option-name{font-size:.84rem}
   #gamePollModal .poll-option-meta{font-size:1.02rem}
 }
+
+
+/* Community poll — mobile viewport fit and safe internal scrolling */
+#gamePollModal.poll-modal-overlay{
+  padding:12px 12px calc(12px + env(safe-area-inset-bottom));
+}
+#gamePollModal .poll-modal{
+  width:100%;
+  max-width:430px;
+  max-height:calc(100dvh - 24px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+  overflow-x:hidden !important;
+  overflow-y:auto !important;
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:thin;
+  scrollbar-color:rgba(160,177,205,.35) transparent;
+  padding:16px 14px 12px;
+}
+#gamePollModal .poll-topline{margin-bottom:11px}
+#gamePollModal .poll-title{font-size:clamp(1.18rem,4.5vw,1.5rem);line-height:1.16;margin-bottom:6px}
+#gamePollModal .poll-subtitle{font-size:.76rem;margin-bottom:11px}
+#gamePollModal .poll-options{gap:7px}
+#gamePollModal .poll-option{padding:9px 10px 8px;border-radius:14px}
+#gamePollModal .poll-option-mark{width:25px;height:25px;flex-basis:25px}
+#gamePollModal .poll-option-leading{gap:9px}
+#gamePollModal .poll-option-name{font-size:clamp(.81rem,3.1vw,.94rem)}
+#gamePollModal .poll-option-meta{font-size:.98rem}
+#gamePollModal .poll-track{height:6px;margin-top:7px}
+#gamePollModal .poll-option-foot{margin-top:6px;font-size:.66rem;min-height:15px}
+#gamePollModal .poll-submit{min-height:40px;margin-top:9px}
+#gamePollModal .poll-foot{margin-top:9px;padding:8px 10px;font-size:.69rem}
+#gamePollModal .poll-modal-note{margin-top:7px;font-size:.48rem}
+#gamePollModal .poll-modal-close{width:33px;height:33px;right:10px;top:10px;font-size:20px}
+@media(max-height:720px){
+  #gamePollModal .poll-modal{padding-top:13px;padding-bottom:10px}
+  #gamePollModal .poll-topline{margin-bottom:8px}
+  #gamePollModal .poll-subtitle{margin-bottom:8px}
+  #gamePollModal .poll-option{padding-top:7px;padding-bottom:7px}
+  #gamePollModal .poll-track{margin-top:6px}
+  #gamePollModal .poll-option-foot{margin-top:5px}
+}
