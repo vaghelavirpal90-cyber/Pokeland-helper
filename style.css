@@ -1346,3 +1346,17 @@ body.poll-modal-open{overflow:hidden}
   #gamePollModal .poll-modal{background:#111b2d}
   #gamePollModal .poll-option{background:rgba(255,255,255,.07)}
 }
+
+
+/* Quick access to the community poll beside Discord in the header. */
+.header-right .poll-quick-btn {
+  color: #ffd36d;
+  border-color: rgba(255,211,109,.34);
+  background: linear-gradient(145deg,rgba(255,211,109,.16),rgba(255,255,255,.045));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 0 16px rgba(255,190,80,.09);
+}
+.header-right .poll-quick-btn svg { width: 18px; height: 18px; }
+.header-right .poll-quick-btn:focus-visible {
+  outline: 2px solid #ffd36d;
+  outline-offset: 3px;
+}
