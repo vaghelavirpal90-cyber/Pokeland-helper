@@ -2084,6 +2084,7 @@ function openCommunityPoll() {
   modal.classList.add("open");
   modal.setAttribute("aria-hidden", "false");
   document.body.classList.add("poll-modal-open");
+  window.dispatchEvent(new Event("communitypoll:open"));
 }
 document.getElementById("btnSide").addEventListener("click", () => setSide(true));
 document.getElementById("btnPollQuick").addEventListener("click", openCommunityPoll);
@@ -2663,6 +2664,7 @@ if ("serviceWorker" in navigator) {
       modal.classList.add("open");
       modal.setAttribute("aria-hidden", "false");
       document.body.classList.add("poll-modal-open");
+      window.dispatchEvent(new Event("communitypoll:open"));
     }, 900);
   }
 })();
@@ -2771,7 +2773,12 @@ if ("serviceWorker" in navigator) {
     }
     busy = false; renderSelection();
   });
-  refresh();
-  window.setInterval(() => { if (document.visibilityState === "visible") refresh(); }, 10000);
-  document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") refresh(); });
+  const modal = document.getElementById("gamePollModal");
+  window.addEventListener("communitypoll:open", refresh);
+  window.setInterval(() => {
+    if (document.visibilityState === "visible" && modal && modal.classList.contains("open")) refresh();
+  }, 30000);
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible" && modal && modal.classList.contains("open")) refresh();
+  });
 })();;
