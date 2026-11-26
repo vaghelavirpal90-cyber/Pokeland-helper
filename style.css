@@ -1517,3 +1517,37 @@ body.poll-modal-open{overflow:hidden}
 @media(prefers-reduced-motion:reduce){
   #gamePollModal .poll-option,#gamePollModal .poll-fill{transition:none}
 }
+
+
+/* Community poll — slightly more compact on mobile */
+#gamePollModal.poll-modal-overlay{padding:18px}
+#gamePollModal .poll-modal{
+  max-width:460px;
+  max-height:84dvh;
+  padding:19px 17px 14px;
+  border-radius:22px;
+}
+#gamePollModal .poll-topline{margin-bottom:15px}
+#gamePollModal .poll-title{font-size:clamp(1.38rem,4.9vw,1.82rem);margin-bottom:7px}
+#gamePollModal .poll-subtitle{font-size:.82rem;margin-bottom:14px}
+#gamePollModal .poll-options{gap:8px}
+#gamePollModal .poll-option{padding:12px 13px 10px;border-radius:16px}
+#gamePollModal .poll-option-mark{width:27px;height:27px;flex-basis:27px}
+#gamePollModal .poll-option-leading{gap:10px}
+#gamePollModal .poll-option-name{font-size:clamp(.86rem,3.3vw,1rem)}
+#gamePollModal .poll-option-meta{font-size:1.08rem}
+#gamePollModal .poll-track{height:8px;margin-top:10px}
+#gamePollModal .poll-option-foot{margin-top:8px;font-size:.7rem}
+#gamePollModal .poll-submit{min-height:44px;margin-top:11px}
+#gamePollModal .poll-foot{margin-top:12px;padding:10px 12px;font-size:.74rem}
+#gamePollModal .poll-modal-note{margin-top:9px;font-size:.52rem}
+#gamePollModal .poll-modal-close{width:36px;height:36px;right:12px;top:12px;font-size:22px}
+@media(max-width:420px){
+  #gamePollModal.poll-modal-overlay{padding:18px}
+  #gamePollModal .poll-modal{padding:18px 13px 12px;max-height:84dvh}
+  #gamePollModal .poll-topline{margin-bottom:14px}
+  #gamePollModal .poll-option{padding:11px 11px 9px}
+  #gamePollModal .poll-option-mark{width:26px;height:26px;flex-basis:26px}
+  #gamePollModal .poll-option-name{font-size:.84rem}
+  #gamePollModal .poll-option-meta{font-size:1.02rem}
+}
