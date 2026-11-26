@@ -2438,74 +2438,7 @@ function bindExternalLinks() {
   });
 }
 
-/* ── Announcement: community (Discord + YouTube) ── */
-const ANN_KEY = "ph_ann_signup_website_v2";
-let annNever = false;
-let annOpenOnce = false; // only auto-popup once per cold JS context; reopen via visibility still ok if not dismissed
-function showAnnouncement(force) {
-  try { if (localStorage.getItem(ANN_KEY) === "1") return; } catch (e) {}
-  const el = document.getElementById("annOverlay");
-  if (!el) return;
-  // Avoid stacking if already open
-  if (el.classList.contains("open")) return;
-  if (document.body.classList.contains("coaching")) return;
-  if (!force && annOpenOnce) return;
-  annOpenOnce = true;
-  el.classList.add("open");
-  el.setAttribute("aria-hidden", "false");
-}
-function hideAnnouncement(permanent) {
-  const el = document.getElementById("annOverlay");
-  if (!el) return;
-  el.classList.remove("open");
-  el.setAttribute("aria-hidden", "true");
-  const videoFrame = document.getElementById("annVideoFrame");
-  const videoPlay = document.getElementById("annVideoPlay");
-  if (videoFrame) { videoFrame.src = ""; videoFrame.hidden = true; }
-  if (videoPlay) videoPlay.hidden = false;
-  if (permanent || annNever) {
-    try { localStorage.setItem(ANN_KEY, "1"); } catch (e) {}
-  }
-}
-(function initAnnouncement() {
-  const close = document.getElementById("annClose");
-  const overlay = document.getElementById("annOverlay");
-  const discord = document.getElementById("annDiscord");
-  const yt = document.getElementById("annYoutube");
-  const videoPlay = document.getElementById("annVideoPlay");
-  const worldPanel = document.getElementById("annWorldPanel");
-  if (worldPanel) {
-    Array.from(worldPanel.children).forEach(child => {
-      const content = child.textContent || "";
-      if (content.includes("INFINITE#0221") || content.includes("FRIEND REFERRAL CODE")) child.remove();
-    });
-  }
-  const gameTabs = [
-    { button: document.getElementById("annTabWorld"), panel: document.getElementById("annWorldPanel") },
-    { button: document.getElementById("annTabOrigin"), panel: document.getElementById("annOriginPanel") }
-  ];
-  gameTabs.forEach((tab, index) => {
-    if (!tab.button || !tab.panel) return;
-    tab.button.addEventListener("click", () => {
-      gameTabs.forEach((item, itemIndex) => {
-        if (!item.button || !item.panel) return;
-        const active = itemIndex === index;
-        item.button.classList.toggle("active", active);
-        item.button.setAttribute("aria-selected", String(active));
-        item.panel.hidden = !active;
-      });
-    });
-  });
-  if (!close || !overlay) return;
-  close.addEventListener("click", () => hideAnnouncement(annNever));
-  overlay.addEventListener("click", e => { if (e.target === overlay) hideAnnouncement(annNever); });
-  if (discord) discord.addEventListener("click", () => hideAnnouncement(false));
-  if (yt) yt.addEventListener("click", () => hideAnnouncement(false));
-  bindExternalLinks();
-
-  // Show the main account-registration announcement before the smaller video cards.
-  window.setTimeout(() => showAnnouncement(false), 650);
-})();
+bindExternalLinks();
 
 // Re-check the permission reminder when the app is reopened and when its 3-day snooze expires.
 // This only shows an in-page reminder; the browser's permission prompt still requires a user tap.
