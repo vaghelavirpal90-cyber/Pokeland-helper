@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=sequential-floating-videos-1121">
+<link rel="stylesheet" href="style.css?v=community-poll-1126">
 <!-- Cloudflare Web Analytics -->
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"0b7b7ad7cab2447b9d1afc52bb5fe4a0"}'></script>
 <!-- End Cloudflare Web Analytics -->
@@ -173,6 +173,17 @@
         <div class="fav-row" id="favList"></div>
         <div class="empty hidden" id="favEmpty"><p>Star legendaries to track them here</p></div>
       </div>
+      <section class="section poll-section" id="gamePollSection" aria-labelledby="gamePollTitle">
+        <div class="poll-card card">
+          <div class="poll-topline"><span class="poll-eyebrow">COMMUNITY POLL</span><span class="poll-live"><i></i> LIVE RESULTS</span></div>
+          <h2 class="poll-title" id="gamePollTitle">Which of these games do you play or enjoy the most?</h2>
+          <p class="poll-subtitle">Cast your vote and see what the community plays most.</p>
+          <div class="poll-options" id="gamePollOptions" aria-live="polite">
+            <div class="poll-loading">Loading poll results…</div>
+          </div>
+          <div class="poll-foot"><span id="gamePollTotal">Loading votes…</span><span id="gamePollStatus" role="status">Votes update live</span></div>
+        </div>
+      </section>
     </section>
     <section id="view-rotation" class="hidden">
       <div id="rotCalendar">
@@ -893,7 +904,7 @@
     </div>
   </nav>
 </div>
-<script defer src="app.js?v=account-popup-auto-1121"></script>
+<script defer src="app.js?v=community-poll-1126"></script>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <filter id="lg-refract" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
     <feTurbulence type="fractalNoise" baseFrequency="0.006 0.011" numOctaves="2" seed="11" result="n"/>
