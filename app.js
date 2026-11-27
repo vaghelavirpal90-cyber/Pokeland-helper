@@ -2782,3 +2782,91 @@ if ("serviceWorker" in navigator) {
     if (document.visibilityState === "visible" && modal && modal.classList.contains("open")) refresh();
   });
 })();;
+
+
+// ── Game hub: Download view tabs, bonus-code copy, poll shortcut ─────────────
+(function initGameHub() {
+  const tabs = Array.from(document.querySelectorAll(".gh-tab"));
+  const panels = Array.from(document.querySelectorAll(".gh-panel"));
+  if (!tabs.length || !panels.length) return;
+  const storageKey = "pokeland_helper_dl_game";
+  const ids = tabs.map(t => t.dataset.game);
+
+  function select(id, focus) {
+    if (!ids.includes(id)) id = ids[0];
+    tabs.forEach(t => {
+      const on = t.dataset.game === id;
+      t.classList.toggle("on", on);
+      t.setAttribute("aria-selected", on ? "true" : "false");
+      t.tabIndex = on ? 0 : -1;
+      if (on && focus) t.focus();
+    });
+    panels.forEach(p => p.classList.toggle("hidden", p.dataset.game !== id));
+    try { sessionStorage.setItem(storageKey, id); } catch (e) {}
+  }
+
+  tabs.forEach((t, i) => {
+    t.addEventListener("click", () => select(t.dataset.game));
+    t.addEventListener("keydown", e => {
+      let n = null;
+      if (e.key === "ArrowRight") n = (i + 1) % tabs.length;
+      else if (e.key === "ArrowLeft") n = (i - 1 + tabs.length) % tabs.length;
+      else if (e.key === "Home") n = 0;
+      else if (e.key === "End") n = tabs.length - 1;
+      if (n === null) return;
+      e.preventDefault();
+      select(ids[n], true);
+    });
+  });
+
+  let saved = null;
+  try { saved = sessionStorage.getItem(storageKey); } catch (e) {}
+  select(saved || ids[0]);
+
+  function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
+    return new Promise((resolve, reject) => {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.cssText = "position:fixed;top:-1000px;opacity:0";
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy") ? resolve() : reject(new Error("copy failed")); }
+      catch (err) { reject(err); }
+      finally { document.body.removeChild(ta); }
+    });
+  }
+
+  document.querySelectorAll("[data-copy]").forEach(btn => {
+    const label = btn.querySelector("span");
+    const idle = label ? label.textContent : "";
+    const target = btn.dataset.copyTarget ? document.getElementById(btn.dataset.copyTarget) : null;
+    let timer = null;
+    function flash(text, ok) {
+      if (label) label.textContent = text;
+      btn.classList.toggle("done", ok);
+      clearTimeout(timer);
+      timer = setTimeout(() => { if (label) label.textContent = idle; btn.classList.remove("done"); }, 1800);
+    }
+    btn.addEventListener("click", () => {
+      copyText(btn.dataset.copy).then(
+        () => flash("Copied ✓", true),
+        () => {
+          // Clipboard blocked: select the code so the person can copy it by hand.
+          if (target) {
+            const range = document.createRange();
+            range.selectNodeContents(target);
+            const sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+          }
+          flash("Select & copy", false);
+        }
+      );
+    });
+  });
+
+  const pollBtn = document.getElementById("ghPollBtn");
+  if (pollBtn) pollBtn.addEventListener("click", () => { if (typeof openCommunityPoll === "function") openCommunityPoll(); });
+})();
