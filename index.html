@@ -35,7 +35,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=poll-fit-1126">
+<link rel="stylesheet" href="style.css?v=game-hub-1127">
 <!-- Cloudflare Web Analytics -->
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"0b7b7ad7cab2447b9d1afc52bb5fe4a0"}'></script>
 <!-- End Cloudflare Web Analytics -->
@@ -327,46 +327,147 @@
       <div class="server-list" id="serverList"></div>
     </section>
     <section id="view-download" class="hidden">
-      <div class="hero-shot">
-        <div class="hero-shot-img">
-          <img src="pokeland-world/FB_IMG_1794324753988.jpg" alt="Pokeland World Open Beta announcement for the 11/19 server launch" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+      <div class="gh-head">
+        <div class="kicker gold">GAME HUB · DOWNLOADS</div>
+        <h2 class="gh-title">Download &amp; play</h2>
+        <p class="gh-sub">Pick a game below to get its download link, bonus code and details.</p>
+      </div>
+
+      <div class="gh-tabs" role="tablist" aria-label="Choose a game">
+        <button class="gh-tab on" type="button" role="tab" id="ghTab-world" aria-selected="true" aria-controls="ghPanel-world" data-game="world" style="--g-rgb:54,201,255">
+          <span class="gh-tab-dot" aria-hidden="true"></span>
+          <span class="gh-tab-name">Pokeland World</span>
+          <span class="gh-tab-tag">Open Beta</span>
+        </button>
+        <button class="gh-tab" type="button" role="tab" id="ghTab-legends" aria-selected="false" aria-controls="ghPanel-legends" data-game="legends" tabindex="-1" style="--g-rgb:255,101,72">
+          <span class="gh-tab-dot" aria-hidden="true"></span>
+          <span class="gh-tab-name">Pokeland Legends</span>
+          <span class="gh-tab-tag">APK</span>
+        </button>
+        <button class="gh-tab" type="button" role="tab" id="ghTab-origin" aria-selected="false" aria-controls="ghPanel-origin" data-game="origin" tabindex="-1" style="--g-rgb:177,140,255">
+          <span class="gh-tab-dot" aria-hidden="true"></span>
+          <span class="gh-tab-name">Origin Reborn</span>
+          <span class="gh-tab-tag">10% bonus</span>
+        </button>
+      </div>
+
+      <!-- Pokeland World -->
+      <div class="gh-panel" id="ghPanel-world" role="tabpanel" aria-labelledby="ghTab-world" data-game="world" style="--g-rgb:54,201,255">
+        <div class="hero-shot">
+          <div class="hero-shot-img">
+            <img src="pokeland-world/FB_IMG_1794324753988.jpg" alt="Pokeland World Open Beta announcement for the 11/19 server launch" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+          </div>
+          <div class="hero-shot-plate">
+            <h3 style="font-size:1.35rem;font-weight:700;letter-spacing:-0.03em;line-height:1.1">Pokeland World</h3>
+            <p style="font-family:var(--mono);font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--soft);margin-top:6px">Official Server · Open Beta · 11/19</p>
+          </div>
         </div>
-        <div class="hero-shot-plate">
-          <h2 style="font-size:1.35rem;font-weight:700;letter-spacing:-0.03em;line-height:1.1">Pokeland World</h2>
-          <p style="font-family:var(--mono);font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--soft);margin-top:6px">Official Server · Open Beta · 11/19</p>
+        <div class="card gh-card">
+          <p class="gh-text">Join the Pokeland World Open Beta, explore the world, build your team and play with friends. Official server launch date: 11/19.</p>
+          <div class="gh-actions">
+            <a class="gh-cta" href="https://pkldwrld.com/downloads" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v11"/><path d="M8 10.5l4 3.5 4-3.5"/><path d="M4 17.5v1.5a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1.5"/></svg>
+              Download Pokeland World
+            </a>
+            <a class="btn gh-btn" href="https://discord.gg/6PXvEvz5yE" target="_blank" rel="noopener noreferrer">Join Official Pokeland World Discord</a>
+          </div>
+          <div class="gh-host">pkldwrld.com/downloads ↗</div>
+        </div>
+        <div>
+          <div class="kicker" style="padding-left:2px">Game screenshots · Events &amp; Rewards</div>
+          <div class="shot-strip">
+            <img class="shot-img" src="pokeland-world/FB_IMG_1794326024036.jpg" alt="Pokeland World Riot ranking rewards" loading="lazy">
+            <img class="shot-img" src="pokeland-world/FB_IMG_1794326027107.jpg" alt="Pokeland World arena ranking mail rewards" loading="lazy">
+            <img class="shot-img" src="pokeland-world/FB_IMG_1794326030126.jpg" alt="Pokeland World Guild War champion rewards" loading="lazy">
+            <img class="shot-img" src="pokeland-world/FB_IMG_1794326035967.jpg" alt="Pokeland World battle rewards ranking" loading="lazy">
+            <img class="shot-img" src="pokeland-world/FB_IMG_1794326038609.jpg" alt="Pokeland World Lucky Lot event" loading="lazy">
+          </div>
+        </div>
+        <div class="card" style="padding:18px">
+          <div class="kicker">Open Beta details</div>
+          <div style="margin-top:8px">
+            <div class="dl-spec"><span>Server</span><span>Official Pokeland World</span></div>
+            <div class="dl-spec"><span>Launch date</span><span>11/19</span></div>
+            <div class="dl-spec"><span>Community</span><span>Official Discord</span></div>
+            <div class="dl-spec"><span>In-game content</span><span>Riot · Arena · Guild War · Lucky Lot</span></div>
+          </div>
         </div>
       </div>
-      <div class="card mt-18" style="padding:18px;background:linear-gradient(155deg,rgba(90,167,216,0.14),var(--s1));border-color:rgba(90,167,216,0.32)">
-        <p style="font-size:0.88rem;color:var(--soft);line-height:1.55;text-wrap:pretty">Join the Pokeland World Open Beta, explore the world, build your team and play with friends. The official server launch is scheduled for 11/19.</p>
-        <div style="display:flex;flex-direction:column;gap:8px;margin-top:16px">
-          <a class="btn btn-primary" href="https://discord.gg/6PXvEvz5yE" target="_blank" rel="noopener noreferrer" style="background:linear-gradient(135deg,rgba(90,167,216,0.28),var(--gold-soft));border-color:rgba(90,167,216,0.45);color:var(--ink);justify-content:center">Join Official Pokeland World Discord</a>
+
+      <!-- Pokeland Legends -->
+      <div class="gh-panel hidden" id="ghPanel-legends" role="tabpanel" aria-labelledby="ghTab-legends" data-game="legends" style="--g-rgb:255,101,72">
+        <div class="gh-banner">
+          <span class="gh-ball" aria-hidden="true"></span>
+          <div class="gh-banner-kicker">Android · APK</div>
+          <h3 class="gh-banner-title">Pokeland Legends</h3>
+          <p class="gh-banner-sub">Playing Pokeland Legends? Use the updated download link below.</p>
         </div>
-        <div style="font-family:var(--mono);font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);margin-top:14px">Official community server</div>
-      </div>
-      <div class="mt-18">
-        <div class="kicker" style="padding-left:2px">Game screenshots · Events &amp; Rewards</div>
-        <div class="shot-strip">
-          <img class="shot-img" src="pokeland-world/FB_IMG_1794326024036.jpg" alt="Pokeland World Riot ranking rewards" loading="lazy">
-          <img class="shot-img" src="pokeland-world/FB_IMG_1794326027107.jpg" alt="Pokeland World arena ranking mail rewards" loading="lazy">
-          <img class="shot-img" src="pokeland-world/FB_IMG_1794326030126.jpg" alt="Pokeland World Guild War champion rewards" loading="lazy">
-          <img class="shot-img" src="pokeland-world/FB_IMG_1794326035967.jpg" alt="Pokeland World battle rewards ranking" loading="lazy">
-          <img class="shot-img" src="pokeland-world/FB_IMG_1794326038609.jpg" alt="Pokeland World Lucky Lot event" loading="lazy">
+        <div class="card gh-card">
+          <div class="gh-actions">
+            <a class="gh-cta" href="https://kol8.x7game.com/tggame_12/down?tgid=144005&amp;gid=13770" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v11"/><path d="M8 10.5l4 3.5 4-3.5"/><path d="M4 17.5v1.5a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1.5"/></svg>
+              Download Pokeland Legends
+            </a>
+          </div>
+          <div class="gh-host">kol8.x7game.com ↗</div>
+        </div>
+        <div class="card" style="padding:18px">
+          <div class="kicker">Details</div>
+          <div style="margin-top:8px">
+            <div class="dl-spec"><span>Game</span><span>Pokeland Legends</span></div>
+            <div class="dl-spec"><span>Download</span><span>Android APK</span></div>
+          </div>
         </div>
       </div>
-      <div class="card mt-18" style="padding:18px">
-        <div class="kicker">Open Beta details</div>
-        <div style="margin-top:8px">
-          <div class="dl-spec"><span>Server</span><span>Official Pokeland World</span></div>
-          <div class="dl-spec"><span>Launch date</span><span>11/19</span></div>
-          <div class="dl-spec"><span>Community</span><span>Official Discord</span></div>
-          <div class="dl-spec"><span>In-game content</span><span>Riot · Arena · Guild War · Lucky Lot</span></div>
+
+      <!-- Origin Reborn -->
+      <div class="gh-panel hidden" id="ghPanel-origin" role="tabpanel" aria-labelledby="ghTab-origin" data-game="origin" style="--g-rgb:177,140,255">
+        <div class="gh-banner">
+          <span class="gh-ball" aria-hidden="true"></span>
+          <div class="gh-banner-kicker">Bonus code inside</div>
+          <h3 class="gh-banner-title">Origin Reborn</h3>
+          <p class="gh-banner-sub">Download Origin Reborn and use the code below for a 10% bonus.</p>
+        </div>
+        <div class="gh-code">
+          <div class="gh-code-top">
+            <span class="gh-code-label">Bonus code</span>
+            <span class="gh-code-badge">10% bonus</span>
+          </div>
+          <div class="gh-code-row">
+            <code class="gh-code-val" id="ghCodeVal">INFINITE0221</code>
+            <button class="gh-copy" type="button" data-copy="INFINITE0221" data-copy-target="ghCodeVal" aria-label="Copy bonus code INFINITE0221">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15V6.5A2.5 2.5 0 0 1 7.5 4H15"/></svg>
+              <span aria-live="polite">Copy</span>
+            </button>
+          </div>
+          <p class="gh-code-note">Use this code for a 10% bonus.</p>
+        </div>
+        <div class="card gh-card">
+          <div class="gh-actions">
+            <a class="gh-cta" href="https://baixar.pkoriginreborn.com/t/9df3de1328a3e36dc26ebb2f63c21540" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v11"/><path d="M8 10.5l4 3.5 4-3.5"/><path d="M4 17.5v1.5a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1.5"/></svg>
+              Download Origin Reborn
+            </a>
+          </div>
+          <div class="gh-host">baixar.pkoriginreborn.com ↗</div>
+        </div>
+        <div class="card" style="padding:18px">
+          <div class="kicker">Details</div>
+          <div style="margin-top:8px">
+            <div class="dl-spec"><span>Game</span><span>Origin Reborn</span></div>
+            <div class="dl-spec"><span>Bonus</span><span>10% with code INFINITE0221</span></div>
+          </div>
         </div>
       </div>
-      <div class="card mt-18" style="padding:18px">
-        <div class="kicker">Also available</div>
-        <p style="font-size:0.85rem;color:var(--soft);line-height:1.55;margin-top:8px">Still playing Pokeland Legends? Its existing download and install information remains available here.</p>
-        <a class="btn mt-18" href="https://kol4.x7game.com/tggame_13/down?tgid=137384&amp;gid=13770" target="_blank" rel="noopener noreferrer">Download Pokeland Legends · APK</a>
-      </div>
+
+      <button class="gh-poll" id="ghPollBtn" type="button">
+        <span class="gh-poll-ico" aria-hidden="true">✦</span>
+        <span>
+          <span class="gh-poll-title">Can't decide?</span>
+          <span class="gh-poll-sub">Vote for your favourite game in the Community Poll</span>
+        </span>
+        <span class="gh-poll-arrow" aria-hidden="true">→</span>
+      </button>
     </section>
     <section id="view-builds" class="hidden">
       <div class="card" style="padding:22px;margin-top:8px;text-align:center">
@@ -733,7 +834,7 @@
       </span>
       <span>
         <span class="side-row-title">Download game <span style="display:inline-block;margin-left:6px;padding:2px 6px;border-radius:6px;background:rgba(79,214,156,.14);border:1px solid rgba(79,214,156,.35);color:#4fd69c;font-size:9px;font-weight:800;letter-spacing:.06em;line-height:1.3;vertical-align:middle">NEW</span></span>
-        <span class="side-row-sub">Pokeland World · Open Beta</span>
+        <span class="side-row-sub">World · Legends · Origin Reborn</span>
       </span>
     </button>
     <button class="side-row" data-side="builds" type="button">
@@ -904,7 +1005,7 @@
     </div>
   </nav>
 </div>
-<script defer src="app.js?v=poll-usage-optimized-1126"></script>
+<script defer src="app.js?v=game-hub-1127"></script>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <filter id="lg-refract" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
     <feTurbulence type="fractalNoise" baseFrequency="0.006 0.011" numOctaves="2" seed="11" result="n"/>
