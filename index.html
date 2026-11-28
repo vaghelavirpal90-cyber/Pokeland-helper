@@ -39,6 +39,17 @@
 <!-- Cloudflare Web Analytics -->
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"0b7b7ad7cab2447b9d1afc52bb5fe4a0"}'></script>
 <!-- End Cloudflare Web Analytics -->
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "92403c70-7227-41e2-aee0-5e6ff8f51346",
+      serviceWorkerPath: "sw.js",
+      serviceWorkerParam: { scope: "/" }
+    });
+  });
+</script>
 </head>
 <template id="__bundler_thumbnail">
 <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect width="120" height="120" rx="24" fill="#0c0e13"/><circle cx="60" cy="60" r="26" fill="#f4f6fb"/><path d="M34 60a26 26 0 0 1 52 0z" fill="#ef6a2b"/><rect x="34" y="56.5" width="52" height="7" fill="#07080b"/><circle cx="60" cy="60" r="8" fill="#f4f6fb" stroke="#07080b" stroke-width="4"/></svg>
