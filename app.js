@@ -2225,14 +2225,32 @@ function isStandalone() {
   return window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
 }
 // Returns one of: "granted" | "unsupported" | "ios-not-installed" | "denied" | "default"
+function isOneSignalSubscribed() {
+  return !!(window.PWHOneSignal &&
+    window.PWHOneSignal.User &&
+    window.PWHOneSignal.User.PushSubscription &&
+    window.PWHOneSignal.User.PushSubscription.optedIn);
+}
+async function enableOneSignalPush() {
+  const OneSignal = window.PWHOneSignal;
+  if (!OneSignal) throw new Error("Push setup is still loading. Please try again in a moment.");
+  if (typeof Notification === "undefined") throw new Error("This browser does not support web notifications.");
+  if (Notification.permission === "default") {
+    await OneSignal.Notifications.requestPermission();
+  }
+  if (Notification.permission === "granted") {
+    await OneSignal.User.PushSubscription.optIn();
+  }
+  return isOneSignalSubscribed();
+}
 function notifState() {
   if (typeof Notification === "undefined") {
     if (isIOS() && !isStandalone()) return "ios-not-installed";
     return "unsupported";
   }
-  if (Notification.permission === "granted") return "granted";
   if (isIOS() && !isStandalone()) return "ios-not-installed";
   if (Notification.permission === "denied") return "denied";
+  if (Notification.permission === "granted") return "granted";
   return "default";
 }
 
@@ -2242,7 +2260,7 @@ function updateNotifNudge() {
   if (!box) return;
   const s = notifState();
   state.notif = (typeof Notification !== "undefined") ? Notification.permission : "default";
-  if (s === "granted") { box.style.display = "none"; return; }
+  if (s === "granted" && isOneSignalSubscribed()) { box.style.display = "none"; return; }
   let snoozeUntil = 0;
   try { snoozeUntil = Number(localStorage.getItem(NUDGE_SNOOZE_KEY)) || 0; } catch (e) {}
   if (Date.now() < snoozeUntil) { box.style.display = "none"; return; }
@@ -2264,6 +2282,10 @@ function updateNotifNudge() {
     title.textContent = "Check Android notifications";
     sub.textContent = "If alerts aren't working in the APK, open Android Settings → Apps → Pokeland Helper → Notifications. This screen can't request native APK permission itself.";
     btn.textContent = "Got it";
+  } else if (s === "granted") {
+    title.textContent = "Finish enabling alerts";
+    sub.textContent = "Allow Pokeland Helper to finish registering this device for push notifications.";
+    btn.textContent = "Enable alerts";
   } else {
     title.textContent = "Turn on alerts";
     sub.textContent = "Get a heads-up before rare weather and events start.";
@@ -2279,10 +2301,13 @@ document.getElementById("notifNudgeBtn").addEventListener("click", async () => {
     return;
   }
   try {
-    const p = await Notification.requestPermission();
-    state.notif = p;
-    if (p !== "granted") { try { localStorage.setItem(NUDGE_SNOOZE_KEY, String(Date.now() + 3 * 86400000)); } catch (e) {} }
-  } catch (e) {}
+    await enableOneSignalPush();
+    state.notif = Notification.permission;
+  } catch (error) {
+    console.warn("OneSignal push opt-in failed:", error);
+    const sub = document.getElementById("notifNudgeSub");
+    if (sub) sub.textContent = error.message || "Could not enable notifications. Please try again.";
+  }
   updateNotifNudge();
   if (state.view === "weather") renderWeather();
 });
@@ -2294,14 +2319,14 @@ document.getElementById("notifBtn").addEventListener("click", async () => {
   const s = notifState();
   if (s === "ios-not-installed") { openNotifModal(); return; }
   if (typeof Notification === "undefined") return;
-  if (Notification.permission !== "default") { state.notif = Notification.permission; renderWeather(); return; }
-  try { const p = await Notification.requestPermission(); state.notif = p; renderWeather(); } catch (e) {}
+  try { await enableOneSignalPush(); state.notif = Notification.permission; renderWeather(); }
+  catch (error) { console.warn("OneSignal push opt-in failed:", error); }
 });
 
 // ---- First-visit modal -----------------------------------------------------
 function openNotifModal() {
   const s = notifState();
-  if (s === "granted" || s === "unsupported") return;
+  if ((s === "granted" && isOneSignalSubscribed()) || s === "unsupported") return;
   const overlay = document.getElementById("notifModalOverlay");
   const title = document.getElementById("notifModalTitle");
   const sub = document.getElementById("notifModalSub");
@@ -2338,12 +2363,19 @@ function openNotifModal() {
     actions.classList.remove("single");
     cta.textContent = "Turn on alerts";
     cta.onclick = async () => {
+      cta.disabled = true;
+      cta.textContent = "Enabling…";
       try {
-        const p = await Notification.requestPermission();
-        state.notif = p;
-        if (p !== "granted") { try { localStorage.setItem(NUDGE_SNOOZE_KEY, String(Date.now() + 3 * 86400000)); } catch (e) {} }
-      } catch (e) {}
-      closeNotifModal();
+        await enableOneSignalPush();
+        state.notif = Notification.permission;
+        closeNotifModal();
+      } catch (error) {
+        console.warn("OneSignal push opt-in failed:", error);
+        sub.textContent = error.message || "Could not enable notifications. Please try again.";
+        cta.textContent = "Try again";
+      } finally {
+        cta.disabled = false;
+      }
       updateNotifNudge();
       if (state.view === "weather") renderWeather();
     };
@@ -2360,7 +2392,19 @@ document.getElementById("notifModalLater").addEventListener("click", () => {
   try { localStorage.setItem(NUDGE_SNOOZE_KEY, String(Date.now() + 3 * 86400000)); } catch (e) {}
   closeNotifModal();
 });
-// First-visit notification popup disabled. Alerts remain available from the Weather controls.
+// Show the notification onboarding once on the first visit. The browser prompt
+// itself is only requested after the user taps the button (required by browsers).
+window.addEventListener("onesignal-ready", updateNotifNudge);
+try {
+  if (localStorage.getItem(MODAL_SEEN_KEY) !== "1") {
+    window.setTimeout(() => {
+      if (notifState() === "unsupported") return;
+      if (notifState() === "granted" && isOneSignalSubscribed()) return;
+      localStorage.setItem(MODAL_SEEN_KEY, "1");
+      openNotifModal();
+    }, 1400);
+  }
+} catch (e) {}
 document.getElementById("sheetOverlay").addEventListener("click", e => { if (e.target === e.currentTarget) closeSheet(); });
 document.getElementById("sheetFav").addEventListener("click", () => { if (state.sel) { toggleFav(state.sel); openSheet(state.sel); } });
 
