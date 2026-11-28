@@ -1,4 +1,5 @@
 // Pokeland Helper — service worker
+importScripts("https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.sw.js");
 // Bump CACHE_NAME whenever index.html changes to force an update.
 const CACHE_NAME = "pokeland-helper-v36";
 const CORE_ASSETS = [
