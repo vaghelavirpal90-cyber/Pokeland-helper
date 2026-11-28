@@ -2326,7 +2326,9 @@ document.getElementById("notifBtn").addEventListener("click", async () => {
 // ---- First-visit modal -----------------------------------------------------
 function openNotifModal() {
   const s = notifState();
-  if ((s === "granted" && isOneSignalSubscribed()) || s === "unsupported") return;
+  // Browser permission is already granted: never show the permission onboarding again.
+  // If OneSignal is still syncing, the in-page nudge can offer a safe opt-in retry.
+  if (s === "granted" || s === "unsupported") return;
   const overlay = document.getElementById("notifModalOverlay");
   const title = document.getElementById("notifModalTitle");
   const sub = document.getElementById("notifModalSub");
@@ -2398,8 +2400,8 @@ window.addEventListener("onesignal-ready", updateNotifNudge);
 try {
   if (localStorage.getItem(MODAL_SEEN_KEY) !== "1") {
     window.setTimeout(() => {
-      if (notifState() === "unsupported") return;
-      if (notifState() === "granted" && isOneSignalSubscribed()) return;
+      const permissionState = notifState();
+      if (permissionState === "unsupported" || permissionState === "granted") return;
       localStorage.setItem(MODAL_SEEN_KEY, "1");
       openNotifModal();
     }, 1400);
