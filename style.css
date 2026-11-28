@@ -1721,3 +1721,28 @@ body.poll-modal-open{overflow:hidden}
 .gh-world-logo { background-image: url("pokeland-world/FB_IMG_1794324753988.jpg"); background-size: 260%; background-position: center 24%; background-repeat: no-repeat; }
 .gh-tab .gh-world-logo { display:block; width:30px; height:30px; flex:0 0 30px; border-radius:9px; box-shadow:0 2px 8px rgba(0,0,0,.24); }
 .gh-game-icon.gh-world-logo { position:absolute; right:20px; top:18px; width:76px; height:76px; border-radius:18px; border:1px solid rgba(255,255,255,.22); box-shadow:0 8px 24px rgba(0,0,0,.3); }
+
+/* ── PWA install banner ───────────────────────────────────────────────────── */
+.install-nudge {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  margin: 14px 0;
+  padding: 15px;
+  border: 1px solid var(--gold-line);
+  border-radius: 18px;
+  background: linear-gradient(120deg, var(--gold-soft), var(--s1) 68%);
+}
+.install-nudge[hidden] { display: none !important; }
+.install-nudge-copy { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.install-nudge-icon {
+  width: 40px; height: 40px; flex: 0 0 40px;
+  display: grid; place-items: center; border-radius: 12px;
+  color: var(--gold-text); background: var(--gold-soft); border: 1px solid var(--gold-line);
+}
+.install-nudge-icon svg { width: 21px; height: 21px; }
+.install-nudge-text { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.install-nudge-text strong { color: var(--ink); font-size: .92rem; line-height: 1.2; }
+.install-nudge-text span { color: var(--soft); font-size: .76rem; line-height: 1.4; }
+.install-nudge-btn { width: 100%; min-height: 44px; }
+.install-nudge-btn:disabled { opacity: .65; }
