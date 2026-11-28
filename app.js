@@ -2543,6 +2543,81 @@ setInterval(() => {
   if (wx && state.notif === "granted") wx.checkAlerts(state.alerts, 5);
 }, 1000);
 
+// ---- Add to Home Screen ---------------------------------------------------
+(function initHomeScreenInstall() {
+  const banner = document.getElementById("installNudge");
+  const button = document.getElementById("installAppBtn");
+  const note = document.getElementById("installNudgeSub");
+  if (!banner || !button) return;
+
+  let installPrompt = null;
+  const ios = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
+  function isAppInstalled() {
+    return isStandalone() ||
+      (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
+  }
+
+  function syncInstallBanner() {
+    banner.hidden = isAppInstalled();
+  }
+
+  window.addEventListener("beforeinstallprompt", event => {
+    event.preventDefault();
+    installPrompt = event;
+    syncInstallBanner();
+    if (note) note.textContent = "Install the app on your device for quick access.";
+  });
+
+  window.addEventListener("appinstalled", () => {
+    installPrompt = null;
+    banner.hidden = true;
+  });
+
+  button.addEventListener("click", async () => {
+    if (isAppInstalled()) {
+      banner.hidden = true;
+      return;
+    }
+
+    if (installPrompt) {
+      const promptEvent = installPrompt;
+      installPrompt = null;
+      button.disabled = true;
+      try {
+        await promptEvent.prompt();
+        const choice = await promptEvent.userChoice;
+        if (choice && choice.outcome === "accepted") {
+          if (note) note.textContent = "Installing Pokeland Helper…";
+        } else if (note) {
+          note.textContent = "You can install it anytime from your browser menu.";
+        }
+      } catch (error) {
+        console.warn("PWA install prompt failed:", error);
+        if (note) note.textContent = "Open your browser menu and choose Add to Home Screen.";
+      } finally {
+        button.disabled = false;
+        syncInstallBanner();
+      }
+      return;
+    }
+
+    if (ios) {
+      window.alert("To add Pokeland Helper: tap the Share button in Safari, then choose “Add to Home Screen”.");
+    } else {
+      window.alert("To add Pokeland Helper: open your browser menu (⋮) and choose “Install app” or “Add to Home screen”.");
+    }
+  });
+
+  syncInstallBanner();
+  if (window.matchMedia) {
+    const standaloneQuery = window.matchMedia("(display-mode: standalone)");
+    if (standaloneQuery.addEventListener) standaloneQuery.addEventListener("change", syncInstallBanner);
+    else if (standaloneQuery.addListener) standaloneQuery.addListener(syncInstallBanner);
+  }
+})();
+
 // PWA: register service worker (enables Install prompt + offline shell)
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
