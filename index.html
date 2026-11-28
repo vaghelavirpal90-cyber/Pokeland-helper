@@ -48,6 +48,8 @@
       serviceWorkerPath: "sw.js",
       serviceWorkerParam: { scope: "/" }
     });
+    window.PWHOneSignal = OneSignal;
+    window.dispatchEvent(new Event("onesignal-ready"));
   });
 </script>
 </head>
